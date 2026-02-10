@@ -1,73 +1,122 @@
-# React + TypeScript + Vite
+# CFT Services Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive website for CFT Services, a technology consulting firm specializing in digital transformation, custom software development, and process automation.
 
-Currently, two official plugins are available:
+## About CFT Services
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+CFT Services is a technology consulting firm focused on delivering practical, high-impact solutions. We partner with businesses of all sizes to modernize operations, build reliable software, and automate the processes that hold teams back.
 
-## React Compiler
+### Services Offered
+- **Technology Consulting**: Strategic technology guidance for digital transformation
+- **Website Development**: Professional websites built to convert with modern tech
+- **Web Applications**: Custom business tools tailored to your workflows
+- **Process Automation**: Eliminate repetitive manual work through automation
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Technologies Used
 
-## Expanding the ESLint configuration
+This website is built with modern web technologies:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React 19** - Latest React with concurrent features
+- **TypeScript** - Type-safe JavaScript
+- **Vite** - Fast build tool and development server
+- **Tailwind CSS 4** - Utility-first CSS framework
+- **Framer Motion** - Animation library for React
+- **i18next** - Internationalization (English and Spanish support)
+- **Lucide React** - Beautiful icons
+- **Class Variance Authority** - Component variant management
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Features
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **Responsive Design**: Optimized for all devices and screen sizes
+- **Internationalization**: Support for English and Spanish languages
+- **Smooth Animations**: Framer Motion powered transitions and effects
+- **Modern UI**: Clean, professional design with Tailwind CSS
+- **SEO Optimized**: Built with performance and search engines in mind
+- **Fast Loading**: Vite-powered build for optimal performance
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Getting Started
+
+### Prerequisites
+
+- Node.js (version 18 or higher)
+- pnpm (recommended) or npm
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/cft-services.git
+cd cft-services
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. Install dependencies:
+```bash
+pnpm install
+# or
+npm install
 ```
+
+3. Start the development server:
+```bash
+pnpm dev
+# or
+npm run dev
+```
+
+4. Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+### Build for Production
+
+```bash
+pnpm build
+# or
+npm run build
+```
+
+### Preview Production Build
+
+```bash
+pnpm preview
+# or
+npm run preview
+```
+
+### Code Quality
+
+- **Linting**: `pnpm lint` or `npm run lint`
+- **Fix Linting Issues**: `pnpm lint:fix` or `npm run lint:fix`
+- **Format Code**: `pnpm format` or `npm run format`
+- **Check Formatting**: `pnpm format:check` or `npm run format:check`
+
+## Project Structure
+
+```
+src/
+├── components/          # Reusable UI components
+│   ├── ui/             # Base UI components (Button, Card, etc.)
+│   ├── Hero.tsx        # Landing section
+│   ├── Services.tsx    # Services showcase
+│   ├── About.tsx       # Company information
+│   ├── Contact.tsx     # Contact form
+│   ├── Navbar.tsx      # Navigation
+│   └── Footer.tsx      # Site footer
+├── hooks/              # Custom React hooks
+├── i18n/               # Internationalization files
+│   ├── en.json         # English translations
+│   ├── es.json         # Spanish translations
+│   └── index.ts        # i18n configuration
+├── lib/                # Utility functions
+└── assets/             # Static assets
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is private and proprietary to CFT Services.
