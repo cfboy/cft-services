@@ -1,0 +1,60 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "services": "Servicios",
+    "about": "Nosotros",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "title": "Soluciones Tecnologicas para el Futuro",
+    "subtitle": "Transformamos ideas en productos digitales con tecnologia de vanguardia, codigo limpio y experiencias de usuario excepcionales.",
+    "cta": "Empezar",
+    "secondary": "Saber Mas"
+  },
+  "services": {
+    "title": "Nuestros Servicios",
+    "subtitle": "Ofrecemos soluciones tecnologicas integrales adaptadas a las necesidades de tu negocio.",
+    "web": {
+      "title": "Desarrollo Web",
+      "description": "Aplicaciones web modernas y responsivas construidas con los ultimos frameworks y mejores practicas."
+    },
+    "cloud": {
+      "title": "Cloud y DevOps",
+      "description": "Infraestructura cloud escalable y pipelines CI/CD que mantienen tu negocio funcionando sin problemas."
+    },
+    "consulting": {
+      "title": "Consultoria Tecnologica",
+      "description": "Orientacion tecnologica estrategica para ayudarte a tomar decisiones informadas y mantenerte a la vanguardia."
+    },
+    "mobile": {
+      "title": "Desarrollo Movil",
+      "description": "Aplicaciones moviles multiplataforma que ofrecen rendimiento y experiencia de usuario nativos."
+    }
+  },
+  "about": {
+    "title": "Sobre CFT",
+    "description": "CFT Services es una empresa de tecnologia dedicada a construir soluciones digitales de alta calidad. Combinamos experiencia tecnica profunda con pasion por el codigo limpio y mantenible.",
+    "stat1Label": "Proyectos Entregados",
+    "stat1Value": "50+",
+    "stat2Label": "Anos de Experiencia",
+    "stat2Value": "8+",
+    "stat3Label": "Satisfaccion del Cliente",
+    "stat3Value": "99%"
+  },
+  "contact": {
+    "title": "Contactanos",
+    "subtitle": "Tienes un proyecto en mente? Hablemos de como podemos ayudarte.",
+    "name": "Nombre",
+    "email": "Correo",
+    "message": "Mensaje",
+    "send": "Enviar Mensaje",
+    "namePlaceholder": "Tu nombre",
+    "emailPlaceholder": "tu@ejemplo.com",
+    "messagePlaceholder": "Cuentanos sobre tu proyecto..."
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados.",
+    "privacy": "Privacidad",
+    "terms": "Terminos"
+  }
+}

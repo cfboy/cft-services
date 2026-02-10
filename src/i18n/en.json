@@ -1,0 +1,60 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Technology Solutions for the Future",
+    "subtitle": "We transform ideas into digital products with cutting-edge technology, clean code, and exceptional user experiences.",
+    "cta": "Get Started",
+    "secondary": "Learn More"
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "We deliver end-to-end technology solutions tailored to your business needs.",
+    "web": {
+      "title": "Web Development",
+      "description": "Modern, responsive web applications built with the latest frameworks and best practices."
+    },
+    "cloud": {
+      "title": "Cloud & DevOps",
+      "description": "Scalable cloud infrastructure and CI/CD pipelines that keep your business running smoothly."
+    },
+    "consulting": {
+      "title": "Tech Consulting",
+      "description": "Strategic technology guidance to help you make informed decisions and stay ahead."
+    },
+    "mobile": {
+      "title": "Mobile Development",
+      "description": "Cross-platform mobile applications that deliver native-like performance and UX."
+    }
+  },
+  "about": {
+    "title": "About CFT",
+    "description": "CFT Services is a technology company dedicated to building high-quality digital solutions. We combine deep technical expertise with a passion for clean, maintainable code.",
+    "stat1Label": "Projects Delivered",
+    "stat1Value": "50+",
+    "stat2Label": "Years Experience",
+    "stat2Value": "8+",
+    "stat3Label": "Client Satisfaction",
+    "stat3Value": "99%"
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "Have a project in mind? Let's talk about how we can help.",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send Message",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "you@example.com",
+    "messagePlaceholder": "Tell us about your project..."
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "privacy": "Privacy",
+    "terms": "Terms"
+  }
+}
