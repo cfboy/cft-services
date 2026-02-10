@@ -1,10 +1,11 @@
-import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
 import { Send } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
+
 import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Card, CardContent } from '@/components/ui/card'
 
 export function Contact() {
   const { t } = useTranslation()
@@ -33,22 +34,26 @@ export function Contact() {
         >
           <Card>
             <CardContent className="p-6 sm:p-8">
-              <form
-                className="space-y-5"
-                onSubmit={(e) => e.preventDefault()}
-              >
+              <form className="space-y-5" onSubmit={e => e.preventDefault()}>
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div className="space-y-2">
                     <label htmlFor="name" className="text-sm font-medium">
                       {t('contact.name')}
                     </label>
-                    <Input id="name" placeholder={t('contact.namePlaceholder')} />
+                    <Input
+                      id="name"
+                      placeholder={t('contact.namePlaceholder')}
+                    />
                   </div>
                   <div className="space-y-2">
                     <label htmlFor="email" className="text-sm font-medium">
                       {t('contact.email')}
                     </label>
-                    <Input id="email" type="email" placeholder={t('contact.emailPlaceholder')} />
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder={t('contact.emailPlaceholder')}
+                    />
                   </div>
                 </div>
                 <div className="space-y-2">

@@ -1,5 +1,5 @@
-import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 
 export function About() {
   const { t } = useTranslation()
@@ -23,7 +23,7 @@ export function About() {
             <h2 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">
               {t('about.title')}
             </h2>
-            <p className="text-lg leading-relaxed text-muted-foreground">
+            <p className="text-muted-foreground text-lg leading-relaxed">
               {t('about.description')}
             </p>
           </motion.div>
@@ -44,10 +44,12 @@ export function About() {
                 transition={{ duration: 0.4, delay: 0.3 + i * 0.1 }}
                 className="text-center"
               >
-                <div className="text-3xl font-bold text-cft-teal-primary sm:text-4xl">
+                <div className="text-cft-teal-primary text-3xl font-bold sm:text-4xl">
                   {stat.value}
                 </div>
-                <div className="mt-1 text-sm text-muted-foreground">{stat.label}</div>
+                <div className="text-muted-foreground mt-1 text-sm">
+                  {stat.label}
+                </div>
               </motion.div>
             ))}
           </motion.div>

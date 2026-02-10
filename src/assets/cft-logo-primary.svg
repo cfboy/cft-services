@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="120" viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="techGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F4C75"/>
+      <stop offset="100%" stop-color="#1B6B93"/>
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3CAEA3"/>
+      <stop offset="100%" stop-color="#20E3B2"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Logo Mark - Abstract Circuit/Connection Symbol -->
+  <g id="logoMark">
+    <!-- Main hexagonal shape representing tech/connectivity -->
+    <path d="M50 15L85 35V75L50 95L15 75V35L50 15Z" fill="url(#techGradient)"/>
+    
+    <!-- Inner circuit lines -->
+    <path d="M50 30L70 42V68L50 80L30 68V42L50 30Z" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+    
+    <!-- Central node -->
+    <circle cx="50" cy="55" r="8" fill="url(#accentGradient)"/>
+    
+    <!-- Connection points -->
+    <circle cx="50" cy="30" r="3" fill="#3CAEA3"/>
+    <circle cx="70" cy="42" r="3" fill="#3CAEA3"/>
+    <circle cx="70" cy="68" r="3" fill="#3CAEA3"/>
+    <circle cx="50" cy="80" r="3" fill="#3CAEA3"/>
+    <circle cx="30" cy="68" r="3" fill="#3CAEA3"/>
+    <circle cx="30" cy="42" r="3" fill="#3CAEA3"/>
+    
+    <!-- Data flow lines -->
+    <line x1="50" y1="38" x2="50" y2="47" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="50" y1="63" x2="50" y2="72" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Wordmark -->
+  <g id="wordmark">
+    <!-- CFT Letters -->
+    <text x="110" y="70" font-family="'Segoe UI', Arial, sans-serif" font-size="48" font-weight="700" fill="#0F4C75">CFT</text>
+    
+    <!-- Services text -->
+    <text x="200" y="70" font-family="'Segoe UI', Arial, sans-serif" font-size="48" font-weight="300" fill="#1B6B93">Services</text>
+    
+    <!-- Tagline -->
+    <text x="110" y="95" font-family="'Segoe UI', Arial, sans-serif" font-size="14" font-weight="400" letter-spacing="3" fill="#3CAEA3">TECHNOLOGY CONSULTING</text>
+  </g>
+</svg>

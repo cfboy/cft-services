@@ -1,6 +1,7 @@
-import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
 import { ArrowRight, ChevronDown } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
+
 import { Button } from '@/components/ui/button'
 
 export function Hero() {
@@ -12,7 +13,7 @@ export function Hero() {
       className="relative flex min-h-screen items-center justify-center overflow-hidden px-4"
     >
       {/* Subtle gradient background */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-cft-teal-primary/5 via-transparent to-cft-navy-deep/5" />
+      <div className="from-cft-teal-primary/5 to-cft-navy-deep/5 pointer-events-none absolute inset-0 bg-linear-to-br via-transparent" />
 
       <div className="relative mx-auto max-w-3xl text-center">
         <motion.div
@@ -20,8 +21,8 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <div className="mb-6 inline-flex items-center rounded-full border border-border bg-muted/50 px-4 py-1.5 text-xs font-medium text-muted-foreground">
-            <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-cft-teal-primary" />
+          <div className="border-border bg-muted/50 text-muted-foreground mb-6 inline-flex items-center rounded-full border px-4 py-1.5 text-xs font-medium">
+            <span className="bg-cft-teal-primary mr-2 inline-block h-1.5 w-1.5 rounded-full" />
             Technology Consulting & Development
           </div>
         </motion.div>
@@ -30,7 +31,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl"
+          className="mb-6 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
         >
           {t('hero.title')}
         </motion.h1>
@@ -39,7 +40,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mx-auto mb-10 max-w-xl text-lg text-muted-foreground"
+          className="text-muted-foreground mx-auto mb-10 max-w-xl text-lg"
         >
           {t('hero.subtitle')}
         </motion.p>
@@ -76,7 +77,7 @@ export function Hero() {
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
         >
-          <ChevronDown className="h-5 w-5 text-muted-foreground" />
+          <ChevronDown className="text-muted-foreground h-5 w-5" />
         </motion.div>
       </motion.a>
     </section>

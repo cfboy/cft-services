@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from 'react'
 
 type Theme = 'dark' | 'light' | 'system'
 
@@ -12,7 +18,9 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 function getSystemTheme(): 'dark' | 'light' {
   if (typeof window === 'undefined') return 'light'
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  return window.matchMedia('(prefers-color-scheme: dark)').matches
+    ? 'dark'
+    : 'light'
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {

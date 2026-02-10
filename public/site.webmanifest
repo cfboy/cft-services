@@ -1,0 +1,13 @@
+{
+  "name": "CFT Services",
+  "short_name": "CFT",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#0F4C75",
+  "background_color": "#FFFFFF"
+}

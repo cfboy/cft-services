@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CFT Services - Brand Guidelines</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Primary Colors */
+      --navy-deep: #0F4C75;
+      --navy-medium: #1B6B93;
+      --navy-dark: #1A1A2E;
+      
+      /* Accent Colors */
+      --teal-primary: #3CAEA3;
+      --teal-light: #20E3B2;
+      --teal-soft: #E8F8F5;
+      
+      /* Neutral Colors */
+      --white: #FFFFFF;
+      --gray-50: #F8FAFC;
+      --gray-100: #F1F5F9;
+      --gray-200: #E2E8F0;
+      --gray-300: #CBD5E1;
+      --gray-500: #64748B;
+      --gray-700: #334155;
+      --gray-900: #0F172A;
+      
+      /* Feedback Colors */
+      --success: #10B981;
+      --warning: #F59E0B;
+      --error: #EF4444;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-900);
+      line-height: 1.6;
+    }
+    
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-medium) 100%);
+      padding: 80px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: radial-gradient(circle at 20% 50%, rgba(60, 174, 163, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 50%, rgba(32, 227, 178, 0.1) 0%, transparent 50%);
+    }
+    
+    .header-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .header h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    
+    .header .subtitle {
+      font-size: 1.25rem;
+      color: var(--teal-primary);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 40px;
+    }
+    
+    /* Section */
+    .section {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 48px;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 20px 40px rgba(0, 0, 0, 0.03);
+    }
+    
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--navy-deep);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .section-title::before {
+      content: '';
+      width: 4px;
+      height: 28px;
+      background: linear-gradient(to bottom, var(--teal-primary), var(--teal-light));
+      border-radius: 2px;
+    }
+    
+    .section-desc {
+      color: var(--gray-500);
+      margin-bottom: 32px;
+      font-size: 1rem;
+    }
+    
+    /* Color Palette */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    
+    .color-card {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .color-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+    
+    .color-swatch {
+      height: 120px;
+      display: flex;
+      align-items: flex-end;
+      padding: 16px;
+    }
+    
+    .color-info {
+      padding: 16px;
+      background: var(--white);
+    }
+    
+    .color-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--gray-900);
+      margin-bottom: 4px;
+    }
+    
+    .color-hex {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.85rem;
+      color: var(--gray-500);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .color-rgb {
+      font-size: 0.8rem;
+      color: var(--gray-400);
+      margin-top: 2px;
+    }
+    
+    /* Logo Display */
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    
+    .logo-card {
+      border: 1px solid var(--gray-200);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    
+    .logo-preview {
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 180px;
+    }
+    
+    .logo-preview.dark {
+      background: var(--navy-dark);
+    }
+    
+    .logo-preview.light {
+      background: var(--gray-100);
+    }
+    
+    .logo-preview.gradient {
+      background: linear-gradient(135deg, var(--navy-deep), var(--navy-medium));
+    }
+    
+    .logo-preview img, .logo-preview svg {
+      max-width: 100%;
+      max-height: 100px;
+    }
+    
+    .logo-label {
+      padding: 16px 20px;
+      background: var(--gray-50);
+      border-top: 1px solid var(--gray-200);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--gray-700);
+    }
+    
+    /* Typography */
+    .type-specimen {
+      margin-bottom: 32px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    
+    .type-specimen:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    
+    .type-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--teal-primary);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .type-example {
+      color: var(--navy-deep);
+    }
+    
+    .type-h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.02em; }
+    .type-h2 { font-size: 2.25rem; font-weight: 700; letter-spacing: -0.01em; }
+    .type-h3 { font-size: 1.5rem; font-weight: 600; }
+    .type-body { font-size: 1rem; font-weight: 400; color: var(--gray-700); line-height: 1.7; }
+    .type-small { font-size: 0.875rem; font-weight: 400; color: var(--gray-500); }
+    
+    .type-specs {
+      margin-top: 12px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.8rem;
+      color: var(--gray-400);
+    }
+    
+    /* Usage Rules */
+    .usage-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    
+    .usage-card {
+      padding: 24px;
+      border-radius: 12px;
+      border: 1px solid var(--gray-200);
+    }
+    
+    .usage-card.do {
+      border-color: var(--success);
+      background: rgba(16, 185, 129, 0.05);
+    }
+    
+    .usage-card.dont {
+      border-color: var(--error);
+      background: rgba(239, 68, 68, 0.05);
+    }
+    
+    .usage-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 1.2rem;
+    }
+    
+    .do .usage-icon {
+      background: var(--success);
+      color: var(--white);
+    }
+    
+    .dont .usage-icon {
+      background: var(--error);
+      color: var(--white);
+    }
+    
+    .usage-title {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 8px;
+      color: var(--gray-900);
+    }
+    
+    .usage-desc {
+      font-size: 0.9rem;
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+    
+    /* Spacing */
+    .spacing-demo {
+      background: var(--gray-100);
+      border-radius: 12px;
+      padding: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    
+    .spacing-box {
+      width: 200px;
+      height: 60px;
+      background: var(--navy-deep);
+      border-radius: 8px;
+      position: relative;
+    }
+    
+    .spacing-indicator {
+      position: absolute;
+      border: 2px dashed var(--teal-primary);
+      border-radius: 12px;
+      top: -20px;
+      left: -20px;
+      right: -20px;
+      bottom: -20px;
+    }
+    
+    .spacing-label {
+      position: absolute;
+      top: -35px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--teal-primary);
+      color: var(--white);
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    
+    /* File List */
+    .file-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .file-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      background: var(--gray-50);
+      border-radius: 12px;
+      border: 1px solid var(--gray-200);
+    }
+    
+    .file-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--navy-deep), var(--navy-medium));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-weight: 700;
+      font-size: 0.75rem;
+    }
+    
+    .file-details {
+      flex: 1;
+    }
+    
+    .file-name {
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: 2px;
+    }
+    
+    .file-desc {
+      font-size: 0.85rem;
+      color: var(--gray-500);
+    }
+    
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px;
+      color: var(--gray-500);
+      font-size: 0.9rem;
+    }
+    
+    .footer strong {
+      color: var(--navy-deep);
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <h1>CFT Services</h1>
+      <p class="subtitle">Brand Guidelines</p>
+    </div>
+  </header>
+  
+  <main class="container">
+    <!-- Brand Overview -->
+    <section class="section">
+      <h2 class="section-title">Brand Overview</h2>
+      <p class="section-desc">CFT Services is a technology consulting firm that bridges innovation with reliability. Our brand identity reflects professionalism, technical expertise, and forward-thinking solutions.</p>
+      
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px;">
+        <div style="text-align: center; padding: 24px;">
+          <div style="font-size: 2.5rem; margin-bottom: 12px;">🎯</div>
+          <h3 style="font-weight: 600; margin-bottom: 8px; color: var(--navy-deep);">Professional</h3>
+          <p style="font-size: 0.9rem; color: var(--gray-500);">Trusted expertise that clients can rely on</p>
+        </div>
+        <div style="text-align: center; padding: 24px;">
+          <div style="font-size: 2.5rem; margin-bottom: 12px;">⚡</div>
+          <h3 style="font-weight: 600; margin-bottom: 8px; color: var(--navy-deep);">Innovative</h3>
+          <p style="font-size: 0.9rem; color: var(--gray-500);">Cutting-edge solutions for modern challenges</p>
+        </div>
+        <div style="text-align: center; padding: 24px;">
+          <div style="font-size: 2.5rem; margin-bottom: 12px;">🔗</div>
+          <h3 style="font-weight: 600; margin-bottom: 8px; color: var(--navy-deep);">Connected</h3>
+          <p style="font-size: 0.9rem; color: var(--gray-500);">Building bridges between technology and business</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Color Palette -->
+    <section class="section">
+      <h2 class="section-title">Color Palette</h2>
+      <p class="section-desc">Our color system balances professionalism with approachability. The deep navy conveys trust and expertise, while teal accents add energy and modernity.</p>
+      
+      <h3 style="font-size: 1rem; font-weight: 600; color: var(--gray-700); margin-bottom: 16px; margin-top: 24px;">Primary Colors</h3>
+      <div class="color-grid">
+        <div class="color-card">
+          <div class="color-swatch" style="background: #0F4C75;"></div>
+          <div class="color-info">
+            <div class="color-name">Navy Deep</div>
+            <div class="color-hex">#0F4C75</div>
+            <div class="color-rgb">RGB: 15, 76, 117</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #1B6B93;"></div>
+          <div class="color-info">
+            <div class="color-name">Navy Medium</div>
+            <div class="color-hex">#1B6B93</div>
+            <div class="color-rgb">RGB: 27, 107, 147</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #1A1A2E;"></div>
+          <div class="color-info">
+            <div class="color-name">Navy Dark</div>
+            <div class="color-hex">#1A1A2E</div>
+            <div class="color-rgb">RGB: 26, 26, 46</div>
+          </div>
+        </div>
+      </div>
+      
+      <h3 style="font-size: 1rem; font-weight: 600; color: var(--gray-700); margin-bottom: 16px; margin-top: 32px;">Accent Colors</h3>
+      <div class="color-grid">
+        <div class="color-card">
+          <div class="color-swatch" style="background: #3CAEA3;"></div>
+          <div class="color-info">
+            <div class="color-name">Teal Primary</div>
+            <div class="color-hex">#3CAEA3</div>
+            <div class="color-rgb">RGB: 60, 174, 163</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #20E3B2;"></div>
+          <div class="color-info">
+            <div class="color-name">Teal Light</div>
+            <div class="color-hex">#20E3B2</div>
+            <div class="color-rgb">RGB: 32, 227, 178</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #E8F8F5;"></div>
+          <div class="color-info">
+            <div class="color-name">Teal Soft</div>
+            <div class="color-hex">#E8F8F5</div>
+            <div class="color-rgb">RGB: 232, 248, 245</div>
+          </div>
+        </div>
+      </div>
+      
+      <h3 style="font-size: 1rem; font-weight: 600; color: var(--gray-700); margin-bottom: 16px; margin-top: 32px;">Neutral Colors</h3>
+      <div class="color-grid">
+        <div class="color-card">
+          <div class="color-swatch" style="background: #FFFFFF; border: 1px solid #E2E8F0;"></div>
+          <div class="color-info">
+            <div class="color-name">White</div>
+            <div class="color-hex">#FFFFFF</div>
+            <div class="color-rgb">RGB: 255, 255, 255</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #F8FAFC;"></div>
+          <div class="color-info">
+            <div class="color-name">Gray 50</div>
+            <div class="color-hex">#F8FAFC</div>
+            <div class="color-rgb">RGB: 248, 250, 252</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #64748B;"></div>
+          <div class="color-info">
+            <div class="color-name">Gray 500</div>
+            <div class="color-hex">#64748B</div>
+            <div class="color-rgb">RGB: 100, 116, 139</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #0F172A;"></div>
+          <div class="color-info">
+            <div class="color-name">Gray 900</div>
+            <div class="color-hex">#0F172A</div>
+            <div class="color-rgb">RGB: 15, 23, 42</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Typography -->
+    <section class="section">
+      <h2 class="section-title">Typography</h2>
+      <p class="section-desc">Plus Jakarta Sans is our primary typeface, offering excellent readability and a modern, professional appearance across all applications.</p>
+      
+      <div class="type-specimen">
+        <div class="type-label">Heading 1</div>
+        <div class="type-example type-h1">Technology Consulting</div>
+        <div class="type-specs">Plus Jakarta Sans / 48px / 800 weight / -0.02em tracking</div>
+      </div>
+      
+      <div class="type-specimen">
+        <div class="type-label">Heading 2</div>
+        <div class="type-example type-h2">Digital Transformation</div>
+        <div class="type-specs">Plus Jakarta Sans / 36px / 700 weight / -0.01em tracking</div>
+      </div>
+      
+      <div class="type-specimen">
+        <div class="type-label">Heading 3</div>
+        <div class="type-example type-h3">Strategic Solutions</div>
+        <div class="type-specs">Plus Jakarta Sans / 24px / 600 weight</div>
+      </div>
+      
+      <div class="type-specimen">
+        <div class="type-label">Body</div>
+        <div class="type-example type-body">CFT Services delivers comprehensive technology consulting solutions that help businesses navigate digital transformation, optimize operations, and achieve sustainable growth through innovative strategies and expert guidance.</div>
+        <div class="type-specs">Plus Jakarta Sans / 16px / 400 weight / 1.7 line-height</div>
+      </div>
+      
+      <div class="type-specimen">
+        <div class="type-label">Small / Caption</div>
+        <div class="type-example type-small">Additional information and fine print details</div>
+        <div class="type-specs">Plus Jakarta Sans / 14px / 400 weight</div>
+      </div>
+    </section>
+    
+    <!-- Logo Usage -->
+    <section class="section">
+      <h2 class="section-title">Logo Usage</h2>
+      <p class="section-desc">The CFT Services logo combines a hexagonal mark symbolizing connectivity and technology with a clean wordmark. Always maintain adequate clear space around the logo.</p>
+      
+      <div class="logo-grid">
+        <div class="logo-card">
+          <div class="logo-preview light">
+            <svg width="280" height="80" viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="tg1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0F4C75"/>
+                  <stop offset="100%" stop-color="#1B6B93"/>
+                </linearGradient>
+                <linearGradient id="ag1" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#3CAEA3"/>
+                  <stop offset="100%" stop-color="#20E3B2"/>
+                </linearGradient>
+              </defs>
+              <path d="M50 15L85 35V75L50 95L15 75V35L50 15Z" fill="url(#tg1)"/>
+              <path d="M50 30L70 42V68L50 80L30 68V42L50 30Z" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+              <circle cx="50" cy="55" r="8" fill="url(#ag1)"/>
+              <circle cx="50" cy="30" r="3" fill="#3CAEA3"/>
+              <circle cx="70" cy="42" r="3" fill="#3CAEA3"/>
+              <circle cx="70" cy="68" r="3" fill="#3CAEA3"/>
+              <circle cx="50" cy="80" r="3" fill="#3CAEA3"/>
+              <circle cx="30" cy="68" r="3" fill="#3CAEA3"/>
+              <circle cx="30" cy="42" r="3" fill="#3CAEA3"/>
+              <text x="110" y="70" font-family="'Segoe UI', Arial" font-size="48" font-weight="700" fill="#0F4C75">CFT</text>
+              <text x="200" y="70" font-family="'Segoe UI', Arial" font-size="48" font-weight="300" fill="#1B6B93">Services</text>
+              <text x="110" y="95" font-family="'Segoe UI', Arial" font-size="14" font-weight="400" letter-spacing="3" fill="#3CAEA3">TECHNOLOGY CONSULTING</text>
+            </svg>
+          </div>
+          <div class="logo-label">Primary Logo - Light Background</div>
+        </div>
+        
+        <div class="logo-card">
+          <div class="logo-preview dark">
+            <svg width="280" height="80" viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="ag2" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#3CAEA3"/>
+                  <stop offset="100%" stop-color="#20E3B2"/>
+                </linearGradient>
+              </defs>
+              <path d="M50 15L85 35V75L50 95L15 75V35L50 15Z" fill="#FFFFFF"/>
+              <path d="M50 30L70 42V68L50 80L30 68V42L50 30Z" fill="none" stroke="#0F4C75" stroke-width="2"/>
+              <circle cx="50" cy="55" r="8" fill="url(#ag2)"/>
+              <circle cx="50" cy="30" r="3" fill="#3CAEA3"/>
+              <circle cx="70" cy="42" r="3" fill="#3CAEA3"/>
+              <circle cx="70" cy="68" r="3" fill="#3CAEA3"/>
+              <circle cx="50" cy="80" r="3" fill="#3CAEA3"/>
+              <circle cx="30" cy="68" r="3" fill="#3CAEA3"/>
+              <circle cx="30" cy="42" r="3" fill="#3CAEA3"/>
+              <text x="110" y="70" font-family="'Segoe UI', Arial" font-size="48" font-weight="700" fill="#FFFFFF">CFT</text>
+              <text x="200" y="70" font-family="'Segoe UI', Arial" font-size="48" font-weight="300" fill="#FFFFFF">Services</text>
+              <text x="110" y="95" font-family="'Segoe UI', Arial" font-size="14" font-weight="400" letter-spacing="3" fill="#3CAEA3">TECHNOLOGY CONSULTING</text>
+            </svg>
+          </div>
+          <div class="logo-label">Reversed Logo - Dark Background</div>
+        </div>
+      </div>
+      
+      <h3 style="font-size: 1rem; font-weight: 600; color: var(--gray-700); margin: 32px 0 16px;">Clear Space</h3>
+      <div class="spacing-demo">
+        <div class="spacing-box">
+          <div class="spacing-indicator"></div>
+          <div class="spacing-label">Minimum 20px</div>
+        </div>
+      </div>
+      <p style="text-align: center; margin-top: 16px; font-size: 0.9rem; color: var(--gray-500);">Always maintain clear space equal to the height of the "C" in CFT around all sides of the logo.</p>
+    </section>
+    
+    <!-- Usage Guidelines -->
+    <section class="section">
+      <h2 class="section-title">Usage Guidelines</h2>
+      <p class="section-desc">Follow these guidelines to ensure consistent and professional brand representation across all applications.</p>
+      
+      <div class="usage-grid">
+        <div class="usage-card do">
+          <div class="usage-icon">✓</div>
+          <div class="usage-title">Use Approved Colors</div>
+          <div class="usage-desc">Always use the exact hex values from this guide. Our colors are carefully calibrated for consistency.</div>
+        </div>
+        <div class="usage-card do">
+          <div class="usage-icon">✓</div>
+          <div class="usage-title">Maintain Clear Space</div>
+          <div class="usage-desc">Keep adequate breathing room around the logo to ensure visibility and impact.</div>
+        </div>
+        <div class="usage-card do">
+          <div class="usage-icon">✓</div>
+          <div class="usage-title">Use High-Quality Assets</div>
+          <div class="usage-desc">Always use SVG for digital and high-resolution PNG for print applications.</div>
+        </div>
+        <div class="usage-card dont">
+          <div class="usage-icon">✗</div>
+          <div class="usage-title">Don't Alter Colors</div>
+          <div class="usage-desc">Never apply unapproved colors, gradients, or effects to the logo.</div>
+        </div>
+        <div class="usage-card dont">
+          <div class="usage-icon">✗</div>
+          <div class="usage-title">Don't Distort</div>
+          <div class="usage-desc">Never stretch, compress, or rotate the logo. Always scale proportionally.</div>
+        </div>
+        <div class="usage-card dont">
+          <div class="usage-icon">✗</div>
+          <div class="usage-title">Don't Add Effects</div>
+          <div class="usage-desc">Avoid shadows, outlines, 3D effects, or other modifications to the logo.</div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Asset Files -->
+    <section class="section">
+      <h2 class="section-title">Brand Assets</h2>
+      <p class="section-desc">Download all brand assets in the appropriate formats for your use case.</p>
+      
+      <div class="file-list">
+        <div class="file-item">
+          <div class="file-icon">SVG</div>
+          <div class="file-details">
+            <div class="file-name">cft-logo-primary.svg</div>
+            <div class="file-desc">Full color logo with wordmark - scalable vector</div>
+          </div>
+        </div>
+        <div class="file-item">
+          <div class="file-icon">SVG</div>
+          <div class="file-details">
+            <div class="file-name">cft-logo-white.svg</div>
+            <div class="file-desc">Reversed/white version for dark backgrounds</div>
+          </div>
+        </div>
+        <div class="file-item">
+          <div class="file-icon">SVG</div>
+          <div class="file-details">
+            <div class="file-name">cft-logo-black.svg</div>
+            <div class="file-desc">Monochrome black version</div>
+          </div>
+        </div>
+        <div class="file-item">
+          <div class="file-icon">SVG</div>
+          <div class="file-details">
+            <div class="file-name">cft-logo-mark.svg</div>
+            <div class="file-desc">Logo mark only - hexagonal symbol</div>
+          </div>
+        </div>
+        <div class="file-item">
+          <div class="file-icon">SVG</div>
+          <div class="file-details">
+            <div class="file-name">favicon.svg</div>
+            <div class="file-desc">Favicon for web use</div>
+          </div>
+        </div>
+        <div class="file-item">
+          <div class="file-icon">SVG</div>
+          <div class="file-details">
+            <div class="file-name">cft-banner-linkedin.svg</div>
+            <div class="file-desc">LinkedIn/social media banner (1500x500)</div>
+          </div>
+        </div>
+        <div class="file-item">
+          <div class="file-icon">PNG</div>
+          <div class="file-details">
+            <div class="file-name">cft-logo-*.png</div>
+            <div class="file-desc">High-resolution PNG versions at 2x and 4x</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <footer class="footer">
+    <p><strong>CFT Services</strong> Brand Guidelines v1.0</p>
+    <p style="margin-top: 8px;">© 2026 CFT Services. All rights reserved.</p>
+  </footer>
+</body>
+</html>

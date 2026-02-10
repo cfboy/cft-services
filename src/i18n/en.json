@@ -6,34 +6,34 @@
     "contact": "Contact"
   },
   "hero": {
-    "title": "Technology Solutions for the Future",
-    "subtitle": "We transform ideas into digital products with cutting-edge technology, clean code, and exceptional user experiences.",
-    "cta": "Get Started",
-    "secondary": "Learn More"
+    "title": "Technology That Drives Your Business Forward",
+    "subtitle": "From strategic consulting to custom software — we help companies modernize, automate, and grow through technology.",
+    "cta": "Start a Project",
+    "secondary": "Explore Services"
   },
   "services": {
-    "title": "Our Services",
-    "subtitle": "We deliver end-to-end technology solutions tailored to your business needs.",
-    "web": {
-      "title": "Web Development",
-      "description": "Modern, responsive web applications built with the latest frameworks and best practices."
-    },
-    "cloud": {
-      "title": "Cloud & DevOps",
-      "description": "Scalable cloud infrastructure and CI/CD pipelines that keep your business running smoothly."
-    },
+    "title": "What We Do",
+    "subtitle": "End-to-end technology services designed to solve real business challenges and accelerate your growth.",
     "consulting": {
-      "title": "Tech Consulting",
-      "description": "Strategic technology guidance to help you make informed decisions and stay ahead."
+      "title": "Technology Consulting",
+      "description": "Strategic technology guidance for businesses navigating digital transformation. We assess your current stack, define roadmaps, and recommend the right tools — from architecture reviews to vendor selection."
     },
-    "mobile": {
-      "title": "Mobile Development",
-      "description": "Cross-platform mobile applications that deliver native-like performance and UX."
+    "websites": {
+      "title": "Website Development",
+      "description": "Professional websites built to convert. From corporate sites and landing pages to e-commerce and portfolios — fast, SEO-optimized, and built on modern tech that scales with your brand."
+    },
+    "webapps": {
+      "title": "Web Applications",
+      "description": "Custom business tools that fit the way you work. We build SaaS platforms, client portals, internal dashboards, and management systems — tailored to your workflows and designed for real users."
+    },
+    "automation": {
+      "title": "Process Automation",
+      "description": "Eliminate repetitive manual work. We automate business workflows, connect your existing tools via APIs, and build pipelines for data processing, notifications, reporting, and more."
     }
   },
   "about": {
-    "title": "About CFT",
-    "description": "CFT Services is a technology company dedicated to building high-quality digital solutions. We combine deep technical expertise with a passion for clean, maintainable code.",
+    "title": "Built Around Your Results",
+    "description": "CFT Services is a technology consulting firm focused on delivering practical, high-impact solutions. We partner with businesses of all sizes to modernize operations, build reliable software, and automate the processes that hold teams back.",
     "stat1Label": "Projects Delivered",
     "stat1Value": "50+",
     "stat2Label": "Years Experience",
@@ -42,15 +42,15 @@
     "stat3Value": "99%"
   },
   "contact": {
-    "title": "Get in Touch",
-    "subtitle": "Have a project in mind? Let's talk about how we can help.",
+    "title": "Let's Work Together",
+    "subtitle": "Tell us about your project and we'll get back to you within one business day.",
     "name": "Name",
     "email": "Email",
     "message": "Message",
     "send": "Send Message",
     "namePlaceholder": "Your name",
     "emailPlaceholder": "you@example.com",
-    "messagePlaceholder": "Tell us about your project..."
+    "messagePlaceholder": "Describe your project or challenge..."
   },
   "footer": {
     "rights": "All rights reserved.",
