@@ -16,17 +16,6 @@ export function Hero() {
       <div className="from-cft-teal-primary/5 to-cft-navy-deep/5 pointer-events-none absolute inset-0 bg-linear-to-br via-transparent" />
 
       <div className="relative mx-auto max-w-3xl text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <div className="border-border bg-muted/50 text-muted-foreground mb-6 inline-flex items-center rounded-full border px-4 py-1.5 text-xs font-medium">
-            <span className="bg-cft-teal-primary mr-2 inline-block h-1.5 w-1.5 rounded-full" />
-            Technology Consulting & Development
-          </div>
-        </motion.div>
-
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
