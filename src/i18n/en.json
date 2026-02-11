@@ -34,12 +34,64 @@
   "about": {
     "title": "Built Around Your Results",
     "description": "CFT Services is a technology consulting firm focused on delivering practical, high-impact solutions. We partner with businesses of all sizes to modernize operations, build reliable software, and automate the processes that hold teams back.",
-    "stat1Label": "Projects Delivered",
-    "stat1Value": "50+",
-    "stat2Label": "Years Experience",
-    "stat2Value": "8+",
-    "stat3Label": "Client Satisfaction",
-    "stat3Value": "99%"
+    "stats": {
+      "projectsCompleted": {
+        "label": "Projects Completed",
+        "value": "50+",
+        "description": "Successful technology implementations"
+      },
+      "satisfiedClients": {
+        "label": "Satisfied Clients",
+        "value": "35+",
+        "description": "Businesses transformed through technology"
+      },
+      "technologies": {
+        "label": "Technologies Mastered",
+        "value": "25+",
+        "description": "Modern tools and frameworks"
+      },
+      "yearsExperience": {
+        "label": "Years Experience",
+        "value": "8+",
+        "description": "Industry expertise and knowledge"
+      }
+    },
+    "howWeDoIt": {
+      "title": "How We Do It",
+      "subtitle": "Our process-oriented approach ensures successful digital transformation",
+      "assessment": {
+        "title": "Requirements Assessment",
+        "description": "We start with comprehensive meetings to understand your business needs, challenges, and goals"
+      },
+      "recommendations": {
+        "title": "Strategic Recommendations",
+        "description": "Based on our assessment, we provide tailored technology recommendations and roadmaps"
+      },
+      "implementation": {
+        "title": "Implementation",
+        "description": "We execute the solution with ongoing support to ensure successful deployment and adoption"
+      }
+    },
+    "industries": {
+      "title": "Industries We've Impacted",
+      "subtitle": "We've helped businesses across various sectors modernize and grow through technology",
+      "healthcare": {
+        "name": "Healthcare",
+        "description": "Digital health solutions and patient management systems"
+      },
+      "insurance": {
+        "name": "Insurance",
+        "description": "Risk assessment and claims processing automation"
+      },
+      "hospitality": {
+        "name": "Hospitality",
+        "description": "Restaurant management and customer experience platforms"
+      },
+      "finance": {
+        "name": "Finance",
+        "description": "Financial services and payment processing systems"
+      }
+    }
   },
   "contact": {
     "title": "Let's Work Together",

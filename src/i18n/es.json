@@ -34,12 +34,64 @@
   "about": {
     "title": "Enfocados en tus Resultados",
     "description": "CFT Services es una firma de consultoría tecnológica enfocada en entregar soluciones prácticas de alto impacto. Trabajamos con empresas de todos los tamaños para modernizar operaciones, desarrollar software confiable y automatizar los procesos que frenan a los equipos.",
-    "stat1Label": "Proyectos Entregados",
-    "stat1Value": "50+",
-    "stat2Label": "Años de Experiencia",
-    "stat2Value": "8+",
-    "stat3Label": "Satisfacción del Cliente",
-    "stat3Value": "99%"
+    "stats": {
+      "projectsCompleted": {
+        "label": "Proyectos Completados",
+        "value": "50+",
+        "description": "Implementaciones tecnológicas exitosas"
+      },
+      "satisfiedClients": {
+        "label": "Clientes Satisfechos",
+        "value": "35+",
+        "description": "Empresas transformadas por la tecnología"
+      },
+      "technologies": {
+        "label": "Tecnologías Dominadas",
+        "value": "25+",
+        "description": "Herramientas y frameworks modernos"
+      },
+      "yearsExperience": {
+        "label": "Años de Experiencia",
+        "value": "8+",
+        "description": "Experiencia y conocimiento en la industria"
+      }
+    },
+    "howWeDoIt": {
+      "title": "Cómo lo Hacemos",
+      "subtitle": "Nuestro enfoque orientado a procesos asegura transformaciones digitales exitosas",
+      "assessment": {
+        "title": "Evaluación de Requerimientos",
+        "description": "Comenzamos con reuniones integrales para entender tus necesidades comerciales, desafíos y objetivos"
+      },
+      "recommendations": {
+        "title": "Recomendaciones Estratégicas",
+        "description": "Basados en nuestra evaluación, proporcionamos recomendaciones tecnológicas personalizadas y planes de acción"
+      },
+      "implementation": {
+        "title": "Implementación",
+        "description": "Ejecutamos la solución con soporte continuo para asegurar un despliegue y adopción exitosos"
+      }
+    },
+    "industries": {
+      "title": "Industrias que Hemos Impactado",
+      "subtitle": "Hemos ayudado a empresas de diversos sectores a modernizarse y crecer a través de la tecnología",
+      "healthcare": {
+        "name": "Salud",
+        "description": "Soluciones de salud digital y sistemas de gestión de pacientes"
+      },
+      "insurance": {
+        "name": "Seguros",
+        "description": "Evaluación de riesgos y automatización de procesamiento de reclamos"
+      },
+      "hospitality": {
+        "name": "Hospitalidad",
+        "description": "Gestión de restaurantes y plataformas de experiencia del cliente"
+      },
+      "finance": {
+        "name": "Finanzas",
+        "description": "Servicios financieros y sistemas de procesamiento de pagos"
+      }
+    }
   },
   "contact": {
     "title": "Trabajemos Juntos",

@@ -2,25 +2,33 @@ import { motion } from 'framer-motion'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
+import patternBgDark from '@/assets/pattern-bg-dark.svg'
+import patternBg from '@/assets/pattern-bg.svg'
 import { Button } from '@/components/ui/button'
+import { useTheme } from '@/hooks/use-theme'
 
 export function Hero() {
   const { t } = useTranslation()
+  const { resolvedTheme } = useTheme()
 
   return (
     <section
       id="home"
       className="relative flex min-h-screen items-center justify-center overflow-hidden px-4"
     >
-      {/* Subtle gradient background */}
-      <div className="from-cft-teal-primary/5 to-cft-navy-deep/5 pointer-events-none absolute inset-0 bg-linear-to-br via-transparent" />
+      <img
+        key={resolvedTheme}
+        src={resolvedTheme === 'dark' ? patternBgDark : patternBg}
+        className="absolute inset-0 h-full w-full object-cover"
+        alt=""
+      />
 
-      <div className="relative mx-auto max-w-3xl text-center">
+      <div className="relative z-10 mx-auto max-w-3xl text-center">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mb-6 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl"
+          className="mb-6 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl"
         >
           {t('hero.title')}
         </motion.h1>
@@ -29,7 +37,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-muted-foreground mx-auto mb-10 max-w-xl text-lg"
+          className="text-cft-teal-primary mx-auto mb-10 max-w-xl text-lg"
         >
           {t('hero.subtitle')}
         </motion.p>
@@ -66,7 +74,7 @@ export function Hero() {
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
         >
-          <ChevronDown className="text-muted-foreground h-5 w-5" />
+          <ChevronDown className="text-cft-teal-primary/60 h-5 w-5" />
         </motion.div>
       </motion.a>
     </section>
