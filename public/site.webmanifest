@@ -55,6 +55,6 @@
   "theme_color": "#0F4C75",
   "background_color": "#FFFFFF",
   "display": "standalone",
-  "start_url": "/",
-  "scope": "/"
+  "start_url": "/cft-services/",
+  "scope": "/cft-services/"
 }
