@@ -98,11 +98,24 @@
     "subtitle": "Tell us about your project and we'll get back to you within one business day.",
     "name": "Name",
     "email": "Email",
+    "industry": "Industry",
     "message": "Message",
     "send": "Send Message",
     "namePlaceholder": "Your name",
     "emailPlaceholder": "you@example.com",
-    "messagePlaceholder": "Describe your project or challenge..."
+    "industryPlaceholder": "Select your industry",
+    "messagePlaceholder": "Describe your project or challenge...",
+    "successMessage": "Message sent successfully! We'll get back to you soon.",
+    "errorMessage": "Failed to send message. Please try again.",
+    "industries": {
+      "technology": "Technology",
+      "finance": "Finance",
+      "healthcare": "Healthcare",
+      "retail": "Retail",
+      "manufacturing": "Manufacturing",
+      "education": "Education",
+      "other": "Other"
+    }
   },
   "footer": {
     "rights": "All rights reserved.",

@@ -98,11 +98,24 @@
     "subtitle": "Cuéntanos sobre tu proyecto y te responderemos en un día hábil.",
     "name": "Nombre",
     "email": "Correo",
+    "industry": "Industria",
     "message": "Mensaje",
     "send": "Enviar Mensaje",
     "namePlaceholder": "Tu nombre",
     "emailPlaceholder": "tu@ejemplo.com",
-    "messagePlaceholder": "Describe tu proyecto o reto..."
+    "industryPlaceholder": "Selecciona tu industria",
+    "messagePlaceholder": "Describe tu proyecto o reto...",
+    "successMessage": "¡Mensaje enviado exitosamente! Nos pondremos en contacto pronto.",
+    "errorMessage": "Error al enviar el mensaje. Por favor, inténtalo de nuevo.",
+    "industries": {
+      "technology": "Tecnología",
+      "finance": "Finanzas",
+      "healthcare": "Salud",
+      "retail": "Retail",
+      "manufacturing": "Manufactura",
+      "education": "Educación",
+      "other": "Otro"
+    }
   },
   "footer": {
     "rights": "Todos los derechos reservados.",
