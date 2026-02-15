@@ -2,6 +2,7 @@
   "nav": {
     "home": "Inicio",
     "services": "Servicios",
+    "work": "Trabajos",
     "about": "Nosotros",
     "contact": "Contacto"
   },
@@ -16,19 +17,23 @@
     "subtitle": "Servicios tecnológicos integrales diseñados para resolver retos reales y acelerar el crecimiento de tu empresa.",
     "consulting": {
       "title": "Consultoría Tecnológica",
-      "description": "Orientación estratégica para empresas en proceso de transformación digital. Evaluamos tu stack actual, definimos roadmaps y recomendamos las herramientas correctas — desde revisiones de arquitectura hasta selección de proveedores."
+      "description": "Orientación estratégica para empresas en proceso de transformación digital. Evaluamos tu stack actual, definimos roadmaps y recomendamos las herramientas correctas — desde revisiones de arquitectura hasta selección de proveedores.",
+      "features": ["Revisión de Arquitectura", "Hoja de Ruta Tech", "Selección de Proveedores", "Evaluación de Stack"]
     },
     "websites": {
       "title": "Desarrollo de Sitios Web",
-      "description": "Sitios web profesionales orientados a la conversión. Desde sitios corporativos y landing pages hasta e-commerce y portafolios — rápidos, optimizados para SEO y construidos con tecnología moderna que escala con tu marca."
+      "description": "Sitios web profesionales orientados a la conversión. Desde sitios corporativos y landing pages hasta e-commerce y portafolios — rápidos, optimizados para SEO y construidos con tecnología moderna que escala con tu marca.",
+      "features": ["Optimizado para SEO", "Mobile-First", "E-Commerce Listo", "Carga Rápida"]
     },
     "webapps": {
       "title": "Aplicaciones Web",
-      "description": "Herramientas de negocio a medida que se adaptan a tu forma de trabajar. Desarrollamos plataformas SaaS, portales para clientes, dashboards internos y sistemas de gestión — diseñados para usuarios reales."
+      "description": "Herramientas de negocio a medida que se adaptan a tu forma de trabajar. Desarrollamos plataformas SaaS, portales para clientes, dashboards internos y sistemas de gestión — diseñados para usuarios reales.",
+      "features": ["Plataformas SaaS", "Portales de Clientes", "Dashboards", "Integraciones API"]
     },
     "automation": {
       "title": "Automatización de Procesos",
-      "description": "Elimina el trabajo manual repetitivo. Automatizamos flujos de trabajo, conectamos tus herramientas existentes a través de APIs y construimos pipelines de procesamiento de datos, notificaciones, reportes y más."
+      "description": "Elimina el trabajo manual repetitivo. Automatizamos flujos de trabajo, conectamos tus herramientas existentes a través de APIs y construimos pipelines de procesamiento de datos, notificaciones, reportes y más.",
+      "features": ["Automatización de Flujos", "Conexiones API", "Pipelines de Datos", "Reportes"]
     }
   },
   "about": {
@@ -91,6 +96,28 @@
         "name": "Finanzas",
         "description": "Servicios financieros y sistemas de procesamiento de pagos"
       }
+    }
+  },
+  "work": {
+    "title": "Nuestro Trabajo",
+    "subtitle": "Una selección de proyectos en vivo que hemos diseñado, construido y lanzado para nuestros clientes.",
+    "cta": "¿Tienes un proyecto en mente?",
+    "ctaLink": "Hablemos.",
+    "project1": {
+      "title": "Titi Amanda Babysitter",
+      "description": "Sitio web profesional de niñera con detalles de servicios, información de reservas y testimonios de padres."
+    },
+    "project2": {
+      "title": "Dashboard Financiero",
+      "description": "Panel de análisis y reportes en tiempo real para una empresa de servicios financieros."
+    },
+    "project3": {
+      "title": "Tienda E-Commerce",
+      "description": "Tienda en línea completa con gestión de inventario, pagos y seguimiento de pedidos."
+    },
+    "project4": {
+      "title": "Plataforma de Hospitalidad",
+      "description": "Sistema de reservas y gestión de mesas para restaurantes con programa de fidelización."
     }
   },
   "contact": {

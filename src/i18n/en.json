@@ -2,6 +2,7 @@
   "nav": {
     "home": "Home",
     "services": "Services",
+    "work": "Work",
     "about": "About",
     "contact": "Contact"
   },
@@ -16,19 +17,23 @@
     "subtitle": "End-to-end technology services designed to solve real business challenges and accelerate your growth.",
     "consulting": {
       "title": "Technology Consulting",
-      "description": "Strategic technology guidance for businesses navigating digital transformation. We assess your current stack, define roadmaps, and recommend the right tools — from architecture reviews to vendor selection."
+      "description": "Strategic technology guidance for businesses navigating digital transformation. We assess your current stack, define roadmaps, and recommend the right tools — from architecture reviews to vendor selection.",
+      "features": ["Architecture Review", "Tech Roadmap", "Vendor Selection", "Stack Assessment"]
     },
     "websites": {
       "title": "Website Development",
-      "description": "Professional websites built to convert. From corporate sites and landing pages to e-commerce and portfolios — fast, SEO-optimized, and built on modern tech that scales with your brand."
+      "description": "Professional websites built to convert. From corporate sites and landing pages to e-commerce and portfolios — fast, SEO-optimized, and built on modern tech that scales with your brand.",
+      "features": ["SEO-Optimized", "Mobile-First", "E-Commerce Ready", "Fast Load Times"]
     },
     "webapps": {
       "title": "Web Applications",
-      "description": "Custom business tools that fit the way you work. We build SaaS platforms, client portals, internal dashboards, and management systems — tailored to your workflows and designed for real users."
+      "description": "Custom business tools that fit the way you work. We build SaaS platforms, client portals, internal dashboards, and management systems — tailored to your workflows and designed for real users.",
+      "features": ["SaaS Platforms", "Client Portals", "Dashboards", "API Integrations"]
     },
     "automation": {
       "title": "Process Automation",
-      "description": "Eliminate repetitive manual work. We automate business workflows, connect your existing tools via APIs, and build pipelines for data processing, notifications, reporting, and more."
+      "description": "Eliminate repetitive manual work. We automate business workflows, connect your existing tools via APIs, and build pipelines for data processing, notifications, reporting, and more.",
+      "features": ["Workflow Automation", "API Connections", "Data Pipelines", "Reporting"]
     }
   },
   "about": {
@@ -91,6 +96,28 @@
         "name": "Finance",
         "description": "Financial services and payment processing systems"
       }
+    }
+  },
+  "work": {
+    "title": "Our Work",
+    "subtitle": "A selection of live projects we've designed, built, and shipped for our clients.",
+    "cta": "Have a project in mind?",
+    "ctaLink": "Let's talk.",
+    "project1": {
+      "title": "Titi Amanda Babysitter",
+      "description": "Professional babysitter website with service details, booking info, and parent testimonials."
+    },
+    "project2": {
+      "title": "Financial Dashboard",
+      "description": "Real-time analytics and reporting dashboard for a financial services company."
+    },
+    "project3": {
+      "title": "Retail E-Commerce Store",
+      "description": "Full-featured online store with inventory management, payments, and order tracking."
+    },
+    "project4": {
+      "title": "Hospitality Management Platform",
+      "description": "Restaurant reservation and table management system with customer loyalty features."
     }
   },
   "contact": {

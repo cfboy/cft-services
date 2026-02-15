@@ -6,6 +6,7 @@ import { Footer } from '@/components/Footer'
 import { Hero } from '@/components/Hero'
 import { Navbar } from '@/components/Navbar'
 import { Services } from '@/components/Services'
+import { Work } from '@/components/Work'
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <Hero />
         <Services />
         <About />
+        <Work />
         <Contact />
       </main>
       <Footer />
