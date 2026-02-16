@@ -38,8 +38,8 @@ export function Contact() {
     } as ContactForm,
     onSubmit: async ({ value }) => {
       try {
-        // TODO: Replace with actual webhook endpoint
-        const webhookUrl = 'https://your-webhook-endpoint.com/contact'
+        const webhookUrl =
+          'https://hook.us2.make.com/2ore7a8fy13c2jn02j2g0oqr041iqrha'
 
         const response = await fetch(webhookUrl, {
           method: 'POST',

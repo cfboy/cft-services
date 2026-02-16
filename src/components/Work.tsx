@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { ArrowUpRight, Globe } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
+import LibelulaLogo from '../assets/projects/LogoLibelula.svg'
 import TitiAmandaLogo from '../assets/projects/LogoTitiAmanda.svg'
 
 const SECTION_ID = 'work'
@@ -18,32 +19,44 @@ const projects = [
     url: 'https://titiamandababysitter.com/',
     image: TitiAmandaLogo,
     isLogo: true,
+    bgColor: '#fff3eb',
+    accentFrom: '#f99898',
+    accentTo: '#fff3eb',
+    textColor: 'text-foreground',
     tags: ['Website'],
-    accent: 'from-cft-teal-primary to-cft-navy-medium',
   },
   {
     key: 'project2',
-    url: 'https://example.com',
-    image: 'https://placehold.co/800x500/0f4c75/20e3b2?text=Project+2',
-    isLogo: false,
-    tags: ['Web App', 'Finance'],
-    accent: 'from-cft-navy-medium to-cft-navy-deep',
+    url: 'https://www.clinicalibelula.com/',
+    image: LibelulaLogo,
+    isLogo: true,
+    bgColor: '#f8ffe3',
+    accentFrom: '#1f3032',
+    accentTo: '#c3f991',
+    textColor: 'text-background',
+    tags: ['Website'],
   },
   {
     key: 'project3',
     url: 'https://example.com',
     image: 'https://placehold.co/800x500/3caea3/ffffff?text=Project+3',
     isLogo: false,
+    bgColor: '',
+    accentFrom: '#3caea3',
+    accentTo: '#a8eddf',
+    textColor: 'text-foreground',
     tags: ['E-Commerce', 'Retail'],
-    accent: 'from-cft-teal-primary to-cft-teal-light',
   },
   {
     key: 'project4',
     url: 'https://example.com',
     image: 'https://placehold.co/800x500/1a1a2e/3caea3?text=Project+4',
     isLogo: false,
+    bgColor: '',
+    accentFrom: '#1a1a2e',
+    accentTo: '#3caea3',
+    textColor: 'text-background',
     tags: ['Platform', 'Hospitality'],
-    accent: 'from-cft-navy-deep to-cft-teal-primary',
   },
 ] as const
 
@@ -69,12 +82,17 @@ function ProjectCard({
     >
       {/* Image / Logo */}
       <div
-        className={`relative overflow-hidden ${project.isLogo ? 'bg-muted/40 flex aspect-video items-center justify-center' : 'aspect-video'}`}
+        className={`relative overflow-hidden ${project.isLogo ? 'flex aspect-video items-center justify-center p-6' : 'aspect-video'}`}
+        style={
+          project.isLogo && project.bgColor
+            ? { backgroundColor: project.bgColor }
+            : undefined
+        }
       >
         <img
           src={project.image}
           alt={t(`work.${project.key}.title`)}
-          className={`transition-transform duration-500 group-hover:scale-105 ${project.isLogo ? 'w-auto object-contain' : 'h-full w-full object-cover'}`}
+          className={`transition-transform duration-500 group-hover:scale-105 ${project.isLogo ? 'max-h-full max-w-full object-contain' : 'h-full w-full object-cover'}`}
           loading="lazy"
         />
       </div>
@@ -95,21 +113,25 @@ function ProjectCard({
       </div>
 
       {/* Hover overlay */}
-      <div className="absolute inset-0 flex flex-col justify-end opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-        {/* Gradient scrim */}
+      <div className="absolute inset-0 flex flex-col justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+        {/* Solid color scrim for hover, using project4's style for all */}
         <div
-          className={`absolute inset-0 bg-linear-to-t ${project.accent} opacity-90`}
+          className="absolute inset-0"
+          style={{
+            backgroundColor: '#1a1a2e',
+            opacity: 0.95,
+          }}
         />
 
-        {/* Content */}
+        {/* Content with project 4 text color on hover */}
         <div className="relative p-4">
           <div className="mb-1 flex items-start justify-between gap-2">
-            <h3 className="text-base leading-tight font-bold text-white">
+            <h3 className="text-background text-base leading-tight font-bold">
               {t(`work.${project.key}.title`)}
             </h3>
-            <ArrowUpRight className="mt-0.5 h-4 w-4 shrink-0 text-white/80" />
+            <ArrowUpRight className="text-background mt-0.5 h-4 w-4 shrink-0" />
           </div>
-          <p className="text-xs leading-relaxed text-white/80">
+          <p className="text-background text-xs leading-relaxed">
             {t(`work.${project.key}.description`)}
           </p>
         </div>
