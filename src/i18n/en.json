@@ -103,6 +103,8 @@
     "subtitle": "A selection of live projects we've designed, built, and shipped for our clients.",
     "cta": "Have a project in mind?",
     "ctaLink": "Let's talk.",
+    "visitSite": "Visit site",
+    "viewDetails": "View details",
     "project1": {
       "title": "Titi Amanda Babysitter",
       "description": "Professional babysitter website with service details, booking info, and parent testimonials."
@@ -112,12 +114,12 @@
       "description": "Professional health clinic website with service listings, team profiles, and appointment information."
     },
     "project3": {
-      "title": "Retail E-Commerce Store",
-      "description": "Full-featured online store with inventory management, payments, and order tracking."
+      "title": "CRM & AI Document Automation",
+      "description": "End-to-end automation pipeline connecting OneDrive, Zoho CRM, and AI agents to process documents, create contacts, and route tasks automatically."
     },
     "project4": {
-      "title": "Hospitality Management Platform",
-      "description": "Restaurant reservation and table management system with customer loyalty features."
+      "title": "Automated Sales Report",
+      "description": "Monthly sales report automation that pulls data from ATH Móvil Business and Clover, aggregates transactions, and delivers a formatted summary via email."
     }
   },
   "contact": {

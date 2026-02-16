@@ -1,28 +1,41 @@
 import { motion } from 'framer-motion'
-import { ArrowUpRight, Globe } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+} from './ui/drawer'
+import CRMAutomationImg from '../assets/projects/CRM-Make-Automation.png'
 import LibelulaLogo from '../assets/projects/LogoLibelula.svg'
 import TitiAmandaLogo from '../assets/projects/LogoTitiAmanda.svg'
+import SalesReportImg from '../assets/projects/Sales-Report.png'
 
 const SECTION_ID = 'work'
 
-/**
- * Projects data — replace placeholder values with real project details.
- * `image` should be a URL to a screenshot (can use a service like
- * https://api.microlink.io/?url=YOUR_URL&screenshot=true&meta=false&embed=screenshot.url
- * or drop real screenshots into /src/assets/ and import them).
- */
-const projects = [
+type Project = {
+  key: string
+  url?: string
+  drawerImage?: string
+  image: string
+  isLogo: boolean
+  bgColor: string
+  backBg: string
+  tags: readonly string[]
+}
+
+const projects: Project[] = [
   {
     key: 'project1',
     url: 'https://titiamandababysitter.com/',
     image: TitiAmandaLogo,
     isLogo: true,
     bgColor: '#fff3eb',
-    accentFrom: '#f99898',
-    accentTo: '#fff3eb',
-    textColor: 'text-foreground',
+    backBg: '#f97c7c',
     tags: ['Website'],
   },
   {
@@ -31,112 +44,187 @@ const projects = [
     image: LibelulaLogo,
     isLogo: true,
     bgColor: '#f8ffe3',
-    accentFrom: '#1f3032',
-    accentTo: '#c3f991',
-    textColor: 'text-background',
+    backBg: '#1f3032',
     tags: ['Website'],
   },
   {
     key: 'project3',
-    url: 'https://example.com',
-    image: 'https://placehold.co/800x500/3caea3/ffffff?text=Project+3',
+    drawerImage: CRMAutomationImg,
+    image: CRMAutomationImg,
     isLogo: false,
     bgColor: '',
-    accentFrom: '#3caea3',
-    accentTo: '#a8eddf',
-    textColor: 'text-foreground',
-    tags: ['E-Commerce', 'Retail'],
+    backBg: '#3b4a6b',
+    tags: ['Automation', 'CRM', 'AI'],
   },
   {
     key: 'project4',
-    url: 'https://example.com',
-    image: 'https://placehold.co/800x500/1a1a2e/3caea3?text=Project+4',
+    drawerImage: SalesReportImg,
+    image: SalesReportImg,
     isLogo: false,
     bgColor: '',
-    accentFrom: '#1a1a2e',
-    accentTo: '#3caea3',
-    textColor: 'text-background',
-    tags: ['Platform', 'Hospitality'],
+    backBg: '#4a1a6b',
+    tags: ['Automation', 'Reporting', 'Finance'],
   },
-] as const
+]
 
-function ProjectCard({
-  project,
-  index,
-}: {
-  project: (typeof projects)[number]
-  index: number
-}) {
+function ProjectCard({ project, index }: { project: Project; index: number }) {
   const { t } = useTranslation()
+  const [flipped, setFlipped] = useState(false)
+  const [drawerOpen, setDrawerOpen] = useState(false)
+
+  const hasDrawer = !!project.drawerImage
+  const hasUrl = !!project.url
 
   return (
-    <motion.a
-      href={project.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.45, delay: index * 0.1 }}
-      className="group relative block overflow-hidden rounded-2xl shadow-md"
-    >
-      {/* Image / Logo */}
-      <div
-        className={`relative overflow-hidden ${project.isLogo ? 'flex aspect-video items-center justify-center p-6' : 'aspect-video'}`}
-        style={
-          project.isLogo && project.bgColor
-            ? { backgroundColor: project.bgColor }
-            : undefined
-        }
+    <>
+      <motion.div
+        initial={{ opacity: 0, y: 28 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.45, delay: index * 0.1 }}
+        className="aspect-[4/3] cursor-pointer"
+        style={{ perspective: '1000px' }}
+        onClick={() => setFlipped(v => !v)}
       >
-        <img
-          src={project.image}
-          alt={t(`work.${project.key}.title`)}
-          className={`transition-transform duration-500 group-hover:scale-105 ${project.isLogo ? 'max-h-full max-w-full object-contain' : 'h-full w-full object-cover'}`}
-          loading="lazy"
-        />
-      </div>
-
-      {/* Always-visible bottom strip */}
-      <div className="bg-card border-border/50 flex items-center justify-between border-t px-4 py-3">
-        <div className="flex flex-wrap gap-1.5">
-          {project.tags.map(tag => (
-            <span
-              key={tag}
-              className="bg-muted text-muted-foreground rounded-full px-2.5 py-0.5 text-xs font-medium"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-        <Globe className="text-muted-foreground h-4 w-4 shrink-0" />
-      </div>
-
-      {/* Hover overlay */}
-      <div className="absolute inset-0 flex flex-col justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-        {/* Solid color scrim for hover, using project4's style for all */}
+        {/* Flip container */}
         <div
-          className="absolute inset-0"
+          className="relative h-full w-full rounded-2xl shadow-md transition-transform duration-500"
           style={{
-            backgroundColor: '#1a1a2e',
-            opacity: 0.95,
+            transformStyle: 'preserve-3d',
+            transform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
           }}
-        />
-
-        {/* Content with project 4 text color on hover */}
-        <div className="relative p-4">
-          <div className="mb-1 flex items-start justify-between gap-2">
-            <h3 className="text-background text-base leading-tight font-bold">
-              {t(`work.${project.key}.title`)}
-            </h3>
-            <ArrowUpRight className="text-background mt-0.5 h-4 w-4 shrink-0" />
+        >
+          {/* ── FRONT ── */}
+          <div
+            className="absolute inset-0 overflow-hidden rounded-2xl"
+            style={{ backfaceVisibility: 'hidden' }}
+          >
+            {/* Image / Logo */}
+            <div
+              className={`relative h-[calc(100%-44px)] overflow-hidden ${project.isLogo ? 'flex items-center justify-center p-6' : ''}`}
+              style={
+                project.isLogo && project.bgColor
+                  ? { backgroundColor: project.bgColor }
+                  : undefined
+              }
+            >
+              <img
+                src={project.image}
+                alt={t(`work.${project.key}.title`)}
+                className={
+                  project.isLogo
+                    ? 'max-h-full max-w-[80%] object-contain'
+                    : 'h-full w-full object-cover'
+                }
+                loading="lazy"
+              />
+            </div>
+            {/* Bottom strip */}
+            <div className="bg-card border-border/50 flex h-11 items-center border-t px-4">
+              <div className="flex flex-wrap gap-1.5">
+                {project.tags.map(tag => (
+                  <span
+                    key={tag}
+                    className="bg-muted text-muted-foreground rounded-full px-2.5 py-0.5 text-xs font-medium"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
-          <p className="text-background text-xs leading-relaxed">
-            {t(`work.${project.key}.description`)}
-          </p>
+
+          {/* ── BACK ── */}
+          <div
+            className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-2xl p-5"
+            style={{
+              backfaceVisibility: 'hidden',
+              transform: 'rotateY(180deg)',
+              backgroundColor: project.backBg,
+            }}
+          >
+            <div>
+              <h3 className="mb-2 text-base leading-tight font-bold text-white">
+                {t(`work.${project.key}.title`)}
+              </h3>
+              <p className="text-xs leading-relaxed text-white/80">
+                {t(`work.${project.key}.description`)}
+              </p>
+            </div>
+
+            <div className="flex items-center justify-between">
+              <div className="flex flex-wrap gap-1.5">
+                {project.tags.map(tag => (
+                  <span
+                    key={tag}
+                    className="rounded-full bg-white/20 px-2.5 py-0.5 text-xs font-medium text-white"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              {hasDrawer && (
+                <button
+                  onClick={e => {
+                    e.stopPropagation()
+                    setDrawerOpen(true)
+                  }}
+                  className="ml-3 inline-flex shrink-0 items-center gap-1 rounded-full border border-white/40 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-white/20"
+                >
+                  {t('work.viewDetails')}
+                </button>
+              )}
+
+              {hasUrl && !hasDrawer && (
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={e => e.stopPropagation()}
+                  className="ml-3 inline-flex shrink-0 items-center gap-1 rounded-full border border-white/40 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-white/20"
+                >
+                  {t('work.visitSite')}
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                </a>
+              )}
+            </div>
+          </div>
         </div>
-      </div>
-    </motion.a>
+      </motion.div>
+
+      {hasDrawer && (
+        <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
+          <DrawerContent>
+            <DrawerHeader>
+              <DrawerTitle>{t(`work.${project.key}.title`)}</DrawerTitle>
+              <div className="mt-1.5 flex flex-wrap gap-1.5">
+                {project.tags.map(tag => (
+                  <span
+                    key={tag}
+                    className="bg-muted text-muted-foreground rounded-full px-2.5 py-0.5 text-xs font-medium"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </DrawerHeader>
+            <div className="overflow-y-auto px-4 pb-8">
+              <DrawerDescription className="pb-1 text-sm leading-relaxed">
+                {t(`work.${project.key}.description`)}
+              </DrawerDescription>
+              {project.drawerImage && (
+                <img
+                  src={project.drawerImage}
+                  alt={t(`work.${project.key}.title`)}
+                  className="mx-auto mb-4 block w-full max-w-lg rounded-xl object-contain"
+                />
+              )}
+            </div>
+          </DrawerContent>
+        </Drawer>
+      )}
+    </>
   )
 }
 
@@ -168,11 +256,17 @@ export function Work() {
           </p>
         </motion.div>
 
-        {/* Grid — 1 col mobile, 2 col tablet, 3 col desktop, 4 col xl */}
+        {/* Grid */}
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {projects.map((project, i) => (
             <ProjectCard key={project.key} project={project} index={i} />
           ))}
+          {/* Coming soon card */}
+          <div className="border-muted-foreground/30 bg-muted text-muted-foreground flex aspect-video flex-col items-center justify-center rounded-2xl border border-dashed p-6 text-center">
+            <span className="mb-2 text-2xl">🚧</span>
+            <span className="font-semibold">Coming soon</span>
+            <span className="mt-1 text-xs">More projects will be added</span>
+          </div>
         </div>
 
         {/* CTA */}
