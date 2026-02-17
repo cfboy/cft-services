@@ -150,11 +150,11 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             </h3>
 
             {/* Scrollable description */}
-            <div className="min-h-0 flex-1 overflow-y-auto">
+            <ScrollArea className="min-h-0 flex-1">
               <p className="text-sm leading-relaxed text-white/80">
                 {t(`work.${project.key}.description`)}
               </p>
-            </div>
+            </ScrollArea>
 
             {/* Action button */}
             {(hasDrawer || hasUrl) && (
