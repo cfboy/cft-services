@@ -20,6 +20,13 @@ import { Textarea } from '@/components/ui/textarea'
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.email('Please enter a valid email address'),
+  phone: z
+    .string()
+    .min(7, 'Phone number must be at least 7 digits')
+    .max(20, 'Phone number must be at most 20 digits')
+    .regex(/^[\d+\-()\s]*$/, 'Please enter a valid phone number')
+    .optional()
+    .or(z.literal('')),
   industry: z.string().min(1, 'Please select an industry'),
   message: z.string().min(10, 'Message must be at least 10 characters'),
 })
@@ -33,6 +40,7 @@ export function Contact() {
     defaultValues: {
       name: '',
       email: '',
+      phone: '',
       industry: '',
       message: '',
     } as ContactForm,
@@ -176,6 +184,33 @@ export function Contact() {
                           onBlur={field.handleBlur}
                           onChange={e => field.handleChange(e.target.value)}
                           placeholder={t('contact.emailPlaceholder')}
+                        />
+                        {field.state.meta.errors.length > 0 && (
+                          <p className="text-destructive text-sm">
+                            {field.state.meta.errors[0]}
+                          </p>
+                        )}
+                      </div>
+                    )}
+                  />
+                  <form.Field
+                    name="phone"
+                    children={field => (
+                      <div className="space-y-2">
+                        <label
+                          htmlFor={field.name}
+                          className="text-sm font-medium"
+                        >
+                          {t('contact.phone')}
+                        </label>
+                        <Input
+                          id={field.name}
+                          name={field.name}
+                          type="tel"
+                          value={field.state.value}
+                          onBlur={field.handleBlur}
+                          onChange={e => field.handleChange(e.target.value)}
+                          placeholder={t('contact.phonePlaceholder')}
                         />
                         {field.state.meta.errors.length > 0 && (
                           <p className="text-destructive text-sm">

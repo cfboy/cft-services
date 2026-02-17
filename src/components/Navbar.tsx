@@ -20,6 +20,16 @@ export function Navbar() {
     setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
   }
 
+  const handleClickLink = (href: string) => {
+    setMobileOpen(false)
+    setTimeout(() => {
+      const id = href.startsWith('#') ? href.slice(1) : href
+      const target = document.getElementById(id)
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }, 250)
+  }
   const navLinks = [
     { href: '#home', label: t('nav.home') },
     { href: '#services', label: t('nav.services') },
@@ -46,6 +56,7 @@ export function Navbar() {
             <a
               key={link.href}
               href={link.href}
+              onClick={() => handleClickLink(link.href)}
               className="text-muted-foreground hover:text-foreground rounded-lg px-3 py-2 text-sm font-medium transition-colors"
             >
               {link.label}
@@ -126,7 +137,10 @@ export function Navbar() {
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={() => setMobileOpen(false)}
+                  onClick={e => {
+                    e.preventDefault()
+                    handleClickLink(link.href)
+                  }}
                   className="text-muted-foreground hover:text-foreground rounded-lg px-3 py-2 text-sm font-medium transition-colors"
                 >
                   {link.label}

@@ -18,22 +18,52 @@
     "consulting": {
       "title": "Consultoría Tecnológica",
       "description": "Orientación estratégica para empresas en proceso de transformación digital. Evaluamos tu stack actual, definimos roadmaps y recomendamos las herramientas correctas — desde revisiones de arquitectura hasta selección de proveedores.",
-      "features": ["Revisión de Arquitectura", "Hoja de Ruta Tech", "Selección de Proveedores", "Evaluación de Stack"]
+      "features": [
+        "Revisión de Arquitectura",
+        "Hoja de Ruta Tech",
+        "Selección de Proveedores",
+        "Evaluación de Stack"
+      ]
     },
     "websites": {
       "title": "Desarrollo de Sitios Web",
       "description": "Sitios web profesionales orientados a la conversión. Desde sitios corporativos y landing pages hasta e-commerce y portafolios — rápidos, optimizados para SEO y construidos con tecnología moderna que escala con tu marca.",
-      "features": ["Optimizado para SEO", "Mobile-First", "E-Commerce Listo", "Carga Rápida"]
+      "features": [
+        "Optimizado para SEO",
+        "Mobile-First",
+        "E-Commerce Listo",
+        "Carga Rápida"
+      ]
     },
     "webapps": {
       "title": "Aplicaciones Web",
       "description": "Herramientas de negocio a medida que se adaptan a tu forma de trabajar. Desarrollamos plataformas SaaS, portales para clientes, dashboards internos y sistemas de gestión — diseñados para usuarios reales.",
-      "features": ["Plataformas SaaS", "Portales de Clientes", "Dashboards", "Integraciones API"]
+      "features": [
+        "Plataformas SaaS",
+        "Portales de Clientes",
+        "Dashboards",
+        "Integraciones API"
+      ]
     },
     "automation": {
       "title": "Automatización de Procesos",
       "description": "Elimina el trabajo manual repetitivo. Automatizamos flujos de trabajo, conectamos tus herramientas existentes a través de APIs y construimos pipelines de procesamiento de datos, notificaciones, reportes y más.",
-      "features": ["Automatización de Flujos", "Conexiones API", "Pipelines de Datos", "Reportes"]
+      "features": [
+        "Automatización de Flujos",
+        "Conexiones API",
+        "Pipelines de Datos",
+        "Reportes"
+      ]
+    },
+    "crm": {
+      "title": "Implementación de CRM",
+      "description": "Configuramos, personalizamos e integramos plataformas CRM que se adaptan a tu proceso de ventas. Desde Zoho hasta HubSpot, configuramos pipelines, automatizamos seguimientos y conectamos tu CRM con las herramientas que ya usa tu equipo.",
+      "features": [
+        "Configuración de CRM",
+        "Automatización de Pipeline",
+        "Integraciones",
+        "Capacitación de Equipo"
+      ]
     }
   },
   "about": {
@@ -144,7 +174,9 @@
       "manufacturing": "Manufactura",
       "education": "Educación",
       "other": "Otro"
-    }
+    },
+    "phonePlaceholder": "XXX-XX-XXXX",
+    "phone": "Teléfono"
   },
   "footer": {
     "rights": "Todos los derechos reservados.",

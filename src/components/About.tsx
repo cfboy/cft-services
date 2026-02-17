@@ -107,21 +107,29 @@ const industries = [
     nameKey: 'about.industries.healthcare.name',
     descKey: 'about.industries.healthcare.description',
     Icon: Heart,
+    iconColor: 'text-rose-500',
+    iconBg: 'bg-rose-500/10',
   },
   {
     nameKey: 'about.industries.insurance.name',
     descKey: 'about.industries.insurance.description',
     Icon: Shield,
+    iconColor: 'text-cft-teal-primary',
+    iconBg: 'bg-cft-teal-primary/10',
   },
   {
     nameKey: 'about.industries.hospitality.name',
     descKey: 'about.industries.hospitality.description',
     Icon: Utensils,
+    iconColor: 'text-amber-500',
+    iconBg: 'bg-amber-500/10',
   },
   {
     nameKey: 'about.industries.finance.name',
     descKey: 'about.industries.finance.description',
     Icon: Banknote,
+    iconColor: 'text-cft-navy-medium',
+    iconBg: 'bg-cft-navy-medium/10',
   },
 ]
 
@@ -289,7 +297,7 @@ export function About() {
           </div>
         </div>
 
-        {/* ── Industries — Icon pill strip ── */}
+        {/* ── Industries — Horizontal scroll cards ── */}
         <div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -306,39 +314,33 @@ export function About() {
             </p>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-wrap justify-center gap-4"
-          >
-            {industries.map(({ nameKey, descKey, Icon }, i) => (
-              <motion.div
-                key={nameKey}
-                initial={{ opacity: 0, scale: 0.85 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.35, delay: i * 0.08 }}
-                whileHover={{ scale: 1.06, transition: { duration: 0.18 } }}
-                className="group bg-card border-border/50 hover:border-cft-teal-primary/40 hover:bg-cft-teal-primary/5 relative flex cursor-default flex-col items-center gap-3 overflow-hidden rounded-2xl border px-8 py-6 shadow-sm transition-all duration-300 hover:shadow-md sm:flex-row sm:gap-4 sm:px-6 sm:py-4"
-              >
-                {/* Glow on hover */}
-                <div className="bg-cft-teal-primary/5 pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-                <div className="bg-cft-teal-primary/10 group-hover:bg-cft-teal-primary/15 relative flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-colors duration-300">
-                  <Icon className="text-cft-teal-primary h-5 w-5" />
-                </div>
-
-                <div className="relative text-center sm:text-left">
-                  <p className="text-sm font-semibold">{t(nameKey)}</p>
-                  <p className="text-muted-foreground mt-0.5 text-xs leading-snug">
-                    {t(descKey)}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+          {/* Staggered two-column grid */}
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {industries.map(
+              ({ nameKey, descKey, Icon, iconColor, iconBg }, i) => (
+                <motion.div
+                  key={nameKey}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ duration: 0.4, delay: i * 0.1 }}
+                  className="bg-card border-border/50 hover:border-cft-teal-primary/30 flex h-full items-start gap-3 rounded-2xl border p-4 shadow-sm transition-all duration-300 hover:shadow-md"
+                >
+                  <div
+                    className={`mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${iconBg}`}
+                  >
+                    <Icon className={`h-4 w-4 ${iconColor}`} />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold">{t(nameKey)}</p>
+                    <p className="text-muted-foreground mt-0.5 text-xs leading-snug">
+                      {t(descKey)}
+                    </p>
+                  </div>
+                </motion.div>
+              )
+            )}
+          </div>
         </div>
       </div>
     </section>

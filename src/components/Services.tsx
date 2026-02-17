@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
-import { Check, Code2, Lightbulb, Monitor, Zap } from 'lucide-react'
+import { Check, Code2, GitBranch, Lightbulb, Monitor, Zap } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+
+import { ScrollArea, ScrollBar } from './ui/scroll-area'
 
 const SECTION_ID = 'services'
 
@@ -9,39 +11,57 @@ const services = [
     key: 'consulting',
     Icon: Lightbulb,
     gradient: 'from-cft-teal-primary to-cft-navy-medium',
-    accentGradient: 'from-cft-teal-primary to-cft-navy-medium',
+    bg: 'from-cft-teal-primary/10 to-cft-navy-medium/10',
+    border: 'hover:border-cft-teal-primary/40',
+    number: '01',
   },
   {
     key: 'websites',
     Icon: Monitor,
     gradient: 'from-cft-navy-medium to-cft-navy-deep',
-    accentGradient: 'from-cft-navy-medium to-cft-navy-deep',
+    bg: 'from-cft-navy-medium/10 to-cft-navy-deep/10',
+    border: 'hover:border-cft-navy-medium/40',
+    number: '02',
   },
   {
     key: 'webapps',
     Icon: Code2,
     gradient: 'from-cft-teal-primary to-cft-teal-light',
-    accentGradient: 'from-cft-teal-primary to-cft-teal-light',
+    bg: 'from-cft-teal-primary/10 to-cft-teal-light/10',
+    border: 'hover:border-cft-teal-primary/40',
+    number: '03',
   },
   {
     key: 'automation',
     Icon: Zap,
     gradient: 'from-cft-navy-deep to-cft-teal-primary',
-    accentGradient: 'from-cft-navy-deep to-cft-teal-primary',
+    bg: 'from-cft-navy-deep/10 to-cft-teal-primary/10',
+    border: 'hover:border-cft-teal-primary/40',
+    number: '04',
   },
-] as const
+  {
+    key: 'crm',
+    Icon: GitBranch,
+    gradient: 'from-violet-500 to-purple-700',
+    bg: 'from-violet-500/10 to-purple-700/10',
+    border: 'hover:border-violet-400/40',
+    number: '05',
+  },
+]
 
 function ServiceCard({
   serviceKey,
   Icon,
   gradient,
-  accentGradient,
+  bg,
+  border,
   index,
 }: {
   serviceKey: string
   Icon: React.ComponentType<{ className?: string }>
   gradient: string
-  accentGradient: string
+  bg: string
+  border: string
   index: number
 }) {
   const { t } = useTranslation()
@@ -53,50 +73,40 @@ function ServiceCard({
     <motion.div
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.45, delay: index * 0.1 }}
-      whileHover={{ y: -6, transition: { duration: 0.2 } }}
-      className="bg-card border-border/60 hover:border-cft-teal-primary/30 group flex flex-col overflow-hidden rounded-2xl border shadow-sm transition-shadow duration-300 hover:shadow-lg"
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.45, delay: index * 0.08 }}
+      className={`bg-card border-border/50 ${border} group relative flex w-80 shrink-0 flex-col overflow-hidden rounded-3xl border shadow-sm transition-all duration-300 hover:shadow-xl`}
     >
-      {/* Top accent bar */}
-      <div className={`h-1 w-full bg-linear-to-r ${accentGradient}`} />
-
-      <div className="flex flex-1 flex-col p-6">
-        {/* Top section — grows to push divider down */}
-        <div className="flex flex-1 flex-col">
-          {/* Icon */}
-          <motion.div
-            animate={{ scale: [1, 1.04, 1] }}
-            transition={{ repeat: Infinity, duration: 3, delay: index * 0.4 }}
-            className={`mb-5 inline-flex h-13 w-13 items-center justify-center rounded-xl bg-linear-to-br ${gradient} shadow-md`}
-          >
-            <Icon className="h-6 w-6 text-white" />
-          </motion.div>
-
-          {/* Title */}
-          <h3 className="mb-2 text-lg leading-tight font-bold">
-            {t(`services.${serviceKey}.title`)}
-          </h3>
-
-          {/* Description — grows to fill remaining space */}
-          <p className="text-muted-foreground grow text-sm leading-relaxed">
-            {t(`services.${serviceKey}.description`)}
-          </p>
+      {/* Gradient icon area */}
+      <div className={`bg-linear-to-br ${bg} relative flex h-40 items-end p-6`}>
+        <div
+          className={`inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-linear-to-br ${gradient} shadow-lg`}
+        >
+          <Icon className="h-7 w-7 text-white" />
         </div>
+      </div>
 
-        {/* Divider — always at the same level per row */}
-        <div className="border-border/50 mt-5 mb-4 border-t" />
+      {/* Content */}
+      <div className="flex flex-1 flex-col p-6">
+        <h3 className="mb-2 text-lg leading-tight font-bold">
+          {t(`services.${serviceKey}.title`)}
+        </h3>
+        <p className="text-muted-foreground mb-5 grow text-sm leading-relaxed">
+          {t(`services.${serviceKey}.description`)}
+        </p>
 
-        {/* Features list */}
+        {/* Divider */}
+        <div className="border-border/40 mb-4 border-t" />
+
+        {/* Features */}
         <ul className="space-y-2">
           {Array.isArray(features) &&
             features.map(feature => (
-              <li key={feature} className="flex items-center gap-2">
-                <span className="bg-cft-teal-primary/10 flex h-5 w-5 shrink-0 items-center justify-center rounded-full">
-                  <Check
-                    className="text-cft-teal-primary h-3 w-3"
-                    strokeWidth={2.5}
-                  />
+              <li key={feature} className="flex items-center gap-2.5">
+                <span
+                  className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-linear-to-br ${gradient}`}
+                >
+                  <Check className="h-3 w-3 text-white" strokeWidth={2.5} />
                 </span>
                 <span className="text-sm font-medium">{feature}</span>
               </li>
@@ -135,19 +145,23 @@ export function Services() {
           </p>
         </motion.div>
 
-        {/* Cards grid */}
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map(({ key, Icon, gradient, accentGradient }, i) => (
-            <ServiceCard
-              key={key}
-              serviceKey={key}
-              Icon={Icon}
-              gradient={gradient}
-              accentGradient={accentGradient}
-              index={i}
-            />
-          ))}
-        </div>
+        {/* Horizontal scroll with drag */}
+        <ScrollArea className="w-full">
+          <div className="flex cursor-grab gap-5 pb-4 select-none">
+            {services.map(({ key, Icon, gradient, bg, border }, i) => (
+              <ServiceCard
+                key={key}
+                serviceKey={key}
+                Icon={Icon}
+                gradient={gradient}
+                bg={bg}
+                border={border}
+                index={i}
+              />
+            ))}
+          </div>
+          <ScrollBar orientation="horizontal" />
+        </ScrollArea>
       </div>
     </section>
   )

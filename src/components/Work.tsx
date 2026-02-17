@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -10,6 +10,7 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from './ui/drawer'
+import { ScrollArea, ScrollBar } from './ui/scroll-area'
 import CRMAutomationImg from '../assets/projects/CRM-Make-Automation.png'
 import LibelulaLogo from '../assets/projects/LogoLibelula.svg'
 import TitiAmandaLogo from '../assets/projects/LogoTitiAmanda.svg'
@@ -67,6 +68,8 @@ const projects: Project[] = [
   },
 ]
 
+const ALL_TAGS = Array.from(new Set(projects.flatMap(p => p.tags)))
+
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const { t } = useTranslation()
   const [flipped, setFlipped] = useState(false)
@@ -82,7 +85,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-60px' }}
         transition={{ duration: 0.45, delay: index * 0.1 }}
-        className="aspect-[4/3] cursor-pointer"
+        className="aspect-3/4 cursor-pointer"
         style={{ perspective: '1000px' }}
         onClick={() => setFlipped(v => !v)}
       >
@@ -99,9 +102,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             className="absolute inset-0 overflow-hidden rounded-2xl"
             style={{ backfaceVisibility: 'hidden' }}
           >
-            {/* Image / Logo */}
+            {/* Image / Logo — full height */}
             <div
-              className={`relative h-[calc(100%-44px)] overflow-hidden ${project.isLogo ? 'flex items-center justify-center p-6' : ''}`}
+              className={`relative h-full overflow-hidden ${project.isLogo ? 'flex items-center justify-center p-6' : ''}`}
               style={
                 project.isLogo && project.bgColor
                   ? { backgroundColor: project.bgColor }
@@ -118,14 +121,12 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 }
                 loading="lazy"
               />
-            </div>
-            {/* Bottom strip */}
-            <div className="bg-card border-border/50 flex h-11 items-center border-t px-4">
-              <div className="flex flex-wrap gap-1.5">
+              {/* Floating tags — bottom left overlay */}
+              <div className="absolute bottom-3 left-3 flex flex-wrap gap-1">
                 {project.tags.map(tag => (
                   <span
                     key={tag}
-                    className="bg-muted text-muted-foreground rounded-full px-2.5 py-0.5 text-xs font-medium"
+                    className="rounded-full bg-black/40 px-2.5 py-0.5 text-xs font-medium text-white backdrop-blur-sm"
                   >
                     {tag}
                   </span>
@@ -136,59 +137,53 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
           {/* ── BACK ── */}
           <div
-            className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-2xl p-5"
+            className="absolute inset-0 flex flex-col overflow-hidden rounded-2xl p-6"
             style={{
               backfaceVisibility: 'hidden',
               transform: 'rotateY(180deg)',
               backgroundColor: project.backBg,
             }}
           >
-            <div>
-              <h3 className="mb-2 text-base leading-tight font-bold text-white">
-                {t(`work.${project.key}.title`)}
-              </h3>
-              <p className="text-xs leading-relaxed text-white/80">
+            {/* Title */}
+            <h3 className="mb-3 shrink-0 text-xl leading-tight font-bold text-white">
+              {t(`work.${project.key}.title`)}
+            </h3>
+
+            {/* Scrollable description */}
+            <div className="min-h-0 flex-1 overflow-y-auto">
+              <p className="text-sm leading-relaxed text-white/80">
                 {t(`work.${project.key}.description`)}
               </p>
             </div>
 
-            <div className="flex items-center justify-between">
-              <div className="flex flex-wrap gap-1.5">
-                {project.tags.map(tag => (
-                  <span
-                    key={tag}
-                    className="rounded-full bg-white/20 px-2.5 py-0.5 text-xs font-medium text-white"
+            {/* Action button */}
+            {(hasDrawer || hasUrl) && (
+              <div className="mt-4 shrink-0">
+                {hasDrawer && (
+                  <button
+                    onClick={e => {
+                      e.stopPropagation()
+                      setDrawerOpen(true)
+                    }}
+                    className="inline-flex items-center gap-1 rounded-full border border-white/40 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-white/20"
                   >
-                    {tag}
-                  </span>
-                ))}
+                    {t('work.viewDetails')}
+                  </button>
+                )}
+                {hasUrl && !hasDrawer && (
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={e => e.stopPropagation()}
+                    className="inline-flex items-center gap-1 rounded-full border border-white/40 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-white/20"
+                  >
+                    {t('work.visitSite')}
+                    <ArrowUpRight className="h-3.5 w-3.5" />
+                  </a>
+                )}
               </div>
-
-              {hasDrawer && (
-                <button
-                  onClick={e => {
-                    e.stopPropagation()
-                    setDrawerOpen(true)
-                  }}
-                  className="ml-3 inline-flex shrink-0 items-center gap-1 rounded-full border border-white/40 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-white/20"
-                >
-                  {t('work.viewDetails')}
-                </button>
-              )}
-
-              {hasUrl && !hasDrawer && (
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={e => e.stopPropagation()}
-                  className="ml-3 inline-flex shrink-0 items-center gap-1 rounded-full border border-white/40 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-white/20"
-                >
-                  {t('work.visitSite')}
-                  <ArrowUpRight className="h-3.5 w-3.5" />
-                </a>
-              )}
-            </div>
+            )}
           </div>
         </div>
       </motion.div>
@@ -230,6 +225,11 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
 export function Work() {
   const { t } = useTranslation()
+  const [activeTag, setActiveTag] = useState<string | null>(null)
+
+  const filtered = activeTag
+    ? projects.filter(p => p.tags.includes(activeTag))
+    : projects
 
   return (
     <section
@@ -246,7 +246,7 @@ export function Work() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.5 }}
-          className="mb-14 text-center"
+          className="mb-10 text-center"
         >
           <h2 className="mb-3 text-3xl font-bold tracking-tight sm:text-4xl">
             {t('work.title')}
@@ -256,18 +256,68 @@ export function Work() {
           </p>
         </motion.div>
 
-        {/* Grid */}
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {projects.map((project, i) => (
-            <ProjectCard key={project.key} project={project} index={i} />
+        {/* Filter pills */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.15 }}
+          className="mb-8 flex flex-wrap justify-center gap-2"
+        >
+          <button
+            onClick={() => setActiveTag(null)}
+            className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all duration-200 ${
+              activeTag === null
+                ? 'bg-cft-teal-primary text-white shadow-sm'
+                : 'bg-muted text-muted-foreground hover:bg-muted/70'
+            }`}
+          >
+            All
+          </button>
+          {ALL_TAGS.map(tag => (
+            <button
+              key={tag}
+              onClick={() => setActiveTag(activeTag === tag ? null : tag)}
+              className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all duration-200 ${
+                activeTag === tag
+                  ? 'bg-cft-teal-primary text-white shadow-sm'
+                  : 'bg-muted text-muted-foreground hover:bg-muted/70'
+              }`}
+            >
+              {tag}
+            </button>
           ))}
-          {/* Coming soon card */}
-          <div className="border-muted-foreground/30 bg-muted text-muted-foreground flex aspect-video flex-col items-center justify-center rounded-2xl border border-dashed p-6 text-center">
-            <span className="mb-2 text-2xl">🚧</span>
-            <span className="font-semibold">Coming soon</span>
-            <span className="mt-1 text-xs">More projects will be added</span>
+        </motion.div>
+
+        {/* Horizontal scroll */}
+        <ScrollArea className="w-full">
+          <div className="flex gap-4 pb-4">
+            <AnimatePresence mode="popLayout">
+              {filtered.map((project, i) => (
+                <motion.div
+                  key={project.key}
+                  layout
+                  initial={{ opacity: 0, scale: 0.92 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.92 }}
+                  transition={{ duration: 0.25 }}
+                  className="w-56 shrink-0"
+                >
+                  <ProjectCard project={project} index={i} />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+            {/* Coming soon card */}
+            {!activeTag && (
+              <div className="border-muted-foreground/30 bg-muted text-muted-foreground flex aspect-3/4 w-56 shrink-0 flex-col items-center justify-center rounded-2xl border border-dashed p-5 text-center">
+                <span className="mb-1.5 text-xl">🚧</span>
+                <span className="text-sm font-semibold">Coming soon</span>
+                <span className="mt-1 text-xs">More projects on the way</span>
+              </div>
+            )}
           </div>
-        </div>
+          <ScrollBar orientation="horizontal" />
+        </ScrollArea>
 
         {/* CTA */}
         <motion.div

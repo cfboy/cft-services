@@ -39,6 +39,13 @@
   --radius-xl: 0.75rem;
 
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+  --animate-marquee: marquee 18s linear infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
 }
 
 /* Dark theme overrides */
