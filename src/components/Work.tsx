@@ -102,37 +102,67 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             className="absolute inset-0 overflow-hidden rounded-2xl"
             style={{ backfaceVisibility: 'hidden' }}
           >
-            {/* Image / Logo — full height */}
-            <div
-              className={`relative h-full overflow-hidden ${project.isLogo ? 'flex items-center justify-center p-6' : ''}`}
-              style={
-                project.isLogo && project.bgColor
-                  ? { backgroundColor: project.bgColor }
-                  : undefined
-              }
-            >
-              <img
-                src={project.image}
-                alt={t(`work.${project.key}.title`)}
-                className={
-                  project.isLogo
-                    ? 'max-h-full max-w-[80%] object-contain'
-                    : 'h-full w-full object-cover'
-                }
-                loading="lazy"
-              />
-              {/* Floating tags — bottom left overlay */}
-              <div className="absolute bottom-3 left-3 flex flex-wrap gap-1">
-                {project.tags.map(tag => (
-                  <span
-                    key={tag}
-                    className="rounded-full bg-black/40 px-2.5 py-0.5 text-xs font-medium text-white backdrop-blur-sm"
-                  >
-                    {tag}
-                  </span>
-                ))}
+            {project.isLogo ? (
+              /* Logo projects — image on colored bg */
+              <div
+                className="relative flex h-full items-center justify-center p-6"
+                style={{ backgroundColor: project.bgColor || undefined }}
+              >
+                <img
+                  src={project.image}
+                  alt={t(`work.${project.key}.title`)}
+                  className="max-h-full max-w-[80%] object-contain"
+                  loading="lazy"
+                />
+                {/* Bottom row: tags left, hint right */}
+                <div className="absolute inset-x-3 bottom-3 flex items-end justify-between gap-2">
+                  <div className="flex flex-wrap gap-1">
+                    {project.tags.map(tag => (
+                      <span
+                        key={tag}
+                        className="rounded-full bg-black/40 px-2.5 py-0.5 text-xs font-medium text-white backdrop-blur-sm"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="shrink-0 text-xs text-black/30">
+                    {t('work.tapToLearnMore')}
+                  </p>
+                </div>
               </div>
-            </div>
+            ) : (
+              /* Non-logo projects — styled title card */
+              <div
+                className="relative flex h-full flex-col items-center justify-center gap-4 p-6 text-center"
+                style={{ backgroundColor: project.backBg }}
+              >
+                {/* Decorative circles */}
+                <div className="absolute -top-8 -right-8 h-32 w-32 rounded-full bg-white/5" />
+                <div className="absolute -bottom-6 -left-6 h-24 w-24 rounded-full bg-white/5" />
+
+                <p className="relative z-10 text-lg leading-snug font-bold text-white">
+                  {t(`work.${project.key}.title`)}
+                </p>
+
+                {/* Bottom row: tags left, hint right */}
+                <div className="absolute inset-x-3 bottom-3 z-10 flex items-end justify-between gap-2">
+                  <div className="flex flex-wrap gap-1">
+                    {project.tags.map(tag => (
+                      <span
+                        key={tag}
+                        className="rounded-full bg-white/15 px-2.5 py-0.5 text-xs font-medium text-white"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="shrink-0 text-xs text-white/40">
+                    {t('work.tapToLearnMore')}
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* ── BACK ── */}
@@ -212,7 +242,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 <img
                   src={project.drawerImage}
                   alt={t(`work.${project.key}.title`)}
-                  className="mx-auto mb-4 block w-full max-w-lg rounded-xl object-contain"
+                  className="mx-auto mt-4 block w-full rounded-xl object-contain"
                 />
               )}
             </div>

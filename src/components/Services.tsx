@@ -75,7 +75,7 @@ function ServiceCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.45, delay: index * 0.08 }}
-      className={`bg-card border-border/50 ${border} group relative flex w-80 shrink-0 flex-col overflow-hidden rounded-3xl border shadow-sm transition-all duration-300 hover:shadow-xl`}
+      className={`bg-card border-border/50 ${border} group relative flex w-80 shrink-0 flex-col overflow-hidden rounded-3xl border shadow-sm transition-[border-color,box-shadow] duration-300 hover:shadow-xl`}
     >
       {/* Gradient icon area */}
       <div className={`bg-linear-to-br ${bg} relative flex h-40 items-end p-6`}>
@@ -123,7 +123,7 @@ export function Services() {
   return (
     <section
       id={SECTION_ID}
-      className="relative overflow-hidden px-4 py-24 sm:py-32"
+      className="relative overflow-x-clip px-4 py-24 sm:py-32"
     >
       {/* Decorative background blob */}
       <div className="bg-cft-teal-primary/5 pointer-events-none absolute -top-32 left-1/2 h-150 w-150 -translate-x-1/2 rounded-full blur-3xl" />

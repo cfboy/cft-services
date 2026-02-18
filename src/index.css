@@ -2,6 +2,11 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
 @theme {
   /* CFT Brand Colors */
   --color-cft-navy-deep: #0f4c75;

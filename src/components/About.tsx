@@ -1,10 +1,17 @@
 import { motion, useInView } from 'framer-motion'
 import {
   Banknote,
+  BookOpen,
+  Building2,
   CheckCircle,
   Clock,
+  Dumbbell,
   Heart,
+  Home,
+  Scale,
   Shield,
+  ShoppingBag,
+  Truck,
   Users,
   Utensils,
 } from 'lucide-react'
@@ -105,31 +112,75 @@ const processSteps = [
 const industries = [
   {
     nameKey: 'about.industries.healthcare.name',
-    descKey: 'about.industries.healthcare.description',
     Icon: Heart,
     iconColor: 'text-rose-500',
     iconBg: 'bg-rose-500/10',
   },
   {
     nameKey: 'about.industries.insurance.name',
-    descKey: 'about.industries.insurance.description',
     Icon: Shield,
     iconColor: 'text-cft-teal-primary',
     iconBg: 'bg-cft-teal-primary/10',
   },
   {
     nameKey: 'about.industries.hospitality.name',
-    descKey: 'about.industries.hospitality.description',
     Icon: Utensils,
     iconColor: 'text-amber-500',
     iconBg: 'bg-amber-500/10',
   },
   {
     nameKey: 'about.industries.finance.name',
-    descKey: 'about.industries.finance.description',
     Icon: Banknote,
     iconColor: 'text-cft-navy-medium',
     iconBg: 'bg-cft-navy-medium/10',
+  },
+  {
+    nameKey: 'about.industries.retail.name',
+    Icon: ShoppingBag,
+    iconColor: 'text-pink-500',
+    iconBg: 'bg-pink-500/10',
+  },
+  {
+    nameKey: 'about.industries.education.name',
+    Icon: BookOpen,
+    iconColor: 'text-violet-500',
+    iconBg: 'bg-violet-500/10',
+  },
+  {
+    nameKey: 'about.industries.legal.name',
+    Icon: Scale,
+    iconColor: 'text-slate-500',
+    iconBg: 'bg-slate-500/10',
+  },
+  {
+    nameKey: 'about.industries.realestate.name',
+    Icon: Home,
+    iconColor: 'text-emerald-500',
+    iconBg: 'bg-emerald-500/10',
+  },
+  {
+    nameKey: 'about.industries.logistics.name',
+    Icon: Truck,
+    iconColor: 'text-orange-500',
+    iconBg: 'bg-orange-500/10',
+  },
+  {
+    nameKey: 'about.industries.fitness.name',
+    Icon: Dumbbell,
+    iconColor: 'text-lime-500',
+    iconBg: 'bg-lime-500/10',
+  },
+  {
+    nameKey: 'about.industries.construction.name',
+    Icon: Building2,
+    iconColor: 'text-yellow-600',
+    iconBg: 'bg-yellow-500/10',
+  },
+  {
+    nameKey: 'about.industries.government.name',
+    Icon: Users,
+    iconColor: 'text-blue-500',
+    iconBg: 'bg-blue-500/10',
   },
 ]
 
@@ -314,32 +365,50 @@ export function About() {
             </p>
           </motion.div>
 
-          {/* Staggered two-column grid */}
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {industries.map(
-              ({ nameKey, descKey, Icon, iconColor, iconBg }, i) => (
-                <motion.div
-                  key={nameKey}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-40px' }}
-                  transition={{ duration: 0.4, delay: i * 0.1 }}
-                  className="bg-card border-border/50 hover:border-cft-teal-primary/30 flex h-full items-start gap-3 rounded-2xl border p-4 shadow-sm transition-all duration-300 hover:shadow-md"
-                >
+          {/* Marquee rows */}
+          <div className="space-y-3 overflow-hidden mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+            {/* Row 1 — scrolls left */}
+            <div className="flex w-max animate-[marquee_30s_linear_infinite] gap-3">
+              {[...industries, ...industries].map(
+                ({ nameKey, Icon, iconColor, iconBg }, i) => (
                   <div
-                    className={`mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${iconBg}`}
+                    key={`row1-${i}`}
+                    className="bg-card border-border/50 flex shrink-0 items-center gap-2.5 rounded-2xl border px-4 py-2.5 shadow-sm"
                   >
-                    <Icon className={`h-4 w-4 ${iconColor}`} />
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold">{t(nameKey)}</p>
-                    <p className="text-muted-foreground mt-0.5 text-xs leading-snug">
-                      {t(descKey)}
+                    <div
+                      className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${iconBg}`}
+                    >
+                      <Icon className={`h-3.5 w-3.5 ${iconColor}`} />
+                    </div>
+                    <p className="text-sm font-semibold whitespace-nowrap">
+                      {t(nameKey)}
                     </p>
                   </div>
-                </motion.div>
-              )
-            )}
+                )
+              )}
+            </div>
+            {/* Row 2 — scrolls right */}
+            <div className="flex w-max animate-[marquee_25s_linear_infinite_reverse] gap-3">
+              {[
+                ...industries.slice(6),
+                ...industries,
+                ...industries.slice(0, 6),
+              ].map(({ nameKey, Icon, iconColor, iconBg }, i) => (
+                <div
+                  key={`row2-${i}`}
+                  className="bg-card border-border/50 flex shrink-0 items-center gap-2.5 rounded-2xl border px-4 py-2.5 shadow-sm"
+                >
+                  <div
+                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${iconBg}`}
+                  >
+                    <Icon className={`h-3.5 w-3.5 ${iconColor}`} />
+                  </div>
+                  <p className="text-sm font-semibold whitespace-nowrap">
+                    {t(nameKey)}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

@@ -111,20 +111,40 @@
       "title": "Industrias que Hemos Impactado",
       "subtitle": "Hemos ayudado a empresas de diversos sectores a modernizarse y crecer a través de la tecnología",
       "healthcare": {
-        "name": "Salud",
-        "description": "Soluciones de salud digital y sistemas de gestión de pacientes"
+        "name": "Salud"
       },
       "insurance": {
-        "name": "Seguros",
-        "description": "Evaluación de riesgos y automatización de procesamiento de reclamos"
+        "name": "Seguros"
       },
       "hospitality": {
-        "name": "Hospitalidad",
-        "description": "Gestión de restaurantes y plataformas de experiencia del cliente"
+        "name": "Hospitalidad"
       },
       "finance": {
-        "name": "Finanzas",
-        "description": "Servicios financieros y sistemas de procesamiento de pagos"
+        "name": "Finanzas"
+      },
+      "retail": {
+        "name": "Retail"
+      },
+      "education": {
+        "name": "Educación"
+      },
+      "legal": {
+        "name": "Legal"
+      },
+      "realestate": {
+        "name": "Bienes Raíces"
+      },
+      "logistics": {
+        "name": "Logística"
+      },
+      "fitness": {
+        "name": "Fitness y Bienestar"
+      },
+      "construction": {
+        "name": "Construcción"
+      },
+      "government": {
+        "name": "Gobierno"
       }
     }
   },
@@ -135,6 +155,7 @@
     "ctaLink": "Hablemos.",
     "visitSite": "Visitar sitio",
     "viewDetails": "Ver detalles",
+    "tapToLearnMore": "Toca para más info",
     "project1": {
       "title": "Titi Amanda Babysitter",
       "description": "Sitio web profesional de niñera con detalles de servicios, información de reservas y testimonios de padres."
