@@ -96,13 +96,17 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           className="relative h-full w-full rounded-2xl shadow-md transition-transform duration-500"
           style={{
             transformStyle: 'preserve-3d',
+            WebkitTransformStyle: 'preserve-3d',
             transform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
           }}
         >
           {/* ── FRONT ── */}
           <div
             className="absolute inset-0 overflow-hidden rounded-2xl"
-            style={{ backfaceVisibility: 'hidden' }}
+            style={{
+              backfaceVisibility: 'hidden',
+              WebkitBackfaceVisibility: 'hidden',
+            }}
           >
             {project.isLogo ? (
               /* Logo projects — image on colored bg */
@@ -172,6 +176,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             className="absolute inset-0 flex flex-col overflow-hidden rounded-2xl p-6"
             style={{
               backfaceVisibility: 'hidden',
+              WebkitBackfaceVisibility: 'hidden',
               transform: 'rotateY(180deg)',
               backgroundColor: project.backBg,
             }}
