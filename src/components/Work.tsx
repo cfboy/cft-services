@@ -138,32 +138,33 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 </div>
               </div>
             ) : (
-              /* Non-logo projects — styled title card */
-              <div
-                className="relative flex h-full flex-col items-center justify-center gap-4 p-6 text-center"
-                style={{ backgroundColor: project.backBg }}
-              >
-                {/* Decorative circles */}
-                <div className="absolute -top-8 -right-8 h-32 w-32 rounded-full bg-white/5" />
-                <div className="absolute -bottom-6 -left-6 h-24 w-24 rounded-full bg-white/5" />
-
-                <p className="relative z-10 text-lg leading-snug font-bold text-white">
-                  {t(`work.${project.key}.title`)}
-                </p>
-
+              /* Non-logo projects — image preview front */
+              <div className="relative h-full w-full overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={t(`work.${project.key}.title`)}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                  style={{
+                    WebkitTransform: 'translateZ(0)',
+                    willChange: 'transform',
+                  }}
+                />
+                {/* Dark overlay so tags/hint are readable */}
+                <div className="absolute inset-0 bg-black/30" />
                 {/* Bottom row: tags left, hint right */}
-                <div className="absolute inset-x-3 bottom-3 z-10 flex items-end justify-between gap-2">
+                <div className="absolute inset-x-3 bottom-3 flex items-end justify-between gap-2">
                   <div className="flex flex-wrap gap-1">
                     {project.tags.map(tag => (
                       <span
                         key={tag}
-                        className="rounded-full bg-white/15 px-2.5 py-0.5 text-xs font-medium text-white"
+                        className="rounded-full bg-black/40 px-2.5 py-0.5 text-xs font-medium text-white backdrop-blur-sm"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
-                  <p className="shrink-0 text-xs text-white/40">
+                  <p className="shrink-0 text-xs text-white/60">
                     {t('work.tapToLearnMore')}
                   </p>
                 </div>
