@@ -2,7 +2,8 @@ import { motion } from 'framer-motion'
 import { Check, Code2, GitBranch, Lightbulb, Monitor, Zap } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
-import { ScrollArea, ScrollBar } from './ui/scroll-area'
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
+import { useDragScroll } from '@/hooks/use-drag-scroll'
 
 const SECTION_ID = 'services'
 
@@ -121,6 +122,8 @@ function ServiceCard({
 
 export function Services() {
   const { t } = useTranslation()
+  const { ref, onMouseDown, onMouseMove, onMouseUp, onMouseLeave } =
+    useDragScroll<HTMLDivElement>()
 
   return (
     <section
@@ -148,22 +151,30 @@ export function Services() {
         </motion.div>
 
         {/* Horizontal scroll with drag */}
-        <ScrollArea className="w-full">
-          <div className="flex cursor-grab gap-5 pb-4 select-none">
-            {services.map(({ key, Icon, gradient, bg, border }, i) => (
-              <ServiceCard
-                key={key}
-                serviceKey={key}
-                Icon={Icon}
-                gradient={gradient}
-                bg={bg}
-                border={border}
-                index={i}
-              />
-            ))}
-          </div>
-          <ScrollBar orientation="horizontal" />
-        </ScrollArea>
+        <div
+          ref={ref}
+          onMouseDown={onMouseDown}
+          onMouseMove={onMouseMove}
+          onMouseUp={onMouseUp}
+          onMouseLeave={onMouseLeave}
+        >
+          <ScrollArea className="w-full">
+            <div className="flex cursor-grab gap-5 pb-4 select-none">
+              {services.map(({ key, Icon, gradient, bg, border }, i) => (
+                <ServiceCard
+                  key={key}
+                  serviceKey={key}
+                  Icon={Icon}
+                  gradient={gradient}
+                  bg={bg}
+                  border={border}
+                  index={i}
+                />
+              ))}
+            </div>
+            <ScrollBar orientation="horizontal" />
+          </ScrollArea>
+        </div>
       </div>
     </section>
   )

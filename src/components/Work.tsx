@@ -16,6 +16,8 @@ import LibelulaLogo from '../assets/projects/LogoLibelula.svg'
 import TitiAmandaLogo from '../assets/projects/LogoTitiAmanda.svg'
 import SalesReportImg from '../assets/projects/Sales-Report.png'
 
+import { useDragScroll } from '@/hooks/use-drag-scroll'
+
 const SECTION_ID = 'work'
 
 type Project = {
@@ -256,6 +258,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 export function Work() {
   const { t } = useTranslation()
   const [activeTag, setActiveTag] = useState<string | null>(null)
+  const { ref, onMouseDown, onMouseMove, onMouseUp, onMouseLeave } =
+    useDragScroll<HTMLDivElement>()
 
   const filtered = activeTag
     ? projects.filter(p => p.tags.includes(activeTag))
@@ -320,34 +324,42 @@ export function Work() {
         </motion.div>
 
         {/* Horizontal scroll */}
-        <ScrollArea className="w-full">
-          <div className="flex gap-4 pb-4">
-            <AnimatePresence mode="popLayout">
-              {filtered.map((project, i) => (
-                <motion.div
-                  key={project.key}
-                  layout
-                  initial={{ opacity: 0, scale: 0.92 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.92 }}
-                  transition={{ duration: 0.25 }}
-                  className="w-56 shrink-0"
-                >
-                  <ProjectCard project={project} index={i} />
-                </motion.div>
-              ))}
-            </AnimatePresence>
-            {/* Coming soon card */}
-            {!activeTag && (
-              <div className="border-muted-foreground/30 bg-muted text-muted-foreground flex aspect-3/4 w-56 shrink-0 flex-col items-center justify-center rounded-2xl border border-dashed p-5 text-center">
-                <span className="mb-1.5 text-xl">🚧</span>
-                <span className="text-sm font-semibold">Coming soon</span>
-                <span className="mt-1 text-xs">More projects on the way</span>
-              </div>
-            )}
-          </div>
-          <ScrollBar orientation="horizontal" />
-        </ScrollArea>
+        <div
+          ref={ref}
+          onMouseDown={onMouseDown}
+          onMouseMove={onMouseMove}
+          onMouseUp={onMouseUp}
+          onMouseLeave={onMouseLeave}
+        >
+          <ScrollArea className="w-full">
+            <div className="flex cursor-grab gap-4 pb-4 select-none">
+              <AnimatePresence mode="popLayout">
+                {filtered.map((project, i) => (
+                  <motion.div
+                    key={project.key}
+                    layout
+                    initial={{ opacity: 0, scale: 0.92 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.92 }}
+                    transition={{ duration: 0.25 }}
+                    className="w-56 shrink-0"
+                  >
+                    <ProjectCard project={project} index={i} />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+              {/* Coming soon card */}
+              {!activeTag && (
+                <div className="border-muted-foreground/30 bg-muted text-muted-foreground flex aspect-3/4 w-56 shrink-0 flex-col items-center justify-center rounded-2xl border border-dashed p-5 text-center">
+                  <span className="mb-1.5 text-xl">🚧</span>
+                  <span className="text-sm font-semibold">Coming soon</span>
+                  <span className="mt-1 text-xs">More projects on the way</span>
+                </div>
+              )}
+            </div>
+            <ScrollBar orientation="horizontal" />
+          </ScrollArea>
+        </div>
 
         {/* CTA */}
         <motion.div
