@@ -76,7 +76,7 @@ function ServiceCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.45, delay: index * 0.08 }}
-      className={`bg-card border-border/50 my-2 ${border} group relative flex shrink-0 flex-col overflow-hidden rounded-3xl border shadow-sm transition-[border-color,box-shadow] duration-300 hover:shadow-xl md:w-80`}
+      className={`bg-card border-border/50 my-2 ${border} group relative flex w-72 shrink-0 flex-col overflow-hidden rounded-3xl border shadow-sm transition-[border-color,box-shadow] duration-300 hover:shadow-xl md:w-80`}
     >
       {/* Gradient icon area */}
       <div
