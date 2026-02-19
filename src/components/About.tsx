@@ -366,7 +366,7 @@ export function About() {
           </motion.div>
 
           {/* Marquee rows */}
-          <div className="space-y-3 overflow-hidden mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+          <div className="space-y-3 overflow-hidden mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] py-1">
             {/* Row 1 — scrolls left */}
             <div className="flex w-max animate-[marquee_30s_linear_infinite] gap-3">
               {[...industries, ...industries].map(

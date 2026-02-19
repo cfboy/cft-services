@@ -24,9 +24,7 @@ const contactSchema = z.object({
     .string()
     .min(7, 'Phone number must be at least 7 digits')
     .max(20, 'Phone number must be at most 20 digits')
-    .regex(/^[\d+\-()\s]*$/, 'Please enter a valid phone number')
-    .optional()
-    .or(z.literal('')),
+    .regex(/^[\d+\-()\s]*$/, 'Please enter a valid phone number'),
   industry: z.string().min(1, 'Please select an industry'),
   message: z.string().min(10, 'Message must be at least 10 characters'),
 })
