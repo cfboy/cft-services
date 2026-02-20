@@ -98,6 +98,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             transformStyle: 'preserve-3d',
             WebkitTransformStyle: 'preserve-3d',
             transform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
+            WebkitTransform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
           }}
         >
           {/* ── FRONT ── */}
@@ -106,6 +107,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             style={{
               backfaceVisibility: 'hidden',
               WebkitBackfaceVisibility: 'hidden',
+              transform: 'rotateY(0deg)',
+              WebkitTransform: 'rotateY(0deg)',
             }}
           >
             {project.isLogo ? (
@@ -138,35 +141,33 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 </div>
               </div>
             ) : (
-              /* Non-logo projects — image preview front */
-              <div className="relative h-full w-full overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={t(`work.${project.key}.title`)}
-                  className="h-full w-full object-cover"
-                  loading="lazy"
-                  style={{
-                    WebkitTransform: 'translateZ(0)',
-                    willChange: 'transform',
-                  }}
-                />
-                {/* Dark overlay so tags/hint are readable */}
-                <div className="absolute inset-0 bg-black/30" />
-                {/* Bottom row: tags left, hint right */}
-                <div className="absolute inset-x-3 bottom-3 flex items-end justify-between gap-2">
-                  <div className="flex flex-wrap gap-1">
-                    {project.tags.map(tag => (
-                      <span
-                        key={tag}
-                        className="rounded-full bg-black/40 px-2.5 py-0.5 text-xs font-medium text-white backdrop-blur-sm"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+              /* Non-logo projects — title card front */
+              <div
+                className="relative flex h-full flex-col items-start justify-end p-6"
+                style={{ backgroundColor: project.backBg }}
+              >
+                {/* Subtle gradient overlay for depth */}
+                <div className="absolute inset-0 rounded-2xl bg-linear-to-t from-black/60 via-transparent to-transparent" />
+                <div className="relative z-10 w-full">
+                  <h3 className="mb-3 text-lg leading-snug font-bold text-white">
+                    {t(`work.${project.key}.title`)}
+                  </h3>
+                  {/* Bottom row: tags left, hint right */}
+                  <div className="flex items-end justify-between gap-2">
+                    <div className="flex flex-wrap gap-1">
+                      {project.tags.map(tag => (
+                        <span
+                          key={tag}
+                          className="rounded-full bg-white/20 px-2.5 py-0.5 text-xs font-medium text-white backdrop-blur-sm"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <p className="shrink-0 text-xs text-white/50">
+                      {t('work.tapToLearnMore')}
+                    </p>
                   </div>
-                  <p className="shrink-0 text-xs text-white/60">
-                    {t('work.tapToLearnMore')}
-                  </p>
                 </div>
               </div>
             )}
@@ -179,6 +180,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               backfaceVisibility: 'hidden',
               WebkitBackfaceVisibility: 'hidden',
               transform: 'rotateY(180deg)',
+              WebkitTransform: 'rotateY(180deg)',
               backgroundColor: project.backBg,
             }}
           >
