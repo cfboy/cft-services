@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -84,6 +84,7 @@ const ALL_TAGS = Array.from(new Set(projects.flatMap(p => p.tags)))
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const { t } = useTranslation()
+  const prefersReduced = useReducedMotion()
   const [flipped, setFlipped] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
 
@@ -93,13 +94,22 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
     <>
       <motion.div
-        initial={{ opacity: 0, y: 28 }}
+        initial={{ opacity: 0, y: prefersReduced ? 0 : 28 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-60px' }}
         transition={{ duration: 0.45, delay: index * 0.1 }}
         className="aspect-3/4 cursor-pointer"
         style={{ perspective: '1000px' }}
         onClick={() => setFlipped(v => !v)}
+        role="button"
+        tabIndex={0}
+        aria-pressed={flipped}
+        onKeyDown={e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault()
+            setFlipped(v => !v)
+          }
+        }}
       >
         {/* Flip container */}
         <div
@@ -107,8 +117,16 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           style={{
             transformStyle: 'preserve-3d',
             WebkitTransformStyle: 'preserve-3d',
-            transform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
-            WebkitTransform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
+            transform: prefersReduced
+              ? 'none'
+              : flipped
+                ? 'rotateY(180deg)'
+                : 'rotateY(0deg)',
+            WebkitTransform: prefersReduced
+              ? 'none'
+              : flipped
+                ? 'rotateY(180deg)'
+                : 'rotateY(0deg)',
           }}
         >
           {/* ── FRONT ── */}
@@ -132,6 +150,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                   alt={t(`work.${project.key}.title`)}
                   className="max-h-full max-w-[80%] object-contain"
                   loading="lazy"
+                  width={320}
+                  height={320}
                 />
                 {/* Bottom row: tags left, hint right */}
                 <div className="absolute inset-x-3 bottom-3 flex items-end justify-between gap-2">
@@ -229,7 +249,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                     className="inline-flex items-center gap-1 rounded-full border border-white/40 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-white/20"
                   >
                     {t('work.visitSite')}
-                    <ArrowUpRight className="h-3.5 w-3.5" />
+                    <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" />
                   </a>
                 )}
               </div>
@@ -263,6 +283,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                   src={project.drawerImage}
                   alt={t(`work.${project.key}.title`)}
                   className="mx-auto mt-4 block w-full rounded-xl object-contain"
+                  width={800}
+                  height={600}
                 />
               )}
             </div>
@@ -275,6 +297,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
 export function Work() {
   const { t } = useTranslation()
+  const prefersReduced = useReducedMotion()
   const [activeTag, setActiveTag] = useState<string | null>(null)
   const { ref, onMouseDown, onMouseMove, onMouseUp, onMouseLeave } =
     useDragScroll<HTMLDivElement>()
@@ -294,7 +317,7 @@ export function Work() {
       <div className="relative mx-auto max-w-6xl">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: prefersReduced ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.5 }}
@@ -310,7 +333,7 @@ export function Work() {
 
         {/* Filter pills */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: prefersReduced ? 0 : 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4, delay: 0.15 }}
@@ -318,7 +341,7 @@ export function Work() {
         >
           <button
             onClick={() => setActiveTag(null)}
-            className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all duration-200 ${
+            className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
               activeTag === null
                 ? 'bg-cft-teal-primary text-white shadow-sm'
                 : 'bg-muted text-muted-foreground hover:bg-muted/70'
@@ -330,7 +353,7 @@ export function Work() {
             <button
               key={tag}
               onClick={() => setActiveTag(activeTag === tag ? null : tag)}
-              className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all duration-200 ${
+              className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
                 activeTag === tag
                   ? 'bg-cft-teal-primary text-white shadow-sm'
                   : 'bg-muted text-muted-foreground hover:bg-muted/70'
@@ -356,9 +379,9 @@ export function Work() {
                   <motion.div
                     key={project.key}
                     layout
-                    initial={{ opacity: 0, scale: 0.92 }}
+                    initial={{ opacity: 0, scale: prefersReduced ? 1 : 0.92 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.92 }}
+                    exit={{ opacity: 0, scale: prefersReduced ? 1 : 0.92 }}
                     transition={{ duration: 0.25 }}
                     className="w-56 shrink-0"
                   >

@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { Moon, Sun, Globe, Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -11,6 +11,7 @@ export function Navbar() {
   const { t, i18n } = useTranslation()
   const { resolvedTheme, setTheme } = useTheme()
   const [mobileOpen, setMobileOpen] = useState(false)
+  const prefersReduced = useReducedMotion()
 
   const toggleLang = () => {
     i18n.changeLanguage(i18n.language === 'en' ? 'es' : 'en')
@@ -40,7 +41,7 @@ export function Navbar() {
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
+      initial={{ y: prefersReduced ? 0 : -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className="border-border/50 bg-background/80 fixed top-0 right-0 left-0 z-50 border-b backdrop-blur-md"
@@ -69,7 +70,7 @@ export function Navbar() {
               onClick={toggleLang}
               aria-label="Toggle language"
             >
-              <Globe className="h-4 w-4" />
+              <Globe aria-hidden="true" className="h-4 w-4" />
             </Button>
             <Button
               variant="ghost"
@@ -78,9 +79,9 @@ export function Navbar() {
               aria-label="Toggle theme"
             >
               {resolvedTheme === 'dark' ? (
-                <Sun className="h-4 w-4" />
+                <Sun aria-hidden="true" className="h-4 w-4" />
               ) : (
-                <Moon className="h-4 w-4" />
+                <Moon aria-hidden="true" className="h-4 w-4" />
               )}
             </Button>
           </div>
@@ -94,7 +95,7 @@ export function Navbar() {
             onClick={toggleLang}
             aria-label="Toggle language"
           >
-            <Globe className="h-4 w-4" />
+            <Globe aria-hidden="true" className="h-4 w-4" />
           </Button>
           <Button
             variant="ghost"
@@ -103,9 +104,9 @@ export function Navbar() {
             aria-label="Toggle theme"
           >
             {resolvedTheme === 'dark' ? (
-              <Sun className="h-4 w-4" />
+              <Sun aria-hidden="true" className="h-4 w-4" />
             ) : (
-              <Moon className="h-4 w-4" />
+              <Moon aria-hidden="true" className="h-4 w-4" />
             )}
           </Button>
           <Button
@@ -115,9 +116,9 @@ export function Navbar() {
             aria-label="Toggle menu"
           >
             {mobileOpen ? (
-              <X className="h-5 w-5" />
+              <X aria-hidden="true" className="h-5 w-5" />
             ) : (
-              <Menu className="h-5 w-5" />
+              <Menu aria-hidden="true" className="h-5 w-5" />
             )}
           </Button>
         </div>
@@ -127,9 +128,9 @@ export function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
+            initial={{ opacity: 0, height: prefersReduced ? 'auto' : 0 }}
             animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
+            exit={{ opacity: 0, height: prefersReduced ? 'auto' : 0 }}
             className="border-border/50 bg-background/95 overflow-hidden border-t backdrop-blur-md md:hidden"
           >
             <div className="flex flex-col gap-1 px-4 py-3">

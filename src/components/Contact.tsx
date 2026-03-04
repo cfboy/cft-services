@@ -151,13 +151,14 @@ export function Contact() {
                         <Input
                           id={field.name}
                           name={field.name}
+                          autoComplete="name"
                           value={field.state.value}
                           onBlur={field.handleBlur}
                           onChange={e => field.handleChange(e.target.value)}
                           placeholder={t('contact.namePlaceholder')}
                         />
                         {field.state.meta.errors.length > 0 && (
-                          <p className="text-destructive text-sm">
+                          <p role="alert" className="text-destructive text-sm">
                             {field.state.meta.errors[0]}
                           </p>
                         )}
@@ -178,13 +179,15 @@ export function Contact() {
                           id={field.name}
                           name={field.name}
                           type="email"
+                          autoComplete="email"
+                          spellCheck={false}
                           value={field.state.value}
                           onBlur={field.handleBlur}
                           onChange={e => field.handleChange(e.target.value)}
                           placeholder={t('contact.emailPlaceholder')}
                         />
                         {field.state.meta.errors.length > 0 && (
-                          <p className="text-destructive text-sm">
+                          <p role="alert" className="text-destructive text-sm">
                             {field.state.meta.errors[0]}
                           </p>
                         )}
@@ -205,13 +208,15 @@ export function Contact() {
                           id={field.name}
                           name={field.name}
                           type="tel"
+                          autoComplete="tel"
+                          inputMode="tel"
                           value={field.state.value}
                           onBlur={field.handleBlur}
                           onChange={e => field.handleChange(e.target.value)}
                           placeholder={t('contact.phonePlaceholder')}
                         />
                         {field.state.meta.errors.length > 0 && (
-                          <p className="text-destructive text-sm">
+                          <p role="alert" className="text-destructive text-sm">
                             {field.state.meta.errors[0]}
                           </p>
                         )}
@@ -254,7 +259,7 @@ export function Contact() {
                         </SelectContent>
                       </Select>
                       {field.state.meta.errors.length > 0 && (
-                        <p className="text-destructive text-sm">
+                        <p role="alert" className="text-destructive text-sm">
                           {field.state.meta.errors[0]}
                         </p>
                       )}
@@ -281,7 +286,7 @@ export function Contact() {
                         placeholder={t('contact.messagePlaceholder')}
                       />
                       {field.state.meta.errors.length > 0 && (
-                        <p className="text-destructive text-sm">
+                        <p role="alert" className="text-destructive text-sm">
                           {field.state.meta.errors[0]}
                         </p>
                       )}
@@ -297,8 +302,8 @@ export function Contact() {
                         className="w-full sm:w-auto"
                         disabled={Boolean(state.isSubmitting)}
                       >
-                        <Send className="h-4 w-4" />
-                        {state.isSubmitting ? 'Sending...' : t('contact.send')}
+                        <Send aria-hidden="true" className="h-4 w-4" />
+                        {state.isSubmitting ? 'Sending…' : t('contact.send')}
                       </Button>
                     )}
                   </form.Subscribe>

@@ -1,4 +1,4 @@
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useReducedMotion } from 'framer-motion'
 import {
   Banknote,
   BookOpen,
@@ -65,10 +65,11 @@ function StatCard({
   isLast?: boolean
 }) {
   const { count, ref } = useCounter(stat.value)
+  const prefersReduced = useReducedMotion()
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: prefersReduced ? 0 : 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.45, delay: index * 0.1 }}
@@ -77,9 +78,12 @@ function StatCard({
       <div
         className={`mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br ${stat.color} shadow-md`}
       >
-        <stat.Icon className="h-5 w-5 text-white" />
+        <stat.Icon aria-hidden="true" className="h-5 w-5 text-white" />
       </div>
-      <div ref={ref} className="text-cft-teal-primary text-3xl font-extrabold">
+      <div
+        ref={ref}
+        className="text-cft-teal-primary text-3xl font-extrabold tabular-nums"
+      >
         {count}
         {stat.suffix}
       </div>
@@ -186,6 +190,7 @@ const industries = [
 
 export function About() {
   const { t } = useTranslation()
+  const prefersReduced = useReducedMotion()
 
   const stats: StatType[] = [
     {
@@ -228,7 +233,7 @@ export function About() {
       <div className="relative mx-auto max-w-6xl space-y-20">
         {/* ── Section header ── */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: prefersReduced ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.5 }}
@@ -257,7 +262,7 @@ export function About() {
         {/* ── How We Do It — Vertical Timeline ── */}
         <div>
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: prefersReduced ? 0 : 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.5 }}
@@ -274,7 +279,7 @@ export function About() {
           <div className="relative">
             {/* Vertical line */}
             <motion.div
-              initial={{ scaleY: 0 }}
+              initial={{ scaleY: prefersReduced ? 1 : 0 }}
               whileInView={{ scaleY: 1 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.8, ease: 'easeInOut' }}
@@ -302,7 +307,7 @@ export function About() {
                   <div key={phase} className="relative flex items-center gap-6">
                     {/* Left column — visible on desktop only when isLeft */}
                     <motion.div
-                      initial={{ opacity: 0, x: -32 }}
+                      initial={{ opacity: 0, x: prefersReduced ? 0 : -32 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: i * 0.15 }}
@@ -313,7 +318,7 @@ export function About() {
 
                     {/* Timeline node */}
                     <motion.div
-                      initial={{ scale: 0 }}
+                      initial={{ scale: prefersReduced ? 1 : 0 }}
                       whileInView={{ scale: 1 }}
                       viewport={{ once: true }}
                       transition={{
@@ -330,7 +335,7 @@ export function About() {
 
                     {/* Right column — desktop right side + full mobile */}
                     <motion.div
-                      initial={{ opacity: 0, x: 32 }}
+                      initial={{ opacity: 0, x: prefersReduced ? 0 : 32 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: i * 0.15 }}
@@ -351,7 +356,7 @@ export function About() {
         {/* ── Industries — Horizontal scroll cards ── */}
         <div>
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: prefersReduced ? 0 : 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.5 }}
@@ -368,7 +373,7 @@ export function About() {
           {/* Marquee rows */}
           <div className="space-y-3 overflow-hidden mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] py-1">
             {/* Row 1 — scrolls left */}
-            <div className="flex w-max animate-[marquee_30s_linear_infinite] gap-3">
+            <div className="flex w-max gap-3 motion-safe:animate-[marquee_30s_linear_infinite]">
               {[...industries, ...industries].map(
                 ({ nameKey, Icon, iconColor, iconBg }, i) => (
                   <div
@@ -378,7 +383,10 @@ export function About() {
                     <div
                       className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${iconBg}`}
                     >
-                      <Icon className={`h-3.5 w-3.5 ${iconColor}`} />
+                      <Icon
+                        aria-hidden="true"
+                        className={`h-3.5 w-3.5 ${iconColor}`}
+                      />
                     </div>
                     <p className="text-sm font-semibold whitespace-nowrap">
                       {t(nameKey)}
@@ -388,7 +396,7 @@ export function About() {
               )}
             </div>
             {/* Row 2 — scrolls right */}
-            <div className="flex w-max animate-[marquee_25s_linear_infinite_reverse] gap-3">
+            <div className="flex w-max gap-3 motion-safe:animate-[marquee_25s_linear_infinite_reverse]">
               {[
                 ...industries.slice(6),
                 ...industries,
@@ -401,7 +409,10 @@ export function About() {
                   <div
                     className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${iconBg}`}
                   >
-                    <Icon className={`h-3.5 w-3.5 ${iconColor}`} />
+                    <Icon
+                      aria-hidden="true"
+                      className={`h-3.5 w-3.5 ${iconColor}`}
+                    />
                   </div>
                   <p className="text-sm font-semibold whitespace-nowrap">
                     {t(nameKey)}
