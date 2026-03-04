@@ -13,8 +13,8 @@ import {
 import { ScrollArea, ScrollBar } from './ui/scroll-area'
 import CRMAutomationImg from '../assets/projects/CRM-Make-Automation.png'
 import LibelulaLogo from '../assets/projects/LogoLibelula.svg'
-import TitiAmandaLogo from '../assets/projects/LogoTitiAmanda.svg'
 import MACEducandoLogo from '../assets/projects/LogoMACEducando.png'
+import TitiAmandaLogo from '../assets/projects/LogoTitiAmanda.svg'
 import SalesReportImg from '../assets/projects/Sales-Report.png'
 
 import { useDragScroll } from '@/hooks/use-drag-scroll'
@@ -74,7 +74,7 @@ const projects: Project[] = [
     url: 'https://maceducando.com/',
     image: MACEducandoLogo,
     isLogo: true,
-    bgColor: '#f0f7f0',
+    bgColor: '#1a3d1b',
     backBg: '#2d6a2e',
     tags: ['Website'],
   },
@@ -341,7 +341,7 @@ export function Work() {
         >
           <button
             onClick={() => setActiveTag(null)}
-            className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
+            className={`focus-visible:ring-ring rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none ${
               activeTag === null
                 ? 'bg-cft-teal-primary text-white shadow-sm'
                 : 'bg-muted text-muted-foreground hover:bg-muted/70'
@@ -353,7 +353,7 @@ export function Work() {
             <button
               key={tag}
               onClick={() => setActiveTag(activeTag === tag ? null : tag)}
-              className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
+              className={`focus-visible:ring-ring rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none ${
                 activeTag === tag
                   ? 'bg-cft-teal-primary text-white shadow-sm'
                   : 'bg-muted text-muted-foreground hover:bg-muted/70'
