@@ -67,7 +67,7 @@ export function Footer() {
                 className="text-muted-foreground hover:text-foreground flex items-center gap-2 text-sm transition-colors"
               >
                 <Mail className="h-4 w-4 shrink-0" />
-                cristianf.torres15@gmail.com
+                <span className="break-all">cristianf.torres15@gmail.com</span>
               </a>
               <span className="text-muted-foreground flex items-center gap-2 text-sm">
                 <MapPin className="h-4 w-4 shrink-0" />
