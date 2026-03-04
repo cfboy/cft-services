@@ -199,9 +199,20 @@
     "phonePlaceholder": "XXX-XX-XXXX",
     "phone": "Teléfono"
   },
+  "finalCta": {
+    "title": "¿Listo para dejar de adivinar y empezar a construir?",
+    "subtitle": "Agenda una llamada gratuita de 30 minutos. Escuchamos, hacemos las preguntas correctas y te decimos exactamente lo que recomendaríamos — sin discurso de ventas, sin presión.",
+    "cta": "Agendar una Llamada Gratuita",
+    "note": "Consulta gratuita de 30 minutos · Sin compromiso"
+  },
   "footer": {
     "rights": "Todos los derechos reservados.",
     "privacy": "Privacidad",
-    "terms": "Términos"
+    "terms": "Términos",
+    "tagline": "Tecnología que realmente funciona para tu negocio.",
+    "navigation": "Navegación",
+    "contact": "Contacto",
+    "followUs": "Síguenos",
+    "location": "Puerto Rico"
   }
 }

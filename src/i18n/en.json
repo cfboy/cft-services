@@ -199,9 +199,20 @@
     "phone": "Phone Number",
     "phonePlaceholder": "XXX-XX-XXXX"
   },
+  "finalCta": {
+    "title": "Ready to Stop Guessing and Start Building?",
+    "subtitle": "Book a free 30-minute call. We'll listen, ask the right questions, and tell you exactly what we'd recommend — no pitch, no pressure.",
+    "cta": "Schedule a Free Call",
+    "note": "Free 30-minute consultation · No commitment required"
+  },
   "footer": {
     "rights": "All rights reserved.",
     "privacy": "Privacy",
-    "terms": "Terms"
+    "terms": "Terms",
+    "tagline": "Technology that actually works for your business.",
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "followUs": "Follow Us",
+    "location": "Puerto Rico"
   }
 }
