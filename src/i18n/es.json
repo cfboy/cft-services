@@ -7,17 +7,17 @@
     "contact": "Contacto"
   },
   "hero": {
-    "title": "Tecnología que Impulsa tu Negocio",
-    "subtitle": "Desde consultoría estratégica hasta software a medida — ayudamos a las empresas a modernizarse, automatizarse y crecer con tecnología.",
-    "cta": "Iniciar Proyecto",
+    "title": "Tecnología que Realmente Funciona para tu Negocio",
+    "subtitle": "Desde sitios web hasta automatización, identificamos lo que tu negocio realmente necesita — y lo construimos. Sin jerga, sin relleno, sin proyectos que no llegan a ningún lado.",
+    "cta": "Cuéntanos sobre tu Negocio",
     "secondary": "Ver Servicios"
   },
   "services": {
     "title": "Lo Que Hacemos",
-    "subtitle": "Servicios tecnológicos integrales diseñados para resolver retos reales y acelerar el crecimiento de tu empresa.",
+    "subtitle": "Consultoría tecnológica, sitios web, apps, automatización y CRM — un solo equipo, una sola conversación para saber por dónde empezar.",
     "consulting": {
       "title": "Consultoría Tecnológica",
-      "description": "Orientación estratégica para empresas en proceso de transformación digital. Evaluamos tu stack actual, definimos roadmaps y recomendamos las herramientas correctas — desde revisiones de arquitectura hasta selección de proveedores.",
+      "description": "¿No sabes por dónde empezar? Analizamos cómo opera tu negocio hoy y te decimos exactamente qué tecnología te ayudaría — y qué solo desperdiciaría tu dinero.",
       "features": [
         "Revisión de Arquitectura",
         "Hoja de Ruta Tech",
@@ -27,7 +27,7 @@
     },
     "websites": {
       "title": "Desarrollo de Sitios Web",
-      "description": "Sitios web profesionales orientados a la conversión. Desde sitios corporativos y landing pages hasta e-commerce y portafolios — rápidos, optimizados para SEO y construidos con tecnología moderna que escala con tu marca.",
+      "description": "Un sitio web que no genera negocio es solo un gasto. Construimos sitios rápidos, de aspecto profesional, que realmente llevan a la gente a actuar.",
       "features": [
         "Optimizado para SEO",
         "Mobile-First",
@@ -37,7 +37,7 @@
     },
     "webapps": {
       "title": "Aplicaciones Web",
-      "description": "Herramientas de negocio a medida que se adaptan a tu forma de trabajar. Desarrollamos plataformas SaaS, portales para clientes, dashboards internos y sistemas de gestión — diseñados para usuarios reales.",
+      "description": "Cuando tu negocio supera las hojas de cálculo y el software genérico, construimos la herramienta personalizada que se adapta exactamente a tu forma de trabajar.",
       "features": [
         "Plataformas SaaS",
         "Portales de Clientes",
@@ -47,7 +47,7 @@
     },
     "automation": {
       "title": "Automatización de Procesos",
-      "description": "Elimina el trabajo manual repetitivo. Automatizamos flujos de trabajo, conectamos tus herramientas existentes a través de APIs y construimos pipelines de procesamiento de datos, notificaciones, reportes y más.",
+      "description": "Cada vez que tu equipo hace la misma tarea repetitiva, eso es tiempo y dinero que se va del negocio. Conectamos tus herramientas y automatizamos el trabajo rutinario para que tu equipo se enfoque en lo que importa.",
       "features": [
         "Automatización de Flujos",
         "Conexiones API",
@@ -57,7 +57,7 @@
     },
     "crm": {
       "title": "Implementación de CRM",
-      "description": "Configuramos, personalizamos e integramos plataformas CRM que se adaptan a tu proceso de ventas. Desde Zoho hasta HubSpot, configuramos pipelines, automatizamos seguimientos y conectamos tu CRM con las herramientas que ya usa tu equipo.",
+      "description": "La mayoría de los proyectos CRM fallan porque el software no está configurado para como realmente vendes. Configuramos HubSpot, Zoho, o lo que se adapte a tu equipo — para que tu pipeline funcione solo.",
       "features": [
         "Configuración de CRM",
         "Automatización de Pipeline",
@@ -67,18 +67,18 @@
     }
   },
   "about": {
-    "title": "Enfocados en tus Resultados",
-    "description": "CFT Services es una firma de consultoría tecnológica enfocada en entregar soluciones prácticas de alto impacto. Trabajamos con empresas de todos los tamaños para modernizar operaciones, desarrollar software confiable y automatizar los procesos que frenan a los equipos.",
+    "title": "Somos un Equipo Pequeño. Lo Preferimos Así.",
+    "description": "CFT Services es una firma de consultoría tecnológica con base en Puerto Rico. Trabajamos con empresas de todos los tamaños para modernizar operaciones, desarrollar software confiable y automatizar los procesos que consumen el tiempo de tu equipo. No estamos aquí para venderte una plataforma que no necesitas. Empezamos por entender tu negocio — qué quieres lograr, qué lo está frenando y cuál es el camino más directo hacia adelante.",
     "stats": {
       "projectsCompleted": {
         "label": "Proyectos Completados",
-        "value": "50+",
-        "description": "Implementaciones tecnológicas exitosas"
+        "value": "20+",
+        "description": "Entregados en distintas industrias en Puerto Rico y más allá"
       },
       "satisfiedClients": {
         "label": "Clientes Satisfechos",
-        "value": "35+",
-        "description": "Empresas transformadas por la tecnología"
+        "value": "10+",
+        "description": "Empresas que volvieron para el próximo proyecto"
       },
       "technologies": {
         "label": "Tecnologías Dominadas",
@@ -93,18 +93,18 @@
     },
     "howWeDoIt": {
       "title": "Cómo lo Hacemos",
-      "subtitle": "Nuestro enfoque orientado a procesos asegura transformaciones digitales exitosas",
+      "subtitle": "Empezamos con una conversación real, no con una propuesta",
       "assessment": {
         "title": "Evaluación de Requerimientos",
-        "description": "Comenzamos con reuniones integrales para entender tus necesidades comerciales, desafíos y objetivos"
+        "description": "Empezamos con una conversación real. Sin propuestas antes de entender tu negocio, tus limitaciones y cómo luce el éxito para ti."
       },
       "recommendations": {
         "title": "Recomendaciones Estratégicas",
-        "description": "Basados en nuestra evaluación, proporcionamos recomendaciones tecnológicas personalizadas y planes de acción"
+        "description": "Recomendamos solo lo que realmente necesitas. Si no necesitas una app personalizada, te lo decimos. Si hay un camino más simple, lo tomamos."
       },
       "implementation": {
         "title": "Implementación",
-        "description": "Ejecutamos la solución con soporte continuo para asegurar un despliegue y adopción exitosos"
+        "description": "Construimos, integramos y capacitamos a tu equipo — y seguimos disponibles después del lanzamiento. El proyecto no termina cuando llega la factura."
       }
     },
     "industries": {
@@ -149,33 +149,33 @@
     }
   },
   "work": {
-    "title": "Nuestro Trabajo",
-    "subtitle": "Una selección de proyectos en vivo que hemos diseñado, construido y lanzado para nuestros clientes.",
-    "cta": "¿Tienes un proyecto en mente?",
-    "ctaLink": "Hablemos.",
+    "title": "Trabajo que Hemos Lanzado",
+    "subtitle": "Algunos proyectos en vivo que diseñamos, construimos y entregamos a clientes que los usan hoy.",
+    "cta": "¿Estás construyendo algo?",
+    "ctaLink": "Hablemos de tu proyecto.",
     "visitSite": "Visitar sitio",
     "viewDetails": "Ver detalles",
     "tapToLearnMore": "Toca para más info",
     "project1": {
       "title": "Titi Amanda Babysitter",
-      "description": "Sitio web profesional de niñera con detalles de servicios, información de reservas y testimonios de padres."
+      "description": "Un sitio web profesional para un servicio de niñera — con detalles de servicios, información de reservas y testimonios reales de padres. Simple, confiable y diseñado para convertir visitantes nuevos en consultas."
     },
     "project2": {
       "title": "Clínica Libélula",
-      "description": "Sitio web profesional de clínica de salud con listado de servicios, perfiles del equipo e información de citas."
+      "description": "Un sitio web limpio y confiable para una clínica de salud — listado de servicios, perfiles del equipo y flujo de citas. Diseñado para funcionar igual de bien en el teléfono que en el escritorio."
     },
     "project3": {
       "title": "Automatización CRM con IA",
-      "description": "Pipeline de automatización que conecta OneDrive, Zoho CRM y agentes de IA para procesar documentos, crear contactos y enrutar tareas automáticamente."
+      "description": "Conectamos OneDrive, Zoho CRM y agentes de IA en un solo pipeline que lee documentos entrantes, crea contactos y enruta tareas automáticamente — sin entrada manual."
     },
     "project4": {
       "title": "Reporte de Ventas Automatizado",
-      "description": "Automatización de reporte mensual de ventas que obtiene datos de ATH Móvil Business y Clover, consolida transacciones y envía un resumen formateado por correo."
+      "description": "Una automatización de reporte mensual que obtiene datos de ventas de ATH Móvil Business y Clover, los consolida y envía un resumen formateado por correo. Lo que antes tomaba horas, ahora toma cero."
     }
   },
   "contact": {
-    "title": "Trabajemos Juntos",
-    "subtitle": "Cuéntanos sobre tu proyecto y te responderemos en un día hábil.",
+    "title": "¿No sabes qué necesitas? No importa — empieza aquí.",
+    "subtitle": "Envíanos un mensaje describiendo tu reto — no hace falta un brief perfecto, solo la situación honesta. Te respondemos en un día hábil.",
     "name": "Nombre",
     "email": "Correo",
     "industry": "Industria",
@@ -199,9 +199,20 @@
     "phonePlaceholder": "XXX-XX-XXXX",
     "phone": "Teléfono"
   },
+  "finalCta": {
+    "title": "¿Listo para dejar de adivinar y empezar a construir?",
+    "subtitle": "Agenda una llamada gratuita de 30 minutos. Escuchamos, hacemos las preguntas correctas y te decimos exactamente lo que recomendaríamos — sin discurso de ventas, sin presión.",
+    "cta": "Agendar una Llamada Gratuita",
+    "note": "Consulta gratuita de 30 minutos · Sin compromiso"
+  },
   "footer": {
     "rights": "Todos los derechos reservados.",
     "privacy": "Privacidad",
-    "terms": "Términos"
+    "terms": "Términos",
+    "tagline": "Tecnología que realmente funciona para tu negocio.",
+    "navigation": "Navegación",
+    "contact": "Contacto",
+    "followUs": "Síguenos",
+    "location": "Puerto Rico"
   }
 }

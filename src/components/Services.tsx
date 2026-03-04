@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { Check, Code2, GitBranch, Lightbulb, Monitor, Zap } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
@@ -66,13 +66,14 @@ function ServiceCard({
   index: number
 }) {
   const { t } = useTranslation()
+  const prefersReduced = useReducedMotion()
   const features = t(`services.${serviceKey}.features`, {
     returnObjects: true,
   }) as string[]
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: prefersReduced ? 0 : 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.45, delay: index * 0.08 }}
@@ -85,7 +86,7 @@ function ServiceCard({
         <div
           className={`inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-linear-to-br ${gradient} shadow-lg`}
         >
-          <Icon className="h-7 w-7 text-white" />
+          <Icon aria-hidden="true" className="h-7 w-7 text-white" />
         </div>
       </div>
 
@@ -109,7 +110,11 @@ function ServiceCard({
                 <span
                   className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-linear-to-br ${gradient}`}
                 >
-                  <Check className="h-3 w-3 text-white" strokeWidth={2.5} />
+                  <Check
+                    aria-hidden="true"
+                    className="h-3 w-3 text-white"
+                    strokeWidth={2.5}
+                  />
                 </span>
                 <span className="text-sm font-medium">{feature}</span>
               </li>
@@ -122,6 +127,7 @@ function ServiceCard({
 
 export function Services() {
   const { t } = useTranslation()
+  const prefersReduced = useReducedMotion()
   const { ref, onMouseDown, onMouseMove, onMouseUp, onMouseLeave } =
     useDragScroll<HTMLDivElement>()
 
@@ -136,7 +142,7 @@ export function Services() {
       <div className="relative mx-auto max-w-6xl">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: prefersReduced ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.5 }}

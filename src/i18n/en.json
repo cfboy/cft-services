@@ -7,17 +7,17 @@
     "contact": "Contact"
   },
   "hero": {
-    "title": "Technology That Drives Your Business Forward",
-    "subtitle": "From strategic consulting to custom software — we help companies modernize, automate, and grow through technology.",
-    "cta": "Start a Project",
+    "title": "Technology That Actually Works for Your Business",
+    "subtitle": "From websites to automation, we figure out what your business actually needs — then build it. No jargon, no fluff, no projects that go nowhere.",
+    "cta": "Tell Us About Your Business",
     "secondary": "Explore Services"
   },
   "services": {
     "title": "What We Do",
-    "subtitle": "End-to-end technology services designed to solve real business challenges and accelerate your growth.",
+    "subtitle": "Technology consulting, websites, custom apps, process automation, and CRM — one team, one conversation to figure out where to start.",
     "consulting": {
       "title": "Technology Consulting",
-      "description": "Strategic technology guidance for businesses navigating digital transformation. We assess your current stack, define roadmaps, and recommend the right tools — from architecture reviews to vendor selection.",
+      "description": "Not sure where to start? We look at how your business runs today and tell you exactly what technology would help — and what would just waste your money.",
       "features": [
         "Architecture Review",
         "Tech Roadmap",
@@ -27,7 +27,7 @@
     },
     "websites": {
       "title": "Website Development",
-      "description": "Professional websites built to convert. From corporate sites and landing pages to e-commerce and portfolios — fast, SEO-optimized, and built on modern tech that scales with your brand.",
+      "description": "A website that doesn't bring in business is just an expense. We build sites that load fast, look professional, and actually move people to act.",
       "features": [
         "SEO-Optimized",
         "Mobile-First",
@@ -37,7 +37,7 @@
     },
     "webapps": {
       "title": "Web Applications",
-      "description": "Custom business tools that fit the way you work. We build SaaS platforms, client portals, internal dashboards, and management systems — tailored to your workflows and designed for real users.",
+      "description": "When your business outgrows spreadsheets and generic software, we build the custom tool that fits exactly how you work.",
       "features": [
         "SaaS Platforms",
         "Client Portals",
@@ -47,7 +47,7 @@
     },
     "automation": {
       "title": "Process Automation",
-      "description": "Eliminate repetitive manual work. We automate business workflows, connect your existing tools via APIs, and build pipelines for data processing, notifications, reporting, and more.",
+      "description": "Every time your team does the same repetitive task, that's time and money leaving the business. We connect your tools and automate the busy work so your team can focus on what matters.",
       "features": [
         "Workflow Automation",
         "API Connections",
@@ -57,7 +57,7 @@
     },
     "crm": {
       "title": "CRM Implementation",
-      "description": "Set up, customize, and integrate CRM platforms that fit your sales process. From Zoho to HubSpot, we configure pipelines, automate follow-ups, and connect your CRM to the tools your team already uses.",
+      "description": "Most CRM projects fail because the software isn't set up for how you actually sell. We configure HubSpot, Zoho, or whatever fits your team — so your pipeline runs itself.",
       "features": [
         "CRM Setup & Config",
         "Pipeline Automation",
@@ -67,18 +67,18 @@
     }
   },
   "about": {
-    "title": "Built Around Your Results",
-    "description": "CFT Services is a technology consulting firm focused on delivering practical, high-impact solutions. We partner with businesses of all sizes to modernize operations, build reliable software, and automate the processes that hold teams back.",
+    "title": "We're a Small Team. We Prefer It That Way.",
+    "description": "CFT Services is a technology consulting firm based in Puerto Rico. We work with businesses of all sizes to modernize their operations, build reliable software, and automate the processes that eat up your team's time. We're not here to sell you a platform you don't need. We start by understanding your business — what you're trying to do, what's in the way, and what the fastest path forward looks like.",
     "stats": {
       "projectsCompleted": {
         "label": "Projects Completed",
-        "value": "50+",
-        "description": "Successful technology implementations"
+        "value": "20+",
+        "description": "Delivered across industries in Puerto Rico and beyond"
       },
       "satisfiedClients": {
         "label": "Satisfied Clients",
-        "value": "35+",
-        "description": "Businesses transformed through technology"
+        "value": "10+",
+        "description": "Businesses that came back for the next project"
       },
       "technologies": {
         "label": "Technologies Mastered",
@@ -93,18 +93,18 @@
     },
     "howWeDoIt": {
       "title": "How We Do It",
-      "subtitle": "Our process-oriented approach ensures successful digital transformation",
+      "subtitle": "We start with a real conversation, not a proposal",
       "assessment": {
         "title": "Requirements Assessment",
-        "description": "We start with comprehensive meetings to understand your business needs, challenges, and goals"
+        "description": "We start with a real conversation. No proposals before we understand your business, your constraints, and what success looks like for you."
       },
       "recommendations": {
         "title": "Strategic Recommendations",
-        "description": "Based on our assessment, we provide tailored technology recommendations and roadmaps"
+        "description": "We recommend only what you actually need. If you don't need a custom app, we'll tell you. If there's a simpler path, we'll take it."
       },
       "implementation": {
         "title": "Implementation",
-        "description": "We execute the solution with ongoing support to ensure successful deployment and adoption"
+        "description": "We build, integrate, and train your team — and stay available after launch. The project doesn't end when the invoice does."
       }
     },
     "industries": {
@@ -149,33 +149,33 @@
     }
   },
   "work": {
-    "title": "Our Work",
-    "subtitle": "A selection of live projects we've designed, built, and shipped for our clients.",
-    "cta": "Have a project in mind?",
-    "ctaLink": "Let's talk.",
+    "title": "Work We've Shipped",
+    "subtitle": "A few live projects we designed, built, and handed over to clients who are using them today.",
+    "cta": "Building something?",
+    "ctaLink": "Let's talk about your project.",
     "visitSite": "Visit site",
     "viewDetails": "View details",
     "tapToLearnMore": "Tap to learn more",
     "project1": {
       "title": "Titi Amanda Babysitter",
-      "description": "Professional babysitter website with service details, booking info, and parent testimonials."
+      "description": "A professional website for a babysitter service — with service details, booking info, and real parent testimonials. Simple, trustworthy, and built to convert first-time visitors into inquiries."
     },
     "project2": {
       "title": "Clinica Libelula",
-      "description": "Professional health clinic website with service listings, team profiles, and appointment information."
+      "description": "A clean, credible website for a health clinic — service listings, team profiles, and appointment flow. Designed to work as well on a phone as on a desktop."
     },
     "project3": {
       "title": "CRM & AI Document Automation",
-      "description": "End-to-end automation pipeline connecting OneDrive, Zoho CRM, and AI agents to process documents, create contacts, and route tasks automatically."
+      "description": "Connected OneDrive, Zoho CRM, and AI agents into a single pipeline that reads incoming documents, creates contacts, and routes tasks automatically — zero manual entry."
     },
     "project4": {
       "title": "Automated Sales Report",
-      "description": "Monthly sales report automation that pulls data from ATH Móvil Business and Clover, aggregates transactions, and delivers a formatted summary via email."
+      "description": "A monthly report automation that pulls sales data from ATH Móvil Business and Clover, aggregates everything, and emails a formatted summary. What used to take hours now takes zero."
     }
   },
   "contact": {
-    "title": "Let's Work Together",
-    "subtitle": "Tell us about your project and we'll get back to you within one business day.",
+    "title": "Not Sure What You Need? That's Fine — Start Here.",
+    "subtitle": "Send us a message describing your challenge — not a perfect brief, just the honest situation. We'll get back to you within one business day.",
     "name": "Name",
     "email": "Email",
     "industry": "Industry",
@@ -199,9 +199,20 @@
     "phone": "Phone Number",
     "phonePlaceholder": "XXX-XX-XXXX"
   },
+  "finalCta": {
+    "title": "Ready to Stop Guessing and Start Building?",
+    "subtitle": "Book a free 30-minute call. We'll listen, ask the right questions, and tell you exactly what we'd recommend — no pitch, no pressure.",
+    "cta": "Schedule a Free Call",
+    "note": "Free 30-minute consultation · No commitment required"
+  },
   "footer": {
     "rights": "All rights reserved.",
     "privacy": "Privacy",
-    "terms": "Terms"
+    "terms": "Terms",
+    "tagline": "Technology that actually works for your business.",
+    "navigation": "Navigation",
+    "contact": "Contact",
+    "followUs": "Follow Us",
+    "location": "Puerto Rico"
   }
 }
