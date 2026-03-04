@@ -171,6 +171,10 @@
     "project4": {
       "title": "Reporte de Ventas Automatizado",
       "description": "Automatización de reporte mensual de ventas que obtiene datos de ATH Móvil Business y Clover, consolida transacciones y envía un resumen formateado por correo."
+    },
+    "project5": {
+      "title": "MAC Educando",
+      "description": "Sitio web de marketing para M Adviser and Consultant Inc., un centro de servicios educativos en Puerto Rico. Incluye navegación con scroll suave, tema claro/oscuro y secciones animadas que presentan sus servicios, oportunidades de empleo e información de contacto."
     }
   },
   "contact": {

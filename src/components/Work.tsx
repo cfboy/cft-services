@@ -14,6 +14,7 @@ import { ScrollArea, ScrollBar } from './ui/scroll-area'
 import CRMAutomationImg from '../assets/projects/CRM-Make-Automation.png'
 import LibelulaLogo from '../assets/projects/LogoLibelula.svg'
 import TitiAmandaLogo from '../assets/projects/LogoTitiAmanda.svg'
+import MACEducandoLogo from '../assets/projects/LogoMACEducando.png'
 import SalesReportImg from '../assets/projects/Sales-Report.png'
 
 import { useDragScroll } from '@/hooks/use-drag-scroll'
@@ -67,6 +68,15 @@ const projects: Project[] = [
     bgColor: '',
     backBg: '#4a1a6b',
     tags: ['Automation', 'Reporting', 'Finance'],
+  },
+  {
+    key: 'project5',
+    url: 'https://maceducando.com/',
+    image: MACEducandoLogo,
+    isLogo: true,
+    bgColor: '#f0f7f0',
+    backBg: '#2d6a2e',
+    tags: ['Website'],
   },
 ]
 
