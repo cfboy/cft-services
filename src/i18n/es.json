@@ -2,6 +2,7 @@
   "nav": {
     "home": "Inicio",
     "services": "Servicios",
+    "events": "Eventos",
     "work": "Trabajos",
     "about": "Nosotros",
     "contact": "Contacto"
@@ -64,6 +65,30 @@
         "Integraciones",
         "Capacitación de Equipo"
       ]
+    }
+  },
+  "events": {
+    "eyebrow": "Tecnología de Experiencias",
+    "title": "Experiencias Dinámicas para Convenciones y Stands",
+    "subtitle": "Diseñamos y construimos tecnología interactiva y a la medida de tu marca que convierte un stand en el punto más concurrido del salón — y el flujo de visitantes en resultados medibles.",
+    "contextStrip": "convenciones · expos · ferias · activaciones",
+    "capabilities": {
+      "kiosk": {
+        "title": "Juegos Interactivos en Kiosco",
+        "description": "Experiencias gamificadas en pantalla táctil — elige y gana, ruleta y revelación de premios — creadas en torno a tu marca para atraer público y premiar la participación."
+      },
+      "signage": {
+        "title": "Señalización y Pantallas en Vivo",
+        "description": "Pantallas dinámicas, tableros de líderes en vivo y displays de patrocinadores que mantienen tu stand activo y tu mensaje en pantalla todo el día."
+      },
+      "leads": {
+        "title": "Captura de Leads y Sincronización con CRM",
+        "description": "Captura la información de los visitantes en el stand y sincronízala directo a tu CRM, con automatización de seguimiento y un tablero en tiempo real para tu equipo."
+      },
+      "checkin": {
+        "title": "Registro y Check-in de Eventos",
+        "description": "Check-in digital rápido, flujos de registro y credenciales, y gestión de asistentes que escalan de un solo stand a un evento completo."
+      }
     }
   },
   "about": {

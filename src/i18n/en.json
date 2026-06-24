@@ -2,6 +2,7 @@
   "nav": {
     "home": "Home",
     "services": "Services",
+    "events": "Events",
     "work": "Work",
     "about": "About",
     "contact": "Contact"
@@ -64,6 +65,30 @@
         "Tool Integrations",
         "Team Training"
       ]
+    }
+  },
+  "events": {
+    "eyebrow": "Experiential Technology",
+    "title": "Dynamic Experiences for Conventions & Booths",
+    "subtitle": "We design and build interactive, on-brand technology that turns a booth into the busiest spot on the floor — and turns foot traffic into measurable results.",
+    "contextStrip": "conventions · expos · trade shows · activations",
+    "capabilities": {
+      "kiosk": {
+        "title": "Interactive Kiosk Games",
+        "description": "Gamified touchscreen experiences — pick-to-win, spin, and prize reveals — built around your brand to draw a crowd and reward engagement."
+      },
+      "signage": {
+        "title": "Digital Signage & Live Displays",
+        "description": "Dynamic screens, live leaderboards, and sponsor displays that keep your booth moving and your message on screen all day."
+      },
+      "leads": {
+        "title": "Lead Capture & CRM Sync",
+        "description": "Capture visitor info at the booth and sync it straight to your CRM, with follow-up automation and a real-time dashboard for your team."
+      },
+      "checkin": {
+        "title": "Event Check-in & Registration",
+        "description": "Fast digital check-in, badge and registration flows, and attendee management that scale from a single booth to a full event."
+      }
     }
   },
   "about": {
