@@ -20,8 +20,8 @@ export function FinalCTA() {
       >
         <div className="border-border bg-muted/40 relative overflow-hidden rounded-2xl border px-8 py-16 text-center sm:px-16">
           {/* Decorative background blobs */}
-          <div className="pointer-events-none absolute -left-16 -top-16 h-64 w-64 rounded-full bg-primary/5 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-16 -right-16 h-64 w-64 rounded-full bg-primary/5 blur-3xl" />
+          <div className="bg-primary/5 pointer-events-none absolute -top-16 -left-16 h-64 w-64 rounded-full blur-3xl" />
+          <div className="bg-primary/5 pointer-events-none absolute -right-16 -bottom-16 h-64 w-64 rounded-full blur-3xl" />
 
           <div className="relative z-10 flex flex-col items-center gap-6">
             <div className="bg-primary/10 flex h-14 w-14 items-center justify-center rounded-full">
@@ -38,7 +38,11 @@ export function FinalCTA() {
             </div>
 
             <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
-              <Button size="lg" variant="default" className="gap-2 font-semibold">
+              <Button
+                size="lg"
+                variant="default"
+                className="gap-2 font-semibold"
+              >
                 <Calendar className="h-4 w-4" />
                 {t('finalCta.cta')}
               </Button>
