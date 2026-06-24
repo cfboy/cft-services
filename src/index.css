@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap');
 @import 'tailwindcss';
 
 @custom-variant dark (&:is(.dark *));
@@ -44,6 +45,12 @@
   --radius-xl: 0.75rem;
 
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Space Grotesk', 'Plus Jakarta Sans', system-ui, sans-serif;
+
+  /* Events register (Register B) — dark in both themes */
+  --color-events-bg: #0a1420;
+  --color-events-bg-soft: #0f2236;
+  --color-events-glow: #20e3b2;
 
   --animate-marquee: marquee 18s linear infinite;
 
