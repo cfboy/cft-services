@@ -28,7 +28,7 @@ Applied to: `Hero`, `Services`, `About`, `Work`, `Contact`, `FinalCTA`, `Footer`
 
 Applied to: `Events` section only
 
-- Full-bleed dark band (`#0A0F1E` base) — dark in light mode AND dark mode
+- Full-bleed dark band (`#0A1420` base) — dark in light mode AND dark mode
 - Teal and navy appear as **glow** rather than ink — radial halos, gradient text
 - Visual depth: layered backgrounds (noise texture, radial gradient, vignette)
 - Interactive mockup with floating particles and ambient motion
@@ -62,9 +62,20 @@ The transition from Register A into Register B (as the user scrolls past Service
 
 **Register B (Events — always dark):**
 - Teal appears as glow: `box-shadow: 0 0 24px rgba(60,174,163,0.4)`, gradient text
-- Navy is a surface color: `#1A1A2E` base, `#0F1B2D` card surfaces
+- Dark navy surface colors define Register B hierarchy (see **Register B Surface Tokens** below)
 - Teal-light (`#20E3B2`) used sparingly at gradient endpoints
 - White at 80–95% opacity for primary text on dark surfaces
+
+### Register B Surface Tokens
+
+| Token | Hex | Usage |
+|-------|-----|-------|
+| `events-bg` (base) | `#0A1420` | Section base background |
+| `events-bg-soft` | `#0F2236` | Raised card/panel surface |
+| `events-bg-deep` | `#050A12` | Vignette edges / deepest layer |
+| `events-glow` | `#20E3B2` | Teal glow accent |
+
+These tokens ensure consistency across the Register B section and align with CSS variables defined in `src/index.css` (`--color-events-bg`, `--color-events-bg-soft`, `--color-events-bg-deep`, `--color-events-glow`).
 
 ### Semantic Gradient — Teal Glow (Register B)
 
@@ -102,13 +113,25 @@ filter: drop-shadow(0 2px 16px rgba(32, 227, 178, 0.3));
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
 ```
 
-**CSS custom property definition:**
+**CSS custom property definition (and Tailwind v4 theme registration):**
 ```css
 :root {
   --font-display: 'Space Grotesk', system-ui, sans-serif;
   --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
 }
 ```
+
+**Tailwind v4 @theme block (in `src/index.css`):**
+
+Tailwind v4 automatically generates the `font-display` and `font-sans` utilities from CSS custom properties. Register them in the `@theme` block:
+
+```css
+/* src/index.css, inside @theme { } */
+--font-display: 'Space Grotesk', 'Plus Jakarta Sans', system-ui, sans-serif;
+--font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+```
+
+This approach replaces `tailwind.config.js` (which this project does not use); Tailwind v4 reads theme values directly from CSS variables.
 
 ### Type Scale
 
@@ -216,6 +239,8 @@ The premium redesign eliminates the "AI card" pattern: gradient background tile 
 </div>
 ```
 
+**Register B Exception:** The inline `rgba()` and `#3CAEA3` color values above are intentional. Register B (Events) uses glassmorphism and glow effects where semantic tokens don't map to exact values. This is the sole exception to the "no hardcoded hex" rule (see Anti-Patterns). All other sections must use semantic Tailwind classes.
+
 ### Buttons
 
 | Variant | Use | Classes |
@@ -254,6 +279,8 @@ The premium redesign eliminates the "AI card" pattern: gradient background tile 
 </span>
 ```
 
+**Note:** Eyebrow labels use the arbitrary-value `text-[#3CAEA3]` (teal primary hex) because the project's Tailwind config does not expose a `text-cft-teal-primary` utility. This is acceptable for brand-color accents that do not vary by theme. All other foreground colors should use semantic classes (`text-primary`, `text-muted-foreground`, etc.).
+
 ---
 
 ## Background Treatments
@@ -269,7 +296,8 @@ The premium redesign eliminates the "AI card" pattern: gradient background tile 
 
 ```css
 /* Base layer — always dark regardless of theme */
-background: radial-gradient(ellipse at 50% 20%, #0F2D45 0%, #080E1A 50%, #020408 100%);
+/* Uses Register B Surface Tokens: events-bg (#0A1420), events-bg-soft (#0F2236), events-bg-deep (#050A12) */
+background: radial-gradient(ellipse at 50% 20%, #0F2236 0%, #0A1420 50%, #050A12 100%);
 ```
 
 Layered depth elements (apply in order, lowest z-index first):
@@ -281,7 +309,7 @@ Layered depth elements (apply in order, lowest z-index first):
 ```tsx
 {/* Register B section wrapper pattern */}
 <section id="events" className="relative overflow-hidden py-24 sm:py-32"
-  style={{ background: 'radial-gradient(ellipse at 50% 20%, #0F2D45 0%, #080E1A 50%, #020408 100%)' }}
+  style={{ background: 'radial-gradient(ellipse at 50% 20%, #0F2236 0%, #0A1420 50%, #050A12 100%)' }}
 >
   {/* Noise overlay */}
   <div className="pointer-events-none absolute inset-0 opacity-[0.04] [background-image:url('/noise.svg')]" aria-hidden />
@@ -452,7 +480,7 @@ These are the concrete moves that differentiate CFT Services from a template-gen
 | Gradient icon tiles on every card | Homogenizes all cards; screams "template" | Line icons + numbered index |
 | `rounded-3xl shadow-xl` on static cards | Makes cards look like floating UI components | `rounded-lg border border-border/50` |
 | Centering every section | Monotonous rhythm; no hierarchy | Left-align headings, use offset layouts |
-| Hardcoded hex colors in components | Breaks theme switching | Semantic Tailwind classes (`text-primary`, `bg-muted`) |
+| Hardcoded hex colors in components | Breaks theme switching | Semantic Tailwind classes (`text-primary`, `bg-muted`). **Exception:** Register B (Events) glass/glow surfaces may use `rgba()` inline styles or arbitrary-value classes where no semantic token exists (e.g., `style={{ background: 'rgba(15,76,117,0.15)' }}` for glassmorphism, `text-[#3CAEA3]` for teal accents). Elsewhere, always use semantic classes. |
 | `text-shadow` on gradient text | Incompatible with `background-clip: text` | `filter: drop-shadow()` |
 | Hover-only states with no focus equivalent | Accessibility gap | Pair `:hover` with `:focus-visible` |
 | `asChild` prop on `<Button>` | Not implemented in this project's Button | Wrap `<a>` around `<Button>` |
