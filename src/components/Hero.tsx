@@ -7,6 +7,10 @@ import { Button } from '@/components/ui/button'
 export function Hero() {
   const { t } = useTranslation()
   const prefersReduced = useReducedMotion()
+  const identity = t('hero.identity', { returnObjects: true }) as Array<{
+    label: string
+    sub: string
+  }>
 
   return (
     <section
@@ -114,25 +118,9 @@ export function Hero() {
 
               {/* Structural stat / identity block */}
               <div className="space-y-8 pl-8">
-                {[
-                  {
-                    index: '01',
-                    label: 'IT & Digital',
-                    sub: 'Consulting · Web · Automation · CRM',
-                  },
-                  {
-                    index: '02',
-                    label: 'Experiential',
-                    sub: 'Kiosks · Signage · Lead Capture',
-                  },
-                  {
-                    index: '03',
-                    label: 'Puerto Rico',
-                    sub: 'Serving local & remote clients',
-                  },
-                ].map((item, i) => (
+                {identity.map((item, i) => (
                   <motion.div
-                    key={item.index}
+                    key={item.label}
                     initial={{ opacity: 0, x: prefersReduced ? 0 : 12 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.4, delay: 0.7 + i * 0.1 }}
@@ -140,7 +128,7 @@ export function Hero() {
                   >
                     <div className="flex items-baseline gap-3">
                       <span className="font-display text-foreground/25 text-sm font-semibold tabular-nums">
-                        {item.index} /
+                        {String(i + 1).padStart(2, '0')} /
                       </span>
                       <span className="font-display text-foreground text-base font-semibold">
                         {item.label}

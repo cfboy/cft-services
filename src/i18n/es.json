@@ -11,7 +11,12 @@
     "title": "Tecnología que Realmente Funciona para tu Negocio",
     "subtitle": "Desde sitios web hasta automatización, identificamos lo que tu negocio realmente necesita — y lo construimos. Sin jerga, sin relleno, sin proyectos que no llegan a ningún lado.",
     "cta": "Cuéntanos sobre tu Negocio",
-    "secondary": "Ver Servicios"
+    "secondary": "Ver Servicios",
+    "identity": [
+      { "label": "TI & Digital", "sub": "Consultoría · Web · Automatización · CRM" },
+      { "label": "Experiencias", "sub": "Kioscos · Señalización · Captura de Leads" },
+      { "label": "Puerto Rico", "sub": "Clientes locales y remotos" }
+    ]
   },
   "services": {
     "title": "Lo Que Hacemos",

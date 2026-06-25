@@ -11,7 +11,12 @@
     "title": "Technology That Actually Works for Your Business",
     "subtitle": "From websites to automation, we figure out what your business actually needs — then build it. No jargon, no fluff, no projects that go nowhere.",
     "cta": "Tell Us About Your Business",
-    "secondary": "Explore Services"
+    "secondary": "Explore Services",
+    "identity": [
+      { "label": "IT & Digital", "sub": "Consulting · Web · Automation · CRM" },
+      { "label": "Experiential", "sub": "Kiosks · Signage · Lead Capture" },
+      { "label": "Puerto Rico", "sub": "Serving local & remote clients" }
+    ]
   },
   "services": {
     "title": "What We Do",
