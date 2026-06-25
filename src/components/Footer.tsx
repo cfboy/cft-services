@@ -33,7 +33,7 @@ export function Footer() {
 
           {/* Navigation */}
           <div className="flex flex-col gap-4">
-            <span className="text-foreground text-sm font-semibold tracking-wider uppercase">
+            <span className="font-display text-foreground text-sm font-semibold tracking-wider uppercase">
               {t('footer.navigation')}
             </span>
             <nav className="flex flex-col gap-2">
@@ -51,7 +51,7 @@ export function Footer() {
 
           {/* Contact */}
           <div className="flex flex-col gap-4">
-            <span className="text-foreground text-sm font-semibold tracking-wider uppercase">
+            <span className="font-display text-foreground text-sm font-semibold tracking-wider uppercase">
               {t('footer.contact')}
             </span>
             <div className="flex flex-col gap-3">

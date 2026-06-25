@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { Calendar } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
@@ -8,28 +8,27 @@ const CALENDLY_URL = 'https://calendly.com/cristianf-torres15/consulting'
 
 export function FinalCTA() {
   const { t } = useTranslation()
+  const shouldReduceMotion = useReducedMotion()
 
   return (
     <section id="schedule" className="px-4 py-24 sm:py-32">
       <motion.div
         className="mx-auto max-w-6xl"
-        initial={{ opacity: 0, y: 20 }}
+        initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: 0.5 }}
       >
-        <div className="border-border bg-muted/40 relative overflow-hidden rounded-2xl border px-8 py-16 text-center sm:px-16">
-          {/* Decorative background blobs */}
-          <div className="bg-primary/5 pointer-events-none absolute -top-16 -left-16 h-64 w-64 rounded-full blur-3xl" />
-          <div className="bg-primary/5 pointer-events-none absolute -right-16 -bottom-16 h-64 w-64 rounded-full blur-3xl" />
-
-          <div className="relative z-10 flex flex-col items-center gap-6">
-            <div className="bg-primary/10 flex h-14 w-14 items-center justify-center rounded-full">
-              <Calendar className="text-primary h-7 w-7" />
-            </div>
+        <div className="border-border bg-muted/30 rounded-lg border px-8 py-16 text-center sm:px-16">
+          <div className="flex flex-col items-center gap-6">
+            <Calendar
+              className="text-muted-foreground h-7 w-7"
+              strokeWidth={1.5}
+              aria-hidden="true"
+            />
 
             <div className="flex flex-col items-center gap-3">
-              <h2 className="text-foreground text-3xl font-bold tracking-tight sm:text-4xl">
+              <h2 className="font-display text-foreground text-3xl font-bold tracking-tight sm:text-4xl">
                 {t('finalCta.title')}
               </h2>
               <p className="text-muted-foreground max-w-xl text-lg">
@@ -43,7 +42,7 @@ export function FinalCTA() {
                 variant="default"
                 className="gap-2 font-semibold"
               >
-                <Calendar className="h-4 w-4" />
+                <Calendar className="h-4 w-4" aria-hidden="true" />
                 {t('finalCta.cta')}
               </Button>
             </a>
