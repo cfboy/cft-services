@@ -126,12 +126,6 @@ These moves differentiate the site from template-generated output. Every impleme
 - Section padding: `px-4 py-24 sm:py-32`.
 - Responsive: mobile-first, breakpoints at `sm:` (640px), `md:` (768px), `lg:` (1024px).
 
-### Spacing & Layout
-
-- Max content width: `max-w-6xl` (1152px), centered with `mx-auto`.
-- Section padding: `px-4 py-24 sm:py-32`.
-- Responsive: mobile-first, breakpoints at `sm:` (640px), `md:` (768px), `lg:` (1024px).
-
 ## Component Patterns
 
 ### Page Sections
