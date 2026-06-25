@@ -45,6 +45,7 @@ function useCounter(end: number, duration: number = 2000) {
 }
 
 type StatType = {
+  id: string
   label: string
   value: number
   suffix: string
@@ -163,18 +164,21 @@ export function About() {
 
   const stats: StatType[] = [
     {
+      id: 'projectsCompleted',
       label: t('about.stats.projectsCompleted.label'),
       value: 20,
       suffix: '+',
       description: t('about.stats.projectsCompleted.description'),
     },
     {
+      id: 'satisfiedClients',
       label: t('about.stats.satisfiedClients.label'),
       value: 10,
       suffix: '+',
       description: t('about.stats.satisfiedClients.description'),
     },
     {
+      id: 'yearsExperience',
       label: t('about.stats.yearsExperience.label'),
       value: 8,
       suffix: '+',
@@ -204,7 +208,7 @@ export function About() {
         <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3">
           {stats.map((stat, i) => (
             <StatCard
-              key={stat.label}
+              key={stat.id}
               stat={stat}
               index={i}
               isLast={i === stats.length - 1}
