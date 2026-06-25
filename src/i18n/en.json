@@ -110,11 +110,6 @@
         "value": "10+",
         "description": "Businesses that came back for the next project"
       },
-      "technologies": {
-        "label": "Technologies Mastered",
-        "value": "25+",
-        "description": "Modern tools and frameworks"
-      },
       "yearsExperience": {
         "label": "Years Experience",
         "value": "8+",

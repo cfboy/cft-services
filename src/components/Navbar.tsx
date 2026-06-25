@@ -69,7 +69,11 @@ export function Navbar() {
               variant="ghost"
               size="icon"
               onClick={toggleLang}
-              aria-label="Toggle language"
+              aria-label={
+                i18n.language === 'en'
+                  ? 'Switch to Spanish'
+                  : 'Cambiar a inglés'
+              }
             >
               <Globe aria-hidden="true" className="h-4 w-4" />
             </Button>
@@ -94,7 +98,9 @@ export function Navbar() {
             variant="ghost"
             size="icon"
             onClick={toggleLang}
-            aria-label="Toggle language"
+            aria-label={
+              i18n.language === 'en' ? 'Switch to Spanish' : 'Cambiar a inglés'
+            }
           >
             <Globe aria-hidden="true" className="h-4 w-4" />
           </Button>

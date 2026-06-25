@@ -165,7 +165,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                       </span>
                     ))}
                   </div>
-                  <p className="shrink-0 text-xs text-black/30">
+                  <p className="shrink-0 text-xs text-black/60">
                     {t('work.tapToLearnMore')}
                   </p>
                 </div>

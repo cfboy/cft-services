@@ -513,4 +513,20 @@ These are the concrete moves that differentiate CFT Services from a template-gen
 
 ---
 
-*Last updated: 2026-06-24 | Maintained by: CFT Services / Cristian F. Torres Collazo*
+*Last updated: 2026-06-25 | Maintained by: CFT Services / Cristian F. Torres Collazo*
+
+---
+
+## Deferred Critique Findings
+
+Recorded from the Task 11 Impeccable critique pass (2026-06-25). These are known issues not fixed in that pass — either low-risk polish or ambiguous decisions.
+
+| # | Finding | Severity | Reason Deferred |
+|---|---------|----------|-----------------|
+| D1 | `overused-font` detector warning for Plus Jakarta Sans | Warning | Deliberate identity-preservation choice; PJS committed in design system before critique pass. Tradeoff accepted. |
+| D2 | Footer `NAV_LINKS` omits `#events` | P3 | Events targets a secondary audience (event organizers). Omitting from footer is a defensible scope decision; primary CTA funnel is navbar + in-page scroll. Revisit if event business grows. |
+| D3 | Work "coming soon" card text hardcoded in English | P3 | Low-traffic surface; card copy is structural, not brand-critical. Add `work.comingSoon` / `work.comingSoonSub` i18n keys when more projects are added. |
+| D4 | `KioskMockup.tsx` uses `key={i}` on PARTICLES map | P3 | PARTICLES is a static constant array with no reordering — stable index keys are safe here. Switch to composite key if array becomes dynamic. |
+| D5 | Stat values (`20+`, `10+`, `8+`) hardcoded in `About.tsx` | P3 | Values are structural/marketing content that could be i18n keys for CMS-free updates. Low urgency; change requires adding keys to both JSON files and updating the component. |
+| D6 | No inline (on-blur) form validation in Contact | P2 | TanStack Form supports per-field validators; adding `onBlur` validators would improve UX. Deferred to avoid changing form logic during a visual-only critique pass. |
+| D7 | Services section eyebrow intentionally absent | Design decision | DESIGN.md notes eyebrows on every section can be an AI tell. Services jumping directly to h2 is a deliberate rhythm break. Document as intentional, not an omission. |
