@@ -1,5 +1,5 @@
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, Clock } from 'lucide-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -113,7 +113,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       >
         {/* Flip container */}
         <div
-          className="relative h-full w-full rounded-2xl shadow-md transition-transform duration-500"
+          className="relative h-full w-full rounded-lg transition-transform duration-500"
           style={{
             transformStyle: 'preserve-3d',
             WebkitTransformStyle: 'preserve-3d',
@@ -131,7 +131,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         >
           {/* ── FRONT ── */}
           <div
-            className="absolute inset-0 overflow-hidden rounded-2xl"
+            className="absolute inset-0 overflow-hidden rounded-lg"
             style={{
               backfaceVisibility: 'hidden',
               WebkitBackfaceVisibility: 'hidden',
@@ -140,7 +140,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             }}
           >
             {project.isLogo ? (
-              /* Logo projects — image on colored bg */
+              /* Logo projects — image on client brand bg */
               <div
                 className="relative flex h-full items-center justify-center p-6"
                 style={{ backgroundColor: project.bgColor || undefined }}
@@ -171,15 +171,15 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 </div>
               </div>
             ) : (
-              /* Non-logo projects — title card front */
+              /* Screenshot projects — image fill with overlay */
               <div
                 className="relative flex h-full flex-col items-start justify-end p-6"
                 style={{ backgroundColor: project.backBg }}
               >
-                {/* Subtle gradient overlay for depth */}
-                <div className="absolute inset-0 rounded-2xl bg-linear-to-t from-black/60 via-transparent to-transparent" />
+                {/* Gradient overlay for legibility */}
+                <div className="absolute inset-0 rounded-lg bg-linear-to-t from-black/60 via-transparent to-transparent" />
                 <div className="relative z-10 w-full">
-                  <h3 className="mb-3 text-lg leading-snug font-bold text-white">
+                  <h3 className="font-display mb-3 text-lg leading-snug font-semibold text-white">
                     {t(`work.${project.key}.title`)}
                   </h3>
                   {/* Bottom row: tags left, hint right */}
@@ -205,7 +205,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
           {/* ── BACK ── */}
           <div
-            className="absolute inset-0 flex flex-col overflow-hidden rounded-2xl p-6"
+            className="absolute inset-0 flex flex-col overflow-hidden rounded-lg p-6"
             style={{
               backfaceVisibility: 'hidden',
               WebkitBackfaceVisibility: 'hidden',
@@ -215,7 +215,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             }}
           >
             {/* Title */}
-            <h3 className="mb-3 shrink-0 text-xl leading-tight font-bold text-white">
+            <h3 className="font-display mb-3 shrink-0 text-xl leading-tight font-semibold text-white">
               {t(`work.${project.key}.title`)}
             </h3>
 
@@ -282,7 +282,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 <img
                   src={project.drawerImage}
                   alt={t(`work.${project.key}.title`)}
-                  className="mx-auto mt-4 block w-full rounded-xl object-contain"
+                  className="mx-auto mt-4 block w-full rounded-lg object-contain"
                   width={800}
                   height={600}
                 />
@@ -307,28 +307,20 @@ export function Work() {
     : projects
 
   return (
-    <section
-      id={SECTION_ID}
-      className="relative overflow-hidden px-4 py-24 sm:py-32"
-    >
-      {/* Background blob */}
-      <div className="bg-cft-navy-medium/5 pointer-events-none absolute right-0 -bottom-32 h-96 w-96 rounded-full blur-3xl" />
-
-      <div className="relative mx-auto max-w-6xl">
-        {/* Header */}
+    <section id={SECTION_ID} className="px-4 py-24 sm:py-32">
+      <div className="mx-auto max-w-6xl">
+        {/* Header — flush left per Register A */}
         <motion.div
           initial={{ opacity: 0, y: prefersReduced ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.5 }}
-          className="mb-10 text-center"
+          className="mb-10"
         >
-          <h2 className="mb-3 text-3xl font-bold tracking-tight sm:text-4xl">
+          <h2 className="font-display mb-3 text-3xl font-bold tracking-tight sm:text-4xl">
             {t('work.title')}
           </h2>
-          <p className="text-muted-foreground mx-auto max-w-lg">
-            {t('work.subtitle')}
-          </p>
+          <p className="text-muted-foreground max-w-lg">{t('work.subtitle')}</p>
         </motion.div>
 
         {/* Filter pills */}
@@ -337,9 +329,10 @@ export function Work() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4, delay: 0.15 }}
-          className="mb-8 flex flex-wrap justify-center gap-2"
+          className="mb-8 flex flex-wrap gap-2"
         >
           <button
+            type="button"
             onClick={() => setActiveTag(null)}
             className={`focus-visible:ring-ring rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none ${
               activeTag === null
@@ -352,6 +345,7 @@ export function Work() {
           {ALL_TAGS.map(tag => (
             <button
               key={tag}
+              type="button"
               onClick={() => setActiveTag(activeTag === tag ? null : tag)}
               className={`focus-visible:ring-ring rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none ${
                 activeTag === tag
@@ -391,8 +385,12 @@ export function Work() {
               </AnimatePresence>
               {/* Coming soon card */}
               {!activeTag && (
-                <div className="border-muted-foreground/30 bg-muted text-muted-foreground flex aspect-3/4 w-56 shrink-0 flex-col items-center justify-center rounded-2xl border border-dashed p-5 text-center">
-                  <span className="mb-1.5 text-xl">🚧</span>
+                <div className="border-border/50 bg-muted text-muted-foreground flex aspect-3/4 w-56 shrink-0 flex-col items-center justify-center rounded-lg border border-dashed p-5 text-center">
+                  <Clock
+                    aria-hidden="true"
+                    className="text-muted-foreground/40 mb-3 h-5 w-5"
+                    strokeWidth={1.5}
+                  />
                   <span className="text-sm font-semibold">Coming soon</span>
                   <span className="mt-1 text-xs">More projects on the way</span>
                 </div>
@@ -404,11 +402,11 @@ export function Work() {
 
         {/* CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: prefersReduced ? 0 : 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4, delay: 0.3 }}
-          className="mt-12 text-center"
+          className="mt-12"
         >
           <p className="text-muted-foreground text-sm">
             {t('work.cta')}{' '}
