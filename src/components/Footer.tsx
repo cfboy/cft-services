@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 
 import { Logo } from '@/components/Logo'
 
-const NAV_LINKS = ['services', 'work', 'about', 'contact'] as const
+const NAV_LINKS = ['services', 'events', 'work', 'about', 'contact'] as const
 const INSTAGRAM_URL = 'https://www.instagram.com/cftservicespr'
 
 export function Footer() {
@@ -33,7 +33,7 @@ export function Footer() {
 
           {/* Navigation */}
           <div className="flex flex-col gap-4">
-            <span className="text-foreground text-sm font-semibold tracking-wider uppercase">
+            <span className="font-display text-foreground text-sm font-semibold tracking-wider uppercase">
               {t('footer.navigation')}
             </span>
             <nav className="flex flex-col gap-2">
@@ -51,7 +51,7 @@ export function Footer() {
 
           {/* Contact */}
           <div className="flex flex-col gap-4">
-            <span className="text-foreground text-sm font-semibold tracking-wider uppercase">
+            <span className="font-display text-foreground text-sm font-semibold tracking-wider uppercase">
               {t('footer.contact')}
             </span>
             <div className="flex flex-col gap-3">

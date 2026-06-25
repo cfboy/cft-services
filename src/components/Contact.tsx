@@ -115,7 +115,7 @@ export function Contact() {
           transition={{ duration: 0.5 }}
           className="mb-12 text-center"
         >
-          <h2 className="mb-3 text-3xl font-bold tracking-tight sm:text-4xl">
+          <h2 className="font-display mb-3 text-3xl font-bold tracking-tight sm:text-4xl">
             {t('contact.title')}
           </h2>
           <p className="text-muted-foreground">{t('contact.subtitle')}</p>

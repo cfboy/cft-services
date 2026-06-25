@@ -34,6 +34,7 @@ export function Navbar() {
   const navLinks = [
     { href: '#home', label: t('nav.home') },
     { href: '#services', label: t('nav.services') },
+    { href: '#events', label: t('nav.events') },
     { href: '#about', label: t('nav.about') },
     { href: '#work', label: t('nav.work') },
     { href: '#contact', label: t('nav.contact') },
@@ -68,7 +69,11 @@ export function Navbar() {
               variant="ghost"
               size="icon"
               onClick={toggleLang}
-              aria-label="Toggle language"
+              aria-label={
+                i18n.language === 'en'
+                  ? 'Switch to Spanish'
+                  : 'Cambiar a inglés'
+              }
             >
               <Globe aria-hidden="true" className="h-4 w-4" />
             </Button>
@@ -93,7 +98,9 @@ export function Navbar() {
             variant="ghost"
             size="icon"
             onClick={toggleLang}
-            aria-label="Toggle language"
+            aria-label={
+              i18n.language === 'en' ? 'Switch to Spanish' : 'Cambiar a inglés'
+            }
           >
             <Globe aria-hidden="true" className="h-4 w-4" />
           </Button>

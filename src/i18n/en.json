@@ -2,6 +2,7 @@
   "nav": {
     "home": "Home",
     "services": "Services",
+    "events": "Events",
     "work": "Work",
     "about": "About",
     "contact": "Contact"
@@ -10,7 +11,12 @@
     "title": "Technology That Actually Works for Your Business",
     "subtitle": "From websites to automation, we figure out what your business actually needs — then build it. No jargon, no fluff, no projects that go nowhere.",
     "cta": "Tell Us About Your Business",
-    "secondary": "Explore Services"
+    "secondary": "Explore Services",
+    "identity": [
+      { "label": "IT & Digital", "sub": "Consulting · Web · Automation · CRM" },
+      { "label": "Experiential", "sub": "Kiosks · Signage · Lead Capture" },
+      { "label": "Puerto Rico", "sub": "Serving local & remote clients" }
+    ]
   },
   "services": {
     "title": "What We Do",
@@ -66,6 +72,30 @@
       ]
     }
   },
+  "events": {
+    "eyebrow": "Booth & Event Experiences",
+    "title": "Dynamic Experiences for Conventions & Booths",
+    "subtitle": "We design and build interactive, on-brand technology that turns a booth into the busiest spot on the floor — and turns foot traffic into measurable results.",
+    "contextStrip": "conventions · expos · trade shows · activations",
+    "capabilities": {
+      "kiosk": {
+        "title": "Interactive Kiosk Games",
+        "description": "Gamified touchscreen experiences — pick-to-win, spin, and prize reveals — built around your brand to draw a crowd and reward engagement."
+      },
+      "signage": {
+        "title": "Digital Signage & Live Displays",
+        "description": "Dynamic screens, live leaderboards, and sponsor displays that keep your booth moving and your message on screen all day."
+      },
+      "leads": {
+        "title": "Lead Capture & CRM Sync",
+        "description": "Capture visitor info at the booth and sync it straight to your CRM, with follow-up automation and a real-time dashboard for your team."
+      },
+      "checkin": {
+        "title": "Event Check-in & Registration",
+        "description": "Fast digital check-in, badge and registration flows, and attendee management that scale from a single booth to a full event."
+      }
+    }
+  },
   "about": {
     "title": "We're a Small Team. We Prefer It That Way.",
     "description": "CFT Services is a technology consulting firm based in Puerto Rico. We work with businesses of all sizes to modernize their operations, build reliable software, and automate the processes that eat up your team's time. We're not here to sell you a platform you don't need. We start by understanding your business — what you're trying to do, what's in the way, and what the fastest path forward looks like.",
@@ -79,11 +109,6 @@
         "label": "Satisfied Clients",
         "value": "10+",
         "description": "Businesses that came back for the next project"
-      },
-      "technologies": {
-        "label": "Technologies Mastered",
-        "value": "25+",
-        "description": "Modern tools and frameworks"
       },
       "yearsExperience": {
         "label": "Years Experience",
@@ -156,6 +181,9 @@
     "visitSite": "Visit site",
     "viewDetails": "View details",
     "tapToLearnMore": "Tap to learn more",
+    "all": "All",
+    "comingSoon": "Coming soon",
+    "comingSoonSub": "More projects on the way",
     "project1": {
       "title": "Titi Amanda Babysitter",
       "description": "A professional website for a babysitter service — with service details, booking info, and real parent testimonials. Simple, trustworthy, and built to convert first-time visitors into inquiries."

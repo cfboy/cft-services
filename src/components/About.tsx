@@ -3,8 +3,6 @@ import {
   Banknote,
   BookOpen,
   Building2,
-  CheckCircle,
-  Clock,
   Dumbbell,
   Heart,
   Home,
@@ -47,11 +45,10 @@ function useCounter(end: number, duration: number = 2000) {
 }
 
 type StatType = {
+  id: string
   label: string
   value: number
   suffix: string
-  Icon: React.ComponentType<{ className?: string }>
-  color: string
   description: string
 }
 
@@ -73,22 +70,19 @@ function StatCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.45, delay: index * 0.1 }}
-      className={`bg-card border-border/50 hover:border-cft-teal-primary/20 flex flex-col items-center rounded-2xl border p-6 text-center shadow-sm transition-all duration-300 hover:shadow-md ${isLast ? 'col-span-2 md:col-span-1' : ''}`}
+      className={`border-border/50 hover:border-border flex flex-col rounded-lg border p-6 transition-[border-color] duration-300 ${isLast ? 'col-span-2 md:col-span-1' : ''}`}
     >
       <div
-        className={`mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br ${stat.color} shadow-md`}
-      >
-        <stat.Icon aria-hidden="true" className="h-5 w-5 text-white" />
-      </div>
-      <div
         ref={ref}
-        className="text-cft-teal-primary text-3xl font-extrabold tabular-nums"
+        className="font-display mb-1 text-3xl font-bold tracking-tight tabular-nums"
       >
         {count}
         {stat.suffix}
       </div>
-      <div className="mt-1 text-sm font-semibold">{stat.label}</div>
-      <div className="text-muted-foreground mt-0.5 text-xs">
+      <div className="font-display mb-0.5 text-sm font-semibold">
+        {stat.label}
+      </div>
+      <div className="text-muted-foreground text-xs leading-relaxed">
         {stat.description}
       </div>
     </motion.div>
@@ -117,74 +111,50 @@ const industries = [
   {
     nameKey: 'about.industries.healthcare.name',
     Icon: Heart,
-    iconColor: 'text-rose-500',
-    iconBg: 'bg-rose-500/10',
   },
   {
     nameKey: 'about.industries.insurance.name',
     Icon: Shield,
-    iconColor: 'text-cft-teal-primary',
-    iconBg: 'bg-cft-teal-primary/10',
   },
   {
     nameKey: 'about.industries.hospitality.name',
     Icon: Utensils,
-    iconColor: 'text-amber-500',
-    iconBg: 'bg-amber-500/10',
   },
   {
     nameKey: 'about.industries.finance.name',
     Icon: Banknote,
-    iconColor: 'text-cft-navy-medium',
-    iconBg: 'bg-cft-navy-medium/10',
   },
   {
     nameKey: 'about.industries.retail.name',
     Icon: ShoppingBag,
-    iconColor: 'text-pink-500',
-    iconBg: 'bg-pink-500/10',
   },
   {
     nameKey: 'about.industries.education.name',
     Icon: BookOpen,
-    iconColor: 'text-violet-500',
-    iconBg: 'bg-violet-500/10',
   },
   {
     nameKey: 'about.industries.legal.name',
     Icon: Scale,
-    iconColor: 'text-slate-500',
-    iconBg: 'bg-slate-500/10',
   },
   {
     nameKey: 'about.industries.realestate.name',
     Icon: Home,
-    iconColor: 'text-emerald-500',
-    iconBg: 'bg-emerald-500/10',
   },
   {
     nameKey: 'about.industries.logistics.name',
     Icon: Truck,
-    iconColor: 'text-orange-500',
-    iconBg: 'bg-orange-500/10',
   },
   {
     nameKey: 'about.industries.fitness.name',
     Icon: Dumbbell,
-    iconColor: 'text-lime-500',
-    iconBg: 'bg-lime-500/10',
   },
   {
     nameKey: 'about.industries.construction.name',
     Icon: Building2,
-    iconColor: 'text-yellow-600',
-    iconBg: 'bg-yellow-500/10',
   },
   {
     nameKey: 'about.industries.government.name',
     Icon: Users,
-    iconColor: 'text-blue-500',
-    iconBg: 'bg-blue-500/10',
   },
 ]
 
@@ -194,55 +164,42 @@ export function About() {
 
   const stats: StatType[] = [
     {
+      id: 'projectsCompleted',
       label: t('about.stats.projectsCompleted.label'),
       value: 20,
       suffix: '+',
-      Icon: CheckCircle,
-      color: 'from-cft-teal-primary to-cft-navy-medium',
       description: t('about.stats.projectsCompleted.description'),
     },
     {
+      id: 'satisfiedClients',
       label: t('about.stats.satisfiedClients.label'),
       value: 10,
       suffix: '+',
-      Icon: Users,
-      color: 'from-cft-navy-medium to-cft-navy-deep',
       description: t('about.stats.satisfiedClients.description'),
     },
     {
+      id: 'yearsExperience',
       label: t('about.stats.yearsExperience.label'),
       value: 8,
       suffix: '+',
-      Icon: Clock,
-      color: 'from-cft-navy-deep to-cft-teal-primary',
       description: t('about.stats.yearsExperience.description'),
     },
   ]
 
   return (
-    <section
-      id="about"
-      className="bg-muted/40 relative overflow-hidden px-4 py-24 sm:py-32"
-    >
-      {/* Subtle background blobs */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="bg-cft-teal-primary/5 absolute -top-40 -right-40 h-96 w-96 rounded-full blur-3xl" />
-        <div className="bg-cft-navy-medium/5 absolute -bottom-40 -left-40 h-96 w-96 rounded-full blur-3xl" />
-      </div>
-
-      <div className="relative mx-auto max-w-6xl space-y-20">
+    <section id="about" className="bg-muted/40 px-4 py-24 sm:py-32">
+      <div className="mx-auto max-w-6xl space-y-20">
         {/* ── Section header ── */}
         <motion.div
           initial={{ opacity: 0, y: prefersReduced ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.5 }}
-          className="text-center"
         >
-          <h2 className="mb-3 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+          <h2 className="font-display mb-3 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
             {t('about.title')}
           </h2>
-          <p className="text-muted-foreground mx-auto max-w-2xl text-base sm:text-lg">
+          <p className="text-muted-foreground max-w-2xl text-base sm:text-lg">
             {t('about.description')}
           </p>
         </motion.div>
@@ -251,7 +208,7 @@ export function About() {
         <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3">
           {stats.map((stat, i) => (
             <StatCard
-              key={stat.label}
+              key={stat.id}
               stat={stat}
               index={i}
               isLast={i === stats.length - 1}
@@ -266,37 +223,38 @@ export function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.5 }}
-            className="mb-12 text-center"
+            className="mb-12"
           >
-            <h3 className="mb-2 text-2xl font-bold tracking-tight sm:text-3xl">
+            <h3 className="font-display mb-2 text-2xl font-bold tracking-tight sm:text-3xl">
               {t('about.howWeDoIt.title')}
             </h3>
-            <p className="text-muted-foreground mx-auto max-w-xl text-sm sm:text-base">
+            <p className="text-muted-foreground max-w-xl text-sm sm:text-base">
               {t('about.howWeDoIt.subtitle')}
             </p>
           </motion.div>
 
           <div className="relative">
-            {/* Vertical line */}
+            {/* Vertical hairline */}
             <motion.div
               initial={{ scaleY: prefersReduced ? 1 : 0 }}
               whileInView={{ scaleY: 1 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.8, ease: 'easeInOut' }}
-              className="bg-cft-teal-primary/20 absolute top-0 left-5 h-full w-px origin-top lg:left-1/2 lg:-translate-x-px"
+              className="border-border/50 absolute top-0 left-5 h-full w-px origin-top border-l lg:left-1/2 lg:-translate-x-px"
             />
 
             <div className="space-y-10">
               {processSteps.map(({ phase, titleKey, descKey }, i) => {
-                // odd index (1) = left side on desktop; even index (0,2) = right side
                 const isLeft = i % 2 !== 0
 
                 const cardContent = (
-                  <div className="bg-card border-border/50 hover:border-cft-teal-primary/30 w-full rounded-2xl border p-6 shadow-sm transition-all duration-300 hover:shadow-md lg:max-w-sm">
-                    <p className="text-muted-foreground mb-1 text-xs font-semibold tracking-widest uppercase">
-                      Step {phase}
-                    </p>
-                    <h4 className="mb-2 text-base font-bold">{t(titleKey)}</h4>
+                  <div className="border-border/50 hover:border-border w-full rounded-lg border p-6 transition-[border-color] duration-300 lg:max-w-sm">
+                    <span className="font-display text-muted-foreground/40 mb-3 block text-sm font-semibold tabular-nums">
+                      {String(phase).padStart(2, '0')} /
+                    </span>
+                    <h4 className="font-display mb-2 text-base font-semibold">
+                      {t(titleKey)}
+                    </h4>
                     <p className="text-muted-foreground text-sm leading-relaxed">
                       {t(descKey)}
                     </p>
@@ -316,7 +274,7 @@ export function About() {
                       {isLeft ? cardContent : null}
                     </motion.div>
 
-                    {/* Timeline node */}
+                    {/* Timeline node — restrained circle */}
                     <motion.div
                       initial={{ scale: prefersReduced ? 1 : 0 }}
                       whileInView={{ scale: 1 }}
@@ -326,9 +284,9 @@ export function About() {
                         delay: i * 0.15 + 0.1,
                         type: 'spring',
                       }}
-                      className="bg-cft-teal-primary relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full shadow-lg lg:mx-0"
+                      className="border-border bg-background relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 lg:mx-0"
                     >
-                      <span className="text-sm font-bold text-white">
+                      <span className="font-display text-muted-foreground text-sm font-semibold tabular-nums">
                         {phase}
                       </span>
                     </motion.div>
@@ -341,7 +299,6 @@ export function About() {
                       transition={{ duration: 0.5, delay: i * 0.15 }}
                       className="flex flex-1 justify-start lg:flex"
                     >
-                      {/* On mobile always show; on desktop only when !isLeft */}
                       <div className={!isLeft ? '' : 'lg:hidden'}>
                         {cardContent}
                       </div>
@@ -353,72 +310,69 @@ export function About() {
           </div>
         </div>
 
-        {/* ── Industries — Horizontal scroll cards ── */}
+        {/* ── Industries — Horizontal scroll marquee ── */}
         <div>
           <motion.div
             initial={{ opacity: 0, y: prefersReduced ? 0 : 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.5 }}
-            className="mb-10 text-center"
+            className="mb-10"
           >
-            <h3 className="mb-2 text-2xl font-bold tracking-tight sm:text-3xl">
+            <h3 className="font-display mb-2 text-2xl font-bold tracking-tight sm:text-3xl">
               {t('about.industries.title')}
             </h3>
-            <p className="text-muted-foreground mx-auto max-w-xl text-sm sm:text-base">
+            <p className="text-muted-foreground max-w-xl text-sm sm:text-base">
               {t('about.industries.subtitle')}
             </p>
           </motion.div>
 
-          {/* Marquee rows */}
+          {/* Marquee rows — items duplicated for infinite scroll; slot prefix ensures unique keys */}
           <div className="space-y-3 overflow-hidden mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] py-1">
             {/* Row 1 — scrolls left */}
             <div className="flex w-max gap-3 motion-safe:animate-[marquee_30s_linear_infinite]">
-              {[...industries, ...industries].map(
-                ({ nameKey, Icon, iconColor, iconBg }, i) => (
+              {(['a', 'b'] as const).flatMap(slot =>
+                industries.map(({ nameKey, Icon }) => (
                   <div
-                    key={`row1-${i}`}
-                    className="bg-card border-border/50 flex shrink-0 items-center gap-2.5 rounded-2xl border px-4 py-2.5 shadow-sm"
+                    key={`${slot}-${nameKey}`}
+                    className="border-border/50 bg-card flex shrink-0 items-center gap-2.5 rounded-lg border px-4 py-2.5"
                   >
-                    <div
-                      className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${iconBg}`}
-                    >
-                      <Icon
-                        aria-hidden="true"
-                        className={`h-3.5 w-3.5 ${iconColor}`}
-                      />
-                    </div>
+                    <Icon
+                      aria-hidden="true"
+                      className="text-muted-foreground/60 h-3.5 w-3.5 shrink-0"
+                      strokeWidth={1.5}
+                    />
                     <p className="text-sm font-semibold whitespace-nowrap">
                       {t(nameKey)}
                     </p>
                   </div>
-                )
+                ))
               )}
             </div>
-            {/* Row 2 — scrolls right */}
+            {/* Row 2 — scrolls right (offset start for visual variety) */}
             <div className="flex w-max gap-3 motion-safe:animate-[marquee_25s_linear_infinite_reverse]">
-              {[
-                ...industries.slice(6),
-                ...industries,
-                ...industries.slice(0, 6),
-              ].map(({ nameKey, Icon, iconColor, iconBg }, i) => (
-                <div
-                  key={`row2-${i}`}
-                  className="bg-card border-border/50 flex shrink-0 items-center gap-2.5 rounded-2xl border px-4 py-2.5 shadow-sm"
-                >
+              {(['a', 'b', 'c'] as const).flatMap((slot, si) =>
+                (si === 0
+                  ? industries.slice(6)
+                  : si === 2
+                    ? industries.slice(0, 6)
+                    : industries
+                ).map(({ nameKey, Icon }) => (
                   <div
-                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ${iconBg}`}
+                    key={`${slot}-${nameKey}`}
+                    className="border-border/50 bg-card flex shrink-0 items-center gap-2.5 rounded-lg border px-4 py-2.5"
                   >
                     <Icon
                       aria-hidden="true"
-                      className={`h-3.5 w-3.5 ${iconColor}`}
+                      className="text-muted-foreground/60 h-3.5 w-3.5 shrink-0"
+                      strokeWidth={1.5}
                     />
+                    <p className="text-sm font-semibold whitespace-nowrap">
+                      {t(nameKey)}
+                    </p>
                   </div>
-                  <p className="text-sm font-semibold whitespace-nowrap">
-                    {t(nameKey)}
-                  </p>
-                </div>
-              ))}
+                ))
+              )}
             </div>
           </div>
         </div>
