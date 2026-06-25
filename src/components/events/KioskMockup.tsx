@@ -1,9 +1,10 @@
 import { useReducedMotion, motion } from 'framer-motion'
+import { Gift, ScanLine, Sparkles, UserCheck } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 
 // ---------------------------------------------------------------------------
-// Floating particle — a single glowing dot drifting across the bezel screen
+// Floating particle — a single glowing dot drifting across the screen
 // ---------------------------------------------------------------------------
 
 interface ParticleProps {
@@ -82,7 +83,7 @@ const TILE_STATES: Array<'idle' | 'glow' | 'win'> = [
   'idle',
   'win',
   'idle',
-  'idle',
+  'glow',
 ]
 
 function PickTile({ index, reduced }: TileProps) {
@@ -95,47 +96,37 @@ function PickTile({ index, reduced }: TileProps) {
   return (
     <motion.div
       className={cn(
-        'relative flex aspect-square items-center justify-center rounded-md select-none',
-        'font-display text-base font-semibold sm:text-lg'
-        // Base surface: events-bg-soft tone via rgba
+        'relative flex aspect-square items-center justify-center rounded-lg select-none',
+        'font-display text-lg font-semibold'
       )}
       style={{
         background: isWin
-          ? 'rgba(32, 227, 178, 0.18)' // events-glow tint for revealed tile
-          : 'rgba(15, 34, 54, 0.85)', // events-bg-soft (#0F2236) glass
+          ? 'linear-gradient(145deg, rgba(32,227,178,0.28) 0%, rgba(32,227,178,0.10) 100%)'
+          : 'linear-gradient(145deg, rgba(20,42,64,0.92) 0%, rgba(10,20,32,0.92) 100%)', // events-bg-soft → events-bg glass
         border: isWin
-          ? '1px solid rgba(32, 227, 178, 0.6)'
+          ? '1px solid rgba(32, 227, 178, 0.65)'
           : isGlow
             ? '1px solid rgba(60, 174, 163, 0.4)' // cft-teal-primary
-            : '1px solid rgba(15, 76, 117, 0.25)', // cft-navy-deep faint
+            : '1px solid rgba(120,150,180,0.12)',
         boxShadow: isWin
-          ? '0 0 16px rgba(32,227,178,0.35), inset 0 0 8px rgba(32,227,178,0.15)'
+          ? '0 0 22px rgba(32,227,178,0.4), inset 0 1px 0 rgba(255,255,255,0.12), inset 0 0 12px rgba(32,227,178,0.18)'
           : isGlow
-            ? '0 0 8px rgba(60,174,163,0.2)'
-            : 'none',
+            ? '0 0 10px rgba(60,174,163,0.22), inset 0 1px 0 rgba(255,255,255,0.06)'
+            : 'inset 0 1px 0 rgba(255,255,255,0.05)',
         color: isWin
-          ? '#20E3B2' // events-glow
+          ? '#5CF2D2'
           : isGlow
             ? '#3CAEA3' // cft-teal-primary
-            : 'rgba(255,255,255,0.45)',
+            : 'rgba(255,255,255,0.42)',
       }}
       initial={{ opacity: 0, scale: 0.8 }}
-      animate={
-        reduced
-          ? { opacity: 1, scale: 1 }
-          : isWin
-            ? {
-                opacity: 1,
-                scale: 1,
-              }
-            : { opacity: 1, scale: 1 }
-      }
+      animate={{ opacity: 1, scale: 1 }}
       transition={
         reduced
           ? { duration: 0 }
           : {
               duration: 0.35,
-              delay: index * 0.07,
+              delay: 0.5 + index * 0.07,
               ease: 'easeOut',
             }
       }
@@ -143,28 +134,117 @@ function PickTile({ index, reduced }: TileProps) {
       {/* Win pulse ring — only on the 'win' tile when motion is allowed */}
       {isWin && !reduced && (
         <motion.div
-          className="absolute inset-0 rounded-md"
-          style={{
-            border: '1px solid rgba(32,227,178,0.5)',
-          }}
-          animate={{
-            scale: [1, 1.18, 1],
-            opacity: [0.6, 0, 0.6],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
+          className="absolute inset-0 rounded-lg"
+          style={{ border: '1px solid rgba(32,227,178,0.5)' }}
+          animate={{ scale: [1, 1.18, 1], opacity: [0.6, 0, 0.6] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
         />
       )}
-      <span>{symbol}</span>
+      {isWin ? (
+        <Gift aria-hidden="true" className="h-5 w-5" strokeWidth={1.75} />
+      ) : (
+        <span>{symbol}</span>
+      )}
+    </motion.div>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// Floating accent chip — generic, brand-neutral UI badge orbiting the device.
+// Conveys the experiential story (gamification · lead capture · scan-to-play).
+// ---------------------------------------------------------------------------
+
+interface ChipProps {
+  Icon: typeof Sparkles
+  label: string
+  value?: string
+  reduced: boolean
+  floatDelay: number
+  className?: string
+}
+
+function AccentChip({
+  Icon,
+  label,
+  value,
+  reduced,
+  floatDelay,
+  className,
+}: ChipProps) {
+  return (
+    <motion.div
+      className={cn(
+        'absolute z-20 flex items-center gap-2 rounded-xl px-3 py-2 backdrop-blur-md',
+        className
+      )}
+      style={{
+        background:
+          'linear-gradient(145deg, rgba(20,42,64,0.92) 0%, rgba(10,20,32,0.88) 100%)',
+        border: '1px solid rgba(60,174,163,0.30)',
+        boxShadow:
+          '0 12px 30px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.04), 0 0 20px rgba(32,227,178,0.08)',
+      }}
+      initial={{ opacity: 0, scale: 0.85, y: 8 }}
+      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={
+        reduced
+          ? { duration: 0 }
+          : { type: 'spring', stiffness: 240, damping: 20, delay: floatDelay }
+      }
+    >
+      <motion.div
+        className="flex items-center gap-2"
+        animate={reduced ? {} : { y: [0, -5, 0] }}
+        transition={
+          reduced
+            ? {}
+            : {
+                duration: 4,
+                delay: floatDelay,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }
+        }
+      >
+        <span
+          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg"
+          style={{
+            background: 'rgba(32,227,178,0.14)',
+            border: '1px solid rgba(32,227,178,0.28)',
+          }}
+        >
+          <Icon
+            aria-hidden="true"
+            className="h-3.5 w-3.5"
+            strokeWidth={1.75}
+            style={{ color: '#20E3B2' }}
+          />
+        </span>
+        <span className="flex flex-col leading-none">
+          {value && (
+            <span
+              className="font-display text-sm font-bold"
+              style={{ color: 'rgba(255,255,255,0.95)' }}
+            >
+              {value}
+            </span>
+          )}
+          <span
+            className="font-sans text-[9px] font-semibold tracking-[0.14em] uppercase"
+            style={{ color: 'rgba(255,255,255,0.5)' }}
+          >
+            {label}
+          </span>
+        </span>
+      </motion.div>
     </motion.div>
   )
 }
 
 // ---------------------------------------------------------------------------
 // KioskMockup — main export
+// A brand-neutral, code-built booth kiosk showing a generic pick-to-win game.
 // ---------------------------------------------------------------------------
 
 const PARTICLES: Array<{
@@ -191,220 +271,254 @@ export function KioskMockup({ className }: { className?: string }) {
     <div
       aria-hidden="true"
       className={cn('relative', className)}
-      style={{ perspective: '900px' }}
+      style={{ perspective: '1100px' }}
     >
-      {/* ── Outer device bezel ── */}
+      {/* Floating accent chips — generic experiential UI, hidden on small screens */}
+      <AccentChip
+        Icon={Sparkles}
+        value="+250"
+        label="Points"
+        reduced={reduced}
+        floatDelay={0.6}
+        className="-top-4 -right-2 hidden sm:flex"
+      />
+      <AccentChip
+        Icon={UserCheck}
+        label="Lead captured"
+        reduced={reduced}
+        floatDelay={1.1}
+        className="top-1/3 -left-6 hidden md:flex"
+      />
+      <AccentChip
+        Icon={ScanLine}
+        label="Scan to play"
+        reduced={reduced}
+        floatDelay={1.5}
+        className="right-2 -bottom-3 hidden sm:flex"
+      />
+
+      {/* Idle float wrapper — gentle lift so the device feels alive */}
       <motion.div
         className="relative mx-auto"
-        style={{
-          width: '100%',
-          maxWidth: 320,
-          // Slight 3-D tilt
-          transform: 'rotateY(-8deg) rotateX(4deg)',
-          transformStyle: 'preserve-3d',
-          borderRadius: 24,
-          background:
-            'linear-gradient(160deg, #1B3A52 0%, #0F1E2E 55%, #060E18 100%)',
-          boxShadow: [
-            '0 40px 80px rgba(0,0,0,0.55)',
-            '0 0 0 1px rgba(27,107,147,0.25)',
-            '8px 0 32px rgba(0,0,0,0.4)',
-            '0 0 60px rgba(60,174,163,0.08)',
-          ].join(', '),
-          padding: '14px 12px 20px',
-        }}
-        initial={{ opacity: 0, scale: 0.88, rotateY: -16 }}
-        animate={
-          reduced
-            ? { opacity: 1, scale: 1, rotateY: -8 }
-            : { opacity: 1, scale: 1, rotateY: -8 }
-        }
+        style={{ maxWidth: 300 }}
+        animate={reduced ? {} : { y: [0, -10, 0] }}
         transition={
-          reduced
-            ? { duration: 0 }
-            : { type: 'spring', stiffness: 220, damping: 22, delay: 0.3 }
+          reduced ? {} : { duration: 6, repeat: Infinity, ease: 'easeInOut' }
         }
       >
-        {/* Bezel top bar — camera/sensor strip */}
-        <div className="mb-3 flex items-center justify-center gap-2 px-2">
-          <div
-            className="h-1 w-1 rounded-full"
-            style={{
-              background: 'rgba(32,227,178,0.4)',
-              boxShadow: '0 0 4px rgba(32,227,178,0.6)',
-            }}
-          />
-          <div
-            className="h-1 w-12 rounded-full"
-            style={{ background: 'rgba(255,255,255,0.08)' }}
-          />
-          <div
-            className="h-1.5 w-1.5 rounded-full"
-            style={{ background: 'rgba(255,255,255,0.12)' }}
-          />
-        </div>
-
-        {/* ── Touchscreen surface ── */}
-        <div
-          className="relative overflow-hidden rounded-lg"
+        {/* ── Kiosk screen (bezel) ── */}
+        <motion.div
+          className="relative"
           style={{
+            transform: 'rotateY(-7deg) rotateX(3deg)',
+            transformStyle: 'preserve-3d',
+            borderRadius: 22,
             background:
-              'radial-gradient(ellipse at 50% 0%, #0F2236 0%, #0A1420 60%, #050A12 100%)',
-            minHeight: 320,
+              'linear-gradient(160deg, #21465F 0%, #14283C 50%, #0A1422 100%)',
+            boxShadow: [
+              '0 50px 90px rgba(0,0,0,0.6)',
+              '0 0 0 1px rgba(120,160,190,0.18)',
+              'inset 0 1px 0 rgba(255,255,255,0.12)',
+              'inset 0 -2px 6px rgba(0,0,0,0.5)',
+              '0 0 70px rgba(60,174,163,0.10)',
+            ].join(', '),
+            padding: '12px 12px 16px',
           }}
+          initial={{ opacity: 0, scale: 0.9, rotateY: -16 }}
+          whileInView={{ opacity: 1, scale: 1, rotateY: -7 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={
+            reduced
+              ? { duration: 0 }
+              : { type: 'spring', stiffness: 200, damping: 22, delay: 0.15 }
+          }
         >
-          {/* Screen glare — top-left highlight */}
-          <div
-            className="pointer-events-none absolute top-0 left-0 h-1/3 w-1/2 rounded-tl-lg"
-            style={{
-              background:
-                'linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 70%)',
-            }}
-          />
-
-          {/* Ambient teal glow radial at screen center */}
-          <div
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background:
-                'radial-gradient(ellipse at 50% 40%, rgba(60,174,163,0.07) 0%, transparent 65%)',
-            }}
-          />
-
-          {/* Floating particles */}
-          <div className="pointer-events-none absolute inset-0">
-            {PARTICLES.map((p, i) => (
-              <GlowParticle key={i} {...p} reduced={reduced} />
-            ))}
+          {/* Slim sensor dot — kiosk, not phone (no camera strip) */}
+          <div className="mb-2.5 flex items-center justify-center">
+            <div
+              className="h-1 w-1 rounded-full"
+              style={{
+                background: 'rgba(32,227,178,0.45)',
+                boxShadow: '0 0 5px rgba(32,227,178,0.6)',
+              }}
+            />
           </div>
 
-          {/* Screen content */}
-          <div className="relative z-10 flex flex-col gap-3 p-4">
-            {/* Faux header row */}
-            <div className="flex items-center justify-between pb-1">
-              <div className="flex flex-col gap-0.5">
-                {/* Generic eyebrow */}
-                <span
-                  className="font-sans text-[9px] font-semibold tracking-[0.22em] uppercase"
-                  style={{ color: '#3CAEA3' }} // cft-teal-primary
-                >
-                  Interactive
-                </span>
-                {/* Generic headline */}
-                <span
-                  className="font-display text-sm leading-tight font-bold"
-                  style={{ color: 'rgba(255,255,255,0.92)' }}
-                >
-                  TAP TO PLAY
-                </span>
-              </div>
-
-              {/* Score / status pill */}
-              <div
-                className="rounded-full px-2.5 py-0.5 font-sans text-[9px] font-semibold tracking-wider uppercase"
-                style={{
-                  background: 'rgba(32,227,178,0.12)',
-                  border: '1px solid rgba(32,227,178,0.3)',
-                  color: '#20E3B2', // events-glow
-                }}
-              >
-                Live
-              </div>
-            </div>
-
-            {/* Faux prize label */}
+          {/* ── Touchscreen surface ── */}
+          <div
+            className="relative overflow-hidden rounded-xl"
+            style={{
+              background:
+                'radial-gradient(ellipse at 50% 0%, #102A42 0%, #0A1420 58%, #050A12 100%)',
+              minHeight: 360,
+              boxShadow:
+                'inset 0 0 0 1px rgba(0,0,0,0.5), inset 0 2px 16px rgba(0,0,0,0.55)',
+            }}
+          >
+            {/* Screen glare — top-left highlight */}
             <div
-              className="font-display mb-1 rounded-md px-3 py-2 text-center text-xs font-semibold"
+              className="pointer-events-none absolute top-0 left-0 h-1/3 w-2/3 rounded-tl-xl"
               style={{
-                background: 'rgba(15, 76, 117, 0.2)', // cft-navy-deep tint
-                border: '1px solid rgba(15,76,117,0.3)',
-                color: 'rgba(255,255,255,0.7)',
+                background:
+                  'linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 70%)',
               }}
-            >
-              Match 3 to reveal your prize
-            </div>
+            />
 
-            {/* Pick-to-win tile grid — 3 × 2 */}
-            <div className="grid grid-cols-3 gap-2">
-              {Array.from({ length: 6 }, (_, i) => (
-                <PickTile key={i} index={i} reduced={reduced} />
+            {/* Ambient teal glow radial at screen center */}
+            <div
+              className="pointer-events-none absolute inset-0"
+              style={{
+                background:
+                  'radial-gradient(ellipse at 50% 42%, rgba(60,174,163,0.10) 0%, transparent 62%)',
+              }}
+            />
+
+            {/* Floating particles */}
+            <div className="pointer-events-none absolute inset-0">
+              {PARTICLES.map((p, i) => (
+                <GlowParticle key={i} {...p} reduced={reduced} />
               ))}
             </div>
 
-            {/* Faux CTA button strip at bottom */}
-            <motion.div
-              className="font-display mt-1 rounded-md py-2 text-center text-xs font-bold tracking-widest uppercase"
-              style={{
-                background:
-                  'linear-gradient(135deg, rgba(60,174,163,0.35) 0%, rgba(32,227,178,0.2) 100%)',
-                border: '1px solid rgba(32,227,178,0.4)',
-                color: '#20E3B2',
-              }}
-              animate={
-                reduced
-                  ? {}
-                  : {
-                      boxShadow: [
-                        '0 0 8px rgba(32,227,178,0.2)',
-                        '0 0 20px rgba(32,227,178,0.45)',
-                        '0 0 8px rgba(32,227,178,0.2)',
-                      ],
-                    }
-              }
-              transition={
-                reduced
-                  ? {}
-                  : {
-                      duration: 2.5,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
-                    }
-              }
-            >
-              Confirm Selection
-            </motion.div>
+            {/* Screen content */}
+            <div className="relative z-10 flex flex-col gap-3.5 p-5">
+              {/* Faux header row */}
+              <div className="flex items-start justify-between">
+                <div className="flex flex-col gap-1">
+                  <span
+                    className="font-sans text-[9px] font-semibold tracking-[0.24em] uppercase"
+                    style={{ color: '#3CAEA3' }} // cft-teal-primary
+                  >
+                    Interactive
+                  </span>
+                  <span
+                    className="font-display text-base leading-none font-bold"
+                    style={{ color: 'rgba(255,255,255,0.95)' }}
+                  >
+                    TAP TO PLAY
+                  </span>
+                </div>
 
-            {/* Screen footer — lead capture hint */}
-            <p
-              className="text-center font-sans text-[8px] leading-tight"
-              style={{ color: 'rgba(255,255,255,0.3)' }}
-            >
-              Enter your contact info to claim
-            </p>
+                {/* Live status pill */}
+                <div
+                  className="flex items-center gap-1.5 rounded-full px-2.5 py-1 font-sans text-[9px] font-semibold tracking-wider uppercase"
+                  style={{
+                    background: 'rgba(32,227,178,0.12)',
+                    border: '1px solid rgba(32,227,178,0.3)',
+                    color: '#20E3B2', // events-glow
+                  }}
+                >
+                  <motion.span
+                    className="h-1.5 w-1.5 rounded-full"
+                    style={{ background: '#20E3B2' }}
+                    animate={reduced ? {} : { opacity: [1, 0.25, 1] }}
+                    transition={
+                      reduced
+                        ? {}
+                        : { duration: 1.6, repeat: Infinity, ease: 'easeInOut' }
+                    }
+                  />
+                  Live
+                </div>
+              </div>
+
+              {/* Faux prize label */}
+              <div
+                className="font-display rounded-lg px-3 py-2 text-center text-xs font-semibold"
+                style={{
+                  background:
+                    'linear-gradient(145deg, rgba(15,76,117,0.28) 0%, rgba(15,76,117,0.12) 100%)', // cft-navy-deep tint
+                  border: '1px solid rgba(60,174,163,0.22)',
+                  color: 'rgba(255,255,255,0.78)',
+                }}
+              >
+                Match 3 to reveal your prize
+              </div>
+
+              {/* Pick-to-win tile grid — 3 × 2 */}
+              <div className="grid grid-cols-3 gap-2.5">
+                {Array.from({ length: 6 }, (_, i) => (
+                  <PickTile key={i} index={i} reduced={reduced} />
+                ))}
+              </div>
+
+              {/* Faux CTA button strip at bottom */}
+              <motion.div
+                className="font-display mt-0.5 rounded-lg py-2.5 text-center text-xs font-bold tracking-widest uppercase"
+                style={{
+                  background:
+                    'linear-gradient(135deg, rgba(60,174,163,0.42) 0%, rgba(32,227,178,0.24) 100%)',
+                  border: '1px solid rgba(32,227,178,0.45)',
+                  color: '#CFFCF1',
+                  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.18)',
+                }}
+                animate={
+                  reduced
+                    ? {}
+                    : {
+                        boxShadow: [
+                          'inset 0 1px 0 rgba(255,255,255,0.18), 0 0 8px rgba(32,227,178,0.2)',
+                          'inset 0 1px 0 rgba(255,255,255,0.18), 0 0 22px rgba(32,227,178,0.5)',
+                          'inset 0 1px 0 rgba(255,255,255,0.18), 0 0 8px rgba(32,227,178,0.2)',
+                        ],
+                      }
+                }
+                transition={
+                  reduced
+                    ? {}
+                    : { duration: 2.5, repeat: Infinity, ease: 'easeInOut' }
+                }
+              >
+                Confirm Selection
+              </motion.div>
+
+              {/* Screen footer — lead capture hint */}
+              <p
+                className="text-center font-sans text-[8px] leading-tight"
+                style={{ color: 'rgba(255,255,255,0.32)' }}
+              >
+                Enter your contact info to claim
+              </p>
+            </div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Bezel bottom — home indicator */}
-        <div className="mt-3 flex justify-center">
+        {/* ── Kiosk stand — slim neck + elliptical base ── */}
+        <div className="relative mx-auto flex flex-col items-center">
+          {/* Neck */}
           <div
-            className="h-1 w-16 rounded-full"
-            style={{ background: 'rgba(255,255,255,0.15)' }}
+            className="h-7 w-7"
+            style={{
+              background:
+                'linear-gradient(90deg, #0A1422 0%, #21465F 50%, #0A1422 100%)',
+              boxShadow: 'inset 0 0 0 1px rgba(120,160,190,0.12)',
+            }}
+          />
+          {/* Base */}
+          <div
+            className="h-2.5 w-32 rounded-[50%]"
+            style={{
+              background: 'linear-gradient(180deg, #21465F 0%, #0A1422 100%)',
+              boxShadow:
+                '0 14px 26px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.10)',
+            }}
           />
         </div>
 
-        {/* Ambient glow behind the device */}
+        {/* Floor reflection / contact glow */}
         <motion.div
-          className="pointer-events-none absolute -bottom-8 left-1/2 -z-10 h-24 w-3/4 -translate-x-1/2 rounded-full"
+          className="pointer-events-none absolute -bottom-6 left-1/2 -z-10 h-16 w-3/4 -translate-x-1/2 rounded-[50%]"
           style={{
-            background: 'rgba(60,174,163,0.12)',
-            filter: 'blur(28px)',
+            background: 'rgba(60,174,163,0.16)',
+            filter: 'blur(30px)',
           }}
           animate={
-            reduced
-              ? {}
-              : {
-                  opacity: [0.6, 1, 0.6],
-                  scaleX: [1, 1.1, 1],
-                }
+            reduced ? {} : { opacity: [0.55, 1, 0.55], scaleX: [1, 1.12, 1] }
           }
           transition={
             reduced
               ? {}
-              : {
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }
+              : { duration: 3.5, repeat: Infinity, ease: 'easeInOut' }
           }
         />
       </motion.div>
