@@ -34,6 +34,7 @@ export function Navbar() {
   const navLinks = [
     { href: '#home', label: t('nav.home') },
     { href: '#services', label: t('nav.services') },
+    { href: '#events', label: t('nav.events') },
     { href: '#about', label: t('nav.about') },
     { href: '#work', label: t('nav.work') },
     { href: '#contact', label: t('nav.contact') },

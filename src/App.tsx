@@ -2,6 +2,7 @@ import { Toaster } from 'sonner'
 
 import { About } from '@/components/About'
 import { Contact } from '@/components/Contact'
+import { Events } from '@/components/Events'
 import { FinalCTA } from '@/components/FinalCTA'
 import { Footer } from '@/components/Footer'
 import { Hero } from '@/components/Hero'
@@ -16,6 +17,7 @@ export default function App() {
       <main>
         <Hero />
         <Services />
+        <Events />
         <About />
         <Work />
         <Contact />
