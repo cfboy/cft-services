@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 
 import { Logo } from '@/components/Logo'
 
-const NAV_LINKS = ['services', 'work', 'about', 'contact'] as const
+const NAV_LINKS = ['services', 'events', 'work', 'about', 'contact'] as const
 const INSTAGRAM_URL = 'https://www.instagram.com/cftservicespr'
 
 export function Footer() {

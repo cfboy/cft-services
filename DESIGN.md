@@ -75,7 +75,7 @@ The transition from Register A into Register B (as the user scrolls past Service
 | `events-bg-deep` | `#050A12` | Vignette edges / deepest layer |
 | `events-glow` | `#20E3B2` | Teal glow accent |
 
-These tokens ensure consistency across the Register B section and align with CSS variables defined in `src/index.css` (`--color-events-bg`, `--color-events-bg-soft`, `--color-events-bg-deep`, `--color-events-glow`).
+These tokens are defined in `src/index.css` (`@theme`) as the canonical Register B palette reference (`--color-events-bg`, `--color-events-bg-soft`, `--color-events-bg-deep`, `--color-events-glow`). The Events components consume them as inline `rgba()`/hex values per the Register B glass/glow exception — not via `bg-events-bg` Tailwind utilities.
 
 ### Semantic Gradient — Teal Glow (Register B)
 

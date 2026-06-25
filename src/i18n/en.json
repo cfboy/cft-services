@@ -181,6 +181,9 @@
     "visitSite": "Visit site",
     "viewDetails": "View details",
     "tapToLearnMore": "Tap to learn more",
+    "all": "All",
+    "comingSoon": "Coming soon",
+    "comingSoonSub": "More projects on the way",
     "project1": {
       "title": "Titi Amanda Babysitter",
       "description": "A professional website for a babysitter service — with service details, booking info, and real parent testimonials. Simple, trustworthy, and built to convert first-time visitors into inquiries."

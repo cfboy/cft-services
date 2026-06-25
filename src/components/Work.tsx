@@ -340,7 +340,7 @@ export function Work() {
                 : 'bg-muted text-muted-foreground hover:bg-muted/70'
             }`}
           >
-            All
+            {t('work.all')}
           </button>
           {ALL_TAGS.map(tag => (
             <button
@@ -391,8 +391,12 @@ export function Work() {
                     className="text-muted-foreground/40 mb-3 h-5 w-5"
                     strokeWidth={1.5}
                   />
-                  <span className="text-sm font-semibold">Coming soon</span>
-                  <span className="mt-1 text-xs">More projects on the way</span>
+                  <span className="text-sm font-semibold">
+                    {t('work.comingSoon')}
+                  </span>
+                  <span className="mt-1 text-xs">
+                    {t('work.comingSoonSub')}
+                  </span>
                 </div>
               )}
             </div>
