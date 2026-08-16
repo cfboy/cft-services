@@ -7,13 +7,19 @@ CFT Services is a minimalistic, responsive company website built with Vite + Rea
 ## Commands
 
 ```bash
-npm run dev       # Start dev server with HMR
-npm run build     # TypeScript check + Vite production build
-npm run lint      # ESLint (flat config, TS + React rules)
-npm run preview   # Preview production build locally
+npm run dev           # Start dev server with HMR
+npm run build         # Type check + client build + SSR build + prerender
+npm run build:client  # Client build only (skips prerender; for debugging)
+npm run lint          # ESLint (flat config, TS + React rules)
+npm run preview       # Preview production build locally
 ```
 
-Build is two-step: `tsc -b` (type safety) then `vite build` (bundling).
+Build is four steps: `tsc -b` (type safety) → `vite build` (client bundle) →
+`vite build --ssr src/entry-server.tsx` → `node scripts/prerender.mjs`, which
+injects the rendered markup into `dist/index.html` and deletes `dist-ssr`.
+
+**Always verify with `npm run preview`, not `npm run dev`** — the dev server
+does not prerender, so hydration problems only appear in the production build.
 
 ## Architecture
 
@@ -26,8 +32,12 @@ src/
 ├── lib/               # Utilities (utils.ts with cn() helper)
 ├── assets/            # Static assets
 ├── App.tsx            # Root component — assembles all sections
-├── main.tsx           # Entry point — wraps App in ThemeProvider
+├── main.tsx           # Browser entry — hydrates prerendered markup
+├── entry-server.tsx   # Build-time entry — renders the app to static HTML
 └── index.css          # Tailwind v4 + CSS variables + theme tokens
+
+scripts/
+└── prerender.mjs      # Injects rendered markup into dist/index.html
 ```
 
 ## Import Aliases
@@ -240,10 +250,24 @@ Files exporting both components and non-components (hooks, variant objects) use:
 // eslint-disable-next-line react-refresh/only-export-components
 ```
 
+## Prerendering Rules
+
+The production HTML is rendered at build time and hydrated in the browser, so
+component output must be identical on both sides:
+
+- **Never branch rendered output on `resolvedTheme`.** The prerender is always
+  light. Swap themed images and icons with `dark:` utilities (see `Logo.tsx`).
+- **Never branch rendered output on `prefers-reduced-motion` for layout.**
+- **Values that animate up from a placeholder must render their real value on
+  the server** — see `useCounter` in `About.tsx`.
+- Section `id`s are stable literals, not `useId()` — they are anchor targets.
+
 ## Key Conventions
 
 - **No hardcoded colors** — use semantic Tailwind classes (`bg-primary`, `text-foreground`).
-- **No `asChild` prop** — custom Button doesn't support Radix Slot; wrap `<a>` around `<Button>` instead.
+- **Teal text uses `text-cft-teal-ink`**, never `text-cft-teal-primary` (2.7:1 on white). `cft-teal-primary` is for fills, glows, and Register B only.
+- **No `asChild` prop** — but do not wrap `<Button>` in an `<a>` either; nesting interactive elements is invalid HTML. Style the anchor with `buttonVariants()` from `@/components/ui/button`.
+- **Horizontal carousels** pass `viewportProps={{ tabIndex: 0, role: 'region', 'aria-label': … }}` to `ScrollArea` so off-screen cards are keyboard-reachable.
 - **All interactive elements** need `aria-label` when icon-only.
 - **Focus rings**: `focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2`.
 - **Disabled state**: `disabled:pointer-events-none disabled:opacity-50`.

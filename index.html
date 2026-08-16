@@ -4,6 +4,30 @@
 <head>
   <meta charset="UTF-8" />
 
+  <!-- Viewport & Theme -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
+  <meta name="color-scheme" content="light dark" />
+
+  <!--
+    Apply the stored theme before first paint. Without this the page renders
+    light, then flips to dark once React mounts — a visible flash that the
+    prerendered markup makes worse, because content paints before hydration.
+  -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme')
+        var dark = stored === 'dark' || ((!stored || stored === 'system') &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches)
+        document.documentElement.classList.add(dark ? 'dark' : 'light')
+      } catch (e) {
+        document.documentElement.classList.add('light')
+      }
+    })()
+  </script>
+
   <!-- Favicons -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
@@ -11,71 +35,132 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png" />
   <link rel="manifest" href="/site.webmanifest" />
 
-  <!-- Viewport & Theme -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0F4C75" />
-
   <!-- Primary SEO -->
-  <title>CFT Services | Technology Consulting & Custom Software Development</title>
-  <meta name="description" content="CFT Services helps Puerto Rico businesses modernize, automate, and grow through technology. Websites, custom apps, process automation, and CRM — practical solutions, real results." />
-  <meta name="keywords" content="technology consulting, custom software development, web applications, process automation, CRM implementation, digital transformation, Puerto Rico tech, website development" />
+  <title>CFT Services — Technology Consulting & Automation in Puerto Rico</title>
+  <meta name="description"
+    content="Puerto Rico technology partner for websites, custom apps, process automation, CRM, and interactive event experiences. Practical builds, real results." />
   <meta name="author" content="CFT Services" />
-  <meta name="robots" content="index, follow" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+
+  <!-- Canonical & language alternates.
+       Spanish is served from the same document via the ?lang=es parameter;
+       src/hooks/use-document-language.ts keeps these in sync at runtime. -->
   <link rel="canonical" href="https://cftservicespr.com/" />
+  <link rel="alternate" hreflang="en" href="https://cftservicespr.com/" />
+  <link rel="alternate" hreflang="es" href="https://cftservicespr.com/?lang=es" />
+  <link rel="alternate" hreflang="x-default" href="https://cftservicespr.com/" />
 
   <!-- Open Graph / Facebook / LinkedIn -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://cftservicespr.com/" />
   <meta property="og:site_name" content="CFT Services" />
-  <meta property="og:title" content="CFT Services | Technology Consulting & Custom Software Development" />
-  <meta property="og:description" content="From websites to automation, we figure out what your business actually needs — then build it. No jargon, no fluff, no projects that go nowhere." />
+  <meta property="og:title" content="CFT Services — Technology Consulting & Automation in Puerto Rico" />
+  <meta property="og:description"
+    content="From websites to automation, we figure out what your business actually needs — then build it. No jargon, no fluff, no projects that go nowhere." />
   <meta property="og:image" content="https://cftservicespr.com/og-image.png" />
+  <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="CFT Services - Technology Consulting & Custom Software Development" />
+  <meta property="og:image:alt" content="CFT Services — technology consulting and custom software development in Puerto Rico" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:locale:alternate" content="es_PR" />
 
   <!-- Twitter / X Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:site" content="@cftservices" />
-  <meta name="twitter:title" content="CFT Services | Technology Consulting & Custom Software" />
-  <meta name="twitter:description" content="From websites to automation, we figure out what your business actually needs — then build it. No jargon, no fluff, no projects that go nowhere." />
+  <meta name="twitter:title" content="CFT Services — Technology Consulting & Automation in Puerto Rico" />
+  <meta name="twitter:description"
+    content="From websites to automation, we figure out what your business actually needs — then build it. No jargon, no fluff, no projects that go nowhere." />
   <meta name="twitter:image" content="https://cftservicespr.com/og-image.png" />
-  <meta name="twitter:image:alt" content="CFT Services - Technology Consulting & Custom Software Development" />
+  <meta name="twitter:image:alt" content="CFT Services — technology consulting and custom software development in Puerto Rico" />
 
   <!-- Structured Data (JSON-LD) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "CFT Services",
-    "url": "https://cftservicespr.com",
-    "logo": "https://cftservicespr.com/favicon-192.png",
-    "image": "https://cftservicespr.com/og-image.png",
-    "description": "CFT Services is a technology consulting firm delivering practical, high-impact solutions. We help businesses modernize operations, build reliable software, and automate repetitive processes.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressRegion": "PR",
-      "addressCountry": "US"
-    },
-    "areaServed": ["Puerto Rico", "United States"],
-    "serviceType": [
-      "Technology Consulting",
-      "Website Development",
-      "Web Application Development",
-      "Process Automation",
-      "CRM Implementation"
-    ],
-    "knowsLanguage": ["en", "es"],
-    "sameAs": ["https://www.instagram.com/cftservicespr"]
+    "@graph": [
+      {
+        "@type": ["ProfessionalService", "Organization"],
+        "@id": "https://cftservicespr.com/#organization",
+        "name": "CFT Services",
+        "url": "https://cftservicespr.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://cftservicespr.com/favicon-512.png",
+          "width": 512,
+          "height": 512
+        },
+        "image": "https://cftservicespr.com/og-image.png",
+        "description": "CFT Services is a Puerto Rico technology and experiential firm. We help businesses modernize operations, build reliable software, automate repetitive processes, and run interactive technology at conventions and trade shows.",
+        "slogan": "Technology that actually works for your business.",
+        "email": "cristianf.torres15@gmail.com",
+        "telephone": "+1-787-218-2447",
+        "founder": {
+          "@type": "Person",
+          "name": "Cristian F. Torres Collazo"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressRegion": "PR",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Puerto Rico" },
+          { "@type": "Country", "name": "United States" }
+        ],
+        "knowsLanguage": ["en", "es"],
+        "availableLanguage": ["en", "es"],
+        "sameAs": ["https://www.instagram.com/cftservicespr"],
+        "hasOfferCatalog": [
+          {
+            "@type": "OfferCatalog",
+            "name": "IT & Digital Services",
+            "itemListElement": [
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Technology Consulting", "description": "Strategic guidance on stack selection, systems audits, and vendor evaluation." } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Website Development", "description": "Marketing sites and landing pages built to load fast and convert." } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web Application Development", "description": "Custom internal tools, client portals, and workflow dashboards." } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Process Automation", "description": "Workflow automation and API integrations that remove repetitive manual work." } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "CRM Implementation", "description": "CRM setup, pipeline automation, integrations, and team training." } }
+            ]
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "Experiential Event Technology",
+            "itemListElement": [
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Interactive Kiosk Games", "description": "Gamified touchscreen booth activations such as pick-to-win and spin-to-win." } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Digital Signage & Live Displays", "description": "Dynamic event visuals, live leaderboards, and sponsor displays." } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Lead Capture & CRM Sync", "description": "Touchscreen lead capture delivered to your CRM in real time." } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Event Check-in & Registration", "description": "QR and form-based attendee check-in, badging, and registration." } }
+            ]
+          }
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://cftservicespr.com/#website",
+        "url": "https://cftservicespr.com/",
+        "name": "CFT Services",
+        "publisher": { "@id": "https://cftservicespr.com/#organization" },
+        "inLanguage": ["en", "es"]
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://cftservicespr.com/#webpage",
+        "url": "https://cftservicespr.com/",
+        "name": "CFT Services — Technology Consulting & Automation in Puerto Rico",
+        "isPartOf": { "@id": "https://cftservicespr.com/#website" },
+        "about": { "@id": "https://cftservicespr.com/#organization" },
+        "primaryImageOfPage": "https://cftservicespr.com/og-image.png",
+        "inLanguage": "en"
+      }
+    ]
   }
   </script>
 
-  <!-- Fonts -->
+  <!-- Fonts — one request for both families, so neither waits on the CSS bundle. -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
     rel="stylesheet" />
 </head>
 

@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "plus jakarta sans",
+        "createdAt": "2026-08-16T00:02:08.617Z",
+        "reason": "DESIGN.md D1: committed brand body face, identity-preservation tradeoff accepted at the 2026-06-25 critique. Unchanged by this pass — only relocated from index.css @import to an index.html <link>."
+      }
+    ]
+  }
+}

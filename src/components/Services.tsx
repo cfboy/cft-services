@@ -37,7 +37,7 @@ function ServiceCard({
   }) as string[]
 
   return (
-    <motion.div
+    <motion.li
       initial={{ opacity: 0, y: prefersReduced ? 0 : 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
@@ -46,7 +46,10 @@ function ServiceCard({
     >
       {/* Card header: number index + icon */}
       <div className="flex items-start justify-between p-6 pb-4">
-        <span className="font-display text-muted-foreground/30 text-2xl leading-none font-semibold tabular-nums">
+        <span
+          aria-hidden="true"
+          className="font-display text-foreground/50 text-2xl leading-none font-semibold tabular-nums"
+        >
           {number}
         </span>
         <Icon
@@ -66,7 +69,7 @@ function ServiceCard({
         </p>
 
         {/* Divider */}
-        <div className="border-border/40 mb-4 border-t" />
+        <div aria-hidden="true" className="border-border/40 mb-4 border-t" />
 
         {/* Features */}
         <ul className="space-y-2">
@@ -83,20 +86,27 @@ function ServiceCard({
             ))}
         </ul>
       </div>
-    </motion.div>
+    </motion.li>
   )
 }
 
 export function Services() {
   const { t } = useTranslation()
   const prefersReduced = useReducedMotion()
-  const { ref, onMouseDown, onMouseMove, onMouseUp, onMouseLeave } =
-    useDragScroll<HTMLDivElement>()
+  const {
+    ref,
+    onMouseDown,
+    onMouseMove,
+    onMouseUp,
+    onMouseLeave,
+    onClickCapture,
+  } = useDragScroll<HTMLDivElement>()
 
   return (
     <section
       id={SECTION_ID}
       className="relative overflow-x-clip px-4 py-24 sm:py-32"
+      aria-labelledby="services-title"
     >
       <div className="relative mx-auto max-w-6xl">
         {/* Header — flush left per Register A asymmetric layout */}
@@ -107,7 +117,10 @@ export function Services() {
           transition={{ duration: 0.5 }}
           className="mb-14"
         >
-          <h2 className="font-display mb-3 text-3xl font-bold tracking-tight sm:text-4xl">
+          <h2
+            id="services-title"
+            className="font-display mb-3 text-3xl font-bold tracking-tight sm:text-4xl"
+          >
             {t('services.title')}
           </h2>
           <p className="text-muted-foreground max-w-lg">
@@ -115,16 +128,26 @@ export function Services() {
           </p>
         </motion.div>
 
-        {/* Horizontal scroll with drag */}
+        {/* Horizontal carousel. The viewport carries tabIndex + a label so the
+            cards past the fold are reachable without a mouse. */}
         <div
+          className="relative"
           ref={ref}
           onMouseDown={onMouseDown}
           onMouseMove={onMouseMove}
           onMouseUp={onMouseUp}
           onMouseLeave={onMouseLeave}
+          onClickCapture={onClickCapture}
         >
-          <ScrollArea className="w-full">
-            <div className="flex cursor-grab gap-5 pb-4 select-none">
+          <ScrollArea
+            className="w-full"
+            viewportProps={{
+              tabIndex: 0,
+              role: 'region',
+              'aria-label': t('a11y.servicesCarousel'),
+            }}
+          >
+            <ul className="flex cursor-grab list-none gap-5 pb-4 select-none">
               {services.map(({ key, Icon, number }, i) => (
                 <ServiceCard
                   key={key}
@@ -134,10 +157,20 @@ export function Services() {
                   index={i}
                 />
               ))}
-            </div>
+            </ul>
             <ScrollBar orientation="horizontal" />
           </ScrollArea>
+
+          {/* Right-edge fade: tells the eye there is more to scroll toward. */}
+          <div
+            aria-hidden="true"
+            className="from-background pointer-events-none absolute inset-y-0 right-0 hidden w-16 bg-linear-to-l to-transparent sm:block"
+          />
         </div>
+
+        <p className="text-muted-foreground mt-3 text-xs sm:hidden">
+          {t('services.scrollHint')}
+        </p>
       </div>
     </section>
   )

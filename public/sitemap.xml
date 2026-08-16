@@ -3,11 +3,20 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://cftservicespr.com/</loc>
-    <lastmod>2026-02-17</lastmod>
+    <lastmod>2026-08-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://cftservicespr.com/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://cftservicespr.com/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://cftservicespr.com/?lang=es" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://cftservicespr.com/" />
+  </url>
+  <url>
+    <loc>https://cftservicespr.com/?lang=es</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://cftservicespr.com/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://cftservicespr.com/?lang=es" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://cftservicespr.com/" />
   </url>
 </urlset>

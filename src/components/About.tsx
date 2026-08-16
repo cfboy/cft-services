@@ -17,30 +17,33 @@ import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 function useCounter(end: number, duration: number = 2000) {
-  const [count, setCount] = useState(0)
+  const prefersReduced = useReducedMotion()
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
-  useEffect(() => {
-    if (!isInView) return
+  // `null` means "not counting". Server render, hydration, and reduced motion
+  // all resolve to the real figure, so prerendered markup never ships "0+" and
+  // there is no hydration mismatch to paper over.
+  const [progress, setProgress] = useState<number | null>(null)
 
-    let startTime: number
+  useEffect(() => {
+    if (!isInView || prefersReduced) return
+
+    let startTime: number | undefined
     let animationFrame: number
 
     const animate = (currentTime: number) => {
-      if (!startTime) startTime = currentTime
-      const progress = Math.min((currentTime - startTime) / duration, 1)
-      const easeOutQuart = 1 - Math.pow(1 - progress, 4)
-      setCount(Math.floor(easeOutQuart * end))
-      if (progress < 1) animationFrame = requestAnimationFrame(animate)
+      startTime ??= currentTime
+      const elapsed = Math.min((currentTime - startTime) / duration, 1)
+      setProgress(1 - (1 - elapsed) ** 4)
+      if (elapsed < 1) animationFrame = requestAnimationFrame(animate)
     }
 
     animationFrame = requestAnimationFrame(animate)
-    return () => {
-      if (animationFrame) cancelAnimationFrame(animationFrame)
-    }
-  }, [end, duration, isInView])
+    return () => cancelAnimationFrame(animationFrame)
+  }, [duration, isInView, prefersReduced])
 
+  const count = progress === null ? end : Math.round(progress * end)
   return { count, ref }
 }
 
@@ -187,7 +190,13 @@ export function About() {
   ]
 
   return (
-    <section id="about" className="bg-muted/40 px-4 py-24 sm:py-32">
+    <section
+      id="about"
+      // overflow-x-clip: the timeline cards enter from a 32px x-offset, which
+      // would otherwise let the whole page scroll sideways on narrow screens.
+      className="bg-muted/40 overflow-x-clip px-4 py-24 sm:py-32"
+      aria-labelledby="about-title"
+    >
       <div className="mx-auto max-w-6xl space-y-20">
         {/* ── Section header ── */}
         <motion.div
@@ -196,7 +205,10 @@ export function About() {
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="font-display mb-3 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+          <h2
+            id="about-title"
+            className="font-display mb-3 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl"
+          >
             {t('about.title')}
           </h2>
           <p className="text-muted-foreground max-w-2xl text-base sm:text-lg">
@@ -243,39 +255,29 @@ export function About() {
               className="border-border/50 absolute top-0 left-5 h-full w-px origin-top border-l lg:left-1/2 lg:-translate-x-px"
             />
 
-            <div className="space-y-10">
+            <ol className="space-y-10">
               {processSteps.map(({ phase, titleKey, descKey }, i) => {
+                // Alternate sides at lg by reversing the row, so each card
+                // exists once in the DOM instead of being rendered twice and
+                // hidden — no duplicated copy for crawlers or screen readers.
                 const isLeft = i % 2 !== 0
 
-                const cardContent = (
-                  <div className="border-border/50 hover:border-border w-full rounded-lg border p-6 transition-[border-color] duration-300 lg:max-w-sm">
-                    <span className="font-display text-muted-foreground/40 mb-3 block text-sm font-semibold tabular-nums">
-                      {String(phase).padStart(2, '0')} /
-                    </span>
-                    <h4 className="font-display mb-2 text-base font-semibold">
-                      {t(titleKey)}
-                    </h4>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      {t(descKey)}
-                    </p>
-                  </div>
-                )
-
                 return (
-                  <div key={phase} className="relative flex items-center gap-6">
-                    {/* Left column — visible on desktop only when isLeft */}
-                    <motion.div
-                      initial={{ opacity: 0, x: prefersReduced ? 0 : -32 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: i * 0.15 }}
-                      className="hidden flex-1 justify-end lg:flex"
-                    >
-                      {isLeft ? cardContent : null}
-                    </motion.div>
+                  <li
+                    key={phase}
+                    className={`relative flex items-center gap-6 ${
+                      isLeft ? 'lg:flex-row-reverse' : ''
+                    }`}
+                  >
+                    {/* Balancing column so the node stays on the centre line */}
+                    <div
+                      aria-hidden="true"
+                      className="hidden flex-1 lg:block"
+                    />
 
                     {/* Timeline node — restrained circle */}
                     <motion.div
+                      aria-hidden="true"
                       initial={{ scale: prefersReduced ? 1 : 0 }}
                       whileInView={{ scale: 1 }}
                       viewport={{ once: true }}
@@ -284,29 +286,38 @@ export function About() {
                         delay: i * 0.15 + 0.1,
                         type: 'spring',
                       }}
-                      className="border-border bg-background relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 lg:mx-0"
+                      className="border-border bg-background relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2"
                     >
                       <span className="font-display text-muted-foreground text-sm font-semibold tabular-nums">
                         {phase}
                       </span>
                     </motion.div>
 
-                    {/* Right column — desktop right side + full mobile */}
                     <motion.div
-                      initial={{ opacity: 0, x: prefersReduced ? 0 : 32 }}
+                      initial={{
+                        opacity: 0,
+                        x: prefersReduced ? 0 : isLeft ? -32 : 32,
+                      }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, delay: i * 0.15 }}
-                      className="flex flex-1 justify-start lg:flex"
+                      className={`flex flex-1 ${
+                        isLeft ? 'lg:justify-end' : 'justify-start'
+                      }`}
                     >
-                      <div className={!isLeft ? '' : 'lg:hidden'}>
-                        {cardContent}
+                      <div className="border-border/50 hover:border-border w-full rounded-lg border p-6 transition-[border-color] duration-300 lg:max-w-sm">
+                        <h4 className="font-display mb-2 text-base font-semibold">
+                          {t(titleKey)}
+                        </h4>
+                        <p className="text-muted-foreground text-sm leading-relaxed">
+                          {t(descKey)}
+                        </p>
                       </div>
                     </motion.div>
-                  </div>
+                  </li>
                 )
               })}
-            </div>
+            </ol>
           </div>
         </div>
 
@@ -327,10 +338,21 @@ export function About() {
             </p>
           </motion.div>
 
+          {/* Assistive tech reads the list once; the marquee below repeats each
+              item to loop seamlessly, so it is presentational only. */}
+          <ul className="sr-only">
+            {industries.map(({ nameKey }) => (
+              <li key={nameKey}>{t(nameKey)}</li>
+            ))}
+          </ul>
+
           {/* Marquee rows — items duplicated for infinite scroll; slot prefix ensures unique keys */}
-          <div className="space-y-3 overflow-hidden mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] py-1">
+          <div
+            aria-hidden="true"
+            className="space-y-3 overflow-hidden mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] py-1"
+          >
             {/* Row 1 — scrolls left */}
-            <div className="flex w-max gap-3 motion-safe:animate-[marquee_30s_linear_infinite]">
+            <div className="pause-on-hover flex w-max gap-3 motion-safe:animate-[marquee_30s_linear_infinite]">
               {(['a', 'b'] as const).flatMap(slot =>
                 industries.map(({ nameKey, Icon }) => (
                   <div
@@ -350,7 +372,7 @@ export function About() {
               )}
             </div>
             {/* Row 2 — scrolls right (offset start for visual variety) */}
-            <div className="flex w-max gap-3 motion-safe:animate-[marquee_25s_linear_infinite_reverse]">
+            <div className="pause-on-hover flex w-max gap-3 motion-safe:animate-[marquee_25s_linear_infinite_reverse]">
               {(['a', 'b', 'c'] as const).flatMap((slot, si) =>
                 (si === 0
                   ? industries.slice(6)

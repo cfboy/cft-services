@@ -51,12 +51,14 @@ The transition from Register A into Register B (as the user scrolls past Service
 | `--cft-teal-primary` | `cft-teal-primary` | `#3CAEA3` | A: accent; B: primary glow, CTA |
 | `--cft-teal-light` | `cft-teal-light` | `#20E3B2` | B: highlight, gradient stops, shimmer peak |
 | `--cft-teal-soft` | `cft-teal-soft` | `#E8F8F5` | A: light teal backgrounds, chip fills |
+| `--cft-teal-ink` | `cft-teal-ink` | `#27796E` (light) / `#3CAEA3` (dark) | **Teal as text.** Register A accents: eyebrows, inline links |
 
 ### Usage by Register
 
 **Register A (IT — light-first):**
 - Navy colors are "ink" — use for type, borders, and on-brand accents
 - Teal appears only at accent weight: hover states, underlines, active indicators
+- **Teal text uses `cft-teal-ink`, never `cft-teal-primary`.** `#3CAEA3` on white is 2.7:1 and fails AA at every size; `#27796E` is 5.2:1 and reads as the same brand teal. `cft-teal-primary` remains correct for fills, glows, and the Register B dark surface
 - Backgrounds are white/light-gray (light mode) or `--background` token (dark mode)
 - No colored surface fills on cards — use hairline borders + whitespace instead
 
@@ -96,6 +98,8 @@ filter: drop-shadow(0 2px 16px rgba(32, 227, 178, 0.3));
 | Fine rule | `rgba(15,76,117,0.08)` | Decorative horizontal rules |
 | Index number | `rgba(15,76,117,0.25)` | `01 /` styled numbers in service lists |
 | Muted text | `rgba(15,76,117,0.6)` | Descriptive body text below headings |
+
+**`--color-muted-foreground` is `#5A6B84` in light mode** (one step darker than slate-500). The previous `#64748B` cleared AA on white but failed at 4.34:1 wherever `text-muted-foreground` sat on `bg-muted` — a pairing used by the Work filter pills, the "coming soon" card, and the About band.
 
 ---
 
@@ -149,7 +153,7 @@ This approach replaces `tailwind.config.js` (which this project does not use); T
 
 - **All section headings use `font-display`** (Space Grotesk) — never body font for h1–h3
 - **Eyebrow labels** always uppercase + wide tracking + teal accent color
-- **Numbers (`01 /`, `02 /`)** use `font-display tabular-nums` at reduced opacity (25–40%) — they are structural indices, not focal points
+- **Numbers (`01 /`, `02 /`)** use `font-display tabular-nums` at reduced opacity and are always `aria-hidden` — they are structural indices, not focal points. Opacity has a floor: the 24px card numeral uses `text-foreground/50` (3.1:1, clears AA for large text) and the 14px hero index uses `text-foreground/40`. Below that the numeral is not quiet, it is invisible
 - **No centered body paragraphs over 60 characters** — left-align or use asymmetric layouts
 - **Register B gradient text** — always use `filter: drop-shadow()` for glow effects, never `text-shadow` (incompatible with `background-clip: text`)
 
@@ -274,12 +278,12 @@ The premium redesign eliminates the "AI card" pattern: gradient background tile 
 ### Eyebrow Label
 
 ```tsx
-<span className="inline-block font-sans text-xs font-semibold uppercase tracking-[0.18em] text-[#3CAEA3] mb-4">
+<span className="text-cft-teal-ink mb-4 inline-block font-sans text-xs font-semibold tracking-[0.18em] uppercase">
   {t('section.eyebrow')}
 </span>
 ```
 
-**Note:** Eyebrow labels use the arbitrary-value `text-[#3CAEA3]` (teal primary hex) because the project's Tailwind config does not expose a `text-cft-teal-primary` utility. This is acceptable for brand-color accents that do not vary by theme. All other foreground colors should use semantic classes (`text-primary`, `text-muted-foreground`, etc.).
+**Note:** Register A eyebrows use the `text-cft-teal-ink` utility, which resolves to `#27796E` in light and `#3CAEA3` in dark so the label clears AA in both themes. Register B eyebrows keep the inline `#3CAEA3` — on the dark band it measures 6.6:1. Never hardcode `#3CAEA3` as text on a Register A surface.
 
 ---
 
@@ -397,7 +401,12 @@ const idleVariant = shouldReduceMotion
 
 ## Accessibility
 
-- All interactive elements have visible focus rings: `focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2`
+- All interactive elements have visible focus rings: `focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2`. `--tw-ring-offset-color` is bound to `--color-background` in `@layer base`; Tailwind's white default prints a halo around every focused control in dark mode
+- **A skip link is the first focusable element on the page**, targeting `#main`
+- **Every `<section>` is named** via `aria-labelledby` pointing at its own heading, so landmark navigation lists real section names
+- **Horizontal carousels** (Services, Work) put `tabIndex={0}`, `role="region"`, and a label on the ScrollArea *viewport* via `viewportProps`. Without it, cards past the fold are unreachable by keyboard
+- **Never nest interactive elements.** Buttons are not wrapped in anchors — style the anchor with `buttonVariants()` from `@/components/ui/button` instead. Flip cards expose one control per visible face and mark the hidden face `inert`, moving focus to the face that became visible
+- **No rendered output may branch on a client-only signal** (`resolvedTheme`, `prefers-reduced-motion`). The prerendered document is always light and always English; branching on theme breaks hydration. Swap themed assets and icons with `dark:` CSS variants instead
 - Icon-only interactive elements must have `aria-label`
 - Decorative elements (particles, noise overlays, background shapes) must have `aria-hidden="true"`
 - Gradient text: use `filter: drop-shadow()` for glow — never `text-shadow` (incompatible with `background-clip: text`)
@@ -517,16 +526,47 @@ These are the concrete moves that differentiate CFT Services from a template-gen
 
 ---
 
+## Rendering & SEO Contract
+
+The site is a client-rendered SPA on static hosting, so `npm run build` bakes the rendered markup into `dist/index.html`:
+
+```
+tsc -b
+vite build                                          # client bundle
+vite build --ssr src/entry-server.tsx --outDir dist-ssr
+node scripts/prerender.mjs                          # inject markup, drop dist-ssr
+```
+
+Constraints this places on component code:
+
+| Rule | Why |
+|------|-----|
+| No rendered output may depend on `resolvedTheme` | The prerender is always light; a themed `src` or icon fails hydration. Use `dark:` variants |
+| No rendered output may depend on `prefers-reduced-motion` for *layout* | Same reason. Motion values may differ; the recovery is graceful but avoid where cheap |
+| Values that animate from a placeholder must render their real value on the server | The stat counters resolve to `20+`, never `0+`, when `progress === null` |
+| Section `id`s are stable string literals | They are anchor targets, sitemap fragments, and scroll-spy keys — not generated ids |
+
+**Language.** English is prerendered at `/`; Spanish is the same document with `?lang=es`, switched by i18next at runtime. `src/hooks/use-document-language.ts` keeps `<html lang>`, `og:locale`, the canonical link, and the URL parameter in sync. Known limitation: a crawler that does not execute JavaScript sees English markup at the `?lang=es` URL. Moving Spanish to a prerendered `/es/` path would remove that; it is the natural next step if Spanish organic traffic matters.
+
+**Fonts** load from a single `<link>` in `index.html`. Never `@import` them in `index.css` — that chains the font request behind the stylesheet and delays every heading.
+
+**Tailwind source scanning** is scoped with `source(none)` plus explicit `@source` lines. Automatic detection also scans the markdown docs, which compiled Tailwind examples out of `CLAUDE.md` and `DESIGN.md` into shipped CSS.
+
+---
+
 ## Deferred Critique Findings
 
-Recorded from the Task 11 Impeccable critique pass (2026-06-25). These are known issues not fixed in that pass — either low-risk polish or ambiguous decisions.
+Started at the Task 11 Impeccable critique (2026-06-25); reviewed during the polish + SEO pass (2026-08-15).
 
-| # | Finding | Severity | Reason Deferred |
-|---|---------|----------|-----------------|
-| D1 | `overused-font` detector warning for Plus Jakarta Sans | Warning | Deliberate identity-preservation choice; PJS committed in design system before critique pass. Tradeoff accepted. |
-| D2 | Footer `NAV_LINKS` omits `#events` | P3 | Events targets a secondary audience (event organizers). Omitting from footer is a defensible scope decision; primary CTA funnel is navbar + in-page scroll. Revisit if event business grows. |
-| D3 | Work "coming soon" card text hardcoded in English | P3 | Low-traffic surface; card copy is structural, not brand-critical. Add `work.comingSoon` / `work.comingSoonSub` i18n keys when more projects are added. |
-| D4 | `KioskMockup.tsx` uses `key={i}` on PARTICLES map | P3 | PARTICLES is a static constant array with no reordering — stable index keys are safe here. Switch to composite key if array becomes dynamic. |
-| D5 | Stat values (`20+`, `10+`, `8+`) hardcoded in `About.tsx` | P3 | Values are structural/marketing content that could be i18n keys for CMS-free updates. Low urgency; change requires adding keys to both JSON files and updating the component. |
-| D6 | No inline (on-blur) form validation in Contact | P2 | TanStack Form supports per-field validators; adding `onBlur` validators would improve UX. Deferred to avoid changing form logic during a visual-only critique pass. |
-| D7 | Services section eyebrow intentionally absent | Design decision | DESIGN.md notes eyebrows on every section can be an AI tell. Services jumping directly to h2 is a deliberate rhythm break. Document as intentional, not an omission. |
+| # | Finding | Severity | Status |
+|---|---------|----------|--------|
+| D1 | `overused-font` detector warning for Plus Jakarta Sans | Warning | **Deferred.** Deliberate identity-preservation choice; committed before the critique pass |
+| D2 | Footer `NAV_LINKS` omits `#events` | P3 | **Resolved** — Events is in the footer nav |
+| D3 | Work "coming soon" card text hardcoded in English | P3 | **Resolved** — `work.comingSoon` / `work.comingSoonSub` exist in both locales |
+| D4 | `KioskMockup.tsx` uses `key={i}` on PARTICLES map | P3 | **Deferred.** PARTICLES is a static constant with no reordering; stable index keys are safe |
+| D5 | Stat values (`20+`, `10+`, `8+`) hardcoded in `About.tsx` | P3 | **Deferred.** Still literals; move to i18n if the figures start changing often |
+| D6 | No inline (on-blur) form validation in Contact | P2 | **Resolved** — per-field `onBlur` validators, `aria-invalid`, `aria-describedby`, focus-to-first-error |
+| D7 | Services section eyebrow intentionally absent | Design decision | **Intentional.** Services jumps straight to `h2` as a deliberate rhythm break |
+| D8 | Spanish is not prerendered — `?lang=es` serves English markup to non-JS crawlers | P2 | **Open.** Fix by prerendering an `/es/` path; see Rendering & SEO Contract |
+| D9 | Hydration mismatch for reduced-motion visitors | P3 | **Open.** Framer `initial` values differ from the server render; React recovers with one client render |
+| D10 | Original project PNGs retained beside the shipped WebP | P3 | **Open.** Unreferenced masters in `src/assets/projects/`; kept as source, never bundled |

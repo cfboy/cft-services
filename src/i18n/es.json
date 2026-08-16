@@ -13,9 +13,18 @@
     "cta": "Cuéntanos sobre tu Negocio",
     "secondary": "Ver Servicios",
     "identity": [
-      { "label": "TI & Digital", "sub": "Consultoría · Web · Automatización · CRM" },
-      { "label": "Experiencias", "sub": "Kioscos · Señalización · Captura de Leads" },
-      { "label": "Puerto Rico", "sub": "Clientes locales y remotos" }
+      {
+        "label": "TI & Digital",
+        "sub": "Consultoría · Web · Automatización · CRM"
+      },
+      {
+        "label": "Experiencias",
+        "sub": "Kioscos · Señalización · Captura de Leads"
+      },
+      {
+        "label": "Puerto Rico",
+        "sub": "Clientes locales y remotos"
+      }
     ]
   },
   "services": {
@@ -70,7 +79,8 @@
         "Integraciones",
         "Capacitación de Equipo"
       ]
-    }
+    },
+    "scrollHint": "Desliza para ver los cinco servicios"
   },
   "events": {
     "eyebrow": "Experiencias para Eventos",
@@ -203,7 +213,8 @@
     "project5": {
       "title": "MAC Educando",
       "description": "Sitio web para M Adviser and Consultant Inc., un centro de servicios educativos en Puerto Rico. Incluye navegación con scroll suave, tema claro/oscuro y secciones animadas que presentan sus servicios, oportunidades de empleo e información de contacto."
-    }
+    },
+    "flipBack": "Volver a la portada del proyecto"
   },
   "contact": {
     "title": "¿No sabes qué necesitas? No importa — empieza aquí.",
@@ -229,7 +240,15 @@
       "other": "Otro"
     },
     "phonePlaceholder": "XXX-XX-XXXX",
-    "phone": "Teléfono"
+    "phone": "Teléfono",
+    "sending": "Enviando…",
+    "errors": {
+      "name": "Escribe tu nombre (mínimo 2 caracteres).",
+      "email": "Escribe un correo electrónico válido.",
+      "phone": "Escribe un teléfono válido (7 a 20 dígitos).",
+      "industry": "Selecciona tu industria.",
+      "message": "Cuéntanos un poco más — mínimo 10 caracteres."
+    }
   },
   "finalCta": {
     "title": "¿Listo para dejar de adivinar y empezar a construir?",
@@ -239,12 +258,27 @@
   },
   "footer": {
     "rights": "Todos los derechos reservados.",
-    "privacy": "Privacidad",
-    "terms": "Términos",
     "tagline": "Tecnología que realmente funciona para tu negocio.",
     "navigation": "Navegación",
     "contact": "Contacto",
     "followUs": "Síguenos",
-    "location": "Puerto Rico"
+    "location": "Puerto Rico",
+    "startProject": "Empezar un proyecto"
+  },
+  "a11y": {
+    "skipToContent": "Saltar al contenido principal",
+    "mainNavigation": "Principal",
+    "homeLink": "CFT Services — volver arriba",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "toggleTheme": "Cambiar tema",
+    "switchToSpanish": "Cambiar a español",
+    "switchToEnglish": "Switch to English",
+    "scrollToServices": "Ir a servicios",
+    "servicesCarousel": "Servicios — desplázate horizontalmente",
+    "workCarousel": "Proyectos — desplázate horizontalmente",
+    "filterProjects": "Filtrar proyectos por tipo",
+    "instagram": "CFT Services en Instagram",
+    "opensInNewTab": "(se abre en una pestaña nueva)"
   }
 }

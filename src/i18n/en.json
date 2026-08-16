@@ -13,9 +13,18 @@
     "cta": "Tell Us About Your Business",
     "secondary": "Explore Services",
     "identity": [
-      { "label": "IT & Digital", "sub": "Consulting · Web · Automation · CRM" },
-      { "label": "Experiential", "sub": "Kiosks · Signage · Lead Capture" },
-      { "label": "Puerto Rico", "sub": "Serving local & remote clients" }
+      {
+        "label": "IT & Digital",
+        "sub": "Consulting · Web · Automation · CRM"
+      },
+      {
+        "label": "Experiential",
+        "sub": "Kiosks · Signage · Lead Capture"
+      },
+      {
+        "label": "Puerto Rico",
+        "sub": "Serving local & remote clients"
+      }
     ]
   },
   "services": {
@@ -70,7 +79,8 @@
         "Tool Integrations",
         "Team Training"
       ]
-    }
+    },
+    "scrollHint": "Swipe to see all five services"
   },
   "events": {
     "eyebrow": "Booth & Event Experiences",
@@ -203,7 +213,8 @@
     "project5": {
       "title": "MAC Educando",
       "description": "Website for M Adviser and Consultant Inc., an educational services center in Puerto Rico. Features smooth scroll navigation, dark/light theme, and animated sections showcasing their services, careers, and contact information."
-    }
+    },
+    "flipBack": "Back to project cover"
   },
   "contact": {
     "title": "Not Sure What You Need? That's Fine — Start Here.",
@@ -229,7 +240,15 @@
       "other": "Other"
     },
     "phone": "Phone Number",
-    "phonePlaceholder": "XXX-XX-XXXX"
+    "phonePlaceholder": "XXX-XX-XXXX",
+    "sending": "Sending…",
+    "errors": {
+      "name": "Please enter your name (at least 2 characters).",
+      "email": "Please enter a valid email address.",
+      "phone": "Please enter a valid phone number (7–20 digits).",
+      "industry": "Please select your industry.",
+      "message": "Please tell us a bit more — at least 10 characters."
+    }
   },
   "finalCta": {
     "title": "Ready to Stop Guessing and Start Building?",
@@ -239,12 +258,27 @@
   },
   "footer": {
     "rights": "All rights reserved.",
-    "privacy": "Privacy",
-    "terms": "Terms",
     "tagline": "Technology that actually works for your business.",
     "navigation": "Navigation",
     "contact": "Contact",
     "followUs": "Follow Us",
-    "location": "Puerto Rico"
+    "location": "Puerto Rico",
+    "startProject": "Start a project"
+  },
+  "a11y": {
+    "skipToContent": "Skip to main content",
+    "mainNavigation": "Main",
+    "homeLink": "CFT Services — back to top",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "toggleTheme": "Switch theme",
+    "switchToSpanish": "Cambiar a español",
+    "switchToEnglish": "Switch to English",
+    "scrollToServices": "Scroll to services",
+    "servicesCarousel": "Services — scroll horizontally",
+    "workCarousel": "Projects — scroll horizontally",
+    "filterProjects": "Filter projects by type",
+    "instagram": "CFT Services on Instagram",
+    "opensInNewTab": "(opens in a new tab)"
   }
 }
