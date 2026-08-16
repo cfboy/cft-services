@@ -2,7 +2,8 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { Calendar } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
-import { Button } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 
 const CALENDLY_URL = 'https://calendly.com/cristianf-torres15/consulting'
 
@@ -11,7 +12,11 @@ export function FinalCTA() {
   const shouldReduceMotion = useReducedMotion()
 
   return (
-    <section id="schedule" className="px-4 py-24 sm:py-32">
+    <section
+      id="schedule"
+      className="px-4 py-24 sm:py-32"
+      aria-labelledby="schedule-title"
+    >
       <motion.div
         className="mx-auto max-w-6xl"
         initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
@@ -28,7 +33,10 @@ export function FinalCTA() {
             />
 
             <div className="flex flex-col items-center gap-3">
-              <h2 className="font-display text-foreground text-3xl font-bold tracking-tight sm:text-4xl">
+              <h2
+                id="schedule-title"
+                className="font-display text-foreground text-3xl font-bold tracking-tight sm:text-4xl"
+              >
                 {t('finalCta.title')}
               </h2>
               <p className="text-muted-foreground max-w-xl text-lg">
@@ -36,15 +44,18 @@ export function FinalCTA() {
               </p>
             </div>
 
-            <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
-              <Button
-                size="lg"
-                variant="default"
-                className="gap-2 font-semibold"
-              >
-                <Calendar className="h-4 w-4" aria-hidden="true" />
-                {t('finalCta.cta')}
-              </Button>
+            <a
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                buttonVariants({ size: 'lg' }),
+                'gap-2 font-semibold'
+              )}
+            >
+              <Calendar className="h-4 w-4" aria-hidden="true" />
+              {t('finalCta.cta')}
+              <span className="sr-only">{t('a11y.opensInNewTab')}</span>
             </a>
 
             <p className="text-muted-foreground text-sm">

@@ -2,7 +2,12 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
-import { Button } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+
+/** Fades the hairline grid out toward the edges so it reads as texture. */
+const GRID_MASK =
+  'radial-gradient(ellipse 85% 65% at 50% 40%, black 25%, transparent 100%)'
 
 export function Hero() {
   const { t } = useTranslation()
@@ -15,22 +20,31 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-screen items-center overflow-hidden px-4"
-      aria-label="Hero"
+      className="relative flex min-h-svh items-center overflow-hidden px-4"
+      aria-labelledby="hero-title"
     >
-      {/* Structured editorial background — hairline grid + directional gradient */}
+      {/* Structured editorial background — directional wash, then hairline grid.
+          The grid sits *above* the wash; layering it underneath (as an opaque
+          background layer) hides it entirely. */}
       <div
         className="pointer-events-none absolute inset-0"
         aria-hidden="true"
         style={{
+          background:
+            'linear-gradient(to bottom, var(--color-background) 0%, var(--color-muted) 100%)',
+        }}
+      />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-70"
+        aria-hidden="true"
+        style={{
           backgroundImage: `
-            linear-gradient(to bottom, var(--color-background) 0%, var(--color-muted) 100%),
             linear-gradient(var(--color-border) 1px, transparent 1px),
             linear-gradient(90deg, var(--color-border) 1px, transparent 1px)
           `,
-          backgroundSize: 'auto, 64px 64px, 64px 64px',
-          backgroundBlendMode: 'normal, multiply, multiply',
-          opacity: 1,
+          backgroundSize: '64px 64px',
+          maskImage: GRID_MASK,
+          WebkitMaskImage: GRID_MASK,
         }}
       />
       {/* Subtle top fade to keep navbar clean */}
@@ -44,7 +58,7 @@ export function Hero() {
       />
 
       {/* Asymmetric content — left-weighted at lg */}
-      <div className="relative z-10 mx-auto w-full max-w-6xl py-32 lg:flex lg:min-h-screen lg:items-center lg:py-0">
+      <div className="relative z-10 mx-auto w-full max-w-6xl py-32 lg:flex lg:min-h-svh lg:items-center lg:py-0">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center lg:gap-8">
           {/* Left column — headline + CTAs */}
           <div className="lg:col-span-7">
@@ -53,12 +67,13 @@ export function Hero() {
               initial={{ opacity: 0, y: prefersReduced ? 0 : 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-cft-teal-primary mb-6 inline-block font-sans text-xs font-semibold tracking-[0.18em] uppercase"
+              className="text-cft-teal-ink mb-6 inline-block font-sans text-xs font-semibold tracking-[0.18em] uppercase"
             >
               CFT Services
             </motion.span>
 
             <motion.h1
+              id="hero-title"
               initial={{ opacity: 0, y: prefersReduced ? 0 : 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -83,43 +98,53 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.5 }}
               className="flex flex-col gap-3 sm:flex-row sm:items-center"
             >
-              <a href="#contact">
-                <Button size="lg" className="group w-full sm:w-auto">
-                  {t('hero.cta')}
-                  <ArrowRight
-                    aria-hidden="true"
-                    className="h-4 w-4 transition-transform group-hover:translate-x-1"
-                  />
-                </Button>
+              {/* Styled anchors, not buttons wrapped in anchors: nesting
+                  interactive elements is invalid HTML and gives assistive tech
+                  two conflicting controls for one action. */}
+              <a
+                href="#contact"
+                className={cn(
+                  buttonVariants({ size: 'lg' }),
+                  'group w-full sm:w-auto'
+                )}
+              >
+                {t('hero.cta')}
+                <ArrowRight
+                  aria-hidden="true"
+                  className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                />
               </a>
-              <a href="#services">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="w-full sm:w-auto"
-                >
-                  {t('hero.secondary')}
-                </Button>
+              <a
+                href="#services"
+                className={cn(
+                  buttonVariants({ variant: 'outline', size: 'lg' }),
+                  'w-full sm:w-auto'
+                )}
+              >
+                {t('hero.secondary')}
               </a>
             </motion.div>
           </div>
 
-          {/* Right column — structured editorial accent (desktop only) */}
+          {/* Right column — the two business lines, stated structurally.
+              Real content, not decoration: it is the only place above the fold
+              that names the experiential line, so it stays in the a11y tree. */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
             className="hidden lg:col-span-5 lg:flex lg:items-center lg:justify-end"
-            aria-hidden="true"
           >
             <div className="relative w-full max-w-sm">
               {/* Vertical fine rule */}
-              <div className="bg-border/60 absolute top-0 -left-8 h-full w-px" />
+              <div
+                aria-hidden="true"
+                className="bg-border/60 absolute top-0 -left-8 h-full w-px"
+              />
 
-              {/* Structural stat / identity block */}
-              <div className="space-y-8 pl-8">
+              <ul className="space-y-8 pl-8">
                 {identity.map((item, i) => (
-                  <motion.div
+                  <motion.li
                     key={item.label}
                     initial={{ opacity: 0, x: prefersReduced ? 0 : 12 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -127,7 +152,10 @@ export function Hero() {
                     className="border-border/40 border-b pb-6 last:border-0 last:pb-0"
                   >
                     <div className="flex items-baseline gap-3">
-                      <span className="font-display text-foreground/25 text-sm font-semibold tabular-nums">
+                      <span
+                        aria-hidden="true"
+                        className="font-display text-foreground/40 text-sm font-semibold tabular-nums"
+                      >
                         {String(i + 1).padStart(2, '0')} /
                       </span>
                       <span className="font-display text-foreground text-base font-semibold">
@@ -137,9 +165,9 @@ export function Hero() {
                     <p className="text-muted-foreground mt-1 pl-10 font-sans text-xs">
                       {item.sub}
                     </p>
-                  </motion.div>
+                  </motion.li>
                 ))}
-              </div>
+              </ul>
             </div>
           </motion.div>
         </div>
@@ -148,21 +176,22 @@ export function Hero() {
       {/* Scroll indicator */}
       <motion.a
         href="#services"
-        aria-label="Scroll to services"
+        aria-label={t('a11y.scrollToServices')}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="focus-visible:ring-ring absolute bottom-6 left-1/2 -translate-x-1/2 rounded-full p-3 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
       >
-        <motion.div
+        <motion.span
+          className="block"
           animate={prefersReduced ? {} : { y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
         >
           <ChevronDown
             aria-hidden="true"
-            className="text-cft-teal-primary/60 h-5 w-5"
+            className="text-cft-teal-ink/70 h-5 w-5"
           />
-        </motion.div>
+        </motion.span>
       </motion.a>
     </section>
   )

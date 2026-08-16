@@ -23,11 +23,11 @@ export function Footer() {
             <a
               href={INSTAGRAM_URL}
               target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="text-muted-foreground hover:text-foreground w-fit transition-colors"
+              rel="me noopener noreferrer"
+              aria-label={t('a11y.instagram')}
+              className="text-muted-foreground hover:text-foreground focus-visible:ring-ring w-fit rounded-md p-1 transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
             >
-              <Instagram className="h-5 w-5" />
+              <Instagram aria-hidden="true" className="h-5 w-5" />
             </a>
           </div>
 
@@ -77,25 +77,20 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
+        {/* Bottom bar.
+            Privacy and Terms links are intentionally absent until the pages
+            exist — an href="#" that jumps to the top is a dead link, not a
+            placeholder. Restore them alongside the real routes. */}
         <div className="border-border mt-10 flex flex-col items-center justify-between gap-3 border-t pt-6 sm:flex-row">
           <span className="text-muted-foreground text-sm">
             &copy; {year} CFT Services. {t('footer.rights')}
           </span>
-          <div className="flex gap-5 text-sm">
-            <a
-              href="#"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              {t('footer.privacy')}
-            </a>
-            <a
-              href="#"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              {t('footer.terms')}
-            </a>
-          </div>
+          <a
+            href="#contact"
+            className="text-muted-foreground hover:text-foreground focus-visible:ring-ring rounded-sm text-sm transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+          >
+            {t('footer.startProject')}
+          </a>
         </div>
       </div>
     </footer>

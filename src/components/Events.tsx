@@ -37,6 +37,7 @@ export function Events() {
   return (
     <section
       id="events"
+      aria-labelledby="events-title"
       className="relative overflow-hidden px-4 py-24 sm:py-32"
       style={{
         background:
@@ -98,6 +99,7 @@ export function Events() {
 
             {/* Headline — Register B: gradient text treatment */}
             <motion.h2
+              id="events-title"
               className="font-display mb-6 text-4xl font-bold tracking-tight sm:text-5xl"
               style={
                 {
@@ -125,7 +127,7 @@ export function Events() {
             {/* Subtitle */}
             <motion.p
               className="mb-10 max-w-[54ch] font-sans text-base leading-relaxed"
-              style={{ color: 'rgba(255,255,255,0.62)' }}
+              style={{ color: 'rgba(255,255,255,0.70)' }}
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
@@ -176,7 +178,7 @@ export function Events() {
                   </h3>
                   <p
                     className="font-sans text-sm leading-relaxed"
-                    style={{ color: 'rgba(255,255,255,0.52)' }}
+                    style={{ color: 'rgba(255,255,255,0.60)' }}
                   >
                     {t(`events.capabilities.${key}.description`)}
                   </p>
@@ -187,7 +189,7 @@ export function Events() {
             {/* Context strip */}
             <motion.p
               className="mt-8 font-sans text-xs tracking-[0.22em] uppercase"
-              style={{ color: 'rgba(255,255,255,0.28)' }}
+              style={{ color: 'rgba(255,255,255,0.45)' }}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true, margin: '-40px' }}

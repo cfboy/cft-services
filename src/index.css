@@ -1,12 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap');
-@import 'tailwindcss';
+/* Fonts are loaded via <link> in index.html — never @import here.
+   A CSS @import chains the font request behind the stylesheet download and
+   delays first paint of every heading. */
+/* Scope class detection to real source. Automatic detection also scans the
+   markdown docs, which turned Tailwind examples in CLAUDE.md and DESIGN.md
+   into shipped CSS (and a build warning for an asset that does not exist). */
+@import 'tailwindcss' source(none);
+@source '../index.html';
+@source './**/*.{ts,tsx}';
 
 @custom-variant dark (&:is(.dark *));
-
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
 
 @theme {
   /* CFT Brand Colors */
@@ -17,10 +19,18 @@
   --color-cft-teal-light: #20e3b2;
   --color-cft-teal-soft: #e8f8f5;
 
+  /* Teal as *ink* — darkened so small text clears AA (5.2:1) on light
+     surfaces. `--color-cft-teal-primary` stays the fill/glow value and is
+     only legible as text on dark. Register A text accents use this token. */
+  --color-cft-teal-ink: #27796e;
+
   --color-background: #ffffff;
   --color-foreground: #0f172a;
   --color-muted: #f1f5f9;
-  --color-muted-foreground: #64748b;
+  /* One step darker than slate-500 so secondary text clears AA on the muted
+     surface too (4.96:1), not only on white. The old value passed on white
+     and failed everywhere `bg-muted` and `text-muted-foreground` met. */
+  --color-muted-foreground: #5a6b84;
   --color-border: #e2e8f0;
   --color-input: #e2e8f0;
   --color-ring: #0f4c75;
@@ -34,7 +44,7 @@
   --color-card-foreground: #0f172a;
   --color-popover: #ffffff;
   --color-popover-foreground: #0f172a;
-  --color-destructive: #ef4444;
+  --color-destructive: #dc2626;
   --color-destructive-foreground: #ffffff;
   --color-success: #10b981;
   --color-warning: #f59e0b;
@@ -50,13 +60,18 @@
   /* Events register (Register B) — dark in both themes */
   --color-events-bg: #0a1420;
   --color-events-bg-soft: #0f2236;
+  --color-events-bg-deep: #050a12;
   --color-events-glow: #20e3b2;
 
   --animate-marquee: marquee 18s linear infinite;
 
   @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
   }
 }
 
@@ -79,26 +94,79 @@
   --color-card-foreground: #f8fafc;
   --color-popover: #1e293b;
   --color-popover-foreground: #f8fafc;
+  --color-destructive: #f87171;
+  --color-destructive-foreground: #0f172a;
+
+  /* On dark surfaces the full-strength teal already clears AA (6.6:1). */
+  --color-cft-teal-ink: #3caea3;
 }
 
 @layer base {
   * {
     @apply border-border;
   }
+
+  /* Tailwind's ring-offset defaults to white, which prints a white halo
+     around every focused control in dark mode. Track the surface instead. */
+  *,
+  ::before,
+  ::after {
+    --tw-ring-offset-color: var(--color-background);
+  }
+
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings:
       'rlig' 1,
       'calt' 1;
   }
+
   html {
     scroll-behavior: smooth;
+    /* Browser chrome inherits the palette rather than the OS default. */
+    scrollbar-color: var(--color-border) transparent;
+    accent-color: var(--color-primary);
+  }
+
+  /* Anchor targets must clear the 80px fixed navbar. */
+  section[id],
+  :target {
+    scroll-margin-top: 6rem;
+  }
+
+  ::selection {
+    background: color-mix(
+      in srgb,
+      var(--color-cft-teal-primary) 26%,
+      transparent
+    );
+    color: var(--color-foreground);
+  }
+
+  input,
+  textarea {
+    caret-color: var(--color-primary);
+  }
+
+  /* Numerals in headline/stat positions should not jitter as they animate. */
+  [data-tabular] {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@utility pause-on-hover {
+  &:hover {
+    animation-play-state: paused;
   }
 }
 
 /* Reduced-motion safety net — disables CSS animations/transitions for users who opt out.
    Framer Motion also checks useReducedMotion() in component code for JS-driven motion. */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   *,
   *::before,
   *::after {
