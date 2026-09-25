@@ -58,7 +58,7 @@ hexagon identity and the teal/navy gradient palette.
   shadows, gradients, outlines, or rotation. The cursor is always a flat
   rectangle.
 - **The cursor may blink** on screens (1.1s, hard on/off). In print it is fixed.
-  On the site it blinks once, after the hero headline (`.cft-cursor` in
+  On the site it appears in one place, blinking after the hero headline (`.cft-cursor` in
   `src/index.css`), and holds solid for reduced-motion visitors.
 - **Clear space** around the logo: at least 2× the cursor height. Minimum
   width 120px (the navbar renders it at 28–32px tall, ≈136–155px wide).
