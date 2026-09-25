@@ -67,7 +67,7 @@ export function Hero() {
               initial={{ opacity: 0, y: prefersReduced ? 0 : 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-cft-teal-ink mb-6 inline-block font-sans text-xs font-semibold tracking-[0.18em] uppercase"
+              className="text-cft-mint-ink mb-6 inline-block font-mono text-xs font-normal tracking-[0.2em] uppercase"
             >
               CFT Services
             </motion.span>
@@ -81,6 +81,8 @@ export function Hero() {
               style={{ textWrap: 'balance' } as React.CSSProperties}
             >
               {t('hero.title')}
+              {/* The brand's signature: the mint cursor, ready to build. */}
+              <span aria-hidden="true" className="cft-cursor" />
             </motion.h1>
 
             <motion.p
@@ -154,7 +156,7 @@ export function Hero() {
                     <div className="flex items-baseline gap-3">
                       <span
                         aria-hidden="true"
-                        className="font-display text-foreground/40 text-sm font-semibold tabular-nums"
+                        className="text-foreground/50 font-mono text-xs tabular-nums"
                       >
                         {String(i + 1).padStart(2, '0')} /
                       </span>
@@ -189,7 +191,7 @@ export function Hero() {
         >
           <ChevronDown
             aria-hidden="true"
-            className="text-cft-teal-ink/70 h-5 w-5"
+            className="text-cft-mint-ink/70 h-5 w-5"
           />
         </motion.span>
       </motion.a>

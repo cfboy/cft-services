@@ -28,7 +28,7 @@ function GlowParticle({
 }: ParticleProps) {
   const color = teal
     ? 'rgba(32, 227, 178, 0.7)' // events-glow (#20E3B2)
-    : 'rgba(27, 107, 147, 0.5)' // cft-navy-medium (#1B6B93)
+    : 'rgba(18, 53, 91, 0.5)' // cft-navy (#12355B)
 
   return (
     <motion.div
@@ -41,7 +41,7 @@ function GlowParticle({
         background: color,
         boxShadow: teal
           ? `0 0 ${size * 3}px rgba(32,227,178,0.5)`
-          : `0 0 ${size * 2}px rgba(27,107,147,0.3)`,
+          : `0 0 ${size * 2}px rgba(18,53,91,0.3)`,
       }}
       initial={{ opacity: 0, y: 0 }}
       animate={
@@ -102,21 +102,21 @@ function PickTile({ index, reduced }: TileProps) {
       style={{
         background: isWin
           ? 'linear-gradient(145deg, rgba(32,227,178,0.28) 0%, rgba(32,227,178,0.10) 100%)'
-          : 'linear-gradient(145deg, rgba(20,42,64,0.92) 0%, rgba(10,20,32,0.92) 100%)', // events-bg-soft → events-bg glass
+          : 'linear-gradient(145deg, rgba(14,36,64,0.92) 0%, rgba(10,22,40,0.92) 100%)', // events-bg-soft → events-bg glass
         border: isWin
           ? '1px solid rgba(32, 227, 178, 0.65)'
           : isGlow
-            ? '1px solid rgba(60, 174, 163, 0.4)' // cft-teal-primary
+            ? '1px solid rgba(32, 227, 178, 0.4)' // cft-mint
             : '1px solid rgba(120,150,180,0.12)',
         boxShadow: isWin
           ? '0 0 22px rgba(32,227,178,0.4), inset 0 1px 0 rgba(255,255,255,0.12), inset 0 0 12px rgba(32,227,178,0.18)'
           : isGlow
-            ? '0 0 10px rgba(60,174,163,0.22), inset 0 1px 0 rgba(255,255,255,0.06)'
+            ? '0 0 10px rgba(32,227,178,0.22), inset 0 1px 0 rgba(255,255,255,0.06)'
             : 'inset 0 1px 0 rgba(255,255,255,0.05)',
         color: isWin
           ? '#5CF2D2'
           : isGlow
-            ? '#3CAEA3' // cft-teal-primary
+            ? '#20E3B2' // cft-mint
             : 'rgba(255,255,255,0.42)',
       }}
       initial={{ opacity: 0, scale: 0.8 }}
@@ -179,8 +179,8 @@ function AccentChip({
       )}
       style={{
         background:
-          'linear-gradient(145deg, rgba(20,42,64,0.92) 0%, rgba(10,20,32,0.88) 100%)',
-        border: '1px solid rgba(60,174,163,0.30)',
+          'linear-gradient(145deg, rgba(14,36,64,0.92) 0%, rgba(10,22,40,0.88) 100%)',
+        border: '1px solid rgba(32,227,178,0.30)',
         boxShadow:
           '0 12px 30px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.04), 0 0 20px rgba(32,227,178,0.08)',
       }}
@@ -314,13 +314,13 @@ export function KioskMockup({ className }: { className?: string }) {
             transformStyle: 'preserve-3d',
             borderRadius: 22,
             background:
-              'linear-gradient(160deg, #21465F 0%, #14283C 50%, #0A1422 100%)',
+              'linear-gradient(160deg, #1C4570 0%, #10294A 50%, #0A1628 100%)',
             boxShadow: [
               '0 50px 90px rgba(0,0,0,0.6)',
               '0 0 0 1px rgba(120,160,190,0.18)',
               'inset 0 1px 0 rgba(255,255,255,0.12)',
               'inset 0 -2px 6px rgba(0,0,0,0.5)',
-              '0 0 70px rgba(60,174,163,0.10)',
+              '0 0 70px rgba(32,227,178,0.10)',
             ].join(', '),
             padding: '12px 12px 16px',
           }}
@@ -349,7 +349,7 @@ export function KioskMockup({ className }: { className?: string }) {
             className="relative overflow-hidden rounded-xl"
             style={{
               background:
-                'radial-gradient(ellipse at 50% 0%, #102A42 0%, #0A1420 58%, #050A12 100%)',
+                'radial-gradient(ellipse at 50% 0%, #0E2440 0%, #0A1628 58%, #050B16 100%)',
               minHeight: 360,
               boxShadow:
                 'inset 0 0 0 1px rgba(0,0,0,0.5), inset 0 2px 16px rgba(0,0,0,0.55)',
@@ -369,7 +369,7 @@ export function KioskMockup({ className }: { className?: string }) {
               className="pointer-events-none absolute inset-0"
               style={{
                 background:
-                  'radial-gradient(ellipse at 50% 42%, rgba(60,174,163,0.10) 0%, transparent 62%)',
+                  'radial-gradient(ellipse at 50% 42%, rgba(32,227,178,0.10) 0%, transparent 62%)',
               }}
             />
 
@@ -387,7 +387,7 @@ export function KioskMockup({ className }: { className?: string }) {
                 <div className="flex flex-col gap-1">
                   <span
                     className="font-sans text-[9px] font-semibold tracking-[0.24em] uppercase"
-                    style={{ color: '#3CAEA3' }} // cft-teal-primary
+                    style={{ color: '#20E3B2' }} // cft-mint
                   >
                     Interactive
                   </span>
@@ -427,8 +427,8 @@ export function KioskMockup({ className }: { className?: string }) {
                 className="font-display rounded-lg px-3 py-2 text-center text-xs font-semibold"
                 style={{
                   background:
-                    'linear-gradient(145deg, rgba(15,76,117,0.28) 0%, rgba(15,76,117,0.12) 100%)', // cft-navy-deep tint
-                  border: '1px solid rgba(60,174,163,0.22)',
+                    'linear-gradient(145deg, rgba(18,53,91,0.28) 0%, rgba(18,53,91,0.12) 100%)', // cft-navy tint
+                  border: '1px solid rgba(32,227,178,0.22)',
                   color: 'rgba(255,255,255,0.78)',
                 }}
               >
@@ -447,7 +447,7 @@ export function KioskMockup({ className }: { className?: string }) {
                 className="font-display mt-0.5 rounded-lg py-2.5 text-center text-xs font-bold tracking-widest uppercase"
                 style={{
                   background:
-                    'linear-gradient(135deg, rgba(60,174,163,0.42) 0%, rgba(32,227,178,0.24) 100%)',
+                    'linear-gradient(135deg, rgba(32,227,178,0.42) 0%, rgba(32,227,178,0.24) 100%)',
                   border: '1px solid rgba(32,227,178,0.45)',
                   color: '#CFFCF1',
                   boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.18)',
@@ -490,7 +490,7 @@ export function KioskMockup({ className }: { className?: string }) {
             className="h-7 w-7"
             style={{
               background:
-                'linear-gradient(90deg, #0A1422 0%, #21465F 50%, #0A1422 100%)',
+                'linear-gradient(90deg, #0A1628 0%, #1C4570 50%, #0A1628 100%)',
               boxShadow: 'inset 0 0 0 1px rgba(120,160,190,0.12)',
             }}
           />
@@ -498,7 +498,7 @@ export function KioskMockup({ className }: { className?: string }) {
           <div
             className="h-2.5 w-32 rounded-[50%]"
             style={{
-              background: 'linear-gradient(180deg, #21465F 0%, #0A1422 100%)',
+              background: 'linear-gradient(180deg, #1C4570 0%, #0A1628 100%)',
               boxShadow:
                 '0 14px 26px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.10)',
             }}
@@ -509,7 +509,7 @@ export function KioskMockup({ className }: { className?: string }) {
         <motion.div
           className="pointer-events-none absolute -bottom-6 left-1/2 -z-10 h-16 w-3/4 -translate-x-1/2 rounded-[50%]"
           style={{
-            background: 'rgba(60,174,163,0.16)',
+            background: 'rgba(32,227,178,0.16)',
             filter: 'blur(30px)',
           }}
           animate={

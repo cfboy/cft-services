@@ -65,48 +65,58 @@ import { cn } from '@/lib/utils'
 
 The site operates in two coordinated visual registers that share a palette but communicate in different emotional keys:
 
-- **Register A — IT & Digital Services** (`Hero`, `Services`, `About`, `Work`, `Contact`, `FinalCTA`, `Footer`, `Navbar`): Calm, editorial, light-first. Navy as ink, teal as sparse accent, generous whitespace, no glow effects.
-- **Register B — Experiential Technology** (`Events` section only): Immersive, **dark in both light and dark themes**, depth + glow + motion. Full-bleed `#0A1420` band; teal appears as glow, not ink; spring entrances + idle loops.
+- **Register A — IT & Digital Services** (`Hero`, `Services`, `About`, `Work`, `Contact`, `FinalCTA`, `Footer`, `Navbar`): Calm, editorial, light-first. Night as ink, mint as sparse accent, generous whitespace, no glow effects.
+- **Register B — Experiential Technology** (`Events` section only): Immersive, **dark in both light and dark themes**, depth + glow + motion. Full-bleed Night `#0A1628` band; mint appears as glow, not ink; spring entrances + idle loops.
 
 The transition from Register A into Register B as the user scrolls from Services into Events should feel like stepping from a professional office onto an event floor. Register B glow effects must never appear in Register A sections.
 
+### Brand v2.0 — the `CFT_` cursor identity
+
+- Identity is **the cursor**: the logo `CFT_` (Space Grotesk "CFT", a flat mint cursor, "SERVICES" in JetBrains Mono) and the symbol `C_` (favicon/app icon only). Logo and symbol never appear side by side.
+- **Never redraw the logo** — use `<Logo />`, which renders the kit's horizontal SVGs from `src/assets/`. No shadows, gradients, outlines, or rotation.
+- The cursor can blink on screen (1.1s). The site uses it once: `.cft-cursor` after the hero headline (defined in `src/index.css`, solid under reduced motion).
+
 ### Colors
 
-| Token               | Hex       | Usage                            |
-|----------------------|-----------|----------------------------------|
-| `cft-navy-deep`     | `#0F4C75` | Primary (light), headings        |
-| `cft-navy-medium`   | `#1B6B93` | Secondary navy                   |
-| `cft-navy-dark`     | `#1A1A2E` | Deepest navy                     |
-| `cft-teal-primary`  | `#3CAEA3` | Accent, CTAs, primary (dark)     |
-| `cft-teal-light`    | `#20E3B2` | Highlight, gradients             |
-| `cft-teal-soft`     | `#E8F8F5` | Light teal backgrounds           |
+One dark base, one accent. Mint is used sparingly — the cursor, a button, a key figure.
+
+| Token (Tailwind)  | Hex       | Usage                                  |
+|-------------------|-----------|----------------------------------------|
+| `cft-night`       | `#0A1628` | Main dark background; text on light     |
+| `cft-navy`        | `#12355B` | Icon backgrounds, surfaces             |
+| `cft-mint`        | `#20E3B2` | Cursor/accent **on dark only**         |
+| `cft-deep-mint`   | `#0E7C6B` | Cursor/accent **on light**             |
+| `cft-fog`         | `#F2F5F8` | Main light background                  |
+| `cft-slate`       | `#45596A` | Secondary text on light                |
+| `cft-mint-ink`    | Deep Mint (light) / Mint (dark) | Themed accent for text, rules, cursor |
 
 #### Register B (Events) surface tokens
 
-| Token (CSS var)        | Hex       | Usage                        |
-|------------------------|-----------|------------------------------|
-| `--color-events-bg`    | `#0A1420` | Section base background       |
-| `--color-events-bg-soft` | `#0F2236` | Raised card/panel surface   |
-| `--color-events-glow`  | `#20E3B2` | Teal glow accent              |
+| Token (CSS var)          | Hex       | Usage                        |
+|--------------------------|-----------|------------------------------|
+| `--color-events-bg`      | `#0A1628` | Section base background (Night) |
+| `--color-events-bg-soft` | `#0E2440` | Raised card/panel surface    |
+| `--color-events-glow`    | `#20E3B2` | Mint glow accent             |
 
 These are defined in `@theme` in `src/index.css`. Register B is the **only** exception to the "no hardcoded hex" rule — glassmorphism and glow surfaces use `rgba()` inline styles where no semantic token exists.
 
 ### Theme Behavior
 
-- **Light mode**: Navy (`#0F4C75`) is primary, teal is accent.
-- **Dark mode**: Teal (`#3CAEA3`) becomes primary, navy becomes accent.
+- **Light mode**: Fog background, Night ink and primary buttons, Deep Mint accent.
+- **Dark mode**: Night background, Fog ink, Mint becomes primary and accent.
 - Theme class (`dark`/`light`) is applied to `<html>` element.
 - CSS variables swap via `.dark { ... }` selector in `index.css`.
 - Use semantic color classes (`bg-primary`, `text-muted-foreground`, `border-border`) — never hardcode hex values in Register A components.
-- **The Events section is always dark regardless of theme** — it uses hardcoded `#0A1420`-family backgrounds, never `bg-background`.
+- **The Events section is always dark regardless of theme** — it uses hardcoded Night-family backgrounds, never `bg-background`.
 
 ### Typography
 
-- **Display font**: Space Grotesk (Google Fonts, weights 500/600/700). CSS token: `--font-display`. Tailwind utility: `font-display`.
-- **Body font**: Plus Jakarta Sans (Google Fonts, weights 400/500/600). CSS token: `--font-sans`. Tailwind utility: `font-sans`.
-- Both fonts are imported via a single `@import url(...)` at the top of `src/index.css` and registered in the Tailwind v4 `@theme` block — no `tailwind.config.js` needed.
-- **All section headings (`h1`–`h3`) must use `font-display`** (Space Grotesk). Body text and UI labels use `font-sans` (Plus Jakarta Sans).
-- Heading classes: `font-display font-bold tracking-tight text-3xl sm:text-4xl` (Register A) or `text-4xl sm:text-5xl` with gradient treatment (Register B).
+- **Space Grotesk** — titles, names, and running text. Tokens `--font-display` and `--font-sans` (utilities `font-display`, `font-sans`).
+- **JetBrains Mono** — labels, data, technical detail, wide-tracked uppercase. Token `--font-mono` (utility `font-mono`).
+- Both load from one Google Fonts `<link>` in `index.html` (never a CSS `@import`).
+- **All section headings (`h1`–`h3`) use `font-display`.**
+- Heading classes: `font-display font-bold tracking-tight text-3xl sm:text-4xl` (Register A) or `text-4xl sm:text-5xl` solid white (Register B — no gradient text).
+- Labels: `font-mono text-xs uppercase tracking-[0.2em] text-cft-mint-ink`.
 - Body: `font-sans text-muted-foreground leading-relaxed`.
 
 ### The Five "Less AI-Built" Rules
@@ -123,9 +133,9 @@ These moves differentiate the site from template-generated output. Every impleme
 
 `src/components/Events.tsx` is the only Register B section. Key constraints:
 
-- **Always dark in both themes** — section background is a hardcoded radial gradient (`#0F2236` → `#0A1420` → `#050A12`), never `bg-background`.
-- **Layered depth**: noise texture overlay (`opacity-[0.04]`) + radial vignette + brand teal glow radial + floating particles — all `aria-hidden="true"`, all `pointer-events-none`.
-- **Gradient headline text** with `filter: drop-shadow()` (never `text-shadow` — incompatible with `background-clip: text`).
+- **Always dark in both themes** — section background is a hardcoded radial gradient (`#0E2440` → `#0A1628` → `#050B16`), never `bg-background`.
+- **Layered depth**: noise texture overlay (`opacity-[0.04]`) + radial vignette + brand mint glow radial + floating particles — all `aria-hidden="true"`, all `pointer-events-none`.
+- **Solid headline text** — white at 95%. Brand v2 allows no gradient text.
 - **Glassmorphism capability cards** using `rgba()` inline styles and `backdropFilter` — the documented exception to the no-hex rule.
 - **Motion**: spring entrances for the KioskMockup, scroll-triggered reveals for copy, idle glow pulse loops — all gated on `useReducedMotion()`.
 - The `KioskMockup` lives in `src/components/events/KioskMockup.tsx` — a code-built interactive mockup using CFT brand colors only, no client branding.
@@ -178,11 +188,11 @@ Component.displayName = 'Component'
 
 | Variant     | Purpose                          |
 |-------------|----------------------------------|
-| `default`   | Primary action (navy/teal bg)    |
+| `default`   | Primary action (Night light / Mint dark) |
 | `secondary` | Secondary action (muted bg)      |
 | `outline`   | Bordered, transparent bg         |
 | `ghost`     | No bg, hover reveals muted       |
-| `accent`    | Teal CTA                         |
+| `accent`    | Mint CTA (Deep Mint light / Mint dark) |
 
 Sizes: `default`, `sm`, `lg`, `icon`.
 
@@ -265,7 +275,7 @@ component output must be identical on both sides:
 ## Key Conventions
 
 - **No hardcoded colors** — use semantic Tailwind classes (`bg-primary`, `text-foreground`).
-- **Teal text uses `text-cft-teal-ink`**, never `text-cft-teal-primary` (2.7:1 on white). `cft-teal-primary` is for fills, glows, and Register B only.
+- **Accent text uses `text-cft-mint-ink`**, never raw `text-cft-mint` in Register A (bright mint is 1.6:1 on white). `cft-mint` is for the always-dark Events band only.
 - **No `asChild` prop** — but do not wrap `<Button>` in an `<a>` either; nesting interactive elements is invalid HTML. Style the anchor with `buttonVariants()` from `@/components/ui/button`.
 - **Horizontal carousels** pass `viewportProps={{ tabIndex: 0, role: 'region', 'aria-label': … }}` to `ScrollArea` so off-screen cards are keyboard-reachable.
 - **All interactive elements** need `aria-label` when icon-only.

@@ -1,30 +1,34 @@
-import logoPrimary from '@/assets/cft-logo-primary.svg'
-import logoWhite from '@/assets/cft-logo-white.svg'
+import logoDark from '@/assets/cft-logo-horizontal-dark.svg'
+import logoLight from '@/assets/cft-logo-horizontal-light.svg'
 import { cn } from '@/lib/utils'
 
 /**
- * The light/dark variants swap in CSS rather than from `useTheme()`.
- * Branching the rendered `src` on theme breaks hydration of the prerendered
- * markup (the server always renders light) and flashes the wrong mark for a
- * frame; the `dark` class is already on `<html>` before first paint.
+ * The CFT_ | SERVICES wordmark, straight from the v2 brand kit — never
+ * redraw it. The light-surface file carries the Deep Mint cursor and the
+ * dark-surface file the Mint one, as the guidelines require.
+ *
+ * The variants swap in CSS rather than from `useTheme()`. Branching the
+ * rendered `src` on theme breaks hydration of the prerendered markup (the
+ * server always renders light) and flashes the wrong mark for a frame; the
+ * `dark` class is already on `<html>` before first paint.
  */
 export function Logo({ className = 'h-8' }: { className?: string }) {
   return (
     <>
       <img
-        src={logoPrimary}
+        src={logoLight}
         alt="CFT Services"
-        className={cn('block object-contain dark:hidden', className)}
-        width={400}
-        height={120}
+        className={cn('block w-auto object-contain dark:hidden', className)}
+        width={544}
+        height={112}
       />
       <img
-        src={logoWhite}
+        src={logoDark}
         alt=""
         aria-hidden="true"
-        className={cn('hidden object-contain dark:block', className)}
-        width={400}
-        height={120}
+        className={cn('hidden w-auto object-contain dark:block', className)}
+        width={544}
+        height={112}
       />
     </>
   )

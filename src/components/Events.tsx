@@ -6,7 +6,7 @@ import { KioskMockup } from '@/components/events/KioskMockup'
 
 // ---------------------------------------------------------------------------
 // Register B — Events section
-// Always-dark band (#0A1420 base), dark in BOTH light and dark themes.
+// Always-dark band (#0A1628 base), dark in BOTH light and dark themes.
 // Text uses explicit light-foreground values (white/slate) — never semantic
 // `text-foreground` which inverts in light mode.
 // ---------------------------------------------------------------------------
@@ -41,7 +41,7 @@ export function Events() {
       className="relative overflow-hidden px-4 py-24 sm:py-32"
       style={{
         background:
-          'radial-gradient(ellipse at 50% 10%, #0F2236 0%, #0A1420 55%, #050A12 100%)',
+          'radial-gradient(ellipse at 50% 10%, #0E2440 0%, #0A1628 55%, #050B16 100%)',
       }}
     >
       {/* Noise texture overlay — decorative, aria-hidden */}
@@ -65,13 +65,13 @@ export function Events() {
         }}
       />
 
-      {/* Brand teal glow — subtle ambient at center */}
+      {/* Brand mint glow — subtle ambient at center */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse at 60% 50%, rgba(60,174,163,0.07) 0%, transparent 55%)',
+            'radial-gradient(ellipse at 60% 50%, rgba(32,227,178,0.07) 0%, transparent 55%)',
         }}
       />
 
@@ -83,8 +83,8 @@ export function Events() {
           <div className="flex-1 lg:max-w-[55%]">
             {/* Eyebrow */}
             <motion.span
-              className="mb-4 inline-block font-sans text-xs font-semibold tracking-[0.18em] uppercase"
-              style={{ color: '#3CAEA3' }}
+              className="mb-4 inline-block font-mono text-xs font-normal tracking-[0.2em] uppercase"
+              style={{ color: '#20E3B2' }}
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
@@ -97,18 +97,13 @@ export function Events() {
               {t('events.eyebrow')}
             </motion.span>
 
-            {/* Headline — Register B: gradient text treatment */}
+            {/* Headline — solid type; brand v2 has one accent and no gradients */}
             <motion.h2
               id="events-title"
               className="font-display mb-6 text-4xl font-bold tracking-tight sm:text-5xl"
               style={
                 {
-                  background:
-                    'linear-gradient(135deg, #ffffff 0%, #20E3B2 60%, #3CAEA3 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                  filter: 'drop-shadow(0 2px 16px rgba(32,227,178,0.25))',
+                  color: 'rgba(255,255,255,0.95)',
                   textWrap: 'balance',
                 } as React.CSSProperties
               }
@@ -147,8 +142,8 @@ export function Events() {
                   key={key}
                   className="rounded-lg p-5"
                   style={{
-                    background: 'rgba(15, 34, 54, 0.75)',
-                    border: '1px solid rgba(60,174,163,0.18)',
+                    background: 'rgba(14, 36, 64, 0.75)',
+                    border: '1px solid rgba(32,227,178,0.18)',
                     backdropFilter: 'blur(8px)',
                   }}
                   initial={{ opacity: 0, y: 16 }}
@@ -166,7 +161,7 @@ export function Events() {
                 >
                   <Icon
                     className="mb-3 size-5"
-                    style={{ color: '#3CAEA3' }}
+                    style={{ color: '#20E3B2' }}
                     strokeWidth={1.5}
                     aria-hidden="true"
                   />
@@ -188,7 +183,7 @@ export function Events() {
 
             {/* Context strip */}
             <motion.p
-              className="mt-8 font-sans text-xs tracking-[0.22em] uppercase"
+              className="mt-8 font-mono text-xs tracking-[0.2em] uppercase"
               style={{ color: 'rgba(255,255,255,0.45)' }}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}

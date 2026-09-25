@@ -117,7 +117,7 @@ export function Navbar() {
           }}
           className="focus-visible:ring-ring flex items-center rounded-lg focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
         >
-          <Logo className="h-11 sm:h-12" />
+          <Logo className="h-7 sm:h-8" />
           <span className="sr-only">{t('a11y.homeLink')}</span>
         </a>
 
@@ -145,7 +145,7 @@ export function Navbar() {
                   <motion.span
                     layoutId="nav-active"
                     aria-hidden="true"
-                    className="bg-cft-teal-primary absolute inset-x-3 -bottom-px h-0.5 rounded-full"
+                    className="bg-cft-mint-ink absolute inset-x-3 -bottom-px h-0.5 rounded-full"
                     transition={
                       prefersReduced
                         ? { duration: 0 }
