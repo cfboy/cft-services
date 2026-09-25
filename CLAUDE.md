@@ -65,7 +65,7 @@ import { cn } from '@/lib/utils'
 
 The site operates in two coordinated visual registers that share a palette but communicate in different emotional keys:
 
-- **Register A — IT & Digital Services** (`Hero`, `Services`, `About`, `Work`, `Contact`, `FinalCTA`, `Footer`, `Navbar`): Calm, editorial, light-first. Night as ink, mint as sparse accent, generous whitespace, no glow effects.
+- **Register A — IT & Digital Services** (`Hero`, `Services`, `About`, `Work`, `Contact`, `Footer`, `Navbar`): Calm, editorial, light-first. Night as ink, mint as sparse accent, generous whitespace, no glow effects.
 - **Register B — Experiential Technology** (`Events` section only): Immersive, **dark in both light and dark themes**, depth + glow + motion. Full-bleed Night `#0A1628` band; mint appears as glow, not ink; spring entrances + idle loops.
 
 The transition from Register A into Register B as the user scrolls from Services into Events should feel like stepping from a professional office onto an event floor. Register B glow effects must never appear in Register A sections.
@@ -269,7 +269,7 @@ component output must be identical on both sides:
   light. Swap themed images and icons with `dark:` utilities (see `Logo.tsx`).
 - **Never branch rendered output on `prefers-reduced-motion` for layout.**
 - **Values that animate up from a placeholder must render their real value on
-  the server** — see `useCounter` in `About.tsx`.
+  the server** — never ship a `0` that counts up after hydration.
 - Section `id`s are stable literals, not `useId()` — they are anchor targets.
 
 ## Key Conventions

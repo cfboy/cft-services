@@ -57,7 +57,7 @@ function isSupported(lang: string): lang is SupportedLanguage {
  * shareable, canonical URL that matches the hreflang alternates in index.html.
  */
 export function useDocumentLanguage() {
-  const { i18n } = useTranslation()
+  const { t, i18n } = useTranslation()
   const resolved = i18n.resolvedLanguage ?? DEFAULT_LANGUAGE
   const lang: SupportedLanguage = isSupported(resolved)
     ? resolved
@@ -65,6 +65,11 @@ export function useDocumentLanguage() {
 
   useEffect(() => {
     document.documentElement.lang = lang
+
+    // The tab title and description follow the language. Social previews
+    // come from the static tags in index.html, since crawlers don't run JS.
+    document.title = t('meta.title')
+    setMeta('name', 'description', t('meta.description'))
 
     const canonical = canonicalFor(lang)
     setCanonical(canonical)
@@ -85,5 +90,5 @@ export function useDocumentLanguage() {
     if (url.toString() !== window.location.href) {
       window.history.replaceState(null, '', url)
     }
-  }, [lang])
+  }, [lang, t])
 }

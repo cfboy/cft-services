@@ -5,11 +5,12 @@
     "events": "Eventos",
     "work": "Trabajos",
     "about": "Nosotros",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "cta": "Empezar un proyecto"
   },
   "hero": {
     "title": "Tecnología que Realmente Funciona para tu Negocio",
-    "subtitle": "Desde sitios web hasta automatización, identificamos lo que tu negocio realmente necesita — y lo construimos. Sin jerga, sin relleno, sin proyectos que no llegan a ningún lado.",
+    "subtitle": "Desde sitios web hasta automatización, identificamos lo que tu negocio realmente necesita y lo construimos. Sin jerga, sin relleno, sin proyectos que no llegan a ningún lado.",
     "cta": "Cuéntanos sobre tu Negocio",
     "secondary": "Ver Servicios",
     "identity": [
@@ -29,10 +30,10 @@
   },
   "services": {
     "title": "Lo Que Hacemos",
-    "subtitle": "Consultoría tecnológica, sitios web, apps, automatización y CRM — un solo equipo, una sola conversación para saber por dónde empezar.",
+    "subtitle": "Consultoría tecnológica, sitios web, apps, automatización y CRM. Un solo equipo, una sola conversación para saber por dónde empezar.",
     "consulting": {
       "title": "Consultoría Tecnológica",
-      "description": "¿No sabes por dónde empezar? Analizamos cómo opera tu negocio hoy y te decimos exactamente qué tecnología te ayudaría — y qué solo desperdiciaría tu dinero.",
+      "description": "¿No sabes por dónde empezar? Analizamos cómo opera tu negocio hoy y te decimos exactamente qué tecnología te ayudaría, y qué solo desperdiciaría tu dinero.",
       "features": [
         "Revisión de Arquitectura",
         "Hoja de Ruta Tech",
@@ -54,7 +55,7 @@
       "title": "Aplicaciones Web",
       "description": "Cuando tu negocio supera las hojas de cálculo y el software genérico, construimos la herramienta personalizada que se adapta exactamente a tu forma de trabajar.",
       "features": [
-        "Plataformas SaaS",
+        "Herramientas Internas",
         "Portales de Clientes",
         "Dashboards",
         "Integraciones API"
@@ -72,7 +73,7 @@
     },
     "crm": {
       "title": "Implementación de CRM",
-      "description": "La mayoría de los proyectos CRM fallan porque el software no está configurado para como realmente vendes. Configuramos HubSpot, Zoho, o lo que se adapte a tu equipo — para que tu pipeline funcione solo.",
+      "description": "La mayoría de los proyectos CRM fallan porque el software no está configurado para como realmente vendes. Configuramos HubSpot, Zoho, o lo que se adapte a tu equipo, para que tu pipeline funcione solo.",
       "features": [
         "Configuración de CRM",
         "Automatización de Pipeline",
@@ -85,12 +86,12 @@
   "events": {
     "eyebrow": "Experiencias para Eventos",
     "title": "Experiencias Dinámicas para Convenciones y Stands",
-    "subtitle": "Diseñamos y construimos tecnología interactiva y a la medida de tu marca que convierte un stand en el punto más concurrido del salón — y el flujo de visitantes en resultados medibles.",
+    "subtitle": "Diseñamos y construimos tecnología interactiva y a la medida de tu marca que convierte un stand en el punto más concurrido del salón, y el flujo de visitantes en resultados medibles.",
     "contextStrip": "convenciones · expos · ferias · activaciones",
     "capabilities": {
       "kiosk": {
         "title": "Juegos Interactivos en Kiosco",
-        "description": "Experiencias gamificadas en pantalla táctil — elige y gana, ruleta y revelación de premios — creadas en torno a tu marca para atraer público y premiar la participación."
+        "description": "Experiencias gamificadas en pantalla táctil (elige y gana, ruleta y revelación de premios) creadas en torno a tu marca para atraer público y premiar la participación."
       },
       "signage": {
         "title": "Señalización y Pantallas en Vivo",
@@ -104,28 +105,13 @@
         "title": "Registro y Check-in de Eventos",
         "description": "Check-in digital rápido, flujos de registro y credenciales, y gestión de asistentes que escalan de un solo stand a un evento completo."
       }
-    }
+    },
+    "cta": "Planifica tu stand",
+    "ctaNote": "Cuéntanos el evento y la fecha. Lo planificamos contigo."
   },
   "about": {
     "title": "Somos un Equipo Pequeño. Lo Preferimos Así.",
-    "description": "CFT Services es una firma de consultoría tecnológica con base en Puerto Rico. Trabajamos con empresas de todos los tamaños para modernizar operaciones, desarrollar software confiable y automatizar los procesos que consumen el tiempo de tu equipo. No estamos aquí para venderte una plataforma que no necesitas. Empezamos por entender tu negocio — qué quieres lograr, qué lo está frenando y cuál es el camino más directo hacia adelante.",
-    "stats": {
-      "projectsCompleted": {
-        "label": "Proyectos Completados",
-        "value": "20+",
-        "description": "Entregados en distintas industrias en Puerto Rico y más allá"
-      },
-      "satisfiedClients": {
-        "label": "Clientes Satisfechos",
-        "value": "10+",
-        "description": "Empresas que volvieron para el próximo proyecto"
-      },
-      "yearsExperience": {
-        "label": "Años de Experiencia",
-        "value": "8+",
-        "description": "Experiencia y conocimiento en la industria"
-      }
-    },
+    "description": "CFT Services es una firma de consultoría tecnológica con base en Puerto Rico. Trabajamos con empresas de todos los tamaños para modernizar operaciones, desarrollar software confiable y automatizar los procesos que consumen el tiempo de tu equipo. No estamos aquí para venderte una plataforma que no necesitas. Empezamos por entender tu negocio: qué quieres lograr, qué lo está frenando y cuál es el camino más directo hacia adelante.",
     "howWeDoIt": {
       "title": "Cómo lo Hacemos",
       "subtitle": "Empezamos con una conversación real, no con una propuesta",
@@ -139,7 +125,7 @@
       },
       "implementation": {
         "title": "Implementación",
-        "description": "Construimos, integramos y capacitamos a tu equipo — y seguimos disponibles después del lanzamiento. El proyecto no termina cuando llega la factura."
+        "description": "Construimos, integramos y capacitamos a tu equipo, y seguimos disponibles después del lanzamiento. El proyecto no termina cuando llega la factura."
       }
     },
     "industries": {
@@ -181,6 +167,23 @@
       "government": {
         "name": "Gobierno"
       }
+    },
+    "proof": {
+      "reporting": {
+        "value": "0 min",
+        "label": "Dedicados al informe mensual de ventas",
+        "description": "Antes tomaba horas. Ahora las ventas de ATH Móvil Business y Clover se recopilan, se suman y se envían por correo automáticamente cada mes."
+      },
+      "entry": {
+        "value": "0 min",
+        "label": "Dedicados a pasar documentos al CRM",
+        "description": "Agentes de IA leen los documentos entrantes y crean por su cuenta los contactos y tareas en Zoho CRM."
+      },
+      "years": {
+        "value": "8+ años",
+        "label": "Desarrollando software",
+        "description": "Para empresas en Puerto Rico y más allá."
+      }
     }
   },
   "work": {
@@ -192,19 +195,17 @@
     "viewDetails": "Ver detalles",
     "tapToLearnMore": "Toca para más info",
     "all": "Todos",
-    "comingSoon": "Próximamente",
-    "comingSoonSub": "Más proyectos en camino",
     "project1": {
       "title": "Titi Amanda Babysitter",
-      "description": "Un sitio web profesional para un servicio de niñera — con detalles de servicios, información de reservas y testimonios reales de padres. Simple, confiable y diseñado para convertir visitantes nuevos en consultas."
+      "description": "Un sitio web profesional para un servicio de niñera, con detalles de servicios, información de reservas y testimonios reales de padres. Simple, confiable y diseñado para convertir visitantes nuevos en consultas."
     },
     "project2": {
       "title": "Clínica Libélula",
-      "description": "Un sitio web limpio y confiable para una clínica de salud — listado de servicios, perfiles del equipo y flujo de citas. Diseñado para funcionar igual de bien en el teléfono que en el escritorio."
+      "description": "Un sitio web limpio y confiable para una clínica de salud: listado de servicios, perfiles del equipo y flujo de citas. Diseñado para funcionar igual de bien en el teléfono que en el escritorio."
     },
     "project3": {
       "title": "Automatización CRM con IA",
-      "description": "Conectamos OneDrive, Zoho CRM y agentes de IA en un solo pipeline que lee documentos entrantes, crea contactos y enruta tareas automáticamente — sin entrada manual."
+      "description": "Conectamos OneDrive, Zoho CRM y agentes de IA en un solo pipeline que lee documentos entrantes, crea contactos y enruta tareas automáticamente. Cero entrada manual."
     },
     "project4": {
       "title": "Reporte de Ventas Automatizado",
@@ -214,11 +215,12 @@
       "title": "MAC Educando",
       "description": "Sitio web para M Adviser and Consultant Inc., un centro de servicios educativos en Puerto Rico. Incluye navegación con scroll suave, tema claro/oscuro y secciones animadas que presentan sus servicios, oportunidades de empleo e información de contacto."
     },
-    "flipBack": "Volver a la portada del proyecto"
+    "flipBack": "Volver a la portada del proyecto",
+    "clickToLearnMore": "Haz clic para ver más"
   },
   "contact": {
     "title": "¿No sabes qué necesitas? No importa — empieza aquí.",
-    "subtitle": "Envíanos un mensaje describiendo tu reto — no hace falta un brief perfecto, solo la situación honesta. Te respondemos en un día hábil.",
+    "subtitle": "Envíanos un mensaje describiendo tu reto. No hace falta un brief perfecto, solo la situación honesta. Te respondemos en un día hábil.",
     "name": "Nombre",
     "email": "Correo",
     "industry": "Industria",
@@ -226,11 +228,11 @@
     "send": "Enviar Mensaje",
     "namePlaceholder": "Tu nombre",
     "emailPlaceholder": "tu@ejemplo.com",
-    "industryPlaceholder": "Selecciona tu industria",
+    "industryPlaceholder": "Selecciona la más cercana",
     "messagePlaceholder": "Describe tu proyecto o reto...",
-    "successMessage": "¡Mensaje enviado exitosamente! Nos pondremos en contacto pronto.",
-    "errorMessage": "Error al enviar el mensaje. Por favor, inténtalo de nuevo.",
+    "errorMessage": "No se pudo enviar. Tu mensaje sigue aquí: inténtalo de nuevo o escríbenos directamente a",
     "industries": {
+      "events": "Eventos y Convenciones",
       "technology": "Tecnología",
       "finance": "Finanzas",
       "healthcare": "Salud",
@@ -239,22 +241,22 @@
       "education": "Educación",
       "other": "Otro"
     },
-    "phonePlaceholder": "XXX-XX-XXXX",
+    "phonePlaceholder": "787-555-0123",
     "phone": "Teléfono",
     "sending": "Enviando…",
     "errors": {
       "name": "Escribe tu nombre (mínimo 2 caracteres).",
       "email": "Escribe un correo electrónico válido.",
-      "phone": "Escribe un teléfono válido (7 a 20 dígitos).",
-      "industry": "Selecciona tu industria.",
-      "message": "Cuéntanos un poco más — mínimo 10 caracteres."
-    }
-  },
-  "finalCta": {
-    "title": "¿Listo para dejar de adivinar y empezar a construir?",
-    "subtitle": "Agenda una llamada gratuita de 30 minutos. Escuchamos, hacemos las preguntas correctas y te decimos exactamente lo que recomendaríamos — sin discurso de ventas, sin presión.",
-    "cta": "Agendar una Llamada Gratuita",
-    "note": "Consulta gratuita de 30 minutos · Sin compromiso"
+      "phone": "Escribe un teléfono válido, o déjalo en blanco.",
+      "message": "Cuéntanos un poco más (mínimo 10 caracteres)."
+    },
+    "optional": "opcional",
+    "success": {
+      "title": "Listo. Recibimos tu mensaje.",
+      "body": "Te responderemos a {{email}} en un día hábil.",
+      "again": "Enviar otro mensaje"
+    },
+    "bookCall": "¿Prefieres hablar? Agenda una llamada gratuita de 30 minutos"
   },
   "footer": {
     "rights": "Todos los derechos reservados.",
@@ -280,5 +282,9 @@
     "filterProjects": "Filtrar proyectos por tipo",
     "instagram": "CFT Services en Instagram",
     "opensInNewTab": "(se abre en una pestaña nueva)"
+  },
+  "meta": {
+    "title": "CFT Services — Consultoría Tecnológica y Automatización en Puerto Rico",
+    "description": "Tu socio tecnológico en Puerto Rico para sitios web, apps a la medida, automatización, CRM y experiencias interactivas para eventos. Soluciones prácticas, resultados reales."
   }
 }

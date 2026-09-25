@@ -13,7 +13,7 @@ The CFT Services site operates in two coordinated visual registers. They share a
 
 > *Calm · Editorial · Light-first · Professional*
 
-Applied to: `Hero`, `Services`, `About`, `Work`, `Contact`, `FinalCTA`, `Footer`, `Navbar`
+Applied to: `Hero`, `Services`, `About`, `Work`, `Contact`, `Footer`, `Navbar`
 
 - Light backgrounds in light mode; dark (but not theatrical) in dark mode
 - Night used as ink — primary text and headings
@@ -460,14 +460,13 @@ These are the concrete moves that differentiate CFT Services from a template-gen
 
 | Section | Register | Layout | Key Constraints |
 |---------|----------|--------|-----------------|
-| `Navbar` | A | Horizontal, sticky | No heavy blur; thin border-bottom |
-| `Hero` | A | Asymmetric 2-col (lg) | Left-align headline; CTA row left |
-| `Services` | A | Numbered list or 2-col grid | Rule 1, 2, 3 apply strictly |
-| `Events` | B | Full-bleed dark, centered | Always dark; glow text; mockup centerpiece |
-| `About` | A | 2-col split (text + visual) | No blobs; hairline dividers |
+| `Navbar` | A | Horizontal, sticky | Thin border-bottom; "Start a project" CTA at lg and inside the mobile menu; mobile menu has a Night scrim and animates opacity/transform only |
+| `Hero` | A | Asymmetric 2-col (lg) | Left-align headline; CTA row left; ends in the `.cft-cursor`; below lg a compact identity row names both business lines |
+| `Services` | A | Carousel below lg; 6-col grid at lg (2 advisory cards span 3, 3 build cards span 2) | Rule 1, 2, 3 apply strictly; every service visible on desktop |
+| `Events` | B | Full-bleed dark, asymmetric | Always dark (`.events-band`, deeper in dark mode) with a mint hairline threshold; solid headline; mockup centerpiece; "Plan your booth" CTA preselects the Events topic in the form |
+| `About` | A | Header, proof row, process, one-row industry marquee | Proof = named outcomes from shipped work (figure in `cft-mint-ink`), never generic counters |
 | `Work` | A | Portfolio grid | Card = image + title only, no gradients |
-| `Contact` | A | Centered (CTA exception) | Simple, low-friction |
-| `FinalCTA` | A | Centered band | One headline, one button |
+| `Contact` | A | Centered (CTA exception) | The page's single primary ask. Name, email, message required; phone and industry optional and labelled. Inline success panel (ends in the cursor) and inline error with an email fallback. Calendly is the secondary link beside Send |
 | `Footer` | A | 3-col at lg, stacked mobile | Hairline top border; no heavy bg |
 
 ---
@@ -544,7 +543,7 @@ Constraints this places on component code:
 |------|-----|
 | No rendered output may depend on `resolvedTheme` | The prerender is always light; a themed `src` or icon fails hydration. Use `dark:` variants |
 | No rendered output may depend on `prefers-reduced-motion` for *layout* | Same reason. Motion values may differ; the recovery is graceful but avoid where cheap |
-| Values that animate from a placeholder must render their real value on the server | The stat counters resolve to `20+`, never `0+`, when `progress === null` |
+| Values that animate from a placeholder must render their real value on the server | Never ship a `0` that counts up after hydration; About's proof figures are static text |
 | Section `id`s are stable string literals | They are anchor targets, sitemap fragments, and scroll-spy keys — not generated ids |
 
 **Language.** English is prerendered at `/`; Spanish is the same document with `?lang=es`, switched by i18next at runtime. `src/hooks/use-document-language.ts` keeps `<html lang>`, `og:locale`, the canonical link, and the URL parameter in sync. Known limitation: a crawler that does not execute JavaScript sees English markup at the `?lang=es` URL. Moving Spanish to a prerendered `/es/` path would remove that; it is the natural next step if Spanish organic traffic matters.
@@ -565,7 +564,7 @@ Started at the Task 11 Impeccable critique (2026-06-25); reviewed during the pol
 | D2 | Footer `NAV_LINKS` omits `#events` | P3 | **Resolved** — Events is in the footer nav |
 | D3 | Work "coming soon" card text hardcoded in English | P3 | **Resolved** — `work.comingSoon` / `work.comingSoonSub` exist in both locales |
 | D4 | `KioskMockup.tsx` uses `key={i}` on PARTICLES map | P3 | **Deferred.** PARTICLES is a static constant with no reordering; stable index keys are safe |
-| D5 | Stat values (`20+`, `10+`, `8+`) hardcoded in `About.tsx` | P3 | **Deferred.** Still literals; move to i18n if the figures start changing often |
+| D5 | Stat values (`20+`, `10+`, `8+`) hardcoded in `About.tsx` | P3 | **Resolved** — replaced by named proof items in `about.proof.*` (EN/ES) |
 | D6 | No inline (on-blur) form validation in Contact | P2 | **Resolved** — per-field `onBlur` validators, `aria-invalid`, `aria-describedby`, focus-to-first-error |
 | D7 | Services section eyebrow intentionally absent | Design decision | **Intentional.** Services jumps straight to `h2` as a deliberate rhythm break |
 | D8 | Spanish is not prerendered — `?lang=es` serves English markup to non-JS crawlers | P2 | **Open.** Fix by prerendering an `/es/` path; see Rendering & SEO Contract |

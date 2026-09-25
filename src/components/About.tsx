@@ -1,4 +1,4 @@
-import { motion, useInView, useReducedMotion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import {
   Banknote,
   BookOpen,
@@ -13,82 +13,43 @@ import {
   Users,
   Utensils,
 } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-function useCounter(end: number, duration: number = 2000) {
-  const prefersReduced = useReducedMotion()
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
-
-  // `null` means "not counting". Server render, hydration, and reduced motion
-  // all resolve to the real figure, so prerendered markup never ships "0+" and
-  // there is no hydration mismatch to paper over.
-  const [progress, setProgress] = useState<number | null>(null)
-
-  useEffect(() => {
-    if (!isInView || prefersReduced) return
-
-    let startTime: number | undefined
-    let animationFrame: number
-
-    const animate = (currentTime: number) => {
-      startTime ??= currentTime
-      const elapsed = Math.min((currentTime - startTime) / duration, 1)
-      setProgress(1 - (1 - elapsed) ** 4)
-      if (elapsed < 1) animationFrame = requestAnimationFrame(animate)
-    }
-
-    animationFrame = requestAnimationFrame(animate)
-    return () => cancelAnimationFrame(animationFrame)
-  }, [duration, isInView, prefersReduced])
-
-  const count = progress === null ? end : Math.round(progress * end)
-  return { count, ref }
-}
-
-type StatType = {
-  id: string
+type Proof = {
+  id: 'reporting' | 'entry' | 'years'
+  value: string
   label: string
-  value: number
-  suffix: string
   description: string
 }
 
-function StatCard({
-  stat,
-  index,
-  isLast,
-}: {
-  stat: StatType
-  index: number
-  isLast?: boolean
-}) {
-  const { count, ref } = useCounter(stat.value)
+/**
+ * Named outcomes from shipped work instead of generic counters. The figure is
+ * the one key datum the brand allows in mint (`cft-mint-ink`).
+ */
+function ProofCard({ proof, index }: { proof: Proof; index: number }) {
   const prefersReduced = useReducedMotion()
 
   return (
-    <motion.div
+    <motion.li
       initial={{ opacity: 0, y: prefersReduced ? 0 : 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.45, delay: index * 0.1 }}
-      className={`border-border/50 hover:border-border flex flex-col rounded-lg border p-6 transition-[border-color] duration-300 ${isLast ? 'col-span-2 md:col-span-1' : ''}`}
+      className="border-border/60 flex flex-col border-t pt-6"
     >
-      <div
-        ref={ref}
-        className="font-display mb-1 text-3xl font-bold tracking-tight tabular-nums"
+      <span
+        data-tabular
+        className="font-display text-cft-mint-ink mb-3 text-4xl leading-none font-bold tracking-tight sm:text-5xl"
       >
-        {count}
-        {stat.suffix}
-      </div>
-      <div className="font-display mb-0.5 text-sm font-semibold">
-        {stat.label}
-      </div>
-      <div className="text-muted-foreground text-xs leading-relaxed">
-        {stat.description}
-      </div>
-    </motion.div>
+        {proof.value}
+      </span>
+      <span className="font-display text-foreground mb-2 text-base font-semibold">
+        {proof.label}
+      </span>
+      <span className="text-muted-foreground text-sm leading-relaxed">
+        {proof.description}
+      </span>
+    </motion.li>
   )
 }
 
@@ -165,29 +126,12 @@ export function About() {
   const { t } = useTranslation()
   const prefersReduced = useReducedMotion()
 
-  const stats: StatType[] = [
-    {
-      id: 'projectsCompleted',
-      label: t('about.stats.projectsCompleted.label'),
-      value: 20,
-      suffix: '+',
-      description: t('about.stats.projectsCompleted.description'),
-    },
-    {
-      id: 'satisfiedClients',
-      label: t('about.stats.satisfiedClients.label'),
-      value: 10,
-      suffix: '+',
-      description: t('about.stats.satisfiedClients.description'),
-    },
-    {
-      id: 'yearsExperience',
-      label: t('about.stats.yearsExperience.label'),
-      value: 8,
-      suffix: '+',
-      description: t('about.stats.yearsExperience.description'),
-    },
-  ]
+  const proof: Proof[] = (['reporting', 'entry', 'years'] as const).map(id => ({
+    id,
+    value: t(`about.proof.${id}.value`),
+    label: t(`about.proof.${id}.label`),
+    description: t(`about.proof.${id}.description`),
+  }))
 
   return (
     <section
@@ -216,17 +160,12 @@ export function About() {
           </p>
         </motion.div>
 
-        {/* ── Stats grid ── */}
-        <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3">
-          {stats.map((stat, i) => (
-            <StatCard
-              key={stat.id}
-              stat={stat}
-              index={i}
-              isLast={i === stats.length - 1}
-            />
+        {/* ── Proof — named outcomes from shipped work ── */}
+        <ul className="grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-10">
+          {proof.map((item, i) => (
+            <ProofCard key={item.id} proof={item} index={i} />
           ))}
-        </div>
+        </ul>
 
         {/* ── How We Do It — Vertical Timeline ── */}
         <div>
@@ -346,40 +285,14 @@ export function About() {
             ))}
           </ul>
 
-          {/* Marquee rows — items duplicated for infinite scroll; slot prefix ensures unique keys */}
+          {/* Marquee — items duplicated for a seamless loop; slot prefix keeps keys unique */}
           <div
             aria-hidden="true"
-            className="space-y-3 overflow-hidden mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] py-1"
+            className="overflow-hidden mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] py-1"
           >
-            {/* Row 1 — scrolls left */}
             <div className="pause-on-hover flex w-max gap-3 motion-safe:animate-[marquee_30s_linear_infinite]">
               {(['a', 'b'] as const).flatMap(slot =>
                 industries.map(({ nameKey, Icon }) => (
-                  <div
-                    key={`${slot}-${nameKey}`}
-                    className="border-border/50 bg-card flex shrink-0 items-center gap-2.5 rounded-lg border px-4 py-2.5"
-                  >
-                    <Icon
-                      aria-hidden="true"
-                      className="text-muted-foreground/60 h-3.5 w-3.5 shrink-0"
-                      strokeWidth={1.5}
-                    />
-                    <p className="text-sm font-semibold whitespace-nowrap">
-                      {t(nameKey)}
-                    </p>
-                  </div>
-                ))
-              )}
-            </div>
-            {/* Row 2 — scrolls right (offset start for visual variety) */}
-            <div className="pause-on-hover flex w-max gap-3 motion-safe:animate-[marquee_25s_linear_infinite_reverse]">
-              {(['a', 'b', 'c'] as const).flatMap((slot, si) =>
-                (si === 0
-                  ? industries.slice(6)
-                  : si === 2
-                    ? industries.slice(0, 6)
-                    : industries
-                ).map(({ nameKey, Icon }) => (
                   <div
                     key={`${slot}-${nameKey}`}
                     className="border-border/50 bg-card flex shrink-0 items-center gap-2.5 rounded-lg border px-4 py-2.5"

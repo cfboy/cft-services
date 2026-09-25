@@ -42,7 +42,11 @@ function ServiceCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.45, delay: index * 0.08 }}
-      className="bg-card border-border/50 hover:border-border group relative my-2 flex w-72 shrink-0 flex-col overflow-hidden rounded-lg border transition-[border-color] duration-300 md:w-80"
+      // Below lg: a fixed-width carousel card. At lg the list becomes a 6-col
+      // grid: the two advisory services span 3 columns, the three builds 2.
+      className={`bg-card border-border/50 hover:border-border group relative my-2 flex w-72 shrink-0 flex-col overflow-hidden rounded-lg border transition-[border-color] duration-300 md:w-80 lg:my-0 lg:w-auto ${
+        index < 2 ? 'lg:col-span-3' : 'lg:col-span-2'
+      }`}
     >
       {/* Card header: number index + icon */}
       <div className="flex items-start justify-between p-6 pb-4">
@@ -128,8 +132,9 @@ export function Services() {
           </p>
         </motion.div>
 
-        {/* Horizontal carousel. The viewport carries tabIndex + a label so the
-            cards past the fold are reachable without a mouse. */}
+        {/* Horizontal carousel below lg, grid at lg. The viewport carries
+            tabIndex + a label so cards past the fold are reachable without a
+            mouse. */}
         <div
           className="relative"
           ref={ref}
@@ -147,7 +152,7 @@ export function Services() {
               'aria-label': t('a11y.servicesCarousel'),
             }}
           >
-            <ul className="flex cursor-grab list-none gap-5 pb-4 select-none">
+            <ul className="flex cursor-grab list-none gap-5 pb-4 select-none lg:grid lg:cursor-auto lg:grid-cols-6 lg:pb-0 lg:select-auto">
               {services.map(({ key, Icon, number }, i) => (
                 <ServiceCard
                   key={key}
@@ -164,7 +169,7 @@ export function Services() {
           {/* Right-edge fade: tells the eye there is more to scroll toward. */}
           <div
             aria-hidden="true"
-            className="from-background pointer-events-none absolute inset-y-0 right-0 hidden w-16 bg-linear-to-l to-transparent sm:block"
+            className="from-background pointer-events-none absolute inset-y-0 right-0 hidden w-16 bg-linear-to-l to-transparent sm:block lg:hidden"
           />
         </div>
 
