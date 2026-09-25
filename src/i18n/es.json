@@ -170,18 +170,18 @@
     },
     "proof": {
       "reporting": {
-        "value": "0 hrs",
-        "label": "Informe mensual de ventas",
-        "description": "Ventas de ATH Móvil Business y Clover, recopiladas, sumadas y enviadas por correo automáticamente cada mes."
+        "value": "0 min",
+        "label": "Dedicados al informe mensual de ventas",
+        "description": "Antes tomaba horas. Ahora las ventas de ATH Móvil Business y Clover se recopilan, se suman y se envían por correo automáticamente cada mes."
       },
       "entry": {
-        "value": "0",
-        "label": "Entrada manual de datos",
-        "description": "Documentos entrantes leídos por agentes de IA y enrutados a Zoho CRM como contactos y tareas."
+        "value": "0 min",
+        "label": "Dedicados a pasar documentos al CRM",
+        "description": "Agentes de IA leen los documentos entrantes y crean por su cuenta los contactos y tareas en Zoho CRM."
       },
       "years": {
-        "value": "8+",
-        "label": "Años desarrollando software",
+        "value": "8+ años",
+        "label": "Desarrollando software",
         "description": "Para empresas en Puerto Rico y más allá."
       }
     }

@@ -170,18 +170,18 @@
     },
     "proof": {
       "reporting": {
-        "value": "0 hrs",
-        "label": "Monthly sales reporting",
-        "description": "Sales from ATH Móvil Business and Clover, pulled, totaled, and emailed automatically every month."
+        "value": "0 min",
+        "label": "Spent building the monthly sales report",
+        "description": "It used to take hours. Now sales from ATH Móvil Business and Clover are pulled, totaled, and emailed automatically every month."
       },
       "entry": {
-        "value": "0",
-        "label": "Manual data entry",
-        "description": "Incoming documents read by AI agents and routed into Zoho CRM as contacts and tasks."
+        "value": "0 min",
+        "label": "Spent typing documents into the CRM",
+        "description": "AI agents read incoming documents and create the contacts and tasks in Zoho CRM on their own."
       },
       "years": {
-        "value": "8+",
-        "label": "Years building software",
+        "value": "8+ yrs",
+        "label": "Building software",
         "description": "For businesses in Puerto Rico and beyond."
       }
     }
