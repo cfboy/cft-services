@@ -126,6 +126,30 @@ export function Hero() {
                 {t('hero.secondary')}
               </a>
             </motion.div>
+
+            {/* Below lg the right column is hidden, so name both business lines
+                here in one compact row. Only one of the two lists is ever
+                displayed, so assistive tech reads it once. */}
+            <motion.ul
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.65 }}
+              className="border-border/60 mt-10 flex flex-wrap gap-x-6 gap-y-3 border-t pt-6 lg:hidden"
+            >
+              {identity.map((item, i) => (
+                <li key={item.label} className="flex items-baseline gap-2">
+                  <span
+                    aria-hidden="true"
+                    className="text-foreground/50 font-mono text-xs tabular-nums"
+                  >
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span className="font-display text-foreground text-sm font-semibold">
+                    {item.label}
+                  </span>
+                </li>
+              ))}
+            </motion.ul>
           </div>
 
           {/* Right column — the two business lines, stated structurally.

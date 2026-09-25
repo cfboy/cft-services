@@ -5,11 +5,12 @@
     "events": "Events",
     "work": "Work",
     "about": "About",
-    "contact": "Contact"
+    "contact": "Contact",
+    "cta": "Start a project"
   },
   "hero": {
     "title": "Technology That Actually Works for Your Business",
-    "subtitle": "From websites to automation, we figure out what your business actually needs — then build it. No jargon, no fluff, no projects that go nowhere.",
+    "subtitle": "From websites to automation, we figure out what your business actually needs, then build it. No jargon, no fluff, no projects that go nowhere.",
     "cta": "Tell Us About Your Business",
     "secondary": "Explore Services",
     "identity": [
@@ -29,10 +30,10 @@
   },
   "services": {
     "title": "What We Do",
-    "subtitle": "Technology consulting, websites, custom apps, process automation, and CRM — one team, one conversation to figure out where to start.",
+    "subtitle": "Technology consulting, websites, custom apps, process automation, and CRM. One team, one conversation to figure out where to start.",
     "consulting": {
       "title": "Technology Consulting",
-      "description": "Not sure where to start? We look at how your business runs today and tell you exactly what technology would help — and what would just waste your money.",
+      "description": "Not sure where to start? We look at how your business runs today and tell you exactly what technology would help, and what would just waste your money.",
       "features": [
         "Architecture Review",
         "Tech Roadmap",
@@ -54,7 +55,7 @@
       "title": "Web Applications",
       "description": "When your business outgrows spreadsheets and generic software, we build the custom tool that fits exactly how you work.",
       "features": [
-        "SaaS Platforms",
+        "Internal Tools",
         "Client Portals",
         "Dashboards",
         "API Integrations"
@@ -72,7 +73,7 @@
     },
     "crm": {
       "title": "CRM Implementation",
-      "description": "Most CRM projects fail because the software isn't set up for how you actually sell. We configure HubSpot, Zoho, or whatever fits your team — so your pipeline runs itself.",
+      "description": "Most CRM projects fail because the software isn't set up for how you actually sell. We configure HubSpot, Zoho, or whatever fits your team, so your pipeline runs itself.",
       "features": [
         "CRM Setup & Config",
         "Pipeline Automation",
@@ -85,12 +86,12 @@
   "events": {
     "eyebrow": "Booth & Event Experiences",
     "title": "Dynamic Experiences for Conventions & Booths",
-    "subtitle": "We design and build interactive, on-brand technology that turns a booth into the busiest spot on the floor — and turns foot traffic into measurable results.",
+    "subtitle": "We design and build interactive, on-brand technology that turns a booth into the busiest spot on the floor, and turns foot traffic into measurable results.",
     "contextStrip": "conventions · expos · trade shows · activations",
     "capabilities": {
       "kiosk": {
         "title": "Interactive Kiosk Games",
-        "description": "Gamified touchscreen experiences — pick-to-win, spin, and prize reveals — built around your brand to draw a crowd and reward engagement."
+        "description": "Gamified touchscreen experiences (pick-to-win, spin, and prize reveals) built around your brand to draw a crowd and reward engagement."
       },
       "signage": {
         "title": "Digital Signage & Live Displays",
@@ -104,28 +105,13 @@
         "title": "Event Check-in & Registration",
         "description": "Fast digital check-in, badge and registration flows, and attendee management that scale from a single booth to a full event."
       }
-    }
+    },
+    "cta": "Plan your booth",
+    "ctaNote": "Tell us the event and the date. We'll scope it with you."
   },
   "about": {
     "title": "We're a Small Team. We Prefer It That Way.",
-    "description": "CFT Services is a technology consulting firm based in Puerto Rico. We work with businesses of all sizes to modernize their operations, build reliable software, and automate the processes that eat up your team's time. We're not here to sell you a platform you don't need. We start by understanding your business — what you're trying to do, what's in the way, and what the fastest path forward looks like.",
-    "stats": {
-      "projectsCompleted": {
-        "label": "Projects Completed",
-        "value": "20+",
-        "description": "Delivered across industries in Puerto Rico and beyond"
-      },
-      "satisfiedClients": {
-        "label": "Satisfied Clients",
-        "value": "10+",
-        "description": "Businesses that came back for the next project"
-      },
-      "yearsExperience": {
-        "label": "Years Experience",
-        "value": "8+",
-        "description": "Industry expertise and knowledge"
-      }
-    },
+    "description": "CFT Services is a technology consulting firm based in Puerto Rico. We work with businesses of all sizes to modernize their operations, build reliable software, and automate the processes that eat up your team's time. We're not here to sell you a platform you don't need. We start by understanding your business: what you're trying to do, what's in the way, and what the fastest path forward looks like.",
     "howWeDoIt": {
       "title": "How We Do It",
       "subtitle": "We start with a real conversation, not a proposal",
@@ -139,7 +125,7 @@
       },
       "implementation": {
         "title": "Implementation",
-        "description": "We build, integrate, and train your team — and stay available after launch. The project doesn't end when the invoice does."
+        "description": "We build, integrate, and train your team, and stay available after launch. The project doesn't end when the invoice does."
       }
     },
     "industries": {
@@ -181,6 +167,23 @@
       "government": {
         "name": "Government"
       }
+    },
+    "proof": {
+      "reporting": {
+        "value": "0 hrs",
+        "label": "Monthly sales reporting",
+        "description": "Sales from ATH Móvil Business and Clover, pulled, totaled, and emailed automatically every month."
+      },
+      "entry": {
+        "value": "0",
+        "label": "Manual data entry",
+        "description": "Incoming documents read by AI agents and routed into Zoho CRM as contacts and tasks."
+      },
+      "years": {
+        "value": "8+",
+        "label": "Years building software",
+        "description": "For businesses in Puerto Rico and beyond."
+      }
     }
   },
   "work": {
@@ -192,19 +195,17 @@
     "viewDetails": "View details",
     "tapToLearnMore": "Tap to learn more",
     "all": "All",
-    "comingSoon": "Coming soon",
-    "comingSoonSub": "More projects on the way",
     "project1": {
       "title": "Titi Amanda Babysitter",
-      "description": "A professional website for a babysitter service — with service details, booking info, and real parent testimonials. Simple, trustworthy, and built to convert first-time visitors into inquiries."
+      "description": "A professional website for a babysitter service, with service details, booking info, and real parent testimonials. Simple, trustworthy, and built to convert first-time visitors into inquiries."
     },
     "project2": {
       "title": "Clinica Libelula",
-      "description": "A clean, credible website for a health clinic — service listings, team profiles, and appointment flow. Designed to work as well on a phone as on a desktop."
+      "description": "A clean, credible website for a health clinic: service listings, team profiles, and appointment flow. Designed to work as well on a phone as on a desktop."
     },
     "project3": {
       "title": "CRM & AI Document Automation",
-      "description": "Connected OneDrive, Zoho CRM, and AI agents into a single pipeline that reads incoming documents, creates contacts, and routes tasks automatically — zero manual entry."
+      "description": "Connected OneDrive, Zoho CRM, and AI agents into a single pipeline that reads incoming documents, creates contacts, and routes tasks automatically. Zero manual entry."
     },
     "project4": {
       "title": "Automated Sales Report",
@@ -214,11 +215,12 @@
       "title": "MAC Educando",
       "description": "Website for M Adviser and Consultant Inc., an educational services center in Puerto Rico. Features smooth scroll navigation, dark/light theme, and animated sections showcasing their services, careers, and contact information."
     },
-    "flipBack": "Back to project cover"
+    "flipBack": "Back to project cover",
+    "clickToLearnMore": "Click for details"
   },
   "contact": {
     "title": "Not Sure What You Need? That's Fine — Start Here.",
-    "subtitle": "Send us a message describing your challenge — not a perfect brief, just the honest situation. We'll get back to you within one business day.",
+    "subtitle": "Send us a message describing your challenge. Not a perfect brief, just the honest situation. We'll get back to you within one business day.",
     "name": "Name",
     "email": "Email",
     "industry": "Industry",
@@ -226,11 +228,11 @@
     "send": "Send Message",
     "namePlaceholder": "Your name",
     "emailPlaceholder": "you@example.com",
-    "industryPlaceholder": "Select your industry",
+    "industryPlaceholder": "Select the closest match",
     "messagePlaceholder": "Describe your project or challenge...",
-    "successMessage": "Message sent successfully! We'll get back to you soon.",
-    "errorMessage": "Failed to send message. Please try again.",
+    "errorMessage": "That didn't go through. Your message is still here, so try again or email us directly at",
     "industries": {
+      "events": "Events & Conventions",
       "technology": "Technology",
       "finance": "Finance",
       "healthcare": "Healthcare",
@@ -240,21 +242,21 @@
       "other": "Other"
     },
     "phone": "Phone Number",
-    "phonePlaceholder": "XXX-XX-XXXX",
+    "phonePlaceholder": "787-555-0123",
     "sending": "Sending…",
     "errors": {
       "name": "Please enter your name (at least 2 characters).",
       "email": "Please enter a valid email address.",
-      "phone": "Please enter a valid phone number (7–20 digits).",
-      "industry": "Please select your industry.",
-      "message": "Please tell us a bit more — at least 10 characters."
-    }
-  },
-  "finalCta": {
-    "title": "Ready to Stop Guessing and Start Building?",
-    "subtitle": "Book a free 30-minute call. We'll listen, ask the right questions, and tell you exactly what we'd recommend — no pitch, no pressure.",
-    "cta": "Schedule a Free Call",
-    "note": "Free 30-minute consultation · No commitment required"
+      "phone": "Please enter a valid phone number, or leave it blank.",
+      "message": "Please tell us a bit more (at least 10 characters)."
+    },
+    "optional": "optional",
+    "success": {
+      "title": "Got it. Your message is in.",
+      "body": "We'll reply to {{email}} within one business day.",
+      "again": "Send another message"
+    },
+    "bookCall": "Prefer to talk? Book a free 30-minute call"
   },
   "footer": {
     "rights": "All rights reserved.",
@@ -280,5 +282,9 @@
     "filterProjects": "Filter projects by type",
     "instagram": "CFT Services on Instagram",
     "opensInNewTab": "(opens in a new tab)"
+  },
+  "meta": {
+    "title": "CFT Services — Technology Consulting & Automation in Puerto Rico",
+    "description": "Puerto Rico technology partner for websites, custom apps, process automation, CRM, and interactive event experiences. Practical builds, real results."
   }
 }

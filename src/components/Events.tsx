@@ -1,7 +1,14 @@
 import { useReducedMotion, motion } from 'framer-motion'
-import { Gamepad2, MonitorPlay, UserPlus, ClipboardCheck } from 'lucide-react'
+import {
+  ArrowRight,
+  Gamepad2,
+  MonitorPlay,
+  UserPlus,
+  ClipboardCheck,
+} from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
+import { preselectContactTopic } from '@/components/Contact'
 import { KioskMockup } from '@/components/events/KioskMockup'
 
 // ---------------------------------------------------------------------------
@@ -38,12 +45,19 @@ export function Events() {
     <section
       id="events"
       aria-labelledby="events-title"
-      className="relative overflow-hidden px-4 py-24 sm:py-32"
-      style={{
-        background:
-          'radial-gradient(ellipse at 50% 10%, #0E2440 0%, #0A1628 55%, #050B16 100%)',
-      }}
+      // `events-band` (index.css) owns the background so dark mode can sink it
+      // below the Night page surface and keep the register shift visible.
+      className="events-band relative overflow-hidden px-4 py-24 sm:py-32"
     >
+      {/* Threshold — a hairline of mint marks the step onto the event floor */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px"
+        style={{
+          background:
+            'linear-gradient(to right, transparent, rgba(32,227,178,0.35) 50%, transparent)',
+        }}
+      />
       {/* Noise texture overlay — decorative, aria-hidden */}
       <div
         aria-hidden="true"
@@ -100,7 +114,7 @@ export function Events() {
             {/* Headline — solid type; brand v2 has one accent and no gradients */}
             <motion.h2
               id="events-title"
-              className="font-display mb-6 text-4xl font-bold tracking-tight sm:text-5xl"
+              className="font-display mb-6 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl"
               style={
                 {
                   color: 'rgba(255,255,255,0.95)',
@@ -181,10 +195,41 @@ export function Events() {
               ))}
             </div>
 
+            {/* Conversion — the organizer's next step, preselecting the topic */}
+            <motion.div
+              className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5"
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={
+                shouldReduceMotion
+                  ? { duration: 0 }
+                  : { duration: 0.5, delay: 0.45, ease: 'easeOut' }
+              }
+            >
+              <a
+                href="#contact"
+                onClick={() => preselectContactTopic('events')}
+                className="group inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-[#20E3B2] px-7 text-base font-medium text-[#0A1628] transition-colors hover:bg-[#20E3B2]/90 focus-visible:ring-2 focus-visible:ring-[#20E3B2] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A1628] focus-visible:outline-none"
+              >
+                {t('events.cta')}
+                <ArrowRight
+                  aria-hidden="true"
+                  className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                />
+              </a>
+              <p
+                className="max-w-[30ch] font-sans text-sm leading-snug"
+                style={{ color: 'rgba(255,255,255,0.70)' }}
+              >
+                {t('events.ctaNote')}
+              </p>
+            </motion.div>
+
             {/* Context strip */}
             <motion.p
               className="mt-8 font-mono text-xs tracking-[0.2em] uppercase"
-              style={{ color: 'rgba(255,255,255,0.45)' }}
+              style={{ color: 'rgba(255,255,255,0.62)' }}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true, margin: '-40px' }}

@@ -4,9 +4,10 @@ import { useEffect, useId, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { Logo } from '@/components/Logo'
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { useActiveSection } from '@/hooks/use-active-section'
 import { useTheme } from '@/hooks/use-theme'
+import { cn } from '@/lib/utils'
 
 /** Section ids in document order — drives both the links and the scroll spy. */
 const SECTIONS = [
@@ -101,62 +102,106 @@ export function Navbar() {
   const themeLabel = t('a11y.toggleTheme')
 
   return (
-    <motion.nav
-      initial={{ y: prefersReduced ? 0 : -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      aria-label={t('a11y.mainNavigation')}
-      className="border-border/50 bg-background/80 fixed top-0 right-0 left-0 z-50 border-b backdrop-blur-md"
-    >
-      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <a
-          href="#home"
-          onClick={e => {
-            e.preventDefault()
-            goToSection('#home', false)
-          }}
-          className="focus-visible:ring-ring flex items-center rounded-lg focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
-        >
-          <Logo className="h-7 sm:h-8" />
-          <span className="sr-only">{t('a11y.homeLink')}</span>
-        </a>
+    <>
+      <motion.nav
+        initial={{ y: prefersReduced ? 0 : -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        aria-label={t('a11y.mainNavigation')}
+        className={cn(
+          'border-border/50 fixed top-0 right-0 left-0 z-50 border-b backdrop-blur-md',
+          // Solid while the mobile menu is open, so the scrim below never
+          // shows through and grays the bar.
+          mobileOpen ? 'bg-background' : 'bg-background/80'
+        )}
+      >
+        <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-4 sm:px-6">
+          <a
+            href="#home"
+            onClick={e => {
+              e.preventDefault()
+              goToSection('#home', false)
+            }}
+            className="focus-visible:ring-ring flex items-center rounded-lg focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+          >
+            <Logo className="h-7 sm:h-8" />
+            <span className="sr-only">{t('a11y.homeLink')}</span>
+          </a>
 
-        {/* Desktop nav */}
-        <div className="hidden items-center gap-1 md:flex">
-          {navLinks.map(link => {
-            const isActive = activeSection === link.id
-            return (
+          {/* Desktop nav */}
+          <div className="hidden items-center gap-1 md:flex">
+            {navLinks.map(link => {
+              const isActive = activeSection === link.id
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  aria-current={isActive ? 'true' : undefined}
+                  onClick={e => {
+                    e.preventDefault()
+                    goToSection(link.href, false)
+                  }}
+                  className={`focus-visible:ring-ring relative rounded-lg px-3 py-2 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none ${
+                    isActive
+                      ? 'text-foreground'
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  {link.label}
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-active"
+                      aria-hidden="true"
+                      className="bg-cft-mint-ink absolute inset-x-3 -bottom-px h-0.5 rounded-full"
+                      transition={
+                        prefersReduced
+                          ? { duration: 0 }
+                          : { type: 'spring', stiffness: 380, damping: 32 }
+                      }
+                    />
+                  )}
+                </a>
+              )
+            })}
+            <div className="ml-2 flex items-center gap-1">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={toggleLang}
+                aria-label={languageLabel}
+              >
+                <Globe aria-hidden="true" className="h-4 w-4" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={toggleTheme}
+                aria-label={themeLabel}
+              >
+                <Moon
+                  aria-hidden="true"
+                  className="block h-4 w-4 dark:hidden"
+                />
+                <Sun aria-hidden="true" className="hidden h-4 w-4 dark:block" />
+              </Button>
               <a
-                key={link.href}
-                href={link.href}
-                aria-current={isActive ? 'true' : undefined}
+                href="#contact"
                 onClick={e => {
                   e.preventDefault()
-                  goToSection(link.href, false)
+                  goToSection('#contact', false)
                 }}
-                className={`focus-visible:ring-ring relative rounded-lg px-3 py-2 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none ${
-                  isActive
-                    ? 'text-foreground'
-                    : 'text-muted-foreground hover:text-foreground'
-                }`}
-              >
-                {link.label}
-                {isActive && (
-                  <motion.span
-                    layoutId="nav-active"
-                    aria-hidden="true"
-                    className="bg-cft-mint-ink absolute inset-x-3 -bottom-px h-0.5 rounded-full"
-                    transition={
-                      prefersReduced
-                        ? { duration: 0 }
-                        : { type: 'spring', stiffness: 380, damping: 32 }
-                    }
-                  />
+                className={cn(
+                  buttonVariants({ size: 'sm' }),
+                  'ml-2 hidden lg:inline-flex'
                 )}
+              >
+                {t('nav.cta')}
               </a>
-            )
-          })}
-          <div className="ml-2 flex items-center gap-1">
+            </div>
+          </div>
+
+          {/* Mobile toggle */}
+          <div className="flex items-center gap-1 md:hidden">
             <Button
               variant="ghost"
               size="icon"
@@ -174,84 +219,91 @@ export function Navbar() {
               <Moon aria-hidden="true" className="block h-4 w-4 dark:hidden" />
               <Sun aria-hidden="true" className="hidden h-4 w-4 dark:block" />
             </Button>
+            <Button
+              ref={toggleRef}
+              variant="ghost"
+              size="icon"
+              onClick={() => setMobileOpen(open => !open)}
+              aria-label={mobileOpen ? t('a11y.closeMenu') : t('a11y.openMenu')}
+              aria-expanded={mobileOpen}
+              aria-controls={menuId}
+            >
+              {mobileOpen ? (
+                <X aria-hidden="true" className="h-5 w-5" />
+              ) : (
+                <Menu aria-hidden="true" className="h-5 w-5" />
+              )}
+            </Button>
           </div>
         </div>
 
-        {/* Mobile toggle */}
-        <div className="flex items-center gap-1 md:hidden">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleLang}
-            aria-label={languageLabel}
-          >
-            <Globe aria-hidden="true" className="h-4 w-4" />
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleTheme}
-            aria-label={themeLabel}
-          >
-            <Moon aria-hidden="true" className="block h-4 w-4 dark:hidden" />
-            <Sun aria-hidden="true" className="hidden h-4 w-4 dark:block" />
-          </Button>
-          <Button
-            ref={toggleRef}
-            variant="ghost"
-            size="icon"
-            onClick={() => setMobileOpen(open => !open)}
-            aria-label={mobileOpen ? t('a11y.closeMenu') : t('a11y.openMenu')}
-            aria-expanded={mobileOpen}
-            aria-controls={menuId}
-          >
-            {mobileOpen ? (
-              <X aria-hidden="true" className="h-5 w-5" />
-            ) : (
-              <Menu aria-hidden="true" className="h-5 w-5" />
-            )}
-          </Button>
-        </div>
-      </div>
+        {/* Mobile menu */}
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              id={menuId}
+              ref={menuRef}
+              // Opacity + transform only: animating height re-lays out the page
+              // on every frame.
+              initial={{ opacity: 0, y: prefersReduced ? 0 : -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: prefersReduced ? 0 : -8 }}
+              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="border-border/50 bg-background border-t md:hidden"
+            >
+              <div className="flex flex-col gap-1 px-4 py-3">
+                {navLinks.map(link => {
+                  const isActive = activeSection === link.id
+                  return (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      aria-current={isActive ? 'true' : undefined}
+                      onClick={e => {
+                        e.preventDefault()
+                        goToSection(link.href, true)
+                      }}
+                      className={`focus-visible:ring-ring rounded-lg px-3 py-2.5 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none ${
+                        isActive
+                          ? 'bg-muted text-foreground'
+                          : 'text-muted-foreground hover:text-foreground'
+                      }`}
+                    >
+                      {link.label}
+                    </a>
+                  )
+                })}
+                <a
+                  href="#contact"
+                  onClick={e => {
+                    e.preventDefault()
+                    goToSection('#contact', true)
+                  }}
+                  className={cn(buttonVariants(), 'mt-2 w-full')}
+                >
+                  {t('nav.cta')}
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.nav>
 
-      {/* Mobile menu */}
+      {/* Scrim — dims the page behind the open mobile menu. It sits outside the
+        nav because the nav's backdrop-filter would trap a fixed child. Clicks
+        on it close the menu through the outside-pointer handler above. */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            id={menuId}
-            ref={menuRef}
-            initial={{ opacity: 0, height: prefersReduced ? 'auto' : 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: prefersReduced ? 'auto' : 0 }}
-            transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="border-border/50 bg-background/95 overflow-hidden border-t backdrop-blur-md md:hidden"
-          >
-            <div className="flex flex-col gap-1 px-4 py-3">
-              {navLinks.map(link => {
-                const isActive = activeSection === link.id
-                return (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    aria-current={isActive ? 'true' : undefined}
-                    onClick={e => {
-                      e.preventDefault()
-                      goToSection(link.href, true)
-                    }}
-                    className={`focus-visible:ring-ring rounded-lg px-3 py-2.5 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none ${
-                      isActive
-                        ? 'bg-muted text-foreground'
-                        : 'text-muted-foreground hover:text-foreground'
-                    }`}
-                  >
-                    {link.label}
-                  </a>
-                )
-              })}
-            </div>
-          </motion.div>
+            aria-hidden="true"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="bg-cft-night/45 fixed inset-0 z-40 md:hidden"
+          />
         )}
       </AnimatePresence>
-    </motion.nav>
+    </>
   )
 }

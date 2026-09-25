@@ -1,5 +1,5 @@
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { ArrowUpRight, Clock, RotateCcw } from 'lucide-react'
+import { ArrowUpRight, RotateCcw } from 'lucide-react'
 import { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -190,7 +190,13 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                     ))}
                   </div>
                   <p className={`shrink-0 text-xs ${hintColor}`}>
-                    {t('work.tapToLearnMore')}
+                    {/* Touch devices read "tap", pointer devices "click". */}
+                    <span className="[@media(hover:hover)]:hidden">
+                      {t('work.tapToLearnMore')}
+                    </span>
+                    <span className="hidden [@media(hover:hover)]:inline">
+                      {t('work.clickToLearnMore')}
+                    </span>
                   </p>
                 </div>
               </div>
@@ -222,7 +228,13 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                       ))}
                     </div>
                     <p className="shrink-0 text-xs text-white/70">
-                      {t('work.tapToLearnMore')}
+                      {/* Touch devices read "tap", pointer devices "click". */}
+                      <span className="[@media(hover:hover)]:hidden">
+                        {t('work.tapToLearnMore')}
+                      </span>
+                      <span className="hidden [@media(hover:hover)]:inline">
+                        {t('work.clickToLearnMore')}
+                      </span>
                     </p>
                   </div>
                 </div>
@@ -236,7 +248,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               type="button"
               onClick={() => flip(true)}
               aria-expanded={flipped}
-              aria-label={`${title} — ${t('work.tapToLearnMore')}`}
+              aria-label={`${title} — ${t('work.viewDetails')}`}
               className="focus-visible:ring-ring absolute inset-0 h-full w-full cursor-pointer rounded-lg focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-inset"
             />
           </div>
@@ -458,22 +470,6 @@ export function Work() {
                   </motion.div>
                 ))}
               </AnimatePresence>
-              {/* Coming soon card */}
-              {!activeTag && (
-                <div className="border-border/50 bg-muted text-muted-foreground flex aspect-3/4 w-56 shrink-0 flex-col items-center justify-center rounded-lg border border-dashed p-5 text-center">
-                  <Clock
-                    aria-hidden="true"
-                    className="text-muted-foreground/40 mb-3 h-5 w-5"
-                    strokeWidth={1.5}
-                  />
-                  <span className="text-sm font-semibold">
-                    {t('work.comingSoon')}
-                  </span>
-                  <span className="mt-1 text-xs">
-                    {t('work.comingSoonSub')}
-                  </span>
-                </div>
-              )}
             </div>
             <ScrollBar orientation="horizontal" />
           </ScrollArea>

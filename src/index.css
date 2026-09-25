@@ -174,6 +174,26 @@
     }
   }
 
+  /* Register B band. Always dark; in dark mode it sinks below the Night page
+     so stepping from Services onto the event floor still reads as a shift. */
+  .events-band {
+    background: radial-gradient(
+      ellipse at 50% 10%,
+      var(--color-events-bg-soft) 0%,
+      var(--color-events-bg) 55%,
+      var(--color-events-bg-deep) 100%
+    );
+  }
+
+  .dark .events-band {
+    background: radial-gradient(
+      ellipse at 50% 0%,
+      #0c2038 0%,
+      var(--color-events-bg-deep) 60%,
+      #02050b 100%
+    );
+  }
+
   [data-tabular] {
     font-variant-numeric: tabular-nums;
   }
