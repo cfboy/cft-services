@@ -496,7 +496,7 @@ export function Work() {
             {t('work.cta')}{' '}
             <a
               href="#contact"
-              className="text-cft-teal-ink focus-visible:ring-ring rounded-sm font-medium underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+              className="text-cft-mint-ink focus-visible:ring-ring rounded-sm font-medium underline underline-offset-4 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
             >
               {t('work.ctaLink')}
             </a>

@@ -48,7 +48,7 @@ function ServiceCard({
       <div className="flex items-start justify-between p-6 pb-4">
         <span
           aria-hidden="true"
-          className="font-display text-foreground/50 text-2xl leading-none font-semibold tabular-nums"
+          className="text-foreground/55 font-mono text-lg leading-none tabular-nums"
         >
           {number}
         </span>

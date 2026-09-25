@@ -1,769 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CFT Services - Brand Guidelines</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      /* Primary Colors */
-      --navy-deep: #0F4C75;
-      --navy-medium: #1B6B93;
-      --navy-dark: #1A1A2E;
-      
-      /* Accent Colors */
-      --teal-primary: #3CAEA3;
-      --teal-light: #20E3B2;
-      --teal-soft: #E8F8F5;
-      
-      /* Neutral Colors */
-      --white: #FFFFFF;
-      --gray-50: #F8FAFC;
-      --gray-100: #F1F5F9;
-      --gray-200: #E2E8F0;
-      --gray-300: #CBD5E1;
-      --gray-500: #64748B;
-      --gray-700: #334155;
-      --gray-900: #0F172A;
-      
-      /* Feedback Colors */
-      --success: #10B981;
-      --warning: #F59E0B;
-      --error: #EF4444;
-    }
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--gray-50);
-      color: var(--gray-900);
-      line-height: 1.6;
-    }
-    
-    /* Header */
-    .header {
-      background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-medium) 100%);
-      padding: 80px 40px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .header::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: radial-gradient(circle at 20% 50%, rgba(60, 174, 163, 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 50%, rgba(32, 227, 178, 0.1) 0%, transparent 50%);
-    }
-    
-    .header-content {
-      position: relative;
-      z-index: 1;
-    }
-    
-    .header h1 {
-      font-size: 3rem;
-      font-weight: 800;
-      color: var(--white);
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.02em;
-    }
-    
-    .header .subtitle {
-      font-size: 1.25rem;
-      color: var(--teal-primary);
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-    
-    /* Container */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 60px 40px;
-    }
-    
-    /* Section */
-    .section {
-      background: var(--white);
-      border-radius: 24px;
-      padding: 48px;
-      margin-bottom: 32px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 20px 40px rgba(0, 0, 0, 0.03);
-    }
-    
-    .section-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--navy-deep);
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    
-    .section-title::before {
-      content: '';
-      width: 4px;
-      height: 28px;
-      background: linear-gradient(to bottom, var(--teal-primary), var(--teal-light));
-      border-radius: 2px;
-    }
-    
-    .section-desc {
-      color: var(--gray-500);
-      margin-bottom: 32px;
-      font-size: 1rem;
-    }
-    
-    /* Color Palette */
-    .color-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-    }
-    
-    .color-card {
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    
-    .color-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-    }
-    
-    .color-swatch {
-      height: 120px;
-      display: flex;
-      align-items: flex-end;
-      padding: 16px;
-    }
-    
-    .color-info {
-      padding: 16px;
-      background: var(--white);
-    }
-    
-    .color-name {
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: var(--gray-900);
-      margin-bottom: 4px;
-    }
-    
-    .color-hex {
-      font-family: 'SF Mono', 'Fira Code', monospace;
-      font-size: 0.85rem;
-      color: var(--gray-500);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    .color-rgb {
-      font-size: 0.8rem;
-      color: var(--gray-400);
-      margin-top: 2px;
-    }
-    
-    /* Logo Display */
-    .logo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
-    }
-    
-    .logo-card {
-      border: 1px solid var(--gray-200);
-      border-radius: 16px;
-      overflow: hidden;
-    }
-    
-    .logo-preview {
-      padding: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 180px;
-    }
-    
-    .logo-preview.dark {
-      background: var(--navy-dark);
-    }
-    
-    .logo-preview.light {
-      background: var(--gray-100);
-    }
-    
-    .logo-preview.gradient {
-      background: linear-gradient(135deg, var(--navy-deep), var(--navy-medium));
-    }
-    
-    .logo-preview img, .logo-preview svg {
-      max-width: 100%;
-      max-height: 100px;
-    }
-    
-    .logo-label {
-      padding: 16px 20px;
-      background: var(--gray-50);
-      border-top: 1px solid var(--gray-200);
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--gray-700);
-    }
-    
-    /* Typography */
-    .type-specimen {
-      margin-bottom: 32px;
-      padding-bottom: 32px;
-      border-bottom: 1px solid var(--gray-200);
-    }
-    
-    .type-specimen:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-      padding-bottom: 0;
-    }
-    
-    .type-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--teal-primary);
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-    
-    .type-example {
-      color: var(--navy-deep);
-    }
-    
-    .type-h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.02em; }
-    .type-h2 { font-size: 2.25rem; font-weight: 700; letter-spacing: -0.01em; }
-    .type-h3 { font-size: 1.5rem; font-weight: 600; }
-    .type-body { font-size: 1rem; font-weight: 400; color: var(--gray-700); line-height: 1.7; }
-    .type-small { font-size: 0.875rem; font-weight: 400; color: var(--gray-500); }
-    
-    .type-specs {
-      margin-top: 12px;
-      font-family: 'SF Mono', 'Fira Code', monospace;
-      font-size: 0.8rem;
-      color: var(--gray-400);
-    }
-    
-    /* Usage Rules */
-    .usage-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-    }
-    
-    .usage-card {
-      padding: 24px;
-      border-radius: 12px;
-      border: 1px solid var(--gray-200);
-    }
-    
-    .usage-card.do {
-      border-color: var(--success);
-      background: rgba(16, 185, 129, 0.05);
-    }
-    
-    .usage-card.dont {
-      border-color: var(--error);
-      background: rgba(239, 68, 68, 0.05);
-    }
-    
-    .usage-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-      font-size: 1.2rem;
-    }
-    
-    .do .usage-icon {
-      background: var(--success);
-      color: var(--white);
-    }
-    
-    .dont .usage-icon {
-      background: var(--error);
-      color: var(--white);
-    }
-    
-    .usage-title {
-      font-weight: 600;
-      font-size: 1rem;
-      margin-bottom: 8px;
-      color: var(--gray-900);
-    }
-    
-    .usage-desc {
-      font-size: 0.9rem;
-      color: var(--gray-600);
-      line-height: 1.6;
-    }
-    
-    /* Spacing */
-    .spacing-demo {
-      background: var(--gray-100);
-      border-radius: 12px;
-      padding: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-    
-    .spacing-box {
-      width: 200px;
-      height: 60px;
-      background: var(--navy-deep);
-      border-radius: 8px;
-      position: relative;
-    }
-    
-    .spacing-indicator {
-      position: absolute;
-      border: 2px dashed var(--teal-primary);
-      border-radius: 12px;
-      top: -20px;
-      left: -20px;
-      right: -20px;
-      bottom: -20px;
-    }
-    
-    .spacing-label {
-      position: absolute;
-      top: -35px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--teal-primary);
-      color: var(--white);
-      padding: 4px 12px;
-      border-radius: 4px;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-    
-    /* File List */
-    .file-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    
-    .file-item {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 16px 20px;
-      background: var(--gray-50);
-      border-radius: 12px;
-      border: 1px solid var(--gray-200);
-    }
-    
-    .file-icon {
-      width: 48px;
-      height: 48px;
-      background: linear-gradient(135deg, var(--navy-deep), var(--navy-medium));
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--white);
-      font-weight: 700;
-      font-size: 0.75rem;
-    }
-    
-    .file-details {
-      flex: 1;
-    }
-    
-    .file-name {
-      font-weight: 600;
-      color: var(--gray-900);
-      margin-bottom: 2px;
-    }
-    
-    .file-desc {
-      font-size: 0.85rem;
-      color: var(--gray-500);
-    }
-    
-    /* Footer */
-    .footer {
-      text-align: center;
-      padding: 40px;
-      color: var(--gray-500);
-      font-size: 0.9rem;
-    }
-    
-    .footer strong {
-      color: var(--navy-deep);
-    }
-  </style>
-</head>
-<body>
-  <header class="header">
-    <div class="header-content">
-      <h1>CFT Services</h1>
-      <p class="subtitle">Brand Guidelines</p>
-    </div>
-  </header>
-  
-  <main class="container">
-    <!-- Brand Overview -->
-    <section class="section">
-      <h2 class="section-title">Brand Overview</h2>
-      <p class="section-desc">CFT Services is a technology consulting firm that bridges innovation with reliability. Our brand identity reflects professionalism, technical expertise, and forward-thinking solutions.</p>
-      
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px;">
-        <div style="text-align: center; padding: 24px;">
-          <div style="font-size: 2.5rem; margin-bottom: 12px;">🎯</div>
-          <h3 style="font-weight: 600; margin-bottom: 8px; color: var(--navy-deep);">Professional</h3>
-          <p style="font-size: 0.9rem; color: var(--gray-500);">Trusted expertise that clients can rely on</p>
-        </div>
-        <div style="text-align: center; padding: 24px;">
-          <div style="font-size: 2.5rem; margin-bottom: 12px;">⚡</div>
-          <h3 style="font-weight: 600; margin-bottom: 8px; color: var(--navy-deep);">Innovative</h3>
-          <p style="font-size: 0.9rem; color: var(--gray-500);">Cutting-edge solutions for modern challenges</p>
-        </div>
-        <div style="text-align: center; padding: 24px;">
-          <div style="font-size: 2.5rem; margin-bottom: 12px;">🔗</div>
-          <h3 style="font-weight: 600; margin-bottom: 8px; color: var(--navy-deep);">Connected</h3>
-          <p style="font-size: 0.9rem; color: var(--gray-500);">Building bridges between technology and business</p>
-        </div>
-      </div>
-    </section>
-    
-    <!-- Color Palette -->
-    <section class="section">
-      <h2 class="section-title">Color Palette</h2>
-      <p class="section-desc">Our color system balances professionalism with approachability. The deep navy conveys trust and expertise, while teal accents add energy and modernity.</p>
-      
-      <h3 style="font-size: 1rem; font-weight: 600; color: var(--gray-700); margin-bottom: 16px; margin-top: 24px;">Primary Colors</h3>
-      <div class="color-grid">
-        <div class="color-card">
-          <div class="color-swatch" style="background: #0F4C75;"></div>
-          <div class="color-info">
-            <div class="color-name">Navy Deep</div>
-            <div class="color-hex">#0F4C75</div>
-            <div class="color-rgb">RGB: 15, 76, 117</div>
-          </div>
-        </div>
-        <div class="color-card">
-          <div class="color-swatch" style="background: #1B6B93;"></div>
-          <div class="color-info">
-            <div class="color-name">Navy Medium</div>
-            <div class="color-hex">#1B6B93</div>
-            <div class="color-rgb">RGB: 27, 107, 147</div>
-          </div>
-        </div>
-        <div class="color-card">
-          <div class="color-swatch" style="background: #1A1A2E;"></div>
-          <div class="color-info">
-            <div class="color-name">Navy Dark</div>
-            <div class="color-hex">#1A1A2E</div>
-            <div class="color-rgb">RGB: 26, 26, 46</div>
-          </div>
-        </div>
-      </div>
-      
-      <h3 style="font-size: 1rem; font-weight: 600; color: var(--gray-700); margin-bottom: 16px; margin-top: 32px;">Accent Colors</h3>
-      <div class="color-grid">
-        <div class="color-card">
-          <div class="color-swatch" style="background: #3CAEA3;"></div>
-          <div class="color-info">
-            <div class="color-name">Teal Primary</div>
-            <div class="color-hex">#3CAEA3</div>
-            <div class="color-rgb">RGB: 60, 174, 163</div>
-          </div>
-        </div>
-        <div class="color-card">
-          <div class="color-swatch" style="background: #20E3B2;"></div>
-          <div class="color-info">
-            <div class="color-name">Teal Light</div>
-            <div class="color-hex">#20E3B2</div>
-            <div class="color-rgb">RGB: 32, 227, 178</div>
-          </div>
-        </div>
-        <div class="color-card">
-          <div class="color-swatch" style="background: #E8F8F5;"></div>
-          <div class="color-info">
-            <div class="color-name">Teal Soft</div>
-            <div class="color-hex">#E8F8F5</div>
-            <div class="color-rgb">RGB: 232, 248, 245</div>
-          </div>
-        </div>
-      </div>
-      
-      <h3 style="font-size: 1rem; font-weight: 600; color: var(--gray-700); margin-bottom: 16px; margin-top: 32px;">Neutral Colors</h3>
-      <div class="color-grid">
-        <div class="color-card">
-          <div class="color-swatch" style="background: #FFFFFF; border: 1px solid #E2E8F0;"></div>
-          <div class="color-info">
-            <div class="color-name">White</div>
-            <div class="color-hex">#FFFFFF</div>
-            <div class="color-rgb">RGB: 255, 255, 255</div>
-          </div>
-        </div>
-        <div class="color-card">
-          <div class="color-swatch" style="background: #F8FAFC;"></div>
-          <div class="color-info">
-            <div class="color-name">Gray 50</div>
-            <div class="color-hex">#F8FAFC</div>
-            <div class="color-rgb">RGB: 248, 250, 252</div>
-          </div>
-        </div>
-        <div class="color-card">
-          <div class="color-swatch" style="background: #64748B;"></div>
-          <div class="color-info">
-            <div class="color-name">Gray 500</div>
-            <div class="color-hex">#64748B</div>
-            <div class="color-rgb">RGB: 100, 116, 139</div>
-          </div>
-        </div>
-        <div class="color-card">
-          <div class="color-swatch" style="background: #0F172A;"></div>
-          <div class="color-info">
-            <div class="color-name">Gray 900</div>
-            <div class="color-hex">#0F172A</div>
-            <div class="color-rgb">RGB: 15, 23, 42</div>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    <!-- Typography -->
-    <section class="section">
-      <h2 class="section-title">Typography</h2>
-      <p class="section-desc">Plus Jakarta Sans is our primary typeface, offering excellent readability and a modern, professional appearance across all applications.</p>
-      
-      <div class="type-specimen">
-        <div class="type-label">Heading 1</div>
-        <div class="type-example type-h1">Technology Consulting</div>
-        <div class="type-specs">Plus Jakarta Sans / 48px / 800 weight / -0.02em tracking</div>
-      </div>
-      
-      <div class="type-specimen">
-        <div class="type-label">Heading 2</div>
-        <div class="type-example type-h2">Digital Transformation</div>
-        <div class="type-specs">Plus Jakarta Sans / 36px / 700 weight / -0.01em tracking</div>
-      </div>
-      
-      <div class="type-specimen">
-        <div class="type-label">Heading 3</div>
-        <div class="type-example type-h3">Strategic Solutions</div>
-        <div class="type-specs">Plus Jakarta Sans / 24px / 600 weight</div>
-      </div>
-      
-      <div class="type-specimen">
-        <div class="type-label">Body</div>
-        <div class="type-example type-body">CFT Services delivers comprehensive technology consulting solutions that help businesses navigate digital transformation, optimize operations, and achieve sustainable growth through innovative strategies and expert guidance.</div>
-        <div class="type-specs">Plus Jakarta Sans / 16px / 400 weight / 1.7 line-height</div>
-      </div>
-      
-      <div class="type-specimen">
-        <div class="type-label">Small / Caption</div>
-        <div class="type-example type-small">Additional information and fine print details</div>
-        <div class="type-specs">Plus Jakarta Sans / 14px / 400 weight</div>
-      </div>
-    </section>
-    
-    <!-- Logo Usage -->
-    <section class="section">
-      <h2 class="section-title">Logo Usage</h2>
-      <p class="section-desc">The CFT Services logo combines a hexagonal mark symbolizing connectivity and technology with a clean wordmark. Always maintain adequate clear space around the logo.</p>
-      
-      <div class="logo-grid">
-        <div class="logo-card">
-          <div class="logo-preview light">
-            <svg width="280" height="80" viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="tg1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#0F4C75"/>
-                  <stop offset="100%" stop-color="#1B6B93"/>
-                </linearGradient>
-                <linearGradient id="ag1" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="#3CAEA3"/>
-                  <stop offset="100%" stop-color="#20E3B2"/>
-                </linearGradient>
-              </defs>
-              <path d="M50 15L85 35V75L50 95L15 75V35L50 15Z" fill="url(#tg1)"/>
-              <path d="M50 30L70 42V68L50 80L30 68V42L50 30Z" fill="none" stroke="#FFFFFF" stroke-width="2"/>
-              <circle cx="50" cy="55" r="8" fill="url(#ag1)"/>
-              <circle cx="50" cy="30" r="3" fill="#3CAEA3"/>
-              <circle cx="70" cy="42" r="3" fill="#3CAEA3"/>
-              <circle cx="70" cy="68" r="3" fill="#3CAEA3"/>
-              <circle cx="50" cy="80" r="3" fill="#3CAEA3"/>
-              <circle cx="30" cy="68" r="3" fill="#3CAEA3"/>
-              <circle cx="30" cy="42" r="3" fill="#3CAEA3"/>
-              <text x="110" y="70" font-family="'Segoe UI', Arial" font-size="48" font-weight="700" fill="#0F4C75">CFT</text>
-              <text x="200" y="70" font-family="'Segoe UI', Arial" font-size="48" font-weight="300" fill="#1B6B93">Services</text>
-              <text x="110" y="95" font-family="'Segoe UI', Arial" font-size="14" font-weight="400" letter-spacing="3" fill="#3CAEA3">TECHNOLOGY CONSULTING</text>
-            </svg>
-          </div>
-          <div class="logo-label">Primary Logo - Light Background</div>
-        </div>
-        
-        <div class="logo-card">
-          <div class="logo-preview dark">
-            <svg width="280" height="80" viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="ag2" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="#3CAEA3"/>
-                  <stop offset="100%" stop-color="#20E3B2"/>
-                </linearGradient>
-              </defs>
-              <path d="M50 15L85 35V75L50 95L15 75V35L50 15Z" fill="#FFFFFF"/>
-              <path d="M50 30L70 42V68L50 80L30 68V42L50 30Z" fill="none" stroke="#0F4C75" stroke-width="2"/>
-              <circle cx="50" cy="55" r="8" fill="url(#ag2)"/>
-              <circle cx="50" cy="30" r="3" fill="#3CAEA3"/>
-              <circle cx="70" cy="42" r="3" fill="#3CAEA3"/>
-              <circle cx="70" cy="68" r="3" fill="#3CAEA3"/>
-              <circle cx="50" cy="80" r="3" fill="#3CAEA3"/>
-              <circle cx="30" cy="68" r="3" fill="#3CAEA3"/>
-              <circle cx="30" cy="42" r="3" fill="#3CAEA3"/>
-              <text x="110" y="70" font-family="'Segoe UI', Arial" font-size="48" font-weight="700" fill="#FFFFFF">CFT</text>
-              <text x="200" y="70" font-family="'Segoe UI', Arial" font-size="48" font-weight="300" fill="#FFFFFF">Services</text>
-              <text x="110" y="95" font-family="'Segoe UI', Arial" font-size="14" font-weight="400" letter-spacing="3" fill="#3CAEA3">TECHNOLOGY CONSULTING</text>
-            </svg>
-          </div>
-          <div class="logo-label">Reversed Logo - Dark Background</div>
-        </div>
-      </div>
-      
-      <h3 style="font-size: 1rem; font-weight: 600; color: var(--gray-700); margin: 32px 0 16px;">Clear Space</h3>
-      <div class="spacing-demo">
-        <div class="spacing-box">
-          <div class="spacing-indicator"></div>
-          <div class="spacing-label">Minimum 20px</div>
-        </div>
-      </div>
-      <p style="text-align: center; margin-top: 16px; font-size: 0.9rem; color: var(--gray-500);">Always maintain clear space equal to the height of the "C" in CFT around all sides of the logo.</p>
-    </section>
-    
-    <!-- Usage Guidelines -->
-    <section class="section">
-      <h2 class="section-title">Usage Guidelines</h2>
-      <p class="section-desc">Follow these guidelines to ensure consistent and professional brand representation across all applications.</p>
-      
-      <div class="usage-grid">
-        <div class="usage-card do">
-          <div class="usage-icon">✓</div>
-          <div class="usage-title">Use Approved Colors</div>
-          <div class="usage-desc">Always use the exact hex values from this guide. Our colors are carefully calibrated for consistency.</div>
-        </div>
-        <div class="usage-card do">
-          <div class="usage-icon">✓</div>
-          <div class="usage-title">Maintain Clear Space</div>
-          <div class="usage-desc">Keep adequate breathing room around the logo to ensure visibility and impact.</div>
-        </div>
-        <div class="usage-card do">
-          <div class="usage-icon">✓</div>
-          <div class="usage-title">Use High-Quality Assets</div>
-          <div class="usage-desc">Always use SVG for digital and high-resolution PNG for print applications.</div>
-        </div>
-        <div class="usage-card dont">
-          <div class="usage-icon">✗</div>
-          <div class="usage-title">Don't Alter Colors</div>
-          <div class="usage-desc">Never apply unapproved colors, gradients, or effects to the logo.</div>
-        </div>
-        <div class="usage-card dont">
-          <div class="usage-icon">✗</div>
-          <div class="usage-title">Don't Distort</div>
-          <div class="usage-desc">Never stretch, compress, or rotate the logo. Always scale proportionally.</div>
-        </div>
-        <div class="usage-card dont">
-          <div class="usage-icon">✗</div>
-          <div class="usage-title">Don't Add Effects</div>
-          <div class="usage-desc">Avoid shadows, outlines, 3D effects, or other modifications to the logo.</div>
-        </div>
-      </div>
-    </section>
-    
-    <!-- Asset Files -->
-    <section class="section">
-      <h2 class="section-title">Brand Assets</h2>
-      <p class="section-desc">Download all brand assets in the appropriate formats for your use case.</p>
-      
-      <div class="file-list">
-        <div class="file-item">
-          <div class="file-icon">SVG</div>
-          <div class="file-details">
-            <div class="file-name">cft-logo-primary.svg</div>
-            <div class="file-desc">Full color logo with wordmark - scalable vector</div>
-          </div>
-        </div>
-        <div class="file-item">
-          <div class="file-icon">SVG</div>
-          <div class="file-details">
-            <div class="file-name">cft-logo-white.svg</div>
-            <div class="file-desc">Reversed/white version for dark backgrounds</div>
-          </div>
-        </div>
-        <div class="file-item">
-          <div class="file-icon">SVG</div>
-          <div class="file-details">
-            <div class="file-name">cft-logo-black.svg</div>
-            <div class="file-desc">Monochrome black version</div>
-          </div>
-        </div>
-        <div class="file-item">
-          <div class="file-icon">SVG</div>
-          <div class="file-details">
-            <div class="file-name">cft-logo-mark.svg</div>
-            <div class="file-desc">Logo mark only - hexagonal symbol</div>
-          </div>
-        </div>
-        <div class="file-item">
-          <div class="file-icon">SVG</div>
-          <div class="file-details">
-            <div class="file-name">favicon.svg</div>
-            <div class="file-desc">Favicon for web use</div>
-          </div>
-        </div>
-        <div class="file-item">
-          <div class="file-icon">SVG</div>
-          <div class="file-details">
-            <div class="file-name">cft-banner-linkedin.svg</div>
-            <div class="file-desc">LinkedIn/social media banner (1500x500)</div>
-          </div>
-        </div>
-        <div class="file-item">
-          <div class="file-icon">PNG</div>
-          <div class="file-details">
-            <div class="file-name">cft-logo-*.png</div>
-            <div class="file-desc">High-resolution PNG versions at 2x and 4x</div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-  
-  <footer class="footer">
-    <p><strong>CFT Services</strong> Brand Guidelines v1.0</p>
-    <p style="margin-top: 8px;">© 2026 CFT Services. All rights reserved.</p>
-  </footer>
-</body>
-</html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CFT Services — Brand Guidelines v2.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--night:#0A1628;--navy:#12355B;--mint:#20E3B2;--deep:#0E7C6B;--fog:#F2F5F8;--slate:#45596A}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Space Grotesk',sans-serif;background:var(--fog);color:var(--night);line-height:1.6}
+.mono{font-family:'JetBrains Mono',monospace}
+header{background:var(--night);color:#fff;padding:72px 24px;text-align:center}
+header .lg{max-width:420px;margin:0 auto 24px}
+header p{color:#9DB1C6;letter-spacing:.3em;font-size:.8rem}
+main{max-width:1100px;margin:0 auto;padding:48px 20px}
+section{background:#fff;border-radius:20px;padding:40px;margin-bottom:28px}
+h2{font-size:1.5rem;margin-bottom:6px}
+h2 small{font-family:'JetBrains Mono',monospace;color:var(--deep);font-size:.8rem;margin-right:10px}
+.desc{color:var(--slate);margin-bottom:28px;max-width:720px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.tile{border-radius:14px;padding:40px;display:flex;align-items:center;justify-content:center;min-height:200px}
+.tile.d{background:var(--night)} .tile.l{background:var(--fog);border:1px solid #DCE3E9}
+.cap{font-size:.85rem;color:var(--slate);margin-top:10px}
+.sym{width:120px} .ic{width:140px;border-radius:24px;overflow:hidden}
+.sw .chip{height:110px;border-radius:12px;display:flex;align-items:flex-end;padding:12px;font-family:'JetBrains Mono',monospace;font-size:.8rem;margin-bottom:8px;border:1px solid #DCE3E9}
+.sw b{display:block} .sw span{font-size:.85rem;color:var(--slate)}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.rule{border-radius:12px;padding:20px;border:1px solid #DCE3E9}
+.rule.do{border-color:var(--deep);background:#E8F6F3} .rule.no{border-color:#C2410C;background:#FFF4ED}
+.rule b{display:block;margin-bottom:4px}
+.type-d{font-size:3rem;font-weight:700;letter-spacing:-.03em;line-height:1.1}
+.spec{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--slate);margin:6px 0 24px}
+table{width:100%;border-collapse:collapse;font-size:.9rem} td{padding:10px 8px;border-bottom:1px solid #E5EAEE} td:first-child{font-family:'JetBrains Mono',monospace;color:var(--deep)}
+footer{text-align:center;color:var(--slate);padding:32px;font-size:.85rem}
+@media(max-width:640px){section{padding:24px}.type-d{font-size:2.2rem}}
+</style></head><body>
+<header><div class="lg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="91.60 106.03 265.02 134.10" width="100%"><path d="M137.184 201.568Q122.624 201.568 114.112 193.448Q105.6 185.328 105.6 170.208V151.392Q105.6 136.272 114.112 128.152Q122.624 120.032 137.184 120.032Q151.632 120.032 159.52800000000002 127.928Q167.424 135.824 167.424 149.6V150.272H152.864V149.152Q152.864 142.208 149.0 137.728Q145.136 133.248 137.184 133.248Q129.344 133.248 124.864 138.064Q120.384 142.88 120.384 151.168V170.432Q120.384 178.608 124.864 183.48000000000002Q129.344 188.352 137.184 188.352Q145.136 188.352 149.0 183.816Q152.864 179.28 152.864 172.448V170.432H167.424V172.0Q167.424 185.776 159.52800000000002 193.67200000000003Q151.632 201.568 137.184 201.568Z M177.28 200.0V121.6H226.56V135.04H192.06400000000002V153.968H223.872V167.40800000000002H192.06400000000002V200.0Z M252.99200000000002 200.0V135.04H230.144V121.6H290.624V135.04H267.776V200.0Z" fill="#FFFFFF"/><rect class="c" x="299.62" y="182.00" width="43" height="18" rx="2" fill="#20E3B2"/><path d="M168.65400000000002 226.13Q167.71800000000002 226.13 167.04850000000002 225.81799999999998Q166.37900000000002 225.506 166.01500000000004 224.921Q165.65100000000004 224.336 165.63800000000003 223.53H166.80800000000002Q166.80800000000002 224.245 167.2955 224.661Q167.78300000000002 225.077 168.65400000000002 225.077Q169.473 225.077 169.9345 224.67399999999998Q170.39600000000002 224.271 170.39600000000002 223.556Q170.39600000000002 222.984 170.09050000000002 222.555Q169.78500000000003 222.126 169.21300000000002 221.957L167.92600000000002 221.554Q166.95100000000002 221.255 166.42450000000002 220.553Q165.89800000000002 219.851 165.89800000000002 218.902Q165.89800000000002 218.135 166.2425 217.5695Q166.58700000000002 217.004 167.211 216.6855Q167.83500000000004 216.367 168.68000000000004 216.367Q169.92800000000003 216.367 170.68200000000002 217.0625Q171.43600000000004 217.758 171.449 218.915H170.27900000000002Q170.27900000000002 218.213 169.85650000000004 217.8165Q169.43400000000003 217.42 168.66700000000003 217.42Q167.91300000000004 217.42 167.49050000000005 217.784Q167.06800000000004 218.148 167.06800000000004 218.798Q167.06800000000004 219.383 167.38000000000005 219.812Q167.69200000000004 220.241 168.27700000000002 220.423L169.57700000000003 220.839Q170.52600000000004 221.138 171.04600000000005 221.853Q171.56600000000003 222.568 171.56600000000003 223.53Q171.56600000000003 224.31 171.20200000000003 224.89499999999998Q170.83800000000002 225.48 170.18150000000003 225.805Q169.52500000000003 226.13 168.65400000000002 226.13Z M181.86200000000002 226.0V216.51H187.322V217.576H183.019V220.514H186.86700000000002V221.567H183.019V224.934H187.322V226.0Z M197.61800000000002 226.0V216.51H200.556Q201.40100000000004 216.51 202.038 216.8545Q202.675 217.199 203.026 217.81Q203.37700000000004 218.421 203.37700000000004 219.24Q203.37700000000004 220.202 202.87650000000002 220.89100000000002Q202.37600000000003 221.58 201.51800000000003 221.84L203.50700000000003 226.0H202.12900000000002L200.30900000000003 221.97H198.78800000000004V226.0ZM198.78800000000004 220.917H200.556Q201.28400000000002 220.917 201.72600000000003 220.4555Q202.16800000000003 219.994 202.16800000000003 219.24Q202.16800000000003 218.473 201.72600000000003 218.018Q201.28400000000002 217.563 200.556 217.563H198.78800000000004Z M215.37600000000003 226.0 212.93200000000004 216.51H214.14100000000005L215.75300000000004 222.958Q215.92200000000003 223.634 216.03900000000004 224.21249999999998Q216.15600000000003 224.791 216.20800000000003 225.09Q216.26000000000005 224.791 216.37050000000005 224.21249999999998Q216.48100000000005 223.634 216.65000000000003 222.958L218.24900000000005 216.51H219.43200000000004L216.97500000000005 226.0Z M229.50700000000006 226.0V224.934H231.44400000000005V217.576H229.50700000000006V216.51H234.57700000000006V217.576H232.64000000000004V224.934H234.57700000000006V226.0Z M247.95400000000006 226.13Q247.09600000000006 226.13 246.46550000000008 225.805Q245.83500000000006 225.48 245.49050000000005 224.8625Q245.14600000000007 224.245 245.14600000000007 223.4V219.11Q245.14600000000007 218.252 245.49050000000005 217.64100000000002Q245.83500000000006 217.03 246.46550000000008 216.70499999999998Q247.09600000000006 216.38 247.95400000000006 216.38Q248.81200000000007 216.38 249.43600000000006 216.7115Q250.06000000000006 217.043 250.39800000000008 217.654Q250.73600000000008 218.265 250.73600000000008 219.11H249.56600000000006Q249.56600000000006 218.304 249.14350000000007 217.86849999999998Q248.72100000000006 217.433 247.95400000000006 217.433Q247.18700000000007 217.433 246.75150000000008 217.862Q246.31600000000006 218.291 246.31600000000006 219.097V223.4Q246.31600000000006 224.206 246.75150000000008 224.6415Q247.18700000000007 225.077 247.95400000000006 225.077Q248.72100000000006 225.077 249.14350000000007 224.6415Q249.56600000000006 224.206 249.56600000000006 223.4H250.73600000000008Q250.73600000000008 224.232 250.39800000000008 224.8495Q250.06000000000006 225.467 249.43600000000006 225.7985Q248.81200000000007 226.13 247.95400000000006 226.13Z M261.1620000000001 226.0V216.51H266.62200000000007V217.576H262.3190000000001V220.514H266.1670000000001V221.567H262.3190000000001V224.934H266.62200000000007V226.0Z M279.6740000000001 226.13Q278.7380000000001 226.13 278.0685000000001 225.81799999999998Q277.3990000000001 225.506 277.0350000000001 224.921Q276.6710000000001 224.336 276.6580000000001 223.53H277.8280000000001Q277.8280000000001 224.245 278.3155000000001 224.661Q278.8030000000001 225.077 279.6740000000001 225.077Q280.4930000000001 225.077 280.9545000000001 224.67399999999998Q281.4160000000001 224.271 281.4160000000001 223.556Q281.4160000000001 222.984 281.1105000000001 222.555Q280.8050000000001 222.126 280.2330000000001 221.957L278.9460000000001 221.554Q277.9710000000001 221.255 277.4445000000001 220.553Q276.9180000000001 219.851 276.9180000000001 218.902Q276.9180000000001 218.135 277.2625000000001 217.5695Q277.6070000000001 217.004 278.2310000000001 216.6855Q278.8550000000001 216.367 279.7000000000001 216.367Q280.9480000000001 216.367 281.7020000000001 217.0625Q282.4560000000001 217.758 282.4690000000001 218.915H281.2990000000001Q281.2990000000001 218.213 280.8765000000001 217.8165Q280.4540000000001 217.42 279.68700000000007 217.42Q278.9330000000001 217.42 278.5105000000001 217.784Q278.0880000000001 218.148 278.0880000000001 218.798Q278.0880000000001 219.383 278.4000000000001 219.812Q278.7120000000001 220.241 279.2970000000001 220.423L280.5970000000001 220.839Q281.5460000000001 221.138 282.0660000000001 221.853Q282.58600000000007 222.568 282.58600000000007 223.53Q282.58600000000007 224.31 282.2220000000001 224.89499999999998Q281.8580000000001 225.48 281.2015000000001 225.805Q280.5450000000001 226.13 279.6740000000001 226.13Z" fill="#9DB1C6"/></svg></div><p class="mono">BRAND GUIDELINES v2.0 · SEPTIEMBRE 2026</p></header>
+<main>
+<section><h2><small>01</small>La idea</h2>
+<p class="desc">CFT Services es una consultoría de tecnología en Puerto Rico: desarrollo, automatización y consultoría. La identidad se basa en un solo elemento: el <b>cursor</b>, la barra que parpadea cuando alguien está listo para escribir. Dice "construimos cosas" sin necesidad de un ícono genérico. El cursor mint aparece en todo lo que lleva la marca.</p></section>
+
+<section><h2><small>02</small>Logo principal — CFT_</h2>
+<p class="desc">"CFT" en Space Grotesk Bold, el cursor mint después de la T y "SERVICES" en JetBrains Mono espaciado. Es el logo por defecto para web, propuestas, presentaciones y pantallas.</p>
+<div class="grid"><div><div class="tile d"><div style="width:100%;max-width:300px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="91.60 106.03 265.02 134.10" width="100%"><path d="M137.184 201.568Q122.624 201.568 114.112 193.448Q105.6 185.328 105.6 170.208V151.392Q105.6 136.272 114.112 128.152Q122.624 120.032 137.184 120.032Q151.632 120.032 159.52800000000002 127.928Q167.424 135.824 167.424 149.6V150.272H152.864V149.152Q152.864 142.208 149.0 137.728Q145.136 133.248 137.184 133.248Q129.344 133.248 124.864 138.064Q120.384 142.88 120.384 151.168V170.432Q120.384 178.608 124.864 183.48000000000002Q129.344 188.352 137.184 188.352Q145.136 188.352 149.0 183.816Q152.864 179.28 152.864 172.448V170.432H167.424V172.0Q167.424 185.776 159.52800000000002 193.67200000000003Q151.632 201.568 137.184 201.568Z M177.28 200.0V121.6H226.56V135.04H192.06400000000002V153.968H223.872V167.40800000000002H192.06400000000002V200.0Z M252.99200000000002 200.0V135.04H230.144V121.6H290.624V135.04H267.776V200.0Z" fill="#FFFFFF"/><rect class="c" x="299.62" y="182.00" width="43" height="18" rx="2" fill="#20E3B2"/><path d="M168.65400000000002 226.13Q167.71800000000002 226.13 167.04850000000002 225.81799999999998Q166.37900000000002 225.506 166.01500000000004 224.921Q165.65100000000004 224.336 165.63800000000003 223.53H166.80800000000002Q166.80800000000002 224.245 167.2955 224.661Q167.78300000000002 225.077 168.65400000000002 225.077Q169.473 225.077 169.9345 224.67399999999998Q170.39600000000002 224.271 170.39600000000002 223.556Q170.39600000000002 222.984 170.09050000000002 222.555Q169.78500000000003 222.126 169.21300000000002 221.957L167.92600000000002 221.554Q166.95100000000002 221.255 166.42450000000002 220.553Q165.89800000000002 219.851 165.89800000000002 218.902Q165.89800000000002 218.135 166.2425 217.5695Q166.58700000000002 217.004 167.211 216.6855Q167.83500000000004 216.367 168.68000000000004 216.367Q169.92800000000003 216.367 170.68200000000002 217.0625Q171.43600000000004 217.758 171.449 218.915H170.27900000000002Q170.27900000000002 218.213 169.85650000000004 217.8165Q169.43400000000003 217.42 168.66700000000003 217.42Q167.91300000000004 217.42 167.49050000000005 217.784Q167.06800000000004 218.148 167.06800000000004 218.798Q167.06800000000004 219.383 167.38000000000005 219.812Q167.69200000000004 220.241 168.27700000000002 220.423L169.57700000000003 220.839Q170.52600000000004 221.138 171.04600000000005 221.853Q171.56600000000003 222.568 171.56600000000003 223.53Q171.56600000000003 224.31 171.20200000000003 224.89499999999998Q170.83800000000002 225.48 170.18150000000003 225.805Q169.52500000000003 226.13 168.65400000000002 226.13Z M181.86200000000002 226.0V216.51H187.322V217.576H183.019V220.514H186.86700000000002V221.567H183.019V224.934H187.322V226.0Z M197.61800000000002 226.0V216.51H200.556Q201.40100000000004 216.51 202.038 216.8545Q202.675 217.199 203.026 217.81Q203.37700000000004 218.421 203.37700000000004 219.24Q203.37700000000004 220.202 202.87650000000002 220.89100000000002Q202.37600000000003 221.58 201.51800000000003 221.84L203.50700000000003 226.0H202.12900000000002L200.30900000000003 221.97H198.78800000000004V226.0ZM198.78800000000004 220.917H200.556Q201.28400000000002 220.917 201.72600000000003 220.4555Q202.16800000000003 219.994 202.16800000000003 219.24Q202.16800000000003 218.473 201.72600000000003 218.018Q201.28400000000002 217.563 200.556 217.563H198.78800000000004Z M215.37600000000003 226.0 212.93200000000004 216.51H214.14100000000005L215.75300000000004 222.958Q215.92200000000003 223.634 216.03900000000004 224.21249999999998Q216.15600000000003 224.791 216.20800000000003 225.09Q216.26000000000005 224.791 216.37050000000005 224.21249999999998Q216.48100000000005 223.634 216.65000000000003 222.958L218.24900000000005 216.51H219.43200000000004L216.97500000000005 226.0Z M229.50700000000006 226.0V224.934H231.44400000000005V217.576H229.50700000000006V216.51H234.57700000000006V217.576H232.64000000000004V224.934H234.57700000000006V226.0Z M247.95400000000006 226.13Q247.09600000000006 226.13 246.46550000000008 225.805Q245.83500000000006 225.48 245.49050000000005 224.8625Q245.14600000000007 224.245 245.14600000000007 223.4V219.11Q245.14600000000007 218.252 245.49050000000005 217.64100000000002Q245.83500000000006 217.03 246.46550000000008 216.70499999999998Q247.09600000000006 216.38 247.95400000000006 216.38Q248.81200000000007 216.38 249.43600000000006 216.7115Q250.06000000000006 217.043 250.39800000000008 217.654Q250.73600000000008 218.265 250.73600000000008 219.11H249.56600000000006Q249.56600000000006 218.304 249.14350000000007 217.86849999999998Q248.72100000000006 217.433 247.95400000000006 217.433Q247.18700000000007 217.433 246.75150000000008 217.862Q246.31600000000006 218.291 246.31600000000006 219.097V223.4Q246.31600000000006 224.206 246.75150000000008 224.6415Q247.18700000000007 225.077 247.95400000000006 225.077Q248.72100000000006 225.077 249.14350000000007 224.6415Q249.56600000000006 224.206 249.56600000000006 223.4H250.73600000000008Q250.73600000000008 224.232 250.39800000000008 224.8495Q250.06000000000006 225.467 249.43600000000006 225.7985Q248.81200000000007 226.13 247.95400000000006 226.13Z M261.1620000000001 226.0V216.51H266.62200000000007V217.576H262.3190000000001V220.514H266.1670000000001V221.567H262.3190000000001V224.934H266.62200000000007V226.0Z M279.6740000000001 226.13Q278.7380000000001 226.13 278.0685000000001 225.81799999999998Q277.3990000000001 225.506 277.0350000000001 224.921Q276.6710000000001 224.336 276.6580000000001 223.53H277.8280000000001Q277.8280000000001 224.245 278.3155000000001 224.661Q278.8030000000001 225.077 279.6740000000001 225.077Q280.4930000000001 225.077 280.9545000000001 224.67399999999998Q281.4160000000001 224.271 281.4160000000001 223.556Q281.4160000000001 222.984 281.1105000000001 222.555Q280.8050000000001 222.126 280.2330000000001 221.957L278.9460000000001 221.554Q277.9710000000001 221.255 277.4445000000001 220.553Q276.9180000000001 219.851 276.9180000000001 218.902Q276.9180000000001 218.135 277.2625000000001 217.5695Q277.6070000000001 217.004 278.2310000000001 216.6855Q278.8550000000001 216.367 279.7000000000001 216.367Q280.9480000000001 216.367 281.7020000000001 217.0625Q282.4560000000001 217.758 282.4690000000001 218.915H281.2990000000001Q281.2990000000001 218.213 280.8765000000001 217.8165Q280.4540000000001 217.42 279.68700000000007 217.42Q278.9330000000001 217.42 278.5105000000001 217.784Q278.0880000000001 218.148 278.0880000000001 218.798Q278.0880000000001 219.383 278.4000000000001 219.812Q278.7120000000001 220.241 279.2970000000001 220.423L280.5970000000001 220.839Q281.5460000000001 221.138 282.0660000000001 221.853Q282.58600000000007 222.568 282.58600000000007 223.53Q282.58600000000007 224.31 282.2220000000001 224.89499999999998Q281.8580000000001 225.48 281.2015000000001 225.805Q280.5450000000001 226.13 279.6740000000001 226.13Z" fill="#9DB1C6"/></svg></div></div><p class="cap">Sobre fondo oscuro — cursor Mint</p></div>
+<div><div class="tile l"><div style="width:100%;max-width:300px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="91.60 106.03 265.02 134.10" width="100%"><path d="M137.184 201.568Q122.624 201.568 114.112 193.448Q105.6 185.328 105.6 170.208V151.392Q105.6 136.272 114.112 128.152Q122.624 120.032 137.184 120.032Q151.632 120.032 159.52800000000002 127.928Q167.424 135.824 167.424 149.6V150.272H152.864V149.152Q152.864 142.208 149.0 137.728Q145.136 133.248 137.184 133.248Q129.344 133.248 124.864 138.064Q120.384 142.88 120.384 151.168V170.432Q120.384 178.608 124.864 183.48000000000002Q129.344 188.352 137.184 188.352Q145.136 188.352 149.0 183.816Q152.864 179.28 152.864 172.448V170.432H167.424V172.0Q167.424 185.776 159.52800000000002 193.67200000000003Q151.632 201.568 137.184 201.568Z M177.28 200.0V121.6H226.56V135.04H192.06400000000002V153.968H223.872V167.40800000000002H192.06400000000002V200.0Z M252.99200000000002 200.0V135.04H230.144V121.6H290.624V135.04H267.776V200.0Z" fill="#0A1628"/><rect class="c" x="299.62" y="182.00" width="43" height="18" rx="2" fill="#0E7C6B"/><path d="M168.65400000000002 226.13Q167.71800000000002 226.13 167.04850000000002 225.81799999999998Q166.37900000000002 225.506 166.01500000000004 224.921Q165.65100000000004 224.336 165.63800000000003 223.53H166.80800000000002Q166.80800000000002 224.245 167.2955 224.661Q167.78300000000002 225.077 168.65400000000002 225.077Q169.473 225.077 169.9345 224.67399999999998Q170.39600000000002 224.271 170.39600000000002 223.556Q170.39600000000002 222.984 170.09050000000002 222.555Q169.78500000000003 222.126 169.21300000000002 221.957L167.92600000000002 221.554Q166.95100000000002 221.255 166.42450000000002 220.553Q165.89800000000002 219.851 165.89800000000002 218.902Q165.89800000000002 218.135 166.2425 217.5695Q166.58700000000002 217.004 167.211 216.6855Q167.83500000000004 216.367 168.68000000000004 216.367Q169.92800000000003 216.367 170.68200000000002 217.0625Q171.43600000000004 217.758 171.449 218.915H170.27900000000002Q170.27900000000002 218.213 169.85650000000004 217.8165Q169.43400000000003 217.42 168.66700000000003 217.42Q167.91300000000004 217.42 167.49050000000005 217.784Q167.06800000000004 218.148 167.06800000000004 218.798Q167.06800000000004 219.383 167.38000000000005 219.812Q167.69200000000004 220.241 168.27700000000002 220.423L169.57700000000003 220.839Q170.52600000000004 221.138 171.04600000000005 221.853Q171.56600000000003 222.568 171.56600000000003 223.53Q171.56600000000003 224.31 171.20200000000003 224.89499999999998Q170.83800000000002 225.48 170.18150000000003 225.805Q169.52500000000003 226.13 168.65400000000002 226.13Z M181.86200000000002 226.0V216.51H187.322V217.576H183.019V220.514H186.86700000000002V221.567H183.019V224.934H187.322V226.0Z M197.61800000000002 226.0V216.51H200.556Q201.40100000000004 216.51 202.038 216.8545Q202.675 217.199 203.026 217.81Q203.37700000000004 218.421 203.37700000000004 219.24Q203.37700000000004 220.202 202.87650000000002 220.89100000000002Q202.37600000000003 221.58 201.51800000000003 221.84L203.50700000000003 226.0H202.12900000000002L200.30900000000003 221.97H198.78800000000004V226.0ZM198.78800000000004 220.917H200.556Q201.28400000000002 220.917 201.72600000000003 220.4555Q202.16800000000003 219.994 202.16800000000003 219.24Q202.16800000000003 218.473 201.72600000000003 218.018Q201.28400000000002 217.563 200.556 217.563H198.78800000000004Z M215.37600000000003 226.0 212.93200000000004 216.51H214.14100000000005L215.75300000000004 222.958Q215.92200000000003 223.634 216.03900000000004 224.21249999999998Q216.15600000000003 224.791 216.20800000000003 225.09Q216.26000000000005 224.791 216.37050000000005 224.21249999999998Q216.48100000000005 223.634 216.65000000000003 222.958L218.24900000000005 216.51H219.43200000000004L216.97500000000005 226.0Z M229.50700000000006 226.0V224.934H231.44400000000005V217.576H229.50700000000006V216.51H234.57700000000006V217.576H232.64000000000004V224.934H234.57700000000006V226.0Z M247.95400000000006 226.13Q247.09600000000006 226.13 246.46550000000008 225.805Q245.83500000000006 225.48 245.49050000000005 224.8625Q245.14600000000007 224.245 245.14600000000007 223.4V219.11Q245.14600000000007 218.252 245.49050000000005 217.64100000000002Q245.83500000000006 217.03 246.46550000000008 216.70499999999998Q247.09600000000006 216.38 247.95400000000006 216.38Q248.81200000000007 216.38 249.43600000000006 216.7115Q250.06000000000006 217.043 250.39800000000008 217.654Q250.73600000000008 218.265 250.73600000000008 219.11H249.56600000000006Q249.56600000000006 218.304 249.14350000000007 217.86849999999998Q248.72100000000006 217.433 247.95400000000006 217.433Q247.18700000000007 217.433 246.75150000000008 217.862Q246.31600000000006 218.291 246.31600000000006 219.097V223.4Q246.31600000000006 224.206 246.75150000000008 224.6415Q247.18700000000007 225.077 247.95400000000006 225.077Q248.72100000000006 225.077 249.14350000000007 224.6415Q249.56600000000006 224.206 249.56600000000006 223.4H250.73600000000008Q250.73600000000008 224.232 250.39800000000008 224.8495Q250.06000000000006 225.467 249.43600000000006 225.7985Q248.81200000000007 226.13 247.95400000000006 226.13Z M261.1620000000001 226.0V216.51H266.62200000000007V217.576H262.3190000000001V220.514H266.1670000000001V221.567H262.3190000000001V224.934H266.62200000000007V226.0Z M279.6740000000001 226.13Q278.7380000000001 226.13 278.0685000000001 225.81799999999998Q277.3990000000001 225.506 277.0350000000001 224.921Q276.6710000000001 224.336 276.6580000000001 223.53H277.8280000000001Q277.8280000000001 224.245 278.3155000000001 224.661Q278.8030000000001 225.077 279.6740000000001 225.077Q280.4930000000001 225.077 280.9545000000001 224.67399999999998Q281.4160000000001 224.271 281.4160000000001 223.556Q281.4160000000001 222.984 281.1105000000001 222.555Q280.8050000000001 222.126 280.2330000000001 221.957L278.9460000000001 221.554Q277.9710000000001 221.255 277.4445000000001 220.553Q276.9180000000001 219.851 276.9180000000001 218.902Q276.9180000000001 218.135 277.2625000000001 217.5695Q277.6070000000001 217.004 278.2310000000001 216.6855Q278.8550000000001 216.367 279.7000000000001 216.367Q280.9480000000001 216.367 281.7020000000001 217.0625Q282.4560000000001 217.758 282.4690000000001 218.915H281.2990000000001Q281.2990000000001 218.213 280.8765000000001 217.8165Q280.4540000000001 217.42 279.68700000000007 217.42Q278.9330000000001 217.42 278.5105000000001 217.784Q278.0880000000001 218.148 278.0880000000001 218.798Q278.0880000000001 219.383 278.4000000000001 219.812Q278.7120000000001 220.241 279.2970000000001 220.423L280.5970000000001 220.839Q281.5460000000001 221.138 282.0660000000001 221.853Q282.58600000000007 222.568 282.58600000000007 223.53Q282.58600000000007 224.31 282.2220000000001 224.89499999999998Q281.8580000000001 225.48 281.2015000000001 225.805Q280.5450000000001 226.13 279.6740000000001 226.13Z" fill="#45596A"/></svg></div></div><p class="cap">Sobre fondo claro — cursor Deep Mint</p></div></div></section>
+
+<section><h2><small>03</small>Símbolo — C_</h2>
+<p class="desc">El logo abreviado: la C con el cursor integrado en un solo trazo. Solo para espacios pequeños: fotos de perfil, favicon, íconos de app, marcas de agua.</p>
+<div class="grid">
+<div><div class="tile d"><div class="sym"><svg xmlns="http://www.w3.org/2000/svg" viewBox="22 24 72 72" width="100%"><path d="M88 34 H48 Q32 34 32 50 V70 Q32 86 48 86" fill="none" stroke="#FFFFFF" stroke-width="15"/><rect x="54" y="78.5" width="36" height="15" rx="2" fill="#20E3B2"/></svg></div></div><p class="cap">Símbolo sobre oscuro</p></div>
+<div><div class="tile l"><div class="sym"><svg xmlns="http://www.w3.org/2000/svg" viewBox="22 24 72 72" width="100%"><path d="M88 34 H48 Q32 34 32 50 V70 Q32 86 48 86" fill="none" stroke="#0A1628" stroke-width="15"/><rect x="54" y="78.5" width="36" height="15" rx="2" fill="#0E7C6B"/></svg></div></div><p class="cap">Símbolo sobre claro</p></div>
+<div><div class="tile l" style="gap:20px"><div class="ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%"><rect width="120" height="120" rx="28" fill="#12355B"/><path d="M88 34 H48 Q32 34 32 50 V70 Q32 86 48 86" fill="none" stroke="#FFFFFF" stroke-width="15"/><rect x="54" y="78.5" width="36" height="15" rx="2" fill="#20E3B2"/></svg></div><div class="ic" style="width:100px;border-radius:50%"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%"><rect width="120" height="120" fill="#20E3B2"/><g transform="translate(60 60) scale(0.85) translate(-60 -60)"><path d="M88 34 H48 Q32 34 32 50 V70 Q32 86 48 86" fill="none" stroke="#0A1628" stroke-width="15"/><rect x="54" y="78.5" width="36" height="15" rx="2" fill="#0A1628"/></g></svg></div></div><p class="cap">App icon y foto de perfil (mint, una tinta)</p></div>
+</div></section>
+
+<section><h2><small>04</small>Reglas de uso</h2>
+<div class="rules">
+<div class="rule do"><b>Un solo cursor por pieza</b>El logo y el símbolo nunca van uno al lado del otro. Si hay espacio, va el logo; si no, el símbolo.</div>
+<div class="rule do"><b>El mint depende del fondo</b>Mint (#20E3B2) sobre oscuro, Deep Mint (#0E7C6B) sobre claro. El mint brillante casi no se ve sobre blanco.</div>
+<div class="rule do"><b>El cursor puede parpadear</b>En video, web y pantallas, el cursor parpadea (1.1 s). En impreso siempre está fijo.</div>
+<div class="rule do"><b>Espacio libre</b>Alrededor del logo, deja como mínimo la altura del cursor ×2.</div>
+<div class="rule no"><b>No redibujar el logo</b>Usa siempre los archivos del kit. No escribas "CFT" con una fuente y le pongas una barra.</div>
+<div class="rule no"><b>No agregar efectos</b>Sin sombras, degradados, contornos ni rotación. El cursor siempre es un rectángulo plano.</div>
+</div></section>
+
+<section><h2><small>05</small>Color</h2>
+<p class="desc">Una base oscura, un acento. El mint se usa poco: el cursor, un botón, un dato clave. Nunca como fondo de texto largo.</p>
+<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))"><div class="sw"><div class="chip" style="background:#0A1628;color:#fff">#0A1628</div><b>Night</b><span>Fondo principal oscuro, texto sobre claro</span></div><div class="sw"><div class="chip" style="background:#12355B;color:#fff">#12355B</div><b>Navy</b><span>Fondos de íconos, superficies</span></div><div class="sw"><div class="chip" style="background:#20E3B2;color:#06231F">#20E3B2</div><b>Mint</b><span>Cursor y acentos sobre fondo oscuro</span></div><div class="sw"><div class="chip" style="background:#0E7C6B;color:#fff">#0E7C6B</div><b>Deep Mint</b><span>Cursor y acentos sobre fondo claro</span></div><div class="sw"><div class="chip" style="background:#F2F5F8;color:#0A1628">#F2F5F8</div><b>Fog</b><span>Fondo principal claro</span></div><div class="sw"><div class="chip" style="background:#45596A;color:#fff">#45596A</div><b>Slate</b><span>Texto secundario sobre claro</span></div></div></section>
+
+<section><h2><small>06</small>Tipografía</h2>
+<div class="type-d">Space Grotesk</div><p class="spec">Títulos, nombres, texto principal · Bold 700 / Medium 500 / Regular 400</p>
+<div class="mono" style="font-size:1.6rem">JetBrains Mono</div><p class="spec">Etiquetas, datos, detalles técnicos, "SERVICES" · Regular 400, con espaciado amplio en mayúsculas</p>
+<p class="desc">Ambas son gratis en Google Fonts.</p></section>
+
+<section><h2><small>07</small>Archivos del kit</h2>
+<table>
+<tr><td>CFT-logo-fondo-oscuro / -claro</td><td>Logo principal, transparente (SVG + PNG 2400px)</td></tr>
+<tr><td>CFT-logo-*-con-fondo</td><td>Logo con fondo incluido, listo para enviar por WhatsApp o email</td></tr>
+<tr><td>CFT-logo-una-tinta-negro / -blanco</td><td>Una sola tinta: sellos, grabado, impresión en un color</td></tr>
+<tr><td>CFT-logo-animado.svg</td><td>Logo con el cursor parpadeando (web)</td></tr>
+<tr><td>CFT-simbolo-fondo-oscuro / -claro</td><td>Símbolo C_ transparente</td></tr>
+<tr><td>CFT-perfil-mint / -navy</td><td>Fotos de perfil 1080×1080 (Instagram, WhatsApp, LinkedIn)</td></tr>
+<tr><td>CFT-app-icon</td><td>Ícono de app 1024px</td></tr>
+<tr><td>favicon.ico / .svg, apple-touch-icon</td><td>Web</td></tr>
+</table></section>
+</main>
+<footer><b>CFT Services</b> · Brand Guidelines v2.0 · Reemplaza la v1.0 (hexágono)</footer>
+</body></html>

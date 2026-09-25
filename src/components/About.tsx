@@ -288,7 +288,7 @@ export function About() {
                       }}
                       className="border-border bg-background relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2"
                     >
-                      <span className="font-display text-muted-foreground text-sm font-semibold tabular-nums">
+                      <span className="text-muted-foreground font-mono text-xs tabular-nums">
                         {phase}
                       </span>
                     </motion.div>

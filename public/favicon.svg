@@ -1,18 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="techGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0F4C75"/>
-      <stop offset="100%" stop-color="#1B6B93"/>
-    </linearGradient>
-    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#3CAEA3"/>
-      <stop offset="100%" stop-color="#20E3B2"/>
-    </linearGradient>
-  </defs>
-  
-  <!-- Favicon - Simplified Logo Mark -->
-  <path d="M16 2L30 10V22L16 30L2 22V10L16 2Z" fill="url(#techGradient)"/>
-  <path d="M16 8L24 13V19L16 24L8 19V13L16 8Z" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
-  <circle cx="16" cy="16" r="4" fill="url(#accentGradient)"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="1080" height="1080"><rect width="120" height="120" rx="28" fill="#12355B"/><path d="M88 32 H48 Q30 32 30 50 V70 Q30 88 48 88" fill="none" stroke="#FFFFFF" stroke-width="18"/><rect x="54" y="79" width="36" height="18" rx="2" fill="#20E3B2"/></svg>
