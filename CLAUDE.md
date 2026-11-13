@@ -16,7 +16,9 @@ npm run preview       # Preview production build locally
 
 Build is four steps: `tsc -b` (type safety) → `vite build` (client bundle) →
 `vite build --ssr src/entry-server.tsx` → `node scripts/prerender.mjs`, which
-injects the rendered markup into `dist/index.html` and deletes `dist-ssr`.
+renders **every route** in `src/routes.ts` to its own `dist/<path>/index.html`
+(with its own `<head>`), writes `dist/404.html` and `dist/sitemap.xml`, and
+deletes `dist-ssr`.
 
 **Always verify with `npm run preview`, not `npm run dev`** — the dev server
 does not prerender, so hydration problems only appear in the production build.
@@ -26,18 +28,23 @@ does not prerender, so hydration problems only appear in the production build.
 ```
 src/
 ├── components/        # Page sections (PascalCase.tsx)
+│   ├── services/      # Service-page building blocks (breadcrumbs, index, related work)
+│   ├── work/          # Project data, BrowserFrame, SchoolMockup
 │   └── ui/            # Base UI components (shadcn-style, lowercase.tsx)
-├── hooks/             # Custom hooks (use-*.tsx)
-├── i18n/              # Translation files (en.json, es.json, index.ts)
-├── lib/               # Utilities (utils.ts with cn() helper)
+├── pages/             # One component per page type (Home, ServicesIndex, Service, NotFound)
+├── hooks/             # Custom hooks (use-*.tsx) — use-route gives the current route
+├── i18n/              # en.json / es.json (sections) + services.{en,es}.json (service pages)
+├── lib/               # utils.ts (cn), site.ts (business facts: NAP, Calendly, areas served)
+├── seo/head.ts        # Per-route <head>: title, meta, canonical, hreflang, OG, JSON-LD
+├── routes.ts          # Every page in both languages — the single source of URLs
 ├── assets/            # Static assets
-├── App.tsx            # Root component — assembles all sections
-├── main.tsx           # Browser entry — hydrates prerendered markup
-├── entry-server.tsx   # Build-time entry — renders the app to static HTML
+├── App.tsx            # Layout (nav, footer) + page switch for a route
+├── main.tsx           # Browser entry — resolves the route, hydrates prerendered markup
+├── entry-server.tsx   # Build-time entry — renders one route + its head
 └── index.css          # Tailwind v4 + CSS variables + theme tokens
 
 scripts/
-└── prerender.mjs      # Injects rendered markup into dist/index.html
+└── prerender.mjs      # Writes dist/<path>/index.html per route, 404.html, sitemap.xml
 ```
 
 ## Import Aliases
@@ -65,7 +72,7 @@ import { cn } from '@/lib/utils'
 
 The site operates in two coordinated visual registers that share a palette but communicate in different emotional keys:
 
-- **Register A — IT & Digital Services** (`Hero`, `Services`, `About`, `Work`, `Contact`, `FinalCTA`, `Footer`, `Navbar`): Calm, editorial, light-first. Night as ink, mint as sparse accent, generous whitespace, no glow effects.
+- **Register A — IT & Digital Services** (`Hero`, `Work`, `Services`, `About`, `Contact`, `Footer`, `Navbar`): Calm, editorial, light-first. Night as ink, mint as sparse accent, generous whitespace, no glow effects.
 - **Register B — Experiential Technology** (`Events` section only): Immersive, **dark in both light and dark themes**, depth + glow + motion. Full-bleed Night `#0A1628` band; mint appears as glow, not ink; spring entrances + idle loops.
 
 The transition from Register A into Register B as the user scrolls from Services into Events should feel like stepping from a professional office onto an event floor. Register B glow effects must never appear in Register A sections.
@@ -136,7 +143,7 @@ These moves differentiate the site from template-generated output. Every impleme
 - **Always dark in both themes** — section background is a hardcoded radial gradient (`#0E2440` → `#0A1628` → `#050B16`), never `bg-background`.
 - **Layered depth**: noise texture overlay (`opacity-[0.04]`) + radial vignette + brand mint glow radial + floating particles — all `aria-hidden="true"`, all `pointer-events-none`.
 - **Solid headline text** — white at 95%. Brand v2 allows no gradient text.
-- **Glassmorphism capability cards** using `rgba()` inline styles and `backdropFilter` — the documented exception to the no-hex rule.
+- **Capabilities as a ruled 2-up list** (hairline `rgba(255,255,255,0.10)` top borders, mint line icons). Inline `rgba()`/hex here is the documented exception to the no-hex rule; glass cards were retired in the 2026-11 redesign.
 - **Motion**: spring entrances for the KioskMockup, scroll-triggered reveals for copy, idle glow pulse loops — all gated on `useReducedMotion()`.
 - The `KioskMockup` lives in `src/components/events/KioskMockup.tsx` — a code-built interactive mockup using CFT brand colors only, no client branding.
 
@@ -227,11 +234,19 @@ Wrap with `<AnimatePresence>` and use `exit` prop.
 
 ## i18n
 
-- Languages: `en`, `es`. Files at `src/i18n/{lang}.json`.
-- Keys are nested objects grouped by section: `nav.*`, `hero.*`, `services.*`, `about.*`, `contact.*`, `footer.*`.
+- Languages: `en` at `/…`, `es` at `/es/…`. **The language comes from the URL**, never from the browser or storage — each language is its own prerendered document.
+- Files: `src/i18n/{lang}.json` (sections, `seo.*`) and `src/i18n/services.{lang}.json` (service pages, mounted under `servicePages.*`).
 - Access via `const { t } = useTranslation()` then `t('section.key')`.
-- Language toggle cycles `en` ↔ `es`.
-- **Both language files must stay in sync** — every key added to one must exist in the other.
+- The language switch is a plain link to `pathIn(route, otherLang)` — the same page in the other language.
+- **Both language files must stay in sync** — every key, and every array length, in one must exist in the other.
+
+## Routes & SEO
+
+- Add a page by adding it to `src/routes.ts`; the prerender, sitemap and hreflang pick it up. Slugs are written in the page's language (`/services/web-design/` ↔ `/es/servicios/diseno-de-paginas-web/`).
+- Links between pages are plain `<a href>` (no client router). Links to a home section use `useSectionHref()`.
+- Each page's title and description come from i18n (`seo.home.*`, `servicePages.<key>.metaTitle/metaDescription`). Keep titles ≲ 60 characters and descriptions ≤ 160.
+- Business facts (phone, email, Calendly, areas served) live only in `src/lib/site.ts` so the footer, contact section and structured data never disagree.
+- Never invent prices, timelines, addresses or client claims in service copy.
 
 ## Theming
 
@@ -242,9 +257,10 @@ Wrap with `<AnimatePresence>` and use `exit` prop.
 
 ## Deployment
 
-- **Target**: GitHub Pages at `/cft-services/` subpath.
-- **Workflow**: `.github/workflows/deploy.yml` — triggers on push to `main`.
-- **Base URL**: Set in `vite.config.ts` as `base: '/cft-services/'`.
+- **Target**: GitHub Pages on the custom domain `cftservicespr.com` (`public/CNAME`).
+- **Workflow**: `.github/workflows/deploy.yml` — triggers on push to `main`. Merging is publishing.
+- **Base URL**: `base: '/'` in `vite.config.ts`. Asset and page links are root-absolute, so every prerendered page works at any depth (`/es/servicios/…/`).
+- **404**: GitHub Pages serves `dist/404.html` for any missing path, in either language.
 - **Activation**: Repo Settings → Pages → Source: "GitHub Actions".
 
 ## ESLint
@@ -269,7 +285,8 @@ component output must be identical on both sides:
   light. Swap themed images and icons with `dark:` utilities (see `Logo.tsx`).
 - **Never branch rendered output on `prefers-reduced-motion` for layout.**
 - **Values that animate up from a placeholder must render their real value on
-  the server** — see `useCounter` in `About.tsx`.
+  the server.** (The About counters were removed in the 2026-11 redesign; the
+  rule stands for anything that counts up.)
 - Section `id`s are stable literals, not `useId()` — they are anchor targets.
 
 ## Key Conventions
@@ -277,7 +294,7 @@ component output must be identical on both sides:
 - **No hardcoded colors** — use semantic Tailwind classes (`bg-primary`, `text-foreground`).
 - **Accent text uses `text-cft-mint-ink`**, never raw `text-cft-mint` in Register A (bright mint is 1.6:1 on white). `cft-mint` is for the always-dark Events band only.
 - **No `asChild` prop** — but do not wrap `<Button>` in an `<a>` either; nesting interactive elements is invalid HTML. Style the anchor with `buttonVariants()` from `@/components/ui/button`.
-- **Horizontal carousels** pass `viewportProps={{ tabIndex: 0, role: 'region', 'aria-label': … }}` to `ScrollArea` so off-screen cards are keyboard-reachable.
+- **No horizontal carousels** — show content in ruled lists. Project captures go through `BrowserFrame` / `PhoneFrame` in `src/components/work/`; see DESIGN.md → Project imagery.
 - **All interactive elements** need `aria-label` when icon-only.
 - **Focus rings**: `focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2`.
 - **Disabled state**: `disabled:pointer-events-none disabled:opacity-50`.

@@ -13,7 +13,7 @@ The CFT Services site operates in two coordinated visual registers. They share a
 
 > *Calm · Editorial · Light-first · Professional*
 
-Applied to: `Hero`, `Services`, `About`, `Work`, `Contact`, `FinalCTA`, `Footer`, `Navbar`
+Applied to: `Hero`, `Work`, `Services`, `About`, `Contact`, `Footer`, `Navbar`
 
 - Light backgrounds in light mode; dark (but not theatrical) in dark mode
 - Night used as ink — primary text and headings
@@ -230,20 +230,23 @@ The premium redesign eliminates the "AI card" pattern: gradient background tile 
 </div>
 ```
 
-### Cards (Register B — Events Capabilities)
+### Capabilities list (Register B — Events)
+
+Retired the glass card grid in the 2026-11 redesign: four identical translucent
+cards read as template. Capabilities are a ruled 2-up list; the depth in this
+band comes from the background layers and the kiosk.
 
 ```tsx
-<div
-  className="rounded-lg p-5"
-  style={{ background: 'rgba(14,36,64,0.75)', border: '1px solid rgba(32,227,178,0.18)', backdropFilter: 'blur(8px)' }}
->
-  <Monitor className="size-5 mb-4" style={{ color: '#20E3B2' }} strokeWidth={1.5} />
-  <h3 className="font-display font-semibold text-white/90 mb-2">Interactive Kiosk Games</h3>
-  <p className="font-sans text-sm text-white/55 leading-relaxed">…</p>
-</div>
+<li className="flex gap-4 py-5" style={{ borderTop: '1px solid rgba(255,255,255,0.10)' }}>
+  <Gamepad2 className="mt-0.5 size-5 shrink-0" style={{ color: '#20E3B2' }} strokeWidth={1.5} />
+  <div>
+    <h3 className="font-display mb-1.5 font-semibold" style={{ color: 'rgba(255,255,255,0.92)' }}>Interactive Kiosk Games</h3>
+    <p className="font-sans text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.66)' }}>…</p>
+  </div>
+</li>
 ```
 
-**Register B Exception:** The inline `rgba()` and `#20E3B2` color values above are intentional. Register B (Events) uses glassmorphism and glow effects where semantic tokens don't map to exact values. This is the sole exception to the "no hardcoded hex" rule (see Anti-Patterns). All other sections must use semantic Tailwind classes.
+**Register B Exception:** The inline `rgba()` and `#20E3B2` color values above are intentional. Register B (Events) uses glow effects and translucent rules where semantic tokens don't map to exact values. This is the sole exception to the "no hardcoded hex" rule (see Anti-Patterns). All other sections must use semantic Tailwind classes.
 
 ### Buttons
 
@@ -404,8 +407,8 @@ const idleVariant = shouldReduceMotion
 - All interactive elements have visible focus rings: `focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2`. `--tw-ring-offset-color` is bound to `--color-background` in `@layer base`; Tailwind's white default prints a halo around every focused control in dark mode
 - **A skip link is the first focusable element on the page**, targeting `#main`
 - **Every `<section>` is named** via `aria-labelledby` pointing at its own heading, so landmark navigation lists real section names
-- **Horizontal carousels** (Services, Work) put `tabIndex={0}`, `role="region"`, and a label on the ScrollArea *viewport* via `viewportProps`. Without it, cards past the fold are unreachable by keyboard
-- **Never nest interactive elements.** Buttons are not wrapped in anchors — style the anchor with `buttonVariants()` from `@/components/ui/button` instead. Flip cards expose one control per visible face and mark the hidden face `inert`, moving focus to the face that became visible
+- **No horizontal carousels.** Services and Work used to scroll sideways and hid most of their content past the fold; both are now ruled lists that show everything at once. If a carousel ever returns, its viewport needs `tabIndex={0}`, `role="region"` and a label so off-screen items are keyboard-reachable
+- **Never nest interactive elements.** Buttons are not wrapped in anchors — style the anchor with `buttonVariants()` from `@/components/ui/button` instead. Rows that are clickable end to end (the Work index) use one real link or button stretched over the row with `after:absolute after:inset-0`, never a link around the row
 - **No rendered output may branch on a client-only signal** (`resolvedTheme`, `prefers-reduced-motion`). The prerendered document is always light and always English; branching on theme breaks hydration. Swap themed assets and icons with `dark:` CSS variants instead
 - Icon-only interactive elements must have `aria-label`
 - Decorative elements (particles, noise overlays, background shapes) must have `aria-hidden="true"`
@@ -460,15 +463,23 @@ These are the concrete moves that differentiate CFT Services from a template-gen
 
 | Section | Register | Layout | Key Constraints |
 |---------|----------|--------|-----------------|
-| `Navbar` | A | Horizontal, sticky | No heavy blur; thin border-bottom |
-| `Hero` | A | Asymmetric 2-col (lg) | Left-align headline; CTA row left |
-| `Services` | A | Numbered list or 2-col grid | Rule 1, 2, 3 apply strictly |
-| `Events` | B | Full-bleed dark, centered | Always dark; glow text; mockup centerpiece |
-| `About` | A | 2-col split (text + visual) | No blobs; hairline dividers |
-| `Work` | A | Portfolio grid | Card = image + title only, no gradients |
-| `Contact` | A | Centered (CTA exception) | Simple, low-friction |
-| `FinalCTA` | A | Centered band | One headline, one button |
-| `Footer` | A | 3-col at lg, stacked mobile | Hairline top border; no heavy bg |
+Page order: `Hero` → `Work` → `Services` → `Events` → `About` → `Contact`. Proof of work comes straight after the promise; Services still hands off directly into the Events band.
+
+| Section | Register | Layout | Key Constraints |
+|---------|----------|--------|-----------------|
+| `Navbar` | A | Horizontal, sticky | Thin border-bottom; "Start a project" button from `lg` |
+| `Hero` | A | Asymmetric 2-col (lg): copy left, live-work stack right | Imagery is three real client captures in `BrowserFrame`s, fanned, pointer parallax (off for reduced motion / touch). Client names set as type below a hairline, no logo wall |
+| `Work` | A | Featured case studies + ruled index | Real captures of live sites in `BrowserFrame` (+ `PhoneFrame` overhang). Rhythm: full row → offset two-up → full row (flipped) → "More projects" index. Private apps get a code-built illustration (`SchoolMockup`), never fake screenshots of real data |
+| `Services` | A | Ruled numbered index, 12-col rows | All five visible at once; no carousel, no cards. Mint cursor appears on row hover |
+| `Events` | B | Full-bleed dark, copy left + kiosk right | Always dark; capabilities as a ruled 2-up list, not glass cards |
+| `About` | A | Statement split, ruled figures, 3-step process, industries set as type | No cards, no counters, no marquee. Figures come from i18n (`about.stats.*.value`) |
+| `Contact` | A | 2-col: ask + call + direct lines left, form right | Absorbs the old FinalCTA — one closing ask, not two in a row |
+| `Footer` | A | 4-col at lg (brand, services, navigation, contact) | Hairline top border; links every service page; NAP in `<address>` |
+| Service pages | A | Breadcrumbs → hero (H1 + lead + visual) → what's included → fit + process → related work → FAQ (`<details>`) → other services → Contact | One template (`src/pages/ServicePage.tsx`); copy in `services.{en,es}.json`. Event technology keeps a dark Register B stage for the kiosk |
+
+### Project imagery
+
+Captures live in `src/assets/projects/` as WebP: `{project}-desktop.webp` (1440×900), `{project}-desktop-sm.webp` (720×450, srcset partner) and `{project}-mobile.webp` (585×1266, from a 390×844 viewport). Re-capture from the live site with Playwright at deviceScaleFactor 2 (desktop) / 3 (mobile), wait for network idle plus a few seconds, then downscale. Project data is in `src/components/work/projects.ts`; copy is under `work.projects.<key>` in both locales.
 
 ---
 
@@ -523,19 +534,20 @@ These are the concrete moves that differentiate CFT Services from a template-gen
 
 ---
 
-*Last updated: 2026-09-25 (brand v2.0) | Maintained by: CFT Services / Cristian F. Torres Collazo*
+*Last updated: 2026-11-13 (premium redesign, Work refresh) · 2026-09-25 (brand v2.0) | Maintained by: CFT Services / Cristian F. Torres Collazo*
 
 ---
 
 ## Rendering & SEO Contract
 
-The site is a client-rendered SPA on static hosting, so `npm run build` bakes the rendered markup into `dist/index.html`:
+The site is a static multi-page site: `npm run build` renders every route in `src/routes.ts` to its own HTML document, each with its own `<head>`:
 
 ```
 tsc -b
 vite build                                          # client bundle
 vite build --ssr src/entry-server.tsx --outDir dist-ssr
-node scripts/prerender.mjs                          # inject markup, drop dist-ssr
+node scripts/prerender.mjs                          # dist/<path>/index.html per route,
+                                                    # 404.html, sitemap.xml; drop dist-ssr
 ```
 
 Constraints this places on component code:
@@ -547,7 +559,7 @@ Constraints this places on component code:
 | Values that animate from a placeholder must render their real value on the server | The stat counters resolve to `20+`, never `0+`, when `progress === null` |
 | Section `id`s are stable string literals | They are anchor targets, sitemap fragments, and scroll-spy keys — not generated ids |
 
-**Language.** English is prerendered at `/`; Spanish is the same document with `?lang=es`, switched by i18next at runtime. `src/hooks/use-document-language.ts` keeps `<html lang>`, `og:locale`, the canonical link, and the URL parameter in sync. Known limitation: a crawler that does not execute JavaScript sees English markup at the `?lang=es` URL. Moving Spanish to a prerendered `/es/` path would remove that; it is the natural next step if Spanish organic traffic matters.
+**Language and URLs.** English lives at `/…`, Spanish at `/es/…`, each prerendered in its own language, so non-JS crawlers see real Spanish markup. The language comes from the path only. Every page carries a canonical, `hreflang` `en` / `es` / `x-default` alternates (also in the sitemap), Open Graph, and a JSON-LD graph: `ProfessionalService` (NAP and `areaServed` from `src/lib/site.ts`), `WebSite`, `WebPage`, plus `BreadcrumbList`, `Service` and `FAQPage` on service pages. Legacy `/?lang=es` links redirect to `/es/` in the browser. `dist/404.html` is shared by both languages; it renders client-side in the right one and is `noindex`.
 
 **Fonts** load from a single `<link>` in `index.html`. Never `@import` them in `index.css` — that chains the font request behind the stylesheet and delays every heading.
 
@@ -565,9 +577,9 @@ Started at the Task 11 Impeccable critique (2026-06-25); reviewed during the pol
 | D2 | Footer `NAV_LINKS` omits `#events` | P3 | **Resolved** — Events is in the footer nav |
 | D3 | Work "coming soon" card text hardcoded in English | P3 | **Resolved** — `work.comingSoon` / `work.comingSoonSub` exist in both locales |
 | D4 | `KioskMockup.tsx` uses `key={i}` on PARTICLES map | P3 | **Deferred.** PARTICLES is a static constant with no reordering; stable index keys are safe |
-| D5 | Stat values (`20+`, `10+`, `8+`) hardcoded in `About.tsx` | P3 | **Deferred.** Still literals; move to i18n if the figures start changing often |
+| D5 | Stat values (`20+`, `10+`, `8+`) hardcoded in `About.tsx` | P3 | **Resolved** (2026-11) — read from `about.stats.*.value` |
 | D6 | No inline (on-blur) form validation in Contact | P2 | **Resolved** — per-field `onBlur` validators, `aria-invalid`, `aria-describedby`, focus-to-first-error |
 | D7 | Services section eyebrow intentionally absent | Design decision | **Intentional.** Services jumps straight to `h2` as a deliberate rhythm break |
-| D8 | Spanish is not prerendered — `?lang=es` serves English markup to non-JS crawlers | P2 | **Open.** Fix by prerendering an `/es/` path; see Rendering & SEO Contract |
+| D8 | Spanish is not prerendered — `?lang=es` serves English markup to non-JS crawlers | P2 | **Resolved** (2026-11) — Spanish is prerendered under `/es/`; no hydration mismatch in either language |
 | D9 | Hydration mismatch for reduced-motion visitors | P3 | **Open.** Framer `initial` values differ from the server render; React recovers with one client render |
-| D10 | Original project PNGs retained beside the shipped WebP | P3 | **Open.** Unreferenced masters in `src/assets/projects/`; kept as source, never bundled |
+| D10 | Original project PNGs retained beside the shipped WebP | P3 | **Open.** Two automation-diagram masters remain in `src/assets/projects/`; unreferenced, never bundled. Old logo files were removed with the flip cards |

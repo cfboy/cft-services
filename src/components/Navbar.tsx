@@ -1,41 +1,65 @@
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
-import { Moon, Sun, Globe, Menu, X } from 'lucide-react'
+import { Moon, Sun, Menu, X } from 'lucide-react'
 import { useEffect, useId, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { Logo } from '@/components/Logo'
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { useActiveSection } from '@/hooks/use-active-section'
+import { useRoute } from '@/hooks/use-route'
 import { useTheme } from '@/hooks/use-theme'
+import { cn } from '@/lib/utils'
+import { homePath, pathIn, servicesPath, type Lang } from '@/routes'
 
-/** Section ids in document order — drives both the links and the scroll spy. */
+/** Home-page section ids in document order — links and scroll spy. */
 const SECTIONS = [
   'home',
+  'work',
   'services',
   'events',
   'about',
-  'work',
   'contact',
 ] as const
+type SectionId = (typeof SECTIONS)[number]
 
 /** Fixed navbar height (h-20), matched by `scroll-margin-top` in index.css. */
 const NAV_HEIGHT = 80
 
+const linkBase =
+  'focus-visible:ring-ring relative rounded-lg text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none'
+
 export function Navbar() {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
+  const route = useRoute()
   const { resolvedTheme, setTheme } = useTheme()
   const [mobileOpen, setMobileOpen] = useState(false)
   const prefersReduced = useReducedMotion()
-  const activeSection = useActiveSection(SECTIONS, NAV_HEIGHT + 16)
+  const spied = useActiveSection(SECTIONS, NAV_HEIGHT + 16)
   const menuId = useId()
   const menuRef = useRef<HTMLDivElement>(null)
   const toggleRef = useRef<HTMLButtonElement>(null)
 
-  const isSpanish = i18n.resolvedLanguage === 'es'
+  const isHome = route.kind === 'home'
+  const hasContact = route.kind !== 'notFound'
+  const home = homePath(route.lang)
+  const otherLang: Lang = route.lang === 'en' ? 'es' : 'en'
 
-  const toggleLang = () => {
-    i18n.changeLanguage(isSpanish ? 'en' : 'es')
+  // Where each link goes from the current page. On the home page everything
+  // is an in-page fragment; elsewhere "Services" goes to the services hub and
+  // the rest go back to their home-page section.
+  const hrefFor = (id: SectionId): string => {
+    if (isHome) return `#${id}`
+    if (id === 'home') return home
+    if (id === 'services') return servicesPath(route.lang)
+    if (id === 'contact' && hasContact) return '#contact'
+    return `${home}#${id}`
   }
+
+  const activeId: SectionId | null = isHome
+    ? (spied as SectionId)
+    : route.kind === 'services' || route.kind === 'service'
+      ? 'services'
+      : null
 
   const toggleTheme = () => {
     setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
@@ -66,39 +90,69 @@ export function Navbar() {
     }
   }, [mobileOpen])
 
-  const goToSection = (href: string, wasInMenu: boolean) => {
-    const id = href.replace('#', '')
+  /** In-page fragments scroll smoothly; real page links navigate normally. */
+  const onNavigate = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+    wasInMenu: boolean
+  ) => {
     setMobileOpen(false)
+    if (!href.startsWith('#')) return
+    const target = document.getElementById(href.slice(1))
+    if (!target) return
+    e.preventDefault()
 
     const scroll = () => {
-      const target = document.getElementById(id)
-      if (!target) return
       target.scrollIntoView({
         behavior: prefersReduced ? 'auto' : 'smooth',
         block: 'start',
       })
       // Keep the URL shareable without pushing a history entry per click.
-      window.history.replaceState(null, '', href)
+      window.history.replaceState(null, '', href === '#home' ? home : href)
     }
-
     // Let the menu finish collapsing so the target lands at the right offset.
     if (wasInMenu) window.setTimeout(scroll, 220)
     else scroll()
   }
 
   const navLinks = SECTIONS.map(id => ({
-    href: `#${id}`,
     id,
+    href: hrefFor(id),
     label: t(`nav.${id}`),
   }))
 
-  const languageLabel = isSpanish
-    ? t('a11y.switchToEnglish')
-    : t('a11y.switchToSpanish')
   // Deliberately theme-neutral: any rendered output derived from
-  // resolvedTheme mismatches the prerendered (always light) markup on
-  // hydration. The icon communicates the target state visually instead.
+  // resolvedTheme mismatches the prerendered (always light) markup.
   const themeLabel = t('a11y.toggleTheme')
+
+  // The language switch is a real link to the same page in the other
+  // language — crawlable, shareable, and it works without JavaScript.
+  const languageLink = (
+    <a
+      href={pathIn(route, otherLang)}
+      hrefLang={otherLang}
+      lang={otherLang}
+      aria-label={t('a11y.switchLanguage')}
+      className={cn(
+        buttonVariants({ variant: 'ghost', size: 'sm' }),
+        'px-2.5 font-mono text-xs tracking-wide uppercase'
+      )}
+    >
+      {otherLang}
+    </a>
+  )
+
+  const themeButton = (
+    <Button
+      variant="ghost"
+      size="icon"
+      onClick={toggleTheme}
+      aria-label={themeLabel}
+    >
+      <Moon aria-hidden="true" className="block h-4 w-4 dark:hidden" />
+      <Sun aria-hidden="true" className="hidden h-4 w-4 dark:block" />
+    </Button>
+  )
 
   return (
     <motion.nav
@@ -110,11 +164,8 @@ export function Navbar() {
     >
       <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-4 sm:px-6">
         <a
-          href="#home"
-          onClick={e => {
-            e.preventDefault()
-            goToSection('#home', false)
-          }}
+          href={isHome ? '#home' : home}
+          onClick={e => onNavigate(e, isHome ? '#home' : home, false)}
           className="focus-visible:ring-ring flex items-center rounded-lg focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
         >
           <Logo className="h-7 sm:h-8" />
@@ -124,21 +175,26 @@ export function Navbar() {
         {/* Desktop nav */}
         <div className="hidden items-center gap-1 md:flex">
           {navLinks.map(link => {
-            const isActive = activeSection === link.id
+            const isActive = activeId === link.id
             return (
               <a
-                key={link.href}
+                key={link.id}
                 href={link.href}
-                aria-current={isActive ? 'true' : undefined}
-                onClick={e => {
-                  e.preventDefault()
-                  goToSection(link.href, false)
-                }}
-                className={`focus-visible:ring-ring relative rounded-lg px-3 py-2 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none ${
+                aria-current={
+                  isActive
+                    ? route.kind === 'services'
+                      ? 'page'
+                      : 'true'
+                    : undefined
+                }
+                onClick={e => onNavigate(e, link.href, false)}
+                className={cn(
+                  linkBase,
+                  'px-3 py-2',
                   isActive
                     ? 'text-foreground'
                     : 'text-muted-foreground hover:text-foreground'
-                }`}
+                )}
               >
                 {link.label}
                 {isActive && (
@@ -157,45 +213,25 @@ export function Navbar() {
             )
           })}
           <div className="ml-2 flex items-center gap-1">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleLang}
-              aria-label={languageLabel}
+            {languageLink}
+            {themeButton}
+            <a
+              href={hrefFor('contact')}
+              onClick={e => onNavigate(e, hrefFor('contact'), false)}
+              className={cn(
+                buttonVariants({ size: 'sm' }),
+                'ml-2 hidden px-4 lg:inline-flex'
+              )}
             >
-              <Globe aria-hidden="true" className="h-4 w-4" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              aria-label={themeLabel}
-            >
-              <Moon aria-hidden="true" className="block h-4 w-4 dark:hidden" />
-              <Sun aria-hidden="true" className="hidden h-4 w-4 dark:block" />
-            </Button>
+              {t('nav.cta')}
+            </a>
           </div>
         </div>
 
-        {/* Mobile toggle */}
+        {/* Mobile controls */}
         <div className="flex items-center gap-1 md:hidden">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleLang}
-            aria-label={languageLabel}
-          >
-            <Globe aria-hidden="true" className="h-4 w-4" />
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleTheme}
-            aria-label={themeLabel}
-          >
-            <Moon aria-hidden="true" className="block h-4 w-4 dark:hidden" />
-            <Sun aria-hidden="true" className="hidden h-4 w-4 dark:block" />
-          </Button>
+          {languageLink}
+          {themeButton}
           <Button
             ref={toggleRef}
             variant="ghost"
@@ -228,21 +264,20 @@ export function Navbar() {
           >
             <div className="flex flex-col gap-1 px-4 py-3">
               {navLinks.map(link => {
-                const isActive = activeSection === link.id
+                const isActive = activeId === link.id
                 return (
                   <a
-                    key={link.href}
+                    key={link.id}
                     href={link.href}
                     aria-current={isActive ? 'true' : undefined}
-                    onClick={e => {
-                      e.preventDefault()
-                      goToSection(link.href, true)
-                    }}
-                    className={`focus-visible:ring-ring rounded-lg px-3 py-2.5 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none ${
+                    onClick={e => onNavigate(e, link.href, true)}
+                    className={cn(
+                      linkBase,
+                      'px-3 py-2.5',
                       isActive
                         ? 'bg-muted text-foreground'
                         : 'text-muted-foreground hover:text-foreground'
-                    }`}
+                    )}
                   >
                     {link.label}
                   </a>

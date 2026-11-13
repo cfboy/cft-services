@@ -1,6 +1,6 @@
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { ArrowUpRight, Clock, RotateCcw } from 'lucide-react'
-import { useRef, useState } from 'react'
+import { motion, useReducedMotion } from 'framer-motion'
+import { ArrowUpRight, Lock, Plus } from 'lucide-react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import {
@@ -9,490 +9,360 @@ import {
   DrawerDescription,
   DrawerHeader,
   DrawerTitle,
-} from './ui/drawer'
-import { ScrollArea, ScrollBar } from './ui/scroll-area'
-import CRMAutomationImg from '../assets/projects/CRM-Make-Automation.webp'
-import LibelulaLogo from '../assets/projects/LogoLibelula.svg'
-import MACEducandoLogo from '../assets/projects/LogoMACEducando.webp'
-import TitiAmandaLogo from '../assets/projects/LogoTitiAmanda.svg'
-import SalesReportImg from '../assets/projects/Sales-Report.webp'
-
-import { useDragScroll } from '@/hooks/use-drag-scroll'
+} from '@/components/ui/drawer'
+import { BrowserFrame, PhoneFrame } from '@/components/work/BrowserFrame'
+import {
+  featured,
+  moreProjects,
+  shotSizes,
+  type FeaturedProject,
+  type IndexProject,
+} from '@/components/work/projects'
+import { SchoolMockup } from '@/components/work/SchoolMockup'
+import { cn } from '@/lib/utils'
 
 const SECTION_ID = 'work'
 
-type Project = {
-  key: string
-  url?: string
-  drawerImage?: string
-  /** Intrinsic size of `drawerImage`, so the drawer reserves space up front. */
-  drawerSize?: { width: number; height: number }
-  image: string
-  isLogo: boolean
-  bgColor: string
-  /** Whether `bgColor` is dark — drives the front-face text colour. */
-  bgIsDark: boolean
-  backBg: string
-  tags: readonly string[]
-}
+/** ease-out-quint — fast start, long settle. */
+const EASE = [0.22, 1, 0.36, 1] as const
 
-const projects: Project[] = [
-  {
-    key: 'project1',
-    url: 'https://titiamandababysitter.com/',
-    image: TitiAmandaLogo,
-    isLogo: true,
-    bgColor: '#fff3eb',
-    bgIsDark: false,
-    backBg: '#b13b3b',
-    tags: ['Website'],
-  },
-  {
-    key: 'project2',
-    url: 'https://www.clinicalibelula.com/',
-    image: LibelulaLogo,
-    isLogo: true,
-    bgColor: '#f8ffe3',
-    bgIsDark: false,
-    backBg: '#1f3032',
-    tags: ['Website'],
-  },
-  {
-    key: 'project3',
-    drawerImage: CRMAutomationImg,
-    drawerSize: { width: 1200, height: 553 },
-    image: CRMAutomationImg,
-    isLogo: false,
-    bgColor: '',
-    bgIsDark: true,
-    backBg: '#3b4a6b',
-    tags: ['Automation', 'CRM', 'AI'],
-  },
-  {
-    key: 'project4',
-    drawerImage: SalesReportImg,
-    drawerSize: { width: 1200, height: 519 },
-    image: SalesReportImg,
-    isLogo: false,
-    bgColor: '',
-    bgIsDark: true,
-    backBg: '#4a1a6b',
-    tags: ['Automation', 'Reporting', 'Finance'],
-  },
-  {
-    key: 'project5',
-    url: 'https://maceducando.com/',
-    image: MACEducandoLogo,
-    isLogo: true,
-    bgColor: '#1a3d1b',
-    bgIsDark: true,
-    backBg: '#2d6a2e',
-    tags: ['Website'],
-  },
-]
+const linkClass =
+  'focus-visible:ring-ring inline-flex items-center gap-1.5 rounded-sm text-sm font-medium focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none'
 
-const ALL_TAGS = Array.from(new Set(projects.flatMap(p => p.tags)))
+/* ── Media ──────────────────────────────────────────────────────────── */
 
-function ProjectCard({ project, index }: { project: Project; index: number }) {
+function ProjectMedia({
+  project,
+  sizes,
+  withPhone = true,
+}: {
+  project: FeaturedProject
+  sizes: string
+  withPhone?: boolean
+}) {
   const { t } = useTranslation()
   const prefersReduced = useReducedMotion()
-  const [flipped, setFlipped] = useState(false)
-  const [drawerOpen, setDrawerOpen] = useState(false)
-  const frontRef = useRef<HTMLButtonElement>(null)
-  const backRef = useRef<HTMLButtonElement>(null)
-
-  const hasDrawer = !!project.drawerImage
-  const hasUrl = !!project.url
-  const title = t(`work.${project.key}.title`)
-
-  // Only one face is reachable at a time. Without this, keyboard users tab
-  // into the controls on the hidden back of the card.
-  const faceProps = (isVisible: boolean) => ({
-    inert: !isVisible,
-    'aria-hidden': !isVisible,
-  })
-
-  // Marking the focused face `inert` drops focus to <body>. Hand it to the
-  // face that just became visible so keyboard position survives the flip.
-  const flip = (next: boolean) => {
-    setFlipped(next)
-    requestAnimationFrame(() => {
-      ;(next ? backRef : frontRef).current?.focus()
-    })
-  }
-
-  const hintColor = project.bgIsDark ? 'text-white/60' : 'text-black/60'
+  const alt = t(`work.projects.${project.key}.alt`, { defaultValue: '' })
 
   return (
-    <>
+    <div className="relative">
       <motion.div
-        initial={{ opacity: 0, y: prefersReduced ? 0 : 28 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.45, delay: index * 0.1 }}
-        className="aspect-3/4"
-        style={{ perspective: '1000px' }}
+        // A clip-path reveal: the frame opens from slightly inset rather than
+        // fading in, so the capture is never fully hidden.
+        initial={
+          prefersReduced ? false : { clipPath: 'inset(6% 6% 6% 6% round 8px)' }
+        }
+        whileInView={{ clipPath: 'inset(0% 0% 0% 0% round 8px)' }}
+        viewport={{ once: true, margin: '-80px' }}
+        transition={{ duration: 0.9, ease: EASE }}
       >
-        {/* Flip container */}
-        <div
-          className="relative h-full w-full rounded-lg transition-transform duration-500"
-          style={{
-            transformStyle: 'preserve-3d',
-            WebkitTransformStyle: 'preserve-3d',
-            transform: prefersReduced
-              ? 'none'
-              : flipped
-                ? 'rotateY(180deg)'
-                : 'rotateY(0deg)',
-            WebkitTransform: prefersReduced
-              ? 'none'
-              : flipped
-                ? 'rotateY(180deg)'
-                : 'rotateY(0deg)',
-          }}
+        <BrowserFrame
+          host={project.host}
+          shot={project.desktop}
+          alt={alt}
+          sizes={sizes}
+          className="transition-transform duration-500 ease-out group-hover/project:-translate-y-1"
         >
-          {/* ── FRONT ── */}
-          <div
-            className="absolute inset-0 overflow-hidden rounded-lg"
-            style={{
-              backfaceVisibility: 'hidden',
-              WebkitBackfaceVisibility: 'hidden',
-              transform: 'rotateY(0deg)',
-              WebkitTransform: 'rotateY(0deg)',
-            }}
-            {...faceProps(!flipped)}
-          >
-            {project.isLogo ? (
-              /* Logo projects — image on client brand bg */
-              <div
-                className="relative flex h-full items-center justify-center p-6"
-                style={{ backgroundColor: project.bgColor || undefined }}
-              >
-                <img
-                  src={project.image}
-                  alt={title}
-                  className="max-h-full max-w-[80%] object-contain"
-                  loading="lazy"
-                  decoding="async"
-                  width={320}
-                  height={320}
-                />
-                {/* Bottom row: tags left, hint right */}
-                <div className="absolute inset-x-3 bottom-3 flex items-end justify-between gap-2">
-                  <div className="flex flex-wrap gap-1">
-                    {project.tags.map(tag => (
-                      <span
-                        key={tag}
-                        className="rounded-full bg-black/55 px-2.5 py-0.5 text-xs font-medium text-white backdrop-blur-sm"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <p className={`shrink-0 text-xs ${hintColor}`}>
-                    {t('work.tapToLearnMore')}
-                  </p>
-                </div>
-              </div>
-            ) : (
-              /* Screenshot projects — solid brand field with overlay */
-              <div
-                className="relative flex h-full flex-col items-start justify-end p-6"
-                style={{ backgroundColor: project.backBg }}
-              >
-                {/* Gradient overlay for legibility */}
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 rounded-lg bg-linear-to-t from-black/60 via-transparent to-transparent"
-                />
-                <div className="relative z-10 w-full">
-                  <h3 className="font-display mb-3 text-lg leading-snug font-semibold text-white">
-                    {title}
-                  </h3>
-                  {/* Bottom row: tags left, hint right */}
-                  <div className="flex items-end justify-between gap-2">
-                    <div className="flex flex-wrap gap-1">
-                      {project.tags.map(tag => (
-                        <span
-                          key={tag}
-                          className="rounded-full bg-white/20 px-2.5 py-0.5 text-xs font-medium text-white backdrop-blur-sm"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <p className="shrink-0 text-xs text-white/70">
-                      {t('work.tapToLearnMore')}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Flip trigger covers the face so the whole card stays clickable
-                while remaining a single, real button. */}
-            <button
-              ref={frontRef}
-              type="button"
-              onClick={() => flip(true)}
-              aria-expanded={flipped}
-              aria-label={`${title} — ${t('work.tapToLearnMore')}`}
-              className="focus-visible:ring-ring absolute inset-0 h-full w-full cursor-pointer rounded-lg focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-inset"
-            />
-          </div>
-
-          {/* ── BACK ── */}
-          <div
-            className="absolute inset-0 flex flex-col overflow-hidden rounded-lg p-6"
-            style={{
-              backfaceVisibility: 'hidden',
-              WebkitBackfaceVisibility: 'hidden',
-              transform: 'rotateY(180deg)',
-              WebkitTransform: 'rotateY(180deg)',
-              backgroundColor: project.backBg,
-            }}
-            {...faceProps(flipped)}
-          >
-            {/* Title */}
-            <div className="mb-3 flex shrink-0 items-start justify-between gap-2">
-              <h3 className="font-display text-xl leading-tight font-semibold text-white">
-                {title}
-              </h3>
-              <button
-                ref={backRef}
-                type="button"
-                onClick={() => flip(false)}
-                aria-label={t('work.flipBack')}
-                className="focus-visible:ring-ring -mt-1 -mr-1 shrink-0 cursor-pointer rounded-full p-1.5 text-white/70 transition-colors hover:bg-white/15 hover:text-white focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-inset"
-              >
-                <RotateCcw aria-hidden="true" className="h-4 w-4" />
-              </button>
-            </div>
-
-            {/* Scrollable description */}
-            <ScrollArea className="min-h-0 flex-1">
-              <p className="text-sm leading-relaxed text-white/85">
-                {t(`work.${project.key}.description`)}
-              </p>
-            </ScrollArea>
-
-            {/* Action button */}
-            {(hasDrawer || hasUrl) && (
-              <div className="mt-4 shrink-0">
-                {hasDrawer && (
-                  <button
-                    type="button"
-                    onClick={() => setDrawerOpen(true)}
-                    className="focus-visible:ring-ring inline-flex cursor-pointer items-center gap-1 rounded-full border border-white/40 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-white/20 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-inset"
-                  >
-                    {t('work.viewDetails')}
-                  </button>
-                )}
-                {hasUrl && !hasDrawer && (
-                  <a
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="focus-visible:ring-ring inline-flex items-center gap-1 rounded-full border border-white/40 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-white/20 focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-inset"
-                  >
-                    {t('work.visitSite')}
-                    <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" />
-                    <span className="sr-only">{t('a11y.opensInNewTab')}</span>
-                  </a>
-                )}
-              </div>
-            )}
-          </div>
-        </div>
+          {project.key === 'school' && <SchoolMockup />}
+        </BrowserFrame>
       </motion.div>
 
-      {hasDrawer && (
-        <Drawer open={drawerOpen} onOpenChange={setDrawerOpen}>
+      {/* The phone sits outside the clipped layer so it can overhang */}
+      {withPhone && project.mobile && (
+        <motion.div
+          initial={prefersReduced ? false : { opacity: 0, y: 32 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.9, delay: 0.25, ease: EASE }}
+          className="absolute -right-3 -bottom-8 hidden w-[22%] min-w-24 sm:block lg:-right-6"
+        >
+          <PhoneFrame
+            src={project.mobile}
+            className="transition-transform duration-500 ease-out group-hover/project:-translate-y-2"
+          />
+        </motion.div>
+      )}
+    </div>
+  )
+}
+
+/* ── Copy ───────────────────────────────────────────────────────────── */
+
+function ProjectCopy({
+  project,
+  headingLevel = 'h3',
+}: {
+  project: FeaturedProject
+  headingLevel?: 'h3'
+}) {
+  const { t } = useTranslation()
+  const base = `work.projects.${project.key}`
+  const highlights = t(`${base}.highlights`, {
+    returnObjects: true,
+  }) as string[]
+  const client = t(`${base}.client`, { defaultValue: '' })
+  const Heading = headingLevel
+
+  return (
+    <div className="flex flex-col">
+      <p className="text-muted-foreground font-mono text-xs tracking-wide">
+        {t(`${base}.kind`)}
+      </p>
+      <Heading className="font-display mt-3 text-3xl font-bold tracking-tight text-balance sm:text-4xl">
+        {t(`${base}.title`)}
+      </Heading>
+      {client && (
+        <p className="text-foreground/80 mt-1 text-sm font-medium">{client}</p>
+      )}
+      <p className="text-muted-foreground mt-4 max-w-[52ch] leading-relaxed text-pretty">
+        {t(`${base}.summary`)}
+      </p>
+
+      <ul className="border-border/70 mt-6 border-t">
+        {Array.isArray(highlights) &&
+          highlights.map(item => (
+            <li
+              key={item}
+              className="border-border/70 flex items-baseline gap-3 border-b py-2.5 text-sm"
+            >
+              {/* The brand cursor, as a list marker */}
+              <span
+                aria-hidden="true"
+                className="bg-cft-mint-ink inline-block h-[3px] w-2.5 shrink-0 -translate-y-[3px]"
+              />
+              {item}
+            </li>
+          ))}
+      </ul>
+
+      <div className="mt-5 flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
+        <p className="text-muted-foreground font-mono text-xs">
+          {project.stack.join(' · ')}
+        </p>
+        {project.url ? (
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn(linkClass, 'text-foreground group/link')}
+          >
+            <span className="decoration-cft-mint-ink underline decoration-2 underline-offset-[6px]">
+              {t('work.visitSite')}
+            </span>
+            <ArrowUpRight
+              aria-hidden="true"
+              className="h-4 w-4 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"
+            />
+            <span className="sr-only">
+              {t(`${base}.title`)} {t('a11y.opensInNewTab')}
+            </span>
+          </a>
+        ) : (
+          <span className="text-muted-foreground inline-flex items-center gap-1.5 text-sm">
+            <Lock
+              aria-hidden="true"
+              className="h-3.5 w-3.5"
+              strokeWidth={1.75}
+            />
+            {t('work.privateApp')}
+          </span>
+        )}
+      </div>
+    </div>
+  )
+}
+
+/** Media + copy side by side; `flip` puts the media on the right. */
+function FeatureRow({
+  project,
+  flip = false,
+}: {
+  project: FeaturedProject
+  flip?: boolean
+}) {
+  return (
+    <article className="group/project grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12">
+      <div className={cn('lg:col-span-7', flip && 'lg:order-2')}>
+        <ProjectMedia project={project} sizes={shotSizes.featured} />
+      </div>
+      <div className={cn('lg:col-span-5', flip && 'lg:order-1')}>
+        <ProjectCopy project={project} />
+      </div>
+    </article>
+  )
+}
+
+/** Media above copy — used for the two-up pair. */
+function FeatureStack({ project }: { project: FeaturedProject }) {
+  return (
+    <article className="group/project flex flex-col gap-10">
+      <ProjectMedia project={project} sizes={shotSizes.half} />
+      <ProjectCopy project={project} />
+    </article>
+  )
+}
+
+/* ── More projects ──────────────────────────────────────────────────── */
+
+function IndexRow({ project }: { project: IndexProject }) {
+  const { t } = useTranslation()
+  const [open, setOpen] = useState(false)
+  const base = `work.projects.${project.key}`
+  const title = t(`${base}.title`)
+
+  // One control per row, stretched over the row with ::after, so the whole
+  // line is clickable without nesting interactive elements.
+  const stretched =
+    'after:absolute after:inset-0 after:content-[""] focus-visible:outline-none'
+
+  return (
+    <li className="group/row border-border/70 has-focus-visible:ring-ring relative grid grid-cols-[88px_1fr] items-center gap-4 rounded-sm border-t py-5 has-focus-visible:ring-2 sm:grid-cols-[148px_1fr_auto] sm:gap-8">
+      <div className="border-border/70 bg-muted overflow-hidden rounded-md border">
+        <img
+          src={project.thumb}
+          alt=""
+          width={720}
+          height={450}
+          loading="lazy"
+          decoding="async"
+          className="aspect-16/10 h-auto w-full object-cover object-top transition-transform duration-500 ease-out group-hover/row:scale-[1.04]"
+        />
+      </div>
+
+      <div className="min-w-0">
+        <h4 className="font-display text-lg leading-tight font-semibold">
+          {project.url ? (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={stretched}
+            >
+              {title}
+              <span className="sr-only">
+                {' '}
+                — {t('work.visitSite')} {t('a11y.opensInNewTab')}
+              </span>
+            </a>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
+              aria-haspopup="dialog"
+              className={cn(stretched, 'cursor-pointer text-left')}
+            >
+              {title}
+              <span className="sr-only"> — {t('work.viewDetails')}</span>
+            </button>
+          )}
+        </h4>
+        <p className="text-muted-foreground mt-1 font-mono text-[11px] tracking-wide">
+          {t(`${base}.kind`)}
+        </p>
+        <p className="text-muted-foreground mt-2 hidden max-w-[60ch] text-sm leading-relaxed sm:block">
+          {t(`${base}.summary`)}
+        </p>
+      </div>
+
+      <span
+        aria-hidden="true"
+        className="text-muted-foreground group-hover/row:text-foreground hidden items-center gap-1.5 text-sm transition-colors sm:inline-flex"
+      >
+        {project.url ? t('work.visitSite') : t('work.viewDetails')}
+        {project.url ? (
+          <ArrowUpRight className="h-4 w-4" />
+        ) : (
+          <Plus className="h-4 w-4" />
+        )}
+      </span>
+
+      {project.detail && (
+        <Drawer open={open} onOpenChange={setOpen}>
           <DrawerContent>
             <DrawerHeader>
               <DrawerTitle>{title}</DrawerTitle>
-              <div className="mt-1.5 flex flex-wrap gap-1.5">
-                {project.tags.map(tag => (
-                  <span
-                    key={tag}
-                    className="bg-muted text-muted-foreground rounded-full px-2.5 py-0.5 text-xs font-medium"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+              <p className="text-muted-foreground font-mono text-xs">
+                {t(`${base}.kind`)}
+              </p>
             </DrawerHeader>
-            <div className="overflow-y-auto px-4 pb-8">
-              <DrawerDescription className="pb-1 text-sm leading-relaxed">
-                {t(`work.${project.key}.description`)}
+            <div className="mx-auto w-full max-w-4xl overflow-y-auto px-4 pb-8">
+              <DrawerDescription className="max-w-[65ch] pb-1 text-sm leading-relaxed">
+                {t(`${base}.description`)}
               </DrawerDescription>
-              {project.drawerImage && (
-                <img
-                  src={project.drawerImage}
-                  alt={title}
-                  className="mx-auto mt-4 block w-full rounded-lg object-contain"
-                  loading="lazy"
-                  decoding="async"
-                  width={project.drawerSize?.width}
-                  height={project.drawerSize?.height}
-                />
-              )}
+              <img
+                src={project.detail.src}
+                alt={title}
+                className="border-border/70 mt-5 block w-full rounded-lg border object-contain"
+                loading="lazy"
+                decoding="async"
+                width={project.detail.width}
+                height={project.detail.height}
+              />
             </div>
           </DrawerContent>
         </Drawer>
       )}
-    </>
+    </li>
   )
 }
+
+/* ── Section ────────────────────────────────────────────────────────── */
 
 export function Work() {
   const { t } = useTranslation()
   const prefersReduced = useReducedMotion()
-  const [activeTag, setActiveTag] = useState<string | null>(null)
-  const {
-    ref,
-    onMouseDown,
-    onMouseMove,
-    onMouseUp,
-    onMouseLeave,
-    onClickCapture,
-  } = useDragScroll<HTMLDivElement>()
-
-  const filtered = activeTag
-    ? projects.filter(p => p.tags.includes(activeTag))
-    : projects
-
-  const pillClass = (isActive: boolean) =>
-    `focus-visible:ring-ring cursor-pointer rounded-full px-3.5 py-1.5 text-xs font-semibold transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none ${
-      isActive
-        ? 'bg-primary text-primary-foreground'
-        : 'bg-secondary text-secondary-foreground hover:bg-border'
-    }`
 
   return (
     <section
       id={SECTION_ID}
-      className="px-4 py-24 sm:py-32"
+      className="overflow-x-clip px-4 pt-12 pb-24 sm:pt-16 sm:pb-32"
       aria-labelledby="work-title"
     >
       <div className="mx-auto max-w-6xl">
-        {/* Header — flush left per Register A */}
-        <motion.div
-          initial={{ opacity: 0, y: prefersReduced ? 0 : 20 }}
+        <motion.header
+          initial={prefersReduced ? false : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.5 }}
-          className="mb-10"
+          transition={{ duration: 0.6, ease: EASE }}
+          className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-end"
         >
           <h2
             id="work-title"
-            className="font-display mb-3 text-3xl font-bold tracking-tight sm:text-4xl"
+            className="font-display text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:col-span-7 lg:text-6xl"
           >
             {t('work.title')}
           </h2>
-          <p className="text-muted-foreground max-w-lg">{t('work.subtitle')}</p>
-        </motion.div>
+          <p className="text-muted-foreground max-w-md leading-relaxed lg:col-span-5 lg:justify-self-end">
+            {t('work.subtitle')}
+          </p>
+        </motion.header>
 
-        {/* Filter pills */}
-        <motion.div
-          initial={{ opacity: 0, y: prefersReduced ? 0 : 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.15 }}
-          role="group"
-          aria-label={t('a11y.filterProjects')}
-          className="mb-8 flex flex-wrap gap-2"
-        >
-          <button
-            type="button"
-            onClick={() => setActiveTag(null)}
-            aria-pressed={activeTag === null}
-            className={pillClass(activeTag === null)}
-          >
-            {t('work.all')}
-          </button>
-          {ALL_TAGS.map(tag => (
-            <button
-              key={tag}
-              type="button"
-              onClick={() => setActiveTag(activeTag === tag ? null : tag)}
-              aria-pressed={activeTag === tag}
-              className={pillClass(activeTag === tag)}
-            >
-              {tag}
-            </button>
-          ))}
-        </motion.div>
+        <div className="mt-16 space-y-24 sm:mt-20 sm:space-y-32">
+          <FeatureRow project={featured.masterspace} />
 
-        {/* Horizontal scroll */}
-        <div
-          className="relative"
-          ref={ref}
-          onMouseDown={onMouseDown}
-          onMouseMove={onMouseMove}
-          onMouseUp={onMouseUp}
-          onMouseLeave={onMouseLeave}
-          onClickCapture={onClickCapture}
-        >
-          <ScrollArea
-            className="w-full"
-            viewportProps={{
-              tabIndex: 0,
-              role: 'region',
-              'aria-label': t('a11y.workCarousel'),
-            }}
-          >
-            <div className="flex cursor-grab gap-4 pb-4 select-none">
-              <AnimatePresence mode="popLayout">
-                {filtered.map((project, i) => (
-                  <motion.div
-                    key={project.key}
-                    layout
-                    initial={{ opacity: 0, scale: prefersReduced ? 1 : 0.92 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: prefersReduced ? 1 : 0.92 }}
-                    transition={{ duration: 0.25 }}
-                    className="w-56 shrink-0"
-                  >
-                    <ProjectCard project={project} index={i} />
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-              {/* Coming soon card */}
-              {!activeTag && (
-                <div className="border-border/50 bg-muted text-muted-foreground flex aspect-3/4 w-56 shrink-0 flex-col items-center justify-center rounded-lg border border-dashed p-5 text-center">
-                  <Clock
-                    aria-hidden="true"
-                    className="text-muted-foreground/40 mb-3 h-5 w-5"
-                    strokeWidth={1.5}
-                  />
-                  <span className="text-sm font-semibold">
-                    {t('work.comingSoon')}
-                  </span>
-                  <span className="mt-1 text-xs">
-                    {t('work.comingSoonSub')}
-                  </span>
-                </div>
-              )}
+          <div className="grid grid-cols-1 gap-24 md:grid-cols-2 md:gap-x-10 lg:gap-x-16">
+            <FeatureStack project={featured.dorsal} />
+            {/* Offset the second column so the pair doesn't read as a grid */}
+            <div className="md:pt-24">
+              <FeatureStack project={featured.fudis} />
             </div>
-            <ScrollBar orientation="horizontal" />
-          </ScrollArea>
+          </div>
 
-          <div
-            aria-hidden="true"
-            className="from-background pointer-events-none absolute inset-y-0 right-0 hidden w-16 bg-linear-to-l to-transparent sm:block"
-          />
+          <FeatureRow project={featured.school} flip />
         </div>
 
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: prefersReduced ? 0 : 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.3 }}
-          className="mt-12"
-        >
-          <p className="text-muted-foreground text-sm">
+        {/* More projects — a ruled index, not another grid of cards */}
+        <div className="mt-28 sm:mt-36">
+          <h3 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">
+            {t('work.moreTitle')}
+          </h3>
+          <ul className="border-border/70 mt-8 border-b">
+            {moreProjects.map(project => (
+              <IndexRow key={project.key} project={project} />
+            ))}
+          </ul>
+
+          <p className="text-muted-foreground mt-10 text-sm">
             {t('work.cta')}{' '}
             <a
               href="#contact"
@@ -501,7 +371,7 @@ export function Work() {
               {t('work.ctaLink')}
             </a>
           </p>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

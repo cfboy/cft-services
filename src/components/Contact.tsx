@@ -1,11 +1,11 @@
 import { useForm } from '@tanstack/react-form'
 import { motion, useReducedMotion } from 'framer-motion'
-import { Send } from 'lucide-react'
+import { CalendarDays, Mail, Phone, Send } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import {
@@ -16,6 +16,13 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
+import { CONTACT } from '@/lib/site'
+import { cn } from '@/lib/utils'
+
+const CALENDLY_URL = CONTACT.calendly
+const EMAIL = CONTACT.email
+const PHONE = CONTACT.phone
+const PHONE_HREF = CONTACT.phoneE164
 
 const WEBHOOK_URL = 'https://hook.us2.make.com/2ore7a8fy13c2jn02j2g0oqr041iqrha'
 
@@ -62,7 +69,8 @@ export function Contact() {
         const response = await fetch(WEBHOOK_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(value),
+          // `page` tells the inbox which service page the lead came from.
+          body: JSON.stringify({ ...value, page: window.location.pathname }),
         })
 
         if (!response.ok) throw new Error(`Request failed: ${response.status}`)
@@ -116,31 +124,95 @@ export function Contact() {
       className="px-4 py-24 sm:py-32"
       aria-labelledby="contact-title"
     >
-      <div className="mx-auto max-w-2xl">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-16">
+        {/* Left — the ask, and the faster path for people who'd rather talk */}
         <motion.div
-          initial={{ opacity: 0, y: prefersReduced ? 0 : 20 }}
+          initial={prefersReduced ? false : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.5 }}
-          className="mb-12 text-center"
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="lg:col-span-5"
         >
           <h2
             id="contact-title"
-            className="font-display mb-3 text-3xl font-bold tracking-tight sm:text-4xl"
+            className="font-display text-4xl font-bold tracking-tight text-balance sm:text-5xl"
           >
             {t('contact.title')}
           </h2>
-          <p className="text-muted-foreground">{t('contact.subtitle')}</p>
+          <p className="text-muted-foreground mt-5 max-w-[46ch] leading-relaxed text-pretty">
+            {t('contact.subtitle')}
+          </p>
+
+          <div className="border-border mt-10 border-t pt-8">
+            <h3 className="font-display text-lg font-semibold">
+              {t('contact.callTitle')}
+            </h3>
+            <p className="text-muted-foreground mt-2 max-w-[46ch] text-sm leading-relaxed">
+              {t('contact.callBody')}
+            </p>
+            <a
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                buttonVariants({ variant: 'outline', size: 'lg' }),
+                'mt-5 w-full px-6 sm:w-auto'
+              )}
+            >
+              <CalendarDays aria-hidden="true" className="h-4 w-4" />
+              {t('contact.callCta')}
+              <span className="sr-only">{t('a11y.opensInNewTab')}</span>
+            </a>
+          </div>
+
+          <div className="border-border mt-10 border-t pt-8">
+            <p className="text-muted-foreground font-mono text-xs">
+              {t('contact.direct')}
+            </p>
+            <ul className="mt-4 space-y-2.5 text-sm">
+              <li>
+                <a
+                  href={`mailto:${EMAIL}`}
+                  className="hover:text-cft-mint-ink focus-visible:ring-ring inline-flex items-center gap-2.5 rounded-sm transition-colors focus-visible:ring-2 focus-visible:outline-none"
+                >
+                  <Mail
+                    aria-hidden="true"
+                    className="text-muted-foreground h-4 w-4"
+                    strokeWidth={1.5}
+                  />
+                  <span className="break-all">{EMAIL}</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`tel:${PHONE_HREF}`}
+                  className="hover:text-cft-mint-ink focus-visible:ring-ring inline-flex items-center gap-2.5 rounded-sm transition-colors focus-visible:ring-2 focus-visible:outline-none"
+                >
+                  <Phone
+                    aria-hidden="true"
+                    className="text-muted-foreground h-4 w-4"
+                    strokeWidth={1.5}
+                  />
+                  {PHONE}
+                </a>
+              </li>
+            </ul>
+          </div>
         </motion.div>
 
+        {/* Right — the form */}
         <motion.div
-          initial={{ opacity: 0, y: prefersReduced ? 0 : 20 }}
+          initial={prefersReduced ? false : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          className="lg:col-span-7"
         >
-          <Card>
-            <CardContent className="p-6 sm:p-8">
+          <Card className="border-border/70 rounded-lg shadow-none">
+            <CardContent className="p-6 sm:p-10">
+              <h3 className="font-display mb-8 text-xl font-semibold">
+                {t('contact.formTitle')}
+              </h3>
               <form
                 className="space-y-5"
                 noValidate
@@ -371,7 +443,7 @@ export function Contact() {
                     )
                   }}
                 </form.Field>
-                <div className="flex justify-end">
+                <div className="flex justify-end pt-2">
                   <form.Subscribe selector={state => state.isSubmitting}>
                     {isSubmitting => (
                       <Button

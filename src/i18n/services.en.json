@@ -1,0 +1,506 @@
+{
+  "common": {
+    "breadcrumb": "Breadcrumb",
+    "home": "Home",
+    "services": "Services",
+    "includedTitle": "What's included",
+    "fitTitle": "A good fit if",
+    "processTitle": "How it works",
+    "relatedTitle": "Related work",
+    "faqTitle": "Frequently asked questions",
+    "otherTitle": "Other services",
+    "ctaPrimary": "Start a project",
+    "ctaCall": "Book a free call",
+    "learnMore": "Learn more",
+    "allServices": "All services",
+    "areaNote": "Serving San Juan, the metro area and all of Puerto Rico — in Spanish or English."
+  },
+  "hub": {
+    "metaTitle": "Technology Services in Puerto Rico | CFT Services",
+    "metaDescription": "Web design, custom apps, automation, CRM, consulting and event technology for businesses in San Juan and across Puerto Rico.",
+    "title": "Technology services for Puerto Rico businesses",
+    "lead": "Six things we do, and do well. Every project starts with a free conversation about what your business actually needs — then we build it, in Spanish or English."
+  },
+  "websites": {
+    "name": "Web design",
+    "metaTitle": "Web Design & Development in Puerto Rico | CFT Services",
+    "metaDescription": "Fast, bilingual websites for businesses in San Juan and across Puerto Rico — built to show up on Google and turn visitors into calls, bookings and sales.",
+    "h1": "Web design and development in Puerto Rico",
+    "summary": "Fast, bilingual websites built to show up on Google and turn visitors into clients.",
+    "lead": "A website that doesn't bring in business is just an expense. We design and build fast, bilingual sites for businesses in San Juan and across Puerto Rico — sites that show up on Google, work on every phone, and move people to call, book or buy.",
+    "includes": [
+      {
+        "title": "Design that fits your brand",
+        "desc": "A design built around your business and your customers, not a theme with your logo swapped in."
+      },
+      {
+        "title": "Bilingual from day one",
+        "desc": "Spanish and English versions, each with its own address, so both audiences can find you on Google."
+      },
+      {
+        "title": "Local SEO foundations",
+        "desc": "Page titles, descriptions, structured data, a sitemap and Google Search Console, set up so you appear when people nearby search for what you do."
+      },
+      {
+        "title": "Mobile-first and fast",
+        "desc": "Most visitors arrive on a phone. Pages are built for small screens first and tuned to load quickly on a cellular connection."
+      },
+      {
+        "title": "Content you can edit",
+        "desc": "When your content changes often, a simple CMS lets your team update services, prices and photos without calling a developer."
+      },
+      {
+        "title": "Forms, booking and WhatsApp",
+        "desc": "Contact forms, appointment links, click-to-call and WhatsApp, connected to wherever your team already works."
+      }
+    ],
+    "fit": [
+      "You're opening or relaunching a business and need to look credible from the first search.",
+      "Your current site is slow, outdated or impossible to update.",
+      "You get visits but few calls, bookings or messages."
+    ],
+    "process": [
+      {
+        "title": "Discovery call",
+        "desc": "Thirty minutes about your business, your customers and what the site has to achieve. You get a fixed quote afterwards."
+      },
+      {
+        "title": "Structure and content",
+        "desc": "We map the pages, write or edit the copy with you, and decide which searches each page should answer."
+      },
+      {
+        "title": "Design and build",
+        "desc": "You review the design on a live preview link, on your own phone, before anything is published."
+      },
+      {
+        "title": "Launch and handover",
+        "desc": "Domain, hosting, analytics and Search Console set up. Your team is trained, and we stay available after launch."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "How much does a website cost in Puerto Rico?",
+        "a": "It depends on the number of pages and languages, and on whether you need a CMS, online booking or a store. After a free 30-minute call we send a fixed quote, so you know the full cost before any work starts."
+      },
+      {
+        "q": "How long does it take to build a website?",
+        "a": "A focused business site usually takes a few weeks from the first call to launch. Larger sites with a CMS or many services take longer; the timeline is agreed in the proposal."
+      },
+      {
+        "q": "Will my website show up on Google?",
+        "a": "Every site is built with the technical SEO Google expects — fast pages, clean structure, bilingual addresses, structured data and a sitemap — and we help you connect Search Console and your Google Business Profile. Rankings also grow with content and reviews over time, and we'll tell you honestly what moves the needle for your business."
+      },
+      {
+        "q": "Can I update the website myself?",
+        "a": "Yes. If your content changes often we set up a CMS and train your team. Clínica Dorsal and Masterspace both publish their own changes."
+      },
+      {
+        "q": "Do you work with businesses outside San Juan?",
+        "a": "Yes. We work with businesses all over Puerto Rico — from the metro area to the center of the island — and with clients in the United States. Most of the work is remote, with in-person meetings when they help."
+      }
+    ]
+  },
+  "webapps": {
+    "name": "Web applications",
+    "metaTitle": "Custom Web App Development in Puerto Rico | CFT Services",
+    "metaDescription": "Custom web apps, client portals and internal tools for Puerto Rico businesses that have outgrown spreadsheets. Secure, role-based, built around you.",
+    "h1": "Custom web applications for Puerto Rico businesses",
+    "summary": "Client portals, dashboards and internal tools for teams that have outgrown spreadsheets.",
+    "lead": "When spreadsheets, paper and generic software start slowing your team down, we build the tool that fits exactly how you work — client portals, internal dashboards and multi-user apps where each person sees exactly what they should.",
+    "includes": [
+      {
+        "title": "Client and staff portals",
+        "desc": "A secure place for clients to check status, upload documents or book — and for your team to manage it all."
+      },
+      {
+        "title": "Dashboards and reporting",
+        "desc": "The numbers you check every week, live, in one screen instead of five spreadsheets."
+      },
+      {
+        "title": "Roles and permissions",
+        "desc": "Owners, staff and clients each see what they should. Access is enforced in the database, not just hidden in the interface."
+      },
+      {
+        "title": "Integrations",
+        "desc": "Connected to the tools you already use: CRM, payments, accounting, email and calendars."
+      },
+      {
+        "title": "Installable on phones",
+        "desc": "Apps that install from the browser and work one-handed, for teams that are on the move."
+      },
+      {
+        "title": "Hosting and support",
+        "desc": "Deployed on proven infrastructure with backups and monitoring, and a developer who knows the code when you need a change."
+      }
+    ],
+    "fit": [
+      "Your team re-types the same information in several places.",
+      "The business runs on spreadsheets only one person understands.",
+      "Off-the-shelf software forces you to change how you work."
+    ],
+    "process": [
+      {
+        "title": "Map the workflow",
+        "desc": "We sit with the people who do the work and map every step, document and decision before writing code."
+      },
+      {
+        "title": "Prototype",
+        "desc": "A clickable first version of the key screens, so you can react to something real early."
+      },
+      {
+        "title": "Build in stages",
+        "desc": "The most valuable piece ships first. Each stage goes live and gets used before the next one starts."
+      },
+      {
+        "title": "Launch, train, support",
+        "desc": "Your team is trained on the real app, and we stay on to fix, adjust and add as the business changes."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What's the difference between a website and a web application?",
+        "a": "A website mostly informs — it tells visitors who you are and how to contact you. A web application does work: people sign in, enter and manage data, and each person sees different information. Many projects need both."
+      },
+      {
+        "q": "How much does custom software cost?",
+        "a": "It depends on the number of screens, roles and integrations. We usually start with the smallest version that solves the main problem, give you a fixed quote for it, and grow from there."
+      },
+      {
+        "q": "Is my data secure?",
+        "a": "We build on established platforms such as PostgreSQL and Supabase, with encrypted connections, access rules enforced in the database, and regular backups. Each person only reaches the data their role allows."
+      },
+      {
+        "q": "Will it work on phones?",
+        "a": "Yes. Every app is designed for phones and desktops, and can be installed on a phone's home screen when that helps your team."
+      },
+      {
+        "q": "Can you take over an existing app?",
+        "a": "Often, yes. We start with a review of the code and infrastructure and tell you honestly whether it makes more sense to extend it or rebuild it."
+      }
+    ]
+  },
+  "automation": {
+    "name": "Process automation",
+    "metaTitle": "Business Process Automation in Puerto Rico | CFT Services",
+    "metaDescription": "Automate repetitive work in your Puerto Rico business: connect your apps, sync data, generate reports and process documents with AI. No more copy and paste.",
+    "h1": "Process automation for businesses in Puerto Rico",
+    "summary": "Connect your apps, automate reports and process documents with AI — no more copy and paste.",
+    "lead": "Every time your team copies data between apps, builds the same report or chases the same follow-up, that's time and money leaving the business. We connect your tools and automate the busy work — with Make, Zapier, custom code and AI where it genuinely helps.",
+    "includes": [
+      {
+        "title": "App-to-app integrations",
+        "desc": "Your forms, CRM, email, spreadsheets and accounting talk to each other, so data is entered once."
+      },
+      {
+        "title": "Automated reports",
+        "desc": "Sales, payments and operations data collected and sent to you on schedule — for example from ATH Móvil Business and Clover."
+      },
+      {
+        "title": "AI document processing",
+        "desc": "Incoming PDFs and emails read, classified and turned into records and tasks automatically."
+      },
+      {
+        "title": "Follow-ups and notifications",
+        "desc": "Reminders, confirmations and internal alerts that go out on time without anyone remembering to send them."
+      },
+      {
+        "title": "Data clean-up and sync",
+        "desc": "Duplicates merged, fields standardised and records kept in sync across systems."
+      },
+      {
+        "title": "Monitoring",
+        "desc": "Alerts on every automation, so a broken step is caught before anyone notices missing data."
+      }
+    ],
+    "fit": [
+      "Someone spends hours every week copying data between systems.",
+      "Monthly reports are still built by hand.",
+      "Leads, documents or follow-ups fall through the cracks."
+    ],
+    "process": [
+      {
+        "title": "Audit the process",
+        "desc": "We watch how the work is done today and measure where the hours actually go."
+      },
+      {
+        "title": "Design the flow",
+        "desc": "A map of every trigger, step and exception, agreed with you before anything is connected."
+      },
+      {
+        "title": "Build and test",
+        "desc": "Built and tested with your real data, running side by side with the manual process until you trust it."
+      },
+      {
+        "title": "Hand over",
+        "desc": "Documentation in plain language, monitoring switched on, and support when something upstream changes."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What tools do you use for automation?",
+        "a": "Make and Zapier for most integrations, custom code when a tool can't do it reliably, and AI models for reading documents and classifying information. We choose whatever is simplest to maintain for your case."
+      },
+      {
+        "q": "How much does it cost to automate a process?",
+        "a": "A single automation is a small, fixed-price project; a full workflow across several systems is larger. The free call is where we estimate the hours you'll save against the cost."
+      },
+      {
+        "q": "Do I have to change the software I already use?",
+        "a": "Usually not. Most automations connect the tools you already pay for. If one of them can't be connected, we'll tell you before the project starts."
+      },
+      {
+        "q": "What happens if an automation fails?",
+        "a": "Every automation has error alerts. If an app changes or a step fails, we find out right away and fix it."
+      },
+      {
+        "q": "Can AI really read our documents?",
+        "a": "For structured documents — invoices, forms, IDs, referrals — yes, reliably, with a human check where the stakes are high. We test with your real documents before you rely on it."
+      }
+    ]
+  },
+  "crm": {
+    "name": "CRM implementation",
+    "metaTitle": "CRM Implementation in Puerto Rico | CFT Services",
+    "metaDescription": "CRM setup, data migration, automation and training for sales teams in Puerto Rico. Zoho CRM and HubSpot configured around how you actually sell.",
+    "h1": "CRM implementation for Puerto Rico teams",
+    "summary": "Zoho CRM or HubSpot, set up around how you actually sell — with your team trained to use it.",
+    "lead": "Most CRM projects fail because the software isn't set up for how you actually sell. We configure Zoho CRM, HubSpot or whatever fits your team, bring your data in, automate the follow-ups and train your people — so the pipeline runs itself.",
+    "includes": [
+      {
+        "title": "Choosing the right CRM",
+        "desc": "An honest comparison for your size and budget, including whether you need a CRM at all."
+      },
+      {
+        "title": "Setup and customisation",
+        "desc": "Pipelines, fields, layouts and reports that match your sales process, in Spanish or English."
+      },
+      {
+        "title": "Data migration",
+        "desc": "Contacts, deals and history moved in from spreadsheets or your old system, cleaned on the way."
+      },
+      {
+        "title": "Sales automation",
+        "desc": "Lead assignment, reminders, follow-up emails and task creation that happen without anyone clicking."
+      },
+      {
+        "title": "Integrations",
+        "desc": "Website forms, email, calendars, accounting and event lead capture flowing straight into the CRM."
+      },
+      {
+        "title": "Training and adoption",
+        "desc": "Hands-on sessions with your team on their real pipeline, plus short guides they'll actually read."
+      }
+    ],
+    "fit": [
+      "Leads live in email, WhatsApp and notebooks.",
+      "You pay for a CRM nobody really uses.",
+      "You can't see what's in the pipeline without asking someone."
+    ],
+    "process": [
+      {
+        "title": "Map the sales process",
+        "desc": "From first contact to closed deal: who does what, when, and what needs to be tracked."
+      },
+      {
+        "title": "Configure",
+        "desc": "The CRM set up to mirror that process, reviewed with you screen by screen."
+      },
+      {
+        "title": "Migrate and integrate",
+        "desc": "Your data imported and your other tools connected, tested before the team switches over."
+      },
+      {
+        "title": "Train and adjust",
+        "desc": "Training on day one, then a review a few weeks later to fix whatever slows people down."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Zoho CRM or HubSpot — which is better?",
+        "a": "It depends on your team size, budget and the other tools you use. Zoho is often the better value for small and mid-sized teams; HubSpot shines when marketing and sales work closely together. We'll recommend one after understanding how you sell."
+      },
+      {
+        "q": "Can you fix a CRM we already have?",
+        "a": "Yes. Many projects start with a CRM that was set up quickly and never adopted. We review it, clean it up and reconfigure it around your process."
+      },
+      {
+        "q": "Can you move our data from Excel?",
+        "a": "Yes. We clean, de-duplicate and import contacts, companies and deals from spreadsheets or your previous system."
+      },
+      {
+        "q": "Is training available in Spanish?",
+        "a": "Yes. Training and guides are in Spanish, English, or both — whatever your team works in."
+      },
+      {
+        "q": "How long does a CRM implementation take?",
+        "a": "A straightforward setup for a small team takes a few weeks including training. Larger migrations and integrations take longer, and the plan is agreed up front."
+      }
+    ]
+  },
+  "consulting": {
+    "name": "Technology consulting",
+    "metaTitle": "Technology Consulting in Puerto Rico | CFT Services",
+    "metaDescription": "Not sure what technology your business needs? Independent consulting in Puerto Rico: a systems review, a clear roadmap, no software to sell you.",
+    "h1": "Technology consulting for Puerto Rico businesses",
+    "summary": "A clear, honest plan for the technology your business needs — and what it doesn't.",
+    "lead": "Not sure where to start? We look at how your business runs today and tell you exactly which technology would help — and what would just waste your money. Plain language, a written plan, and no platform to push.",
+    "includes": [
+      {
+        "title": "Systems and process review",
+        "desc": "How information moves through your business today, and where it gets stuck."
+      },
+      {
+        "title": "Technology roadmap",
+        "desc": "A prioritised, written plan: what to do first, what can wait, and roughly what each step costs."
+      },
+      {
+        "title": "Vendor and software selection",
+        "desc": "Side-by-side comparisons and a second opinion before you sign a contract."
+      },
+      {
+        "title": "Stack assessment",
+        "desc": "For teams with existing software: what to keep, what to replace and what to connect."
+      },
+      {
+        "title": "Subscription review",
+        "desc": "The tools you pay for and don't use, and the overlaps between them."
+      },
+      {
+        "title": "Implementation support",
+        "desc": "We can build what we recommend, or help you manage whoever does."
+      }
+    ],
+    "fit": [
+      "You know something has to change but not what.",
+      "You're about to sign with a vendor and want a second opinion.",
+      "Your tools were added one at a time and no longer fit together."
+    ],
+    "process": [
+      {
+        "title": "A real conversation",
+        "desc": "About your business, your constraints and what success looks like — no proposal before we understand it."
+      },
+      {
+        "title": "Review",
+        "desc": "We look at your systems, documents and workflows, and talk to the people who use them."
+      },
+      {
+        "title": "Recommendations",
+        "desc": "A written, prioritised plan in plain language. If you don't need a custom app, we'll tell you."
+      },
+      {
+        "title": "Next steps",
+        "desc": "We can build it with you, or you can take the plan to anyone you choose."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What does a technology consultant do?",
+        "a": "We help you decide which technology your business should use and in what order — software, automation, websites, data — based on how you actually work, and we write it down as a plan you can act on."
+      },
+      {
+        "q": "Do I have to hire you to build what you recommend?",
+        "a": "No. The plan is yours. Many clients do ask us to build it, but the recommendations are written so any capable team can follow them."
+      },
+      {
+        "q": "How much does a consultation cost?",
+        "a": "The first 30-minute call is free. If a deeper review makes sense, we scope it and give you a fixed price before starting."
+      },
+      {
+        "q": "Do you work with small businesses?",
+        "a": "Yes — most of our clients are small and mid-sized businesses in Puerto Rico, from clinics and schools to contractors and restaurants."
+      },
+      {
+        "q": "Can the consulting be in Spanish?",
+        "a": "Yes. Meetings, documents and recommendations can be in Spanish, English or both."
+      }
+    ]
+  },
+  "events": {
+    "name": "Event technology",
+    "metaTitle": "Event & Booth Technology in Puerto Rico | CFT Services",
+    "metaDescription": "Kiosk games, digital signage, lead capture and check-in for conventions and trade shows in Puerto Rico. Turn booth traffic into real leads.",
+    "h1": "Event technology for conventions and booths in Puerto Rico",
+    "summary": "Interactive kiosk games, live displays, lead capture and check-in for conventions and expos.",
+    "lead": "We design and build interactive, on-brand technology that turns a booth into the busiest spot on the floor — and turns foot traffic into leads your team can follow up on. For conventions, expos, trade shows and brand activations across Puerto Rico.",
+    "includes": [
+      {
+        "title": "Interactive kiosk games",
+        "desc": "Pick-to-win, spin and prize-reveal games on a touchscreen, designed around your brand to draw a crowd."
+      },
+      {
+        "title": "Digital signage and live displays",
+        "desc": "Leaderboards, sponsor loops and countdowns that keep the booth moving all day."
+      },
+      {
+        "title": "Lead capture and CRM sync",
+        "desc": "Visitors register on the screen and the lead lands in your CRM in real time, ready for follow-up."
+      },
+      {
+        "title": "Check-in and registration",
+        "desc": "QR or form-based check-in, badges and attendee lists, from a single booth to a full event."
+      },
+      {
+        "title": "On-brand design",
+        "desc": "Your colours, logo and prizes throughout — it looks like your activation, not a generic app."
+      },
+      {
+        "title": "Results after the event",
+        "desc": "Plays, leads and check-ins exported or synced, so you can measure what the event delivered."
+      }
+    ],
+    "fit": [
+      "Your booth needs a reason for people to stop.",
+      "Paper forms and business-card bowls lose leads.",
+      "Check-in lines slow your event down."
+    ],
+    "process": [
+      {
+        "title": "Brief",
+        "desc": "The event, the audience, the goal and the prizes — and what you want to measure afterwards."
+      },
+      {
+        "title": "Design the experience",
+        "desc": "The game or flow designed in your brand and reviewed on screen before it's built."
+      },
+      {
+        "title": "Build and test",
+        "desc": "Built and tested on the actual screens and hardware before the event, not on a laptop the night before."
+      },
+      {
+        "title": "Go live and follow up",
+        "desc": "Ready for the event, with the leads and results delivered to your team when it ends."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "What is an interactive kiosk game?",
+        "a": "A short, branded game on a touchscreen — pick a box, spin a wheel, match three — that visitors play for a prize. To play, they leave their contact details, which becomes your lead list."
+      },
+      {
+        "q": "Do you provide the screens?",
+        "a": "We can work with the screens or tablets you already have, or help you source the right hardware. The setup is confirmed in the proposal."
+      },
+      {
+        "q": "Can the leads go straight into our CRM?",
+        "a": "Yes. Leads can sync in real time to Zoho, HubSpot or other CRMs, or be delivered as a spreadsheet after the event."
+      },
+      {
+        "q": "Can it be customised for our brand?",
+        "a": "Yes. Colours, logo, prizes, questions and the game itself are designed around your brand and your event goals."
+      },
+      {
+        "q": "How far ahead should we book?",
+        "a": "As early as you can. A few weeks before the event gives time to design, build and test without rushing."
+      }
+    ]
+  },
+  "notFound": {
+    "metaTitle": "Page not found | CFT Services",
+    "metaDescription": "This page doesn't exist. Find our services or get in touch.",
+    "title": "This page doesn't exist",
+    "lead": "The link may be old or mistyped. Here's where to go instead.",
+    "home": "Go to the home page",
+    "services": "See all services"
+  }
+}

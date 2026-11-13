@@ -3,32 +3,21 @@
     "home": "Inicio",
     "services": "Servicios",
     "events": "Eventos",
-    "work": "Trabajos",
+    "work": "Proyectos",
     "about": "Nosotros",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "cta": "Empieza un proyecto"
   },
   "hero": {
-    "title": "Tecnología que Realmente Funciona para tu Negocio",
-    "subtitle": "Desde sitios web hasta automatización, identificamos lo que tu negocio realmente necesita — y lo construimos. Sin jerga, sin relleno, sin proyectos que no llegan a ningún lado.",
-    "cta": "Cuéntanos sobre tu Negocio",
-    "secondary": "Ver Servicios",
-    "identity": [
-      {
-        "label": "TI & Digital",
-        "sub": "Consultoría · Web · Automatización · CRM"
-      },
-      {
-        "label": "Experiencias",
-        "sub": "Kioscos · Señalización · Captura de Leads"
-      },
-      {
-        "label": "Puerto Rico",
-        "sub": "Clientes locales y remotos"
-      }
-    ]
+    "title": "Tecnología que realmente funciona para tu negocio",
+    "subtitle": "Páginas web, apps a la medida, automatización y CRM para negocios en Puerto Rico — y experiencias interactivas para eventos. Identificamos lo que tu negocio realmente necesita y lo construimos.",
+    "cta": "Empieza un proyecto",
+    "secondary": "Ver proyectos",
+    "clientsLabel": "Lanzado recientemente para",
+    "stackLabel": "Sitios de clientes en vivo, construidos por CFT Services"
   },
   "services": {
-    "title": "Lo Que Hacemos",
+    "title": "Lo que hacemos",
     "subtitle": "Consultoría tecnológica, sitios web, apps, automatización y CRM — un solo equipo, una sola conversación para saber por dónde empezar.",
     "consulting": {
       "title": "Consultoría Tecnológica",
@@ -80,11 +69,12 @@
         "Capacitación de Equipo"
       ]
     },
-    "scrollHint": "Desliza para ver los cinco servicios"
+    "allServices": "Todos los servicios",
+    "learnMore": "Ver más"
   },
   "events": {
     "eyebrow": "Experiencias para Eventos",
-    "title": "Experiencias Dinámicas para Convenciones y Stands",
+    "title": "Experiencias dinámicas para convenciones y booths",
     "subtitle": "Diseñamos y construimos tecnología interactiva y a la medida de tu marca que convierte un stand en el punto más concurrido del salón — y el flujo de visitantes en resultados medibles.",
     "contextStrip": "convenciones · expos · ferias · activaciones",
     "capabilities": {
@@ -104,30 +94,31 @@
         "title": "Registro y Check-in de Eventos",
         "description": "Check-in digital rápido, flujos de registro y credenciales, y gestión de asistentes que escalan de un solo stand a un evento completo."
       }
-    }
+    },
+    "learnMore": "Servicios de tecnología para eventos"
   },
   "about": {
-    "title": "Somos un Equipo Pequeño. Lo Preferimos Así.",
+    "title": "Somos un equipo pequeño. Lo preferimos así.",
     "description": "CFT Services es una firma de consultoría tecnológica con base en Puerto Rico. Trabajamos con empresas de todos los tamaños para modernizar operaciones, desarrollar software confiable y automatizar los procesos que consumen el tiempo de tu equipo. No estamos aquí para venderte una plataforma que no necesitas. Empezamos por entender tu negocio — qué quieres lograr, qué lo está frenando y cuál es el camino más directo hacia adelante.",
     "stats": {
       "projectsCompleted": {
-        "label": "Proyectos Completados",
+        "label": "Proyectos lanzados",
         "value": "20+",
         "description": "Entregados en distintas industrias en Puerto Rico y más allá"
       },
       "satisfiedClients": {
-        "label": "Clientes Satisfechos",
+        "label": "Clientes que regresan",
         "value": "10+",
         "description": "Empresas que volvieron para el próximo proyecto"
       },
       "yearsExperience": {
-        "label": "Años de Experiencia",
+        "label": "Años de experiencia",
         "value": "8+",
-        "description": "Experiencia y conocimiento en la industria"
+        "description": "Construyendo software y sistemas para negocios"
       }
     },
     "howWeDoIt": {
-      "title": "Cómo lo Hacemos",
+      "title": "Cómo trabajamos",
       "subtitle": "Empezamos con una conversación real, no con una propuesta",
       "assessment": {
         "title": "Evaluación de Requerimientos",
@@ -143,8 +134,7 @@
       }
     },
     "industries": {
-      "title": "Industrias que Hemos Impactado",
-      "subtitle": "Hemos ayudado a empresas de diversos sectores a modernizarse y crecer a través de la tecnología",
+      "title": "Industrias en las que hemos trabajado",
       "healthcare": {
         "name": "Salud"
       },
@@ -184,46 +174,109 @@
     }
   },
   "work": {
-    "title": "Trabajo que Hemos Lanzado",
-    "subtitle": "Algunos proyectos en vivo que diseñamos, construimos y entregamos a clientes que los usan hoy.",
-    "cta": "¿Estás construyendo algo?",
-    "ctaLink": "Hablemos de tu proyecto.",
+    "title": "Proyectos seleccionados",
+    "subtitle": "Sitios web, aplicaciones y automatizaciones funcionando hoy — para clínicas, constructoras y escuelas, y un producto propio.",
     "visitSite": "Visitar sitio",
     "viewDetails": "Ver detalles",
-    "tapToLearnMore": "Toca para más info",
-    "all": "Todos",
-    "comingSoon": "Próximamente",
-    "comingSoonSub": "Más proyectos en camino",
-    "project1": {
-      "title": "Titi Amanda Babysitter",
-      "description": "Un sitio web profesional para un servicio de niñera — con detalles de servicios, información de reservas y testimonios reales de padres. Simple, confiable y diseñado para convertir visitantes nuevos en consultas."
-    },
-    "project2": {
-      "title": "Clínica Libélula",
-      "description": "Un sitio web limpio y confiable para una clínica de salud — listado de servicios, perfiles del equipo y flujo de citas. Diseñado para funcionar igual de bien en el teléfono que en el escritorio."
-    },
-    "project3": {
-      "title": "Automatización CRM con IA",
-      "description": "Conectamos OneDrive, Zoho CRM y agentes de IA en un solo pipeline que lee documentos entrantes, crea contactos y enruta tareas automáticamente — sin entrada manual."
-    },
-    "project4": {
-      "title": "Reporte de Ventas Automatizado",
-      "description": "Una automatización de reporte mensual que obtiene datos de ventas de ATH Móvil Business y Clover, los consolida y envía un resumen formateado por correo. Lo que antes tomaba horas, ahora toma cero."
-    },
-    "project5": {
-      "title": "MAC Educando",
-      "description": "Sitio web para M Adviser and Consultant Inc., un centro de servicios educativos en Puerto Rico. Incluye navegación con scroll suave, tema claro/oscuro y secciones animadas que presentan sus servicios, oportunidades de empleo e información de contacto."
-    },
-    "flipBack": "Volver a la portada del proyecto"
+    "privateApp": "App privada del cliente",
+    "moreTitle": "Más proyectos",
+    "cta": "¿Estás construyendo algo?",
+    "ctaLink": "Hablemos de tu proyecto.",
+    "projects": {
+      "masterspace": {
+        "title": "Masterspace",
+        "kind": "Sitio web + CMS · Construcción",
+        "summary": "Un sitio bilingüe, oscuro y de materiales nobles para una firma de construcción y terminaciones arquitectónicas en Puerto Rico. El equipo publica sus proyectos, servicios y certificaciones desde un estudio integrado al sitio.",
+        "highlights": [
+          "Bilingüe, primero en español",
+          "Portafolio autogestionado en Sanity",
+          "Tema claro y oscuro"
+        ],
+        "alt": "Portada de Masterspace: titular en serif, 'Elevating the standard of construction in Puerto Rico', sobre concreto oscuro con acentos dorados"
+      },
+      "dorsal": {
+        "title": "Clínica Dorsal",
+        "kind": "Sitio web + CMS · Salud",
+        "summary": "Un sitio sereno, pensado para el celular, para una clínica quiropráctica familiar en Orocovis. Los pacientes ven su plan médico, precios y el horario de hoy, y sacan cita en dos toques. El personal edita todo sin llamarnos.",
+        "highlights": [
+          "Abierto / cerrado en tiempo real",
+          "Una página por servicio",
+          "El contenido se valida antes de publicarse"
+        ],
+        "alt": "Portada de Clínica Dorsal: 'Cuidado quiropráctico para toda la familia' junto al retrato de la doctora enmarcado en anillos color oliva"
+      },
+      "fudis": {
+        "title": "Fudis",
+        "kind": "Producto propio · App web · Comida y bebida",
+        "client": "Diseñada, construida y operada por CFT Services",
+        "summary": "Un diario de comida para Puerto Rico. Toma la foto del plato, marca el lugar y dale estrellas — tus favoritos salen solos. Instalable, a una mano y hecha para usarse en la mesa.",
+        "highlights": [
+          "Se instala en cualquier celular",
+          "Sigue los platos favoritos de tus amigos",
+          "Mapa de cada lugar que has probado"
+        ],
+        "alt": "Portada de Fudis: el titular 'Lo que probaste, donde lo probaste' en letras de rótulo junto a un celular con platos calificados"
+      },
+      "school": {
+        "title": "Itinerario Escolar",
+        "kind": "App web · Educación",
+        "client": "Para M. Adviser and Consultant, Inc.",
+        "summary": "Para sacar a un estudiante del salón a terapia, las especialistas encadenaban tres itinerarios impresos a lápiz. Ahora una sola pantalla responde “¿dónde está este estudiante ahora mismo?” — en todas las escuelas que atiende ese día.",
+        "highlights": [
+          "Un día que une varias escuelas",
+          "Los datos de cada escuela protegidos por rol",
+          "La oficina actualiza itinerarios sin programador"
+        ],
+        "mockup": {
+          "before": "Antes",
+          "beforeNote": "Resuelto a lápiz, cada mañana",
+          "now": "Ahora",
+          "student": "Estudiante",
+          "room": "Salón",
+          "subject": "Español",
+          "group": "Grupo",
+          "until": "hasta",
+          "collect": "Recoger para sesión",
+          "alt": "Ilustración: un código de salón escrito a lápiz junto a la respuesta de la app con el salón, la materia y el grupo actual del estudiante"
+        }
+      },
+      "mac": {
+        "title": "MAC Educando",
+        "kind": "Sitio web · Educación",
+        "summary": "Sitio para un centro de servicios educativos en Puerto Rico: servicios, empleos y contacto, con tema claro y oscuro."
+      },
+      "libelula": {
+        "title": "Clínica Libélula",
+        "kind": "Sitio web · Salud",
+        "summary": "Un sitio luminoso y confiable para una clínica de terapias multidisciplinaria — servicios, equipo y un camino corto para sacar cita."
+      },
+      "titi": {
+        "title": "Titi Amanda Babysitter",
+        "kind": "Sitio web · Servicios familiares",
+        "summary": "Un sitio bilingüe para un servicio de niñera en San Juan — servicios, disponibilidad y testimonios reales de padres."
+      },
+      "crm": {
+        "title": "Automatización de CRM y documentos con IA",
+        "kind": "Automatización · CRM · IA",
+        "summary": "OneDrive, Zoho CRM y agentes de IA en un solo flujo que lee documentos, crea contactos y asigna tareas — sin entrada manual.",
+        "description": "Conectamos OneDrive, Zoho CRM y agentes de IA en un solo pipeline que lee documentos entrantes, crea contactos y enruta tareas automáticamente — sin entrada manual."
+      },
+      "sales": {
+        "title": "Reporte de ventas automatizado",
+        "kind": "Automatización · Finanzas",
+        "summary": "Trae las ventas del mes de ATH Móvil Business y Clover, las consolida y envía un resumen por correo. Horas de trabajo, ahora cero.",
+        "description": "Una automatización de reporte mensual que obtiene datos de ventas de ATH Móvil Business y Clover, los consolida y envía un resumen formateado por correo. Lo que antes tomaba horas, ahora toma cero."
+      }
+    }
   },
   "contact": {
-    "title": "¿No sabes qué necesitas? No importa — empieza aquí.",
+    "title": "¿No sabes qué necesitas? Empieza aquí.",
     "subtitle": "Envíanos un mensaje describiendo tu reto — no hace falta un brief perfecto, solo la situación honesta. Te respondemos en un día hábil.",
     "name": "Nombre",
     "email": "Correo",
     "industry": "Industria",
     "message": "Mensaje",
-    "send": "Enviar Mensaje",
+    "send": "Enviar mensaje",
     "namePlaceholder": "Tu nombre",
     "emailPlaceholder": "tu@ejemplo.com",
     "industryPlaceholder": "Selecciona tu industria",
@@ -239,7 +292,7 @@
       "education": "Educación",
       "other": "Otro"
     },
-    "phonePlaceholder": "XXX-XX-XXXX",
+    "phonePlaceholder": "787-555-0123",
     "phone": "Teléfono",
     "sending": "Enviando…",
     "errors": {
@@ -248,13 +301,12 @@
       "phone": "Escribe un teléfono válido (7 a 20 dígitos).",
       "industry": "Selecciona tu industria.",
       "message": "Cuéntanos un poco más — mínimo 10 caracteres."
-    }
-  },
-  "finalCta": {
-    "title": "¿Listo para dejar de adivinar y empezar a construir?",
-    "subtitle": "Agenda una llamada gratuita de 30 minutos. Escuchamos, hacemos las preguntas correctas y te decimos exactamente lo que recomendaríamos — sin discurso de ventas, sin presión.",
-    "cta": "Agendar una Llamada Gratuita",
-    "note": "Consulta gratuita de 30 minutos · Sin compromiso"
+    },
+    "callTitle": "¿Prefieres conversarlo?",
+    "callBody": "Agenda una llamada gratuita de 30 minutos. Escuchamos, hacemos las preguntas correctas y te decimos qué recomendaríamos — sin discurso de ventas, sin presión.",
+    "callCta": "Agenda una llamada gratis",
+    "direct": "O escríbenos directo",
+    "formTitle": "Envíanos un mensaje"
   },
   "footer": {
     "rights": "Todos los derechos reservados.",
@@ -263,7 +315,9 @@
     "contact": "Contacto",
     "followUs": "Síguenos",
     "location": "Puerto Rico",
-    "startProject": "Empezar un proyecto"
+    "startProject": "Empezar un proyecto",
+    "services": "Servicios",
+    "language": "Idioma"
   },
   "a11y": {
     "skipToContent": "Saltar al contenido principal",
@@ -272,13 +326,16 @@
     "openMenu": "Abrir menú",
     "closeMenu": "Cerrar menú",
     "toggleTheme": "Cambiar tema",
-    "switchToSpanish": "Cambiar a español",
-    "switchToEnglish": "Switch to English",
-    "scrollToServices": "Ir a servicios",
-    "servicesCarousel": "Servicios — desplázate horizontalmente",
-    "workCarousel": "Proyectos — desplázate horizontalmente",
-    "filterProjects": "Filtrar proyectos por tipo",
     "instagram": "CFT Services en Instagram",
-    "opensInNewTab": "(se abre en una pestaña nueva)"
+    "opensInNewTab": "(se abre en una pestaña nueva)",
+    "scrollToWork": "Ir a proyectos seleccionados",
+    "languageName": "English",
+    "switchLanguage": "View this page in English"
+  },
+  "seo": {
+    "home": {
+      "title": "CFT Services | Páginas Web y Automatización en Puerto Rico",
+      "description": "Páginas web, apps a la medida, automatización y CRM para negocios en San Juan y todo Puerto Rico — y tecnología para eventos. Hablemos."
+    }
   }
 }
