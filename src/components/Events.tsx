@@ -3,6 +3,8 @@ import { Gamepad2, MonitorPlay, UserPlus, ClipboardCheck } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { KioskMockup } from '@/components/events/KioskMockup'
+import { useRoute } from '@/hooks/use-route'
+import { servicePath } from '@/routes'
 
 // ---------------------------------------------------------------------------
 // Register B — Events section
@@ -33,6 +35,7 @@ const CAPABILITIES = [
 export function Events() {
   const { t } = useTranslation()
   const shouldReduceMotion = useReducedMotion()
+  const { lang } = useRoute()
 
   return (
     <section
@@ -180,6 +183,15 @@ export function Events() {
                 </motion.li>
               ))}
             </ul>
+
+            <a
+              href={servicePath('events', lang)}
+              className="mt-6 inline-flex items-center gap-2 rounded-sm text-sm font-medium focus-visible:ring-2 focus-visible:ring-[#20E3B2] focus-visible:outline-none"
+              style={{ color: '#20E3B2' }}
+            >
+              {t('events.learnMore')}
+              <span aria-hidden="true">→</span>
+            </a>
 
             {/* Context strip */}
             <motion.p

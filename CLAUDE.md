@@ -16,7 +16,9 @@ npm run preview       # Preview production build locally
 
 Build is four steps: `tsc -b` (type safety) → `vite build` (client bundle) →
 `vite build --ssr src/entry-server.tsx` → `node scripts/prerender.mjs`, which
-injects the rendered markup into `dist/index.html` and deletes `dist-ssr`.
+renders **every route** in `src/routes.ts` to its own `dist/<path>/index.html`
+(with its own `<head>`), writes `dist/404.html` and `dist/sitemap.xml`, and
+deletes `dist-ssr`.
 
 **Always verify with `npm run preview`, not `npm run dev`** — the dev server
 does not prerender, so hydration problems only appear in the production build.
@@ -26,18 +28,23 @@ does not prerender, so hydration problems only appear in the production build.
 ```
 src/
 ├── components/        # Page sections (PascalCase.tsx)
+│   ├── services/      # Service-page building blocks (breadcrumbs, index, related work)
+│   ├── work/          # Project data, BrowserFrame, SchoolMockup
 │   └── ui/            # Base UI components (shadcn-style, lowercase.tsx)
-├── hooks/             # Custom hooks (use-*.tsx)
-├── i18n/              # Translation files (en.json, es.json, index.ts)
-├── lib/               # Utilities (utils.ts with cn() helper)
+├── pages/             # One component per page type (Home, ServicesIndex, Service, NotFound)
+├── hooks/             # Custom hooks (use-*.tsx) — use-route gives the current route
+├── i18n/              # en.json / es.json (sections) + services.{en,es}.json (service pages)
+├── lib/               # utils.ts (cn), site.ts (business facts: NAP, Calendly, areas served)
+├── seo/head.ts        # Per-route <head>: title, meta, canonical, hreflang, OG, JSON-LD
+├── routes.ts          # Every page in both languages — the single source of URLs
 ├── assets/            # Static assets
-├── App.tsx            # Root component — assembles all sections
-├── main.tsx           # Browser entry — hydrates prerendered markup
-├── entry-server.tsx   # Build-time entry — renders the app to static HTML
+├── App.tsx            # Layout (nav, footer) + page switch for a route
+├── main.tsx           # Browser entry — resolves the route, hydrates prerendered markup
+├── entry-server.tsx   # Build-time entry — renders one route + its head
 └── index.css          # Tailwind v4 + CSS variables + theme tokens
 
 scripts/
-└── prerender.mjs      # Injects rendered markup into dist/index.html
+└── prerender.mjs      # Writes dist/<path>/index.html per route, 404.html, sitemap.xml
 ```
 
 ## Import Aliases
@@ -227,11 +234,19 @@ Wrap with `<AnimatePresence>` and use `exit` prop.
 
 ## i18n
 
-- Languages: `en`, `es`. Files at `src/i18n/{lang}.json`.
-- Keys are nested objects grouped by section: `nav.*`, `hero.*`, `services.*`, `about.*`, `contact.*`, `footer.*`.
+- Languages: `en` at `/…`, `es` at `/es/…`. **The language comes from the URL**, never from the browser or storage — each language is its own prerendered document.
+- Files: `src/i18n/{lang}.json` (sections, `seo.*`) and `src/i18n/services.{lang}.json` (service pages, mounted under `servicePages.*`).
 - Access via `const { t } = useTranslation()` then `t('section.key')`.
-- Language toggle cycles `en` ↔ `es`.
-- **Both language files must stay in sync** — every key added to one must exist in the other.
+- The language switch is a plain link to `pathIn(route, otherLang)` — the same page in the other language.
+- **Both language files must stay in sync** — every key, and every array length, in one must exist in the other.
+
+## Routes & SEO
+
+- Add a page by adding it to `src/routes.ts`; the prerender, sitemap and hreflang pick it up. Slugs are written in the page's language (`/services/web-design/` ↔ `/es/servicios/diseno-de-paginas-web/`).
+- Links between pages are plain `<a href>` (no client router). Links to a home section use `useSectionHref()`.
+- Each page's title and description come from i18n (`seo.home.*`, `servicePages.<key>.metaTitle/metaDescription`). Keep titles ≲ 60 characters and descriptions ≤ 160.
+- Business facts (phone, email, Calendly, areas served) live only in `src/lib/site.ts` so the footer, contact section and structured data never disagree.
+- Never invent prices, timelines, addresses or client claims in service copy.
 
 ## Theming
 

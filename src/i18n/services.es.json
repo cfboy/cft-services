@@ -1,0 +1,506 @@
+{
+  "common": {
+    "breadcrumb": "Ruta de navegación",
+    "home": "Inicio",
+    "services": "Servicios",
+    "includedTitle": "Qué incluye",
+    "fitTitle": "Es para ti si",
+    "processTitle": "Cómo trabajamos",
+    "relatedTitle": "Proyectos relacionados",
+    "faqTitle": "Preguntas frecuentes",
+    "otherTitle": "Otros servicios",
+    "ctaPrimary": "Empieza un proyecto",
+    "ctaCall": "Agenda una llamada gratis",
+    "learnMore": "Ver más",
+    "allServices": "Todos los servicios",
+    "areaNote": "Trabajamos en San Juan, el área metro y todo Puerto Rico — en español o en inglés."
+  },
+  "hub": {
+    "metaTitle": "Servicios de Tecnología en Puerto Rico | CFT Services",
+    "metaDescription": "Páginas web, apps a la medida, automatización, CRM, consultoría y tecnología para eventos para negocios en San Juan y todo Puerto Rico.",
+    "title": "Servicios de tecnología para negocios en Puerto Rico",
+    "lead": "Seis cosas que hacemos, y las hacemos bien. Todo proyecto empieza con una conversación gratis sobre lo que tu negocio realmente necesita — y luego lo construimos, en español o en inglés."
+  },
+  "websites": {
+    "name": "Diseño de páginas web",
+    "metaTitle": "Diseño de Páginas Web en Puerto Rico | CFT Services",
+    "metaDescription": "Páginas web rápidas y bilingües para negocios en San Juan y todo Puerto Rico — hechas para aparecer en Google y convertir visitas en llamadas, citas y ventas.",
+    "h1": "Diseño y desarrollo de páginas web en Puerto Rico",
+    "summary": "Páginas web rápidas y bilingües, hechas para aparecer en Google y conseguir clientes.",
+    "lead": "Una página web que no te trae clientes es solo un gasto. Diseñamos y desarrollamos páginas rápidas y bilingües para negocios en San Juan y en todo Puerto Rico — que aparecen en Google, funcionan en cualquier celular y llevan a la gente a llamar, sacar cita o comprar.",
+    "includes": [
+      {
+        "title": "Diseño a la medida de tu marca",
+        "desc": "Un diseño pensado para tu negocio y tus clientes, no una plantilla con tu logo encima."
+      },
+      {
+        "title": "Bilingüe desde el primer día",
+        "desc": "Versión en español y en inglés, cada una con su propia dirección, para que ambos públicos te encuentren en Google."
+      },
+      {
+        "title": "SEO local desde la base",
+        "desc": "Títulos, descripciones, datos estructurados, sitemap y Google Search Console, para que aparezcas cuando la gente cerca de ti busca lo que haces."
+      },
+      {
+        "title": "Primero el celular, y rápida",
+        "desc": "La mayoría de tus visitas llegan desde un celular. Las páginas se diseñan primero para pantallas pequeñas y cargan rápido aun con datos móviles."
+      },
+      {
+        "title": "Contenido que tú puedes editar",
+        "desc": "Si tu contenido cambia a menudo, un CMS sencillo para que tu equipo actualice servicios, precios y fotos sin llamar a un programador."
+      },
+      {
+        "title": "Formularios, citas y WhatsApp",
+        "desc": "Formularios de contacto, enlaces para sacar cita, llamar con un toque y WhatsApp, conectados a donde ya trabaja tu equipo."
+      }
+    ],
+    "fit": [
+      "Estás abriendo o relanzando un negocio y necesitas verte confiable desde la primera búsqueda.",
+      "Tu página actual es lenta, se ve vieja o es imposible de actualizar.",
+      "Te visitan, pero recibes pocas llamadas, citas o mensajes."
+    ],
+    "process": [
+      {
+        "title": "Llamada inicial",
+        "desc": "Treinta minutos sobre tu negocio, tus clientes y lo que la página tiene que lograr. Luego recibes una cotización fija."
+      },
+      {
+        "title": "Estructura y contenido",
+        "desc": "Definimos las páginas, escribimos o editamos los textos contigo y decidimos qué búsquedas debe contestar cada página."
+      },
+      {
+        "title": "Diseño y desarrollo",
+        "desc": "Revisas el diseño en un enlace de prueba, en tu propio celular, antes de que se publique nada."
+      },
+      {
+        "title": "Lanzamiento y entrega",
+        "desc": "Dominio, hosting, analítica y Search Console listos. Capacitamos a tu equipo y seguimos disponibles después del lanzamiento."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "¿Cuánto cuesta una página web en Puerto Rico?",
+        "a": "Depende de la cantidad de páginas e idiomas, y de si necesitas un CMS, citas en línea o una tienda. Después de una llamada gratis de 30 minutos te enviamos una cotización fija, así sabes el costo total antes de empezar."
+      },
+      {
+        "q": "¿Cuánto tiempo toma hacer una página web?",
+        "a": "Una página de negocio enfocada suele tomar unas pocas semanas desde la primera llamada hasta el lanzamiento. Las páginas más grandes, con CMS o muchos servicios, toman más; el tiempo se acuerda en la propuesta."
+      },
+      {
+        "q": "¿Mi página va a aparecer en Google?",
+        "a": "Cada página se construye con el SEO técnico que Google espera — páginas rápidas, estructura limpia, direcciones bilingües, datos estructurados y sitemap — y te ayudamos a conectar Search Console y tu perfil de Google Business. El posicionamiento también crece con contenido y reseñas con el tiempo, y te diremos con honestidad qué hace la diferencia para tu negocio."
+      },
+      {
+        "q": "¿Puedo actualizar la página yo mismo?",
+        "a": "Sí. Si tu contenido cambia a menudo, configuramos un CMS y capacitamos a tu equipo. Clínica Dorsal y Masterspace publican sus propios cambios."
+      },
+      {
+        "q": "¿Trabajan con negocios fuera de San Juan?",
+        "a": "Sí. Trabajamos con negocios en todo Puerto Rico — desde el área metro hasta el centro de la isla — y con clientes en Estados Unidos. La mayor parte del trabajo es remoto, con reuniones en persona cuando ayudan."
+      }
+    ]
+  },
+  "webapps": {
+    "name": "Aplicaciones web",
+    "metaTitle": "Desarrollo de Aplicaciones Web en Puerto Rico | CFT Services",
+    "metaDescription": "Aplicaciones web a la medida, portales y herramientas internas para negocios en Puerto Rico que ya no caben en Excel. Seguras y con roles.",
+    "h1": "Aplicaciones web a la medida para negocios en Puerto Rico",
+    "summary": "Portales de clientes, dashboards y herramientas internas para equipos que ya no caben en Excel.",
+    "lead": "Cuando las hojas de cálculo, el papel y el software genérico empiezan a frenar a tu equipo, construimos la herramienta que se ajusta exactamente a cómo trabajas — portales de clientes, dashboards internos y apps para varios usuarios donde cada persona ve justo lo que le toca.",
+    "includes": [
+      {
+        "title": "Portales para clientes y empleados",
+        "desc": "Un lugar seguro donde tus clientes ven el estatus, suben documentos o sacan cita — y donde tu equipo lo maneja todo."
+      },
+      {
+        "title": "Dashboards y reportes",
+        "desc": "Los números que revisas cada semana, en vivo y en una sola pantalla, no en cinco hojas de cálculo."
+      },
+      {
+        "title": "Roles y permisos",
+        "desc": "Dueños, empleados y clientes ven lo que les corresponde. El acceso se controla en la base de datos, no solo escondiéndolo en la pantalla."
+      },
+      {
+        "title": "Integraciones",
+        "desc": "Conectada a las herramientas que ya usas: CRM, pagos, contabilidad, correo y calendarios."
+      },
+      {
+        "title": "Instalable en el celular",
+        "desc": "Apps que se instalan desde el navegador y se usan con una mano, para equipos que están en la calle."
+      },
+      {
+        "title": "Hosting y soporte",
+        "desc": "En infraestructura probada, con respaldos y monitoreo, y un programador que conoce el código cuando necesitas un cambio."
+      }
+    ],
+    "fit": [
+      "Tu equipo escribe la misma información en varios sitios.",
+      "El negocio corre en hojas de cálculo que solo una persona entiende.",
+      "El software genérico te obliga a cambiar cómo trabajas."
+    ],
+    "process": [
+      {
+        "title": "Mapear el proceso",
+        "desc": "Nos sentamos con quienes hacen el trabajo y mapeamos cada paso, documento y decisión antes de programar."
+      },
+      {
+        "title": "Prototipo",
+        "desc": "Una primera versión navegable de las pantallas clave, para que reacciones a algo real desde temprano."
+      },
+      {
+        "title": "Construir por etapas",
+        "desc": "Lo más valioso sale primero. Cada etapa se lanza y se usa antes de empezar la próxima."
+      },
+      {
+        "title": "Lanzar, capacitar, dar soporte",
+        "desc": "Capacitamos a tu equipo con la app real y seguimos contigo para ajustar y añadir según cambie el negocio."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "¿Cuál es la diferencia entre una página web y una aplicación web?",
+        "a": "Una página web mayormente informa: dice quién eres y cómo contactarte. Una aplicación web hace trabajo: la gente entra con su cuenta, registra y maneja información, y cada persona ve algo distinto. Muchos proyectos necesitan las dos."
+      },
+      {
+        "q": "¿Cuánto cuesta un software a la medida?",
+        "a": "Depende de la cantidad de pantallas, roles e integraciones. Normalmente empezamos con la versión más pequeña que resuelve el problema principal, te damos un precio fijo y crecemos desde ahí."
+      },
+      {
+        "q": "¿Mi información está segura?",
+        "a": "Construimos sobre plataformas establecidas como PostgreSQL y Supabase, con conexiones cifradas, reglas de acceso en la base de datos y respaldos regulares. Cada persona solo llega a la información que su rol le permite."
+      },
+      {
+        "q": "¿Funciona en el celular?",
+        "a": "Sí. Cada app se diseña para celular y computadora, y se puede instalar en la pantalla de inicio del celular cuando eso ayuda a tu equipo."
+      },
+      {
+        "q": "¿Pueden encargarse de una app que ya existe?",
+        "a": "Muchas veces, sí. Empezamos revisando el código y la infraestructura y te decimos con honestidad si conviene extenderla o rehacerla."
+      }
+    ]
+  },
+  "automation": {
+    "name": "Automatización de procesos",
+    "metaTitle": "Automatización de Procesos en Puerto Rico | CFT Services",
+    "metaDescription": "Automatiza el trabajo repetitivo de tu negocio en Puerto Rico: conecta tus apps, genera reportes y procesa documentos con IA.",
+    "h1": "Automatización de procesos para negocios en Puerto Rico",
+    "summary": "Conecta tus apps, automatiza reportes y procesa documentos con IA — se acabó el copiar y pegar.",
+    "lead": "Cada vez que tu equipo copia datos de una app a otra, prepara el mismo reporte o persigue el mismo seguimiento, se está yendo tiempo y dinero del negocio. Conectamos tus herramientas y automatizamos el trabajo repetitivo — con Make, Zapier, código a la medida e IA donde de verdad ayuda.",
+    "includes": [
+      {
+        "title": "Integración entre apps",
+        "desc": "Tus formularios, CRM, correo, hojas de cálculo y contabilidad se hablan entre sí, y los datos se entran una sola vez."
+      },
+      {
+        "title": "Reportes automáticos",
+        "desc": "Ventas, pagos y operaciones recopilados y enviados a tiempo — por ejemplo, desde ATH Móvil Business y Clover."
+      },
+      {
+        "title": "Documentos procesados con IA",
+        "desc": "PDFs y correos que llegan se leen, se clasifican y se convierten en registros y tareas automáticamente."
+      },
+      {
+        "title": "Seguimientos y notificaciones",
+        "desc": "Recordatorios, confirmaciones y alertas internas que salen a tiempo sin que nadie tenga que acordarse."
+      },
+      {
+        "title": "Limpieza y sincronización de datos",
+        "desc": "Duplicados unidos, campos estandarizados y registros al día en todos tus sistemas."
+      },
+      {
+        "title": "Monitoreo",
+        "desc": "Alertas en cada automatización, para detectar un paso roto antes de que alguien note que faltan datos."
+      }
+    ],
+    "fit": [
+      "Alguien pasa horas cada semana copiando datos entre sistemas.",
+      "Los reportes mensuales todavía se hacen a mano.",
+      "Se pierden clientes potenciales, documentos o seguimientos."
+    ],
+    "process": [
+      {
+        "title": "Auditar el proceso",
+        "desc": "Vemos cómo se hace el trabajo hoy y medimos dónde se van realmente las horas."
+      },
+      {
+        "title": "Diseñar el flujo",
+        "desc": "Un mapa de cada disparador, paso y excepción, acordado contigo antes de conectar nada."
+      },
+      {
+        "title": "Construir y probar",
+        "desc": "Se construye y se prueba con tus datos reales, corriendo junto al proceso manual hasta que confíes en él."
+      },
+      {
+        "title": "Entregar",
+        "desc": "Documentación en lenguaje claro, monitoreo activo y soporte cuando algo cambia en otra app."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "¿Qué herramientas usan para automatizar?",
+        "a": "Make y Zapier para la mayoría de las integraciones, código a la medida cuando una herramienta no lo hace de forma confiable, y modelos de IA para leer documentos y clasificar información. Escogemos lo más fácil de mantener para tu caso."
+      },
+      {
+        "q": "¿Cuánto cuesta automatizar un proceso?",
+        "a": "Una automatización sencilla es un proyecto pequeño de precio fijo; un flujo completo entre varios sistemas es más grande. En la llamada gratis estimamos las horas que te ahorras contra el costo."
+      },
+      {
+        "q": "¿Tengo que cambiar el software que ya uso?",
+        "a": "Normalmente no. La mayoría de las automatizaciones conectan las herramientas que ya pagas. Si alguna no se puede conectar, te lo decimos antes de empezar."
+      },
+      {
+        "q": "¿Qué pasa si una automatización falla?",
+        "a": "Cada automatización tiene alertas de error. Si una app cambia o un paso falla, nos enteramos enseguida y lo arreglamos."
+      },
+      {
+        "q": "¿De verdad la IA puede leer nuestros documentos?",
+        "a": "Para documentos con estructura — facturas, formularios, identificaciones, referidos — sí, de forma confiable, con revisión humana donde hay mucho en juego. Lo probamos con tus documentos reales antes de que dependas de ello."
+      }
+    ]
+  },
+  "crm": {
+    "name": "Implementación de CRM",
+    "metaTitle": "Implementación de CRM en Puerto Rico | CFT Services",
+    "metaDescription": "Configuración de CRM, migración, automatización y capacitación para equipos de ventas en Puerto Rico. Zoho CRM y HubSpot a tu medida.",
+    "h1": "Implementación de CRM para equipos en Puerto Rico",
+    "summary": "Zoho CRM o HubSpot, configurado a como realmente vendes — y con tu equipo capacitado.",
+    "lead": "La mayoría de los proyectos de CRM fracasan porque el sistema no está configurado para cómo realmente vendes. Configuramos Zoho CRM, HubSpot o lo que mejor le funcione a tu equipo, migramos tus datos, automatizamos los seguimientos y capacitamos a tu gente — para que el pipeline camine solo.",
+    "includes": [
+      {
+        "title": "Escoger el CRM correcto",
+        "desc": "Una comparación honesta para tu tamaño y presupuesto, incluyendo si de verdad necesitas un CRM."
+      },
+      {
+        "title": "Configuración a la medida",
+        "desc": "Pipelines, campos, pantallas y reportes que siguen tu proceso de ventas, en español o en inglés."
+      },
+      {
+        "title": "Migración de datos",
+        "desc": "Contactos, oportunidades e historial traídos desde Excel o tu sistema anterior, limpios en el camino."
+      },
+      {
+        "title": "Automatización de ventas",
+        "desc": "Asignación de clientes potenciales, recordatorios, correos de seguimiento y tareas que ocurren sin que nadie haga clic."
+      },
+      {
+        "title": "Integraciones",
+        "desc": "Formularios de tu página, correo, calendarios, contabilidad y captura de leads en eventos entrando directo al CRM."
+      },
+      {
+        "title": "Capacitación y adopción",
+        "desc": "Sesiones prácticas con tu equipo sobre su pipeline real, y guías cortas que de verdad van a leer."
+      }
+    ],
+    "fit": [
+      "Tus clientes potenciales están regados entre el correo, WhatsApp y libretas.",
+      "Pagas un CRM que nadie usa de verdad.",
+      "No sabes qué hay en el pipeline sin preguntarle a alguien."
+    ],
+    "process": [
+      {
+        "title": "Mapear el proceso de ventas",
+        "desc": "Desde el primer contacto hasta el cierre: quién hace qué, cuándo, y qué hay que registrar."
+      },
+      {
+        "title": "Configurar",
+        "desc": "El CRM montado para reflejar ese proceso, revisado contigo pantalla por pantalla."
+      },
+      {
+        "title": "Migrar e integrar",
+        "desc": "Tus datos importados y tus otras herramientas conectadas, probado antes de que el equipo haga el cambio."
+      },
+      {
+        "title": "Capacitar y ajustar",
+        "desc": "Capacitación desde el primer día y una revisión unas semanas después para arreglar lo que estorbe."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "¿Zoho CRM o HubSpot? ¿Cuál es mejor?",
+        "a": "Depende del tamaño de tu equipo, tu presupuesto y las otras herramientas que usas. Zoho suele rendir más para equipos pequeños y medianos; HubSpot brilla cuando mercadeo y ventas trabajan muy de la mano. Te recomendamos uno después de entender cómo vendes."
+      },
+      {
+        "q": "¿Pueden arreglar el CRM que ya tenemos?",
+        "a": "Sí. Muchos proyectos empiezan con un CRM que se configuró a la carrera y nunca se usó. Lo revisamos, lo limpiamos y lo reconfiguramos alrededor de tu proceso."
+      },
+      {
+        "q": "¿Pueden pasar nuestros datos desde Excel?",
+        "a": "Sí. Limpiamos, quitamos duplicados e importamos contactos, empresas y oportunidades desde hojas de cálculo o tu sistema anterior."
+      },
+      {
+        "q": "¿La capacitación puede ser en español?",
+        "a": "Sí. La capacitación y las guías son en español, en inglés o en ambos — en el idioma en que trabaja tu equipo."
+      },
+      {
+        "q": "¿Cuánto toma implementar un CRM?",
+        "a": "Una configuración sencilla para un equipo pequeño toma unas pocas semanas, con capacitación incluida. Las migraciones e integraciones más grandes toman más, y el plan se acuerda desde el principio."
+      }
+    ]
+  },
+  "consulting": {
+    "name": "Consultoría tecnológica",
+    "metaTitle": "Consultoría Tecnológica en Puerto Rico | CFT Services",
+    "metaDescription": "¿No sabes qué tecnología necesita tu negocio? Consultoría independiente en Puerto Rico: revisión, un plan claro y nada que venderte.",
+    "h1": "Consultoría tecnológica para negocios en Puerto Rico",
+    "summary": "Un plan claro y honesto de la tecnología que tu negocio necesita — y la que no.",
+    "lead": "¿No sabes por dónde empezar? Miramos cómo funciona tu negocio hoy y te decimos exactamente qué tecnología te ayudaría — y cuál solo te haría perder dinero. Lenguaje claro, un plan por escrito y ninguna plataforma que empujarte.",
+    "includes": [
+      {
+        "title": "Revisión de sistemas y procesos",
+        "desc": "Cómo se mueve la información en tu negocio hoy, y dónde se atasca."
+      },
+      {
+        "title": "Plan tecnológico",
+        "desc": "Un plan por escrito y con prioridades: qué hacer primero, qué puede esperar y cuánto cuesta cada paso, más o menos."
+      },
+      {
+        "title": "Selección de proveedores y software",
+        "desc": "Comparaciones lado a lado y una segunda opinión antes de que firmes un contrato."
+      },
+      {
+        "title": "Evaluación de tus herramientas",
+        "desc": "Para equipos que ya tienen software: qué mantener, qué reemplazar y qué conectar."
+      },
+      {
+        "title": "Revisión de suscripciones",
+        "desc": "Las herramientas que pagas y no usas, y las que se repiten entre sí."
+      },
+      {
+        "title": "Acompañamiento en la implementación",
+        "desc": "Podemos construir lo que recomendamos, o ayudarte a dirigir a quien lo haga."
+      }
+    ],
+    "fit": [
+      "Sabes que algo tiene que cambiar, pero no sabes qué.",
+      "Estás por firmar con un proveedor y quieres una segunda opinión.",
+      "Tus herramientas llegaron una a una y ya no encajan entre sí."
+    ],
+    "process": [
+      {
+        "title": "Una conversación real",
+        "desc": "Sobre tu negocio, tus limitaciones y cómo se ve el éxito para ti — sin propuestas antes de entenderlo."
+      },
+      {
+        "title": "Revisión",
+        "desc": "Miramos tus sistemas, documentos y procesos, y hablamos con las personas que los usan."
+      },
+      {
+        "title": "Recomendaciones",
+        "desc": "Un plan por escrito, con prioridades y en lenguaje claro. Si no necesitas una app a la medida, te lo decimos."
+      },
+      {
+        "title": "Próximos pasos",
+        "desc": "Lo construimos contigo, o te llevas el plan a quien tú escojas."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "¿Qué hace un consultor de tecnología?",
+        "a": "Te ayuda a decidir qué tecnología debe usar tu negocio y en qué orden — software, automatización, página web, datos — según cómo trabajas de verdad, y lo deja por escrito como un plan que puedes ejecutar."
+      },
+      {
+        "q": "¿Tengo que contratarlos para construir lo que recomiendan?",
+        "a": "No. El plan es tuyo. Muchos clientes nos piden que lo construyamos, pero las recomendaciones se escriben para que cualquier equipo capacitado las pueda seguir."
+      },
+      {
+        "q": "¿Cuánto cuesta una consultoría?",
+        "a": "La primera llamada de 30 minutos es gratis. Si hace falta una revisión más profunda, la definimos y te damos un precio fijo antes de empezar."
+      },
+      {
+        "q": "¿Trabajan con negocios pequeños?",
+        "a": "Sí — la mayoría de nuestros clientes son pequeños y medianos negocios en Puerto Rico, desde clínicas y escuelas hasta contratistas y restaurantes."
+      },
+      {
+        "q": "¿La consultoría puede ser en español?",
+        "a": "Sí. Las reuniones, documentos y recomendaciones pueden ser en español, en inglés o en ambos."
+      }
+    ]
+  },
+  "events": {
+    "name": "Tecnología para eventos",
+    "metaTitle": "Tecnología para Eventos y Booths en Puerto Rico | CFT Services",
+    "metaDescription": "Juegos en kioscos, pantallas, captura de leads y registro para convenciones y ferias en Puerto Rico. Convierte tu booth en clientes.",
+    "h1": "Tecnología para eventos, convenciones y booths en Puerto Rico",
+    "summary": "Juegos interactivos en kioscos, pantallas en vivo, captura de leads y registro para convenciones y expos.",
+    "lead": "Diseñamos y construimos tecnología interactiva y con tu marca que convierte un booth en el lugar más concurrido del evento — y convierte ese tráfico en clientes potenciales a los que tu equipo les puede dar seguimiento. Para convenciones, expos, ferias y activaciones de marca en todo Puerto Rico.",
+    "includes": [
+      {
+        "title": "Juegos interactivos en kioscos",
+        "desc": "Juegos de escoger y ganar, ruleta o premio sorpresa en pantalla táctil, diseñados con tu marca para atraer gente."
+      },
+      {
+        "title": "Pantallas digitales en vivo",
+        "desc": "Tablas de posiciones, loops de auspiciadores y cuentas regresivas que mantienen el booth en movimiento todo el día."
+      },
+      {
+        "title": "Captura de leads con CRM",
+        "desc": "Los visitantes se registran en la pantalla y el lead llega a tu CRM en tiempo real, listo para el seguimiento."
+      },
+      {
+        "title": "Registro y check-in",
+        "desc": "Check-in por QR o formulario, identificaciones y listas de asistentes, desde un booth hasta un evento completo."
+      },
+      {
+        "title": "Diseño con tu marca",
+        "desc": "Tus colores, tu logo y tus premios en todo — se ve como tu activación, no como una app genérica."
+      },
+      {
+        "title": "Resultados después del evento",
+        "desc": "Jugadas, leads y registros exportados o sincronizados, para que midas lo que el evento logró."
+      }
+    ],
+    "fit": [
+      "Tu booth necesita una razón para que la gente se detenga.",
+      "Los formularios en papel y las peceras de tarjetas pierden clientes.",
+      "Las filas de registro atrasan tu evento."
+    ],
+    "process": [
+      {
+        "title": "Brief",
+        "desc": "El evento, el público, la meta y los premios — y lo que quieres medir después."
+      },
+      {
+        "title": "Diseñar la experiencia",
+        "desc": "El juego o el flujo diseñado con tu marca y revisado en pantalla antes de construirlo."
+      },
+      {
+        "title": "Construir y probar",
+        "desc": "Construido y probado en las pantallas y el equipo reales antes del evento, no en una laptop la noche antes."
+      },
+      {
+        "title": "Salir en vivo y dar seguimiento",
+        "desc": "Listo para el evento, y con los leads y resultados en manos de tu equipo cuando termina."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "¿Qué es un juego interactivo en kiosco?",
+        "a": "Un juego corto y con tu marca en una pantalla táctil — escoger una caja, girar una ruleta, hacer match de tres — que los visitantes juegan por un premio. Para jugar dejan sus datos de contacto, que se convierten en tu lista de leads."
+      },
+      {
+        "q": "¿Ustedes proveen las pantallas?",
+        "a": "Podemos trabajar con las pantallas o tablets que ya tienes, o ayudarte a conseguir el equipo adecuado. La configuración se confirma en la propuesta."
+      },
+      {
+        "q": "¿Los leads pueden ir directo a nuestro CRM?",
+        "a": "Sí. Los leads se pueden sincronizar en tiempo real con Zoho, HubSpot u otros CRM, o entregarse en una hoja de cálculo al terminar el evento."
+      },
+      {
+        "q": "¿Se puede personalizar con nuestra marca?",
+        "a": "Sí. Los colores, el logo, los premios, las preguntas y el juego mismo se diseñan alrededor de tu marca y las metas del evento."
+      },
+      {
+        "q": "¿Con cuánta anticipación debemos reservar?",
+        "a": "Lo antes posible. Unas semanas antes del evento dan tiempo para diseñar, construir y probar sin correr."
+      }
+    ]
+  },
+  "notFound": {
+    "metaTitle": "Página no encontrada | CFT Services",
+    "metaDescription": "Esta página no existe. Mira nuestros servicios o escríbenos.",
+    "title": "Esta página no existe",
+    "lead": "Puede que el enlace sea viejo o tenga un error. Aquí tienes a dónde ir.",
+    "home": "Ir a la página de inicio",
+    "services": "Ver todos los servicios"
+  }
+}

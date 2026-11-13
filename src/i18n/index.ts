@@ -1,43 +1,35 @@
 import i18n from 'i18next'
-import LanguageDetector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'
 
 import en from './en.json'
 import es from './es.json'
+import servicesEn from './services.en.json'
+import servicesEs from './services.es.json'
 
-export const SUPPORTED_LANGUAGES = ['en', 'es'] as const
-export type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number]
+import { DEFAULT_LANG, LANGS, matchRoute } from '@/routes'
 
-export const DEFAULT_LANGUAGE: SupportedLanguage = 'en'
+/**
+ * The language comes from the URL — `/es/…` is Spanish, everything else is
+ * English — never from the browser or a stored preference. Each language is a
+ * separate prerendered document, so the server and the browser always agree
+ * on what was rendered and hydration never has to throw the markup away.
+ */
+const initialLang =
+  typeof window === 'undefined'
+    ? DEFAULT_LANG
+    : matchRoute(window.location.pathname).lang
 
-/** Query parameter that makes a language choice linkable and indexable. */
-export const LANGUAGE_PARAM = 'lang'
-
-const isBrowser = typeof window !== 'undefined'
-
-const instance = i18n.use(initReactI18next)
-
-// The browser detector reads `navigator` and `document`; skip it during the
-// prerender pass, which always renders the default language.
-if (isBrowser) instance.use(LanguageDetector)
-
-instance.init({
+i18n.use(initReactI18next).init({
   resources: {
-    en: { translation: en },
-    es: { translation: es },
+    en: { translation: { ...en, servicePages: servicesEn } },
+    es: { translation: { ...es, servicePages: servicesEs } },
   },
-  supportedLngs: [...SUPPORTED_LANGUAGES],
-  fallbackLng: DEFAULT_LANGUAGE,
-  lng: isBrowser ? undefined : DEFAULT_LANGUAGE,
-  // Treat es-PR, es-MX, … as `es` rather than falling back to English.
-  load: 'languageOnly',
-  detection: {
-    // Querystring first so a shared ?lang=es link always wins over a cached
-    // preference — search engines and shared links must resolve predictably.
-    order: ['querystring', 'localStorage', 'navigator', 'htmlTag'],
-    lookupQuerystring: LANGUAGE_PARAM,
-    caches: ['localStorage'],
-  },
+  lng: initialLang,
+  supportedLngs: [...LANGS],
+  fallbackLng: DEFAULT_LANG,
+  // Resources are bundled, so initialise synchronously: the first render
+  // already has the right strings.
+  initAsync: false,
   interpolation: {
     escapeValue: false,
   },

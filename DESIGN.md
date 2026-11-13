@@ -474,7 +474,8 @@ Page order: `Hero` → `Work` → `Services` → `Events` → `About` → `Conta
 | `Events` | B | Full-bleed dark, copy left + kiosk right | Always dark; capabilities as a ruled 2-up list, not glass cards |
 | `About` | A | Statement split, ruled figures, 3-step process, industries set as type | No cards, no counters, no marquee. Figures come from i18n (`about.stats.*.value`) |
 | `Contact` | A | 2-col: ask + call + direct lines left, form right | Absorbs the old FinalCTA — one closing ask, not two in a row |
-| `Footer` | A | 3-col at lg, stacked mobile | Hairline top border; no heavy bg |
+| `Footer` | A | 4-col at lg (brand, services, navigation, contact) | Hairline top border; links every service page; NAP in `<address>` |
+| Service pages | A | Breadcrumbs → hero (H1 + lead + visual) → what's included → fit + process → related work → FAQ (`<details>`) → other services → Contact | One template (`src/pages/ServicePage.tsx`); copy in `services.{en,es}.json`. Event technology keeps a dark Register B stage for the kiosk |
 
 ### Project imagery
 
@@ -539,13 +540,14 @@ Captures live in `src/assets/projects/` as WebP: `{project}-desktop.webp` (1440�
 
 ## Rendering & SEO Contract
 
-The site is a client-rendered SPA on static hosting, so `npm run build` bakes the rendered markup into `dist/index.html`:
+The site is a static multi-page site: `npm run build` renders every route in `src/routes.ts` to its own HTML document, each with its own `<head>`:
 
 ```
 tsc -b
 vite build                                          # client bundle
 vite build --ssr src/entry-server.tsx --outDir dist-ssr
-node scripts/prerender.mjs                          # inject markup, drop dist-ssr
+node scripts/prerender.mjs                          # dist/<path>/index.html per route,
+                                                    # 404.html, sitemap.xml; drop dist-ssr
 ```
 
 Constraints this places on component code:
@@ -557,7 +559,7 @@ Constraints this places on component code:
 | Values that animate from a placeholder must render their real value on the server | The stat counters resolve to `20+`, never `0+`, when `progress === null` |
 | Section `id`s are stable string literals | They are anchor targets, sitemap fragments, and scroll-spy keys — not generated ids |
 
-**Language.** English is prerendered at `/`; Spanish is the same document with `?lang=es`, switched by i18next at runtime. `src/hooks/use-document-language.ts` keeps `<html lang>`, `og:locale`, the canonical link, and the URL parameter in sync. Known limitation: a crawler that does not execute JavaScript sees English markup at the `?lang=es` URL. Moving Spanish to a prerendered `/es/` path would remove that; it is the natural next step if Spanish organic traffic matters.
+**Language and URLs.** English lives at `/…`, Spanish at `/es/…`, each prerendered in its own language, so non-JS crawlers see real Spanish markup. The language comes from the path only. Every page carries a canonical, `hreflang` `en` / `es` / `x-default` alternates (also in the sitemap), Open Graph, and a JSON-LD graph: `ProfessionalService` (NAP and `areaServed` from `src/lib/site.ts`), `WebSite`, `WebPage`, plus `BreadcrumbList`, `Service` and `FAQPage` on service pages. Legacy `/?lang=es` links redirect to `/es/` in the browser. `dist/404.html` is shared by both languages; it renders client-side in the right one and is `noindex`.
 
 **Fonts** load from a single `<link>` in `index.html`. Never `@import` them in `index.css` — that chains the font request behind the stylesheet and delays every heading.
 
@@ -578,6 +580,6 @@ Started at the Task 11 Impeccable critique (2026-06-25); reviewed during the pol
 | D5 | Stat values (`20+`, `10+`, `8+`) hardcoded in `About.tsx` | P3 | **Resolved** (2026-11) — read from `about.stats.*.value` |
 | D6 | No inline (on-blur) form validation in Contact | P2 | **Resolved** — per-field `onBlur` validators, `aria-invalid`, `aria-describedby`, focus-to-first-error |
 | D7 | Services section eyebrow intentionally absent | Design decision | **Intentional.** Services jumps straight to `h2` as a deliberate rhythm break |
-| D8 | Spanish is not prerendered — `?lang=es` serves English markup to non-JS crawlers | P2 | **Open.** Fix by prerendering an `/es/` path; see Rendering & SEO Contract |
+| D8 | Spanish is not prerendered — `?lang=es` serves English markup to non-JS crawlers | P2 | **Resolved** (2026-11) — Spanish is prerendered under `/es/`; no hydration mismatch in either language |
 | D9 | Hydration mismatch for reduced-motion visitors | P3 | **Open.** Framer `initial` values differ from the server render; React recovers with one client render |
 | D10 | Original project PNGs retained beside the shipped WebP | P3 | **Open.** Two automation-diagram masters remain in `src/assets/projects/`; unreferenced, never bundled. Old logo files were removed with the flip cards |

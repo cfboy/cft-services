@@ -10,7 +10,7 @@
   },
   "hero": {
     "title": "Technology that actually works for your business",
-    "subtitle": "Websites, custom apps, automation and CRM — plus interactive experiences for events. We figure out what your business actually needs, then build it.",
+    "subtitle": "Web design, custom apps, automation and CRM for businesses in Puerto Rico — plus interactive experiences for events. We figure out what your business actually needs, then build it.",
     "cta": "Start a project",
     "secondary": "See the work",
     "clientsLabel": "Recently shipped for",
@@ -68,7 +68,9 @@
         "Tool Integrations",
         "Team Training"
       ]
-    }
+    },
+    "allServices": "All services",
+    "learnMore": "Learn more"
   },
   "events": {
     "eyebrow": "Booth & Event Experiences",
@@ -92,7 +94,8 @@
         "title": "Event Check-in & Registration",
         "description": "Fast digital check-in, badge and registration flows, and attendee management that scale from a single booth to a full event."
       }
-    }
+    },
+    "learnMore": "Event technology services"
   },
   "about": {
     "title": "We're a small team. We prefer it that way.",
@@ -311,7 +314,9 @@
     "contact": "Contact",
     "followUs": "Follow Us",
     "location": "Puerto Rico",
-    "startProject": "Start a project"
+    "startProject": "Start a project",
+    "services": "Services",
+    "language": "Language"
   },
   "a11y": {
     "skipToContent": "Skip to main content",
@@ -320,10 +325,16 @@
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "toggleTheme": "Switch theme",
-    "switchToSpanish": "Cambiar a español",
-    "switchToEnglish": "Switch to English",
     "instagram": "CFT Services on Instagram",
     "opensInNewTab": "(opens in a new tab)",
-    "scrollToWork": "Scroll to selected work"
+    "scrollToWork": "Scroll to selected work",
+    "languageName": "Español",
+    "switchLanguage": "Ver esta página en español"
+  },
+  "seo": {
+    "home": {
+      "title": "CFT Services — Web Design, Apps & Automation in Puerto Rico",
+      "description": "Web design, custom web apps, process automation and CRM for businesses in San Juan and across Puerto Rico — plus interactive technology for events. Let's talk."
+    }
   }
 }

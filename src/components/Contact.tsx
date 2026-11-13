@@ -16,12 +16,13 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
+import { CONTACT } from '@/lib/site'
 import { cn } from '@/lib/utils'
 
-const CALENDLY_URL = 'https://calendly.com/cristianf-torres15/consulting'
-const EMAIL = 'cristianf.torres15@gmail.com'
-const PHONE = '787-218-2447'
-const PHONE_HREF = '+17872182447'
+const CALENDLY_URL = CONTACT.calendly
+const EMAIL = CONTACT.email
+const PHONE = CONTACT.phone
+const PHONE_HREF = CONTACT.phoneE164
 
 const WEBHOOK_URL = 'https://hook.us2.make.com/2ore7a8fy13c2jn02j2g0oqr041iqrha'
 
@@ -68,7 +69,8 @@ export function Contact() {
         const response = await fetch(WEBHOOK_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(value),
+          // `page` tells the inbox which service page the lead came from.
+          body: JSON.stringify({ ...value, page: window.location.pathname }),
         })
 
         if (!response.ok) throw new Error(`Request failed: ${response.status}`)

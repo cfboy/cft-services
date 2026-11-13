@@ -10,7 +10,7 @@
   },
   "hero": {
     "title": "Tecnología que realmente funciona para tu negocio",
-    "subtitle": "Sitios web, apps a la medida, automatización y CRM — y experiencias interactivas para eventos. Identificamos lo que tu negocio realmente necesita y lo construimos.",
+    "subtitle": "Páginas web, apps a la medida, automatización y CRM para negocios en Puerto Rico — y experiencias interactivas para eventos. Identificamos lo que tu negocio realmente necesita y lo construimos.",
     "cta": "Empieza un proyecto",
     "secondary": "Ver proyectos",
     "clientsLabel": "Lanzado recientemente para",
@@ -68,7 +68,9 @@
         "Integraciones",
         "Capacitación de Equipo"
       ]
-    }
+    },
+    "allServices": "Todos los servicios",
+    "learnMore": "Ver más"
   },
   "events": {
     "eyebrow": "Experiencias para Eventos",
@@ -92,7 +94,8 @@
         "title": "Registro y Check-in de Eventos",
         "description": "Check-in digital rápido, flujos de registro y credenciales, y gestión de asistentes que escalan de un solo stand a un evento completo."
       }
-    }
+    },
+    "learnMore": "Servicios de tecnología para eventos"
   },
   "about": {
     "title": "Somos un equipo pequeño. Lo preferimos así.",
@@ -311,7 +314,9 @@
     "contact": "Contacto",
     "followUs": "Síguenos",
     "location": "Puerto Rico",
-    "startProject": "Empezar un proyecto"
+    "startProject": "Empezar un proyecto",
+    "services": "Servicios",
+    "language": "Idioma"
   },
   "a11y": {
     "skipToContent": "Saltar al contenido principal",
@@ -320,10 +325,16 @@
     "openMenu": "Abrir menú",
     "closeMenu": "Cerrar menú",
     "toggleTheme": "Cambiar tema",
-    "switchToSpanish": "Cambiar a español",
-    "switchToEnglish": "Switch to English",
     "instagram": "CFT Services en Instagram",
     "opensInNewTab": "(se abre en una pestaña nueva)",
-    "scrollToWork": "Ir a proyectos seleccionados"
+    "scrollToWork": "Ir a proyectos seleccionados",
+    "languageName": "English",
+    "switchLanguage": "View this page in English"
+  },
+  "seo": {
+    "home": {
+      "title": "CFT Services | Páginas Web y Automatización en Puerto Rico",
+      "description": "Páginas web, apps a la medida, automatización y CRM para negocios en San Juan y todo Puerto Rico — y tecnología para eventos. Hablemos."
+    }
   }
 }

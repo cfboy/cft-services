@@ -1,24 +1,39 @@
+// Build-time module, never hot-reloaded: it re-exports route data for the
+// prerender script alongside the render function.
+/* eslint-disable react-refresh/only-export-components */
 import { renderToString } from 'react-dom/server'
 
 import App from './App'
 import { ThemeProvider } from './hooks/use-theme'
+import i18n from './i18n'
+import { ROUTES, SERVICE_KEYS, type Route } from './routes'
+import { buildHead } from './seo/head'
 
-import './i18n'
 import './index.css'
 
+export { ROUTES, SERVICE_KEYS }
+export { SITE_ORIGIN } from './lib/site'
+export { pathIn, LANGS } from './routes'
+
 /**
- * Renders the site to static markup at build time (see `scripts/prerender.mjs`).
- *
- * The app is a client-rendered SPA on static hosting, so without this step the
- * shipped document is an empty `<div id="root">`: link unfurlers, text-only
- * crawlers, and AI answer engines see no headings, no copy, and no services.
- * Always the default language — Spanish is served from the same document and
- * swapped in the browser.
+ * Renders one route to static markup at build time (see
+ * `scripts/prerender.mjs`): the app HTML, the page-specific `<head>`, and the
+ * document language. Every language and every service is its own document,
+ * so crawlers that never run JavaScript still get the full page.
  */
-export function render(): string {
-  return renderToString(
+export async function render(route: Route) {
+  await i18n.changeLanguage(route.lang)
+  const t = i18n.getFixedT(route.lang)
+
+  const html = renderToString(
     <ThemeProvider>
-      <App />
+      <App route={route} />
     </ThemeProvider>
   )
+
+  return {
+    html,
+    head: buildHead(route, t),
+    lang: route.lang === 'es' ? 'es' : 'en',
+  }
 }

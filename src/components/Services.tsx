@@ -1,6 +1,16 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { Code2, GitBranch, Lightbulb, Monitor, Zap } from 'lucide-react'
+import {
+  ArrowRight,
+  Code2,
+  GitBranch,
+  Lightbulb,
+  Monitor,
+  Zap,
+} from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+
+import { useRoute } from '@/hooks/use-route'
+import { servicePath, servicesPath } from '@/routes'
 
 const SECTION_ID = 'services'
 
@@ -23,6 +33,7 @@ const services = [
 export function Services() {
   const { t } = useTranslation()
   const prefersReduced = useReducedMotion()
+  const { lang } = useRoute()
 
   return (
     <section
@@ -62,7 +73,7 @@ export function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.5, delay: i * 0.05, ease: EASE }}
-                className="group border-border grid grid-cols-[2.5rem_1fr] gap-x-4 gap-y-4 border-t py-8 sm:py-10 lg:grid-cols-12 lg:gap-x-8"
+                className="group border-border has-focus-visible:ring-ring relative grid grid-cols-[2.5rem_1fr] gap-x-4 gap-y-4 rounded-sm border-t py-8 has-focus-visible:ring-2 sm:py-10 lg:grid-cols-12 lg:gap-x-8"
               >
                 <span
                   aria-hidden="true"
@@ -73,7 +84,13 @@ export function Services() {
 
                 <div className="lg:col-span-4">
                   <h3 className="font-display flex items-center gap-3 text-2xl leading-tight font-semibold tracking-tight sm:text-[1.75rem]">
-                    {t(`services.${key}.title`)}
+                    {/* Stretched over the row: the whole service is one link */}
+                    <a
+                      href={servicePath(key, lang)}
+                      className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none"
+                    >
+                      {t(`services.${key}.title`)}
+                    </a>
                     {/* Cursor appears on hover — the brand mark, as state */}
                     <span
                       aria-hidden="true"
@@ -108,6 +125,19 @@ export function Services() {
             )
           })}
         </ol>
+
+        <a
+          href={servicesPath(lang)}
+          className="group/all focus-visible:ring-ring mt-8 inline-flex items-center gap-2 rounded-sm text-sm font-medium focus-visible:ring-2 focus-visible:outline-none"
+        >
+          <span className="decoration-cft-mint-ink underline decoration-2 underline-offset-[6px]">
+            {t('services.allServices')}
+          </span>
+          <ArrowRight
+            aria-hidden="true"
+            className="h-4 w-4 transition-transform group-hover/all:translate-x-1"
+          />
+        </a>
       </div>
     </section>
   )
