@@ -175,7 +175,7 @@
   },
   "work": {
     "title": "Proyectos seleccionados",
-    "subtitle": "Sitios web, aplicaciones y automatizaciones funcionando hoy — para clínicas, constructoras, escuelas y la gente que sale a comer en Puerto Rico.",
+    "subtitle": "Sitios web, aplicaciones y automatizaciones funcionando hoy — para clínicas, constructoras y escuelas, y un producto propio.",
     "visitSite": "Visitar sitio",
     "viewDetails": "Ver detalles",
     "privateApp": "App privada del cliente",
@@ -207,7 +207,8 @@
       },
       "fudis": {
         "title": "Fudis",
-        "kind": "App web · Comida y bebida",
+        "kind": "Producto propio · App web · Comida y bebida",
+        "client": "Diseñada, construida y operada por CFT Services",
         "summary": "Un diario de comida para Puerto Rico. Toma la foto del plato, marca el lugar y dale estrellas — tus favoritos salen solos. Instalable, a una mano y hecha para usarse en la mesa.",
         "highlights": [
           "Se instala en cualquier celular",

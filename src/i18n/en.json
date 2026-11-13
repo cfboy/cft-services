@@ -175,7 +175,7 @@
   },
   "work": {
     "title": "Selected work",
-    "subtitle": "Websites, web apps and automations running in production today — for clinics, builders, schools and the people who eat out in Puerto Rico.",
+    "subtitle": "Websites, web apps and automations running in production today — for clinics, builders and schools, plus a product of our own.",
     "visitSite": "Visit site",
     "viewDetails": "View details",
     "privateApp": "Private client app",
@@ -207,7 +207,8 @@
       },
       "fudis": {
         "title": "Fudis",
-        "kind": "Web app · Food & drink",
+        "kind": "Our product · Web app · Food & drink",
+        "client": "Designed, built and run by CFT Services",
         "summary": "A food diary for Puerto Rico. Snap the dish, tag the place, rate it — and your favourites surface on their own. Installable, one-handed, and built to be used at the table.",
         "highlights": [
           "Installable on any phone",

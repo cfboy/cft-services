@@ -18,10 +18,10 @@ import { cn } from '@/lib/utils'
 /** ease-out-quint */
 const EASE = [0.22, 1, 0.36, 1] as const
 
+// Clients only — Fudis is our own product, so it is not "shipped for" anyone.
 const CLIENTS = [
   'Masterspace',
   'Clínica Dorsal',
-  'Fudis',
   'MAC Educando',
   'Clínica Libélula',
   'Titi Amanda',
