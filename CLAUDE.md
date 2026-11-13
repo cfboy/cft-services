@@ -257,9 +257,10 @@ Wrap with `<AnimatePresence>` and use `exit` prop.
 
 ## Deployment
 
-- **Target**: GitHub Pages at `/cft-services/` subpath.
-- **Workflow**: `.github/workflows/deploy.yml` — triggers on push to `main`.
-- **Base URL**: Set in `vite.config.ts` as `base: '/cft-services/'`.
+- **Target**: GitHub Pages on the custom domain `cftservicespr.com` (`public/CNAME`).
+- **Workflow**: `.github/workflows/deploy.yml` — triggers on push to `main`. Merging is publishing.
+- **Base URL**: `base: '/'` in `vite.config.ts`. Asset and page links are root-absolute, so every prerendered page works at any depth (`/es/servicios/…/`).
+- **404**: GitHub Pages serves `dist/404.html` for any missing path, in either language.
 - **Activation**: Repo Settings → Pages → Source: "GitHub Actions".
 
 ## ESLint
