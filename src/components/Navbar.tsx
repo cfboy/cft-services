@@ -4,17 +4,18 @@ import { useEffect, useId, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { Logo } from '@/components/Logo'
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { useActiveSection } from '@/hooks/use-active-section'
 import { useTheme } from '@/hooks/use-theme'
+import { cn } from '@/lib/utils'
 
 /** Section ids in document order — drives both the links and the scroll spy. */
 const SECTIONS = [
   'home',
+  'work',
   'services',
   'events',
   'about',
-  'work',
   'contact',
 ] as const
 
@@ -174,6 +175,19 @@ export function Navbar() {
               <Moon aria-hidden="true" className="block h-4 w-4 dark:hidden" />
               <Sun aria-hidden="true" className="hidden h-4 w-4 dark:block" />
             </Button>
+            <a
+              href="#contact"
+              onClick={e => {
+                e.preventDefault()
+                goToSection('#contact', false)
+              }}
+              className={cn(
+                buttonVariants({ size: 'sm' }),
+                'ml-2 hidden px-4 lg:inline-flex'
+              )}
+            >
+              {t('nav.cta')}
+            </a>
           </div>
         </div>
 

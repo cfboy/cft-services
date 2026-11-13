@@ -13,7 +13,7 @@ The CFT Services site operates in two coordinated visual registers. They share a
 
 > *Calm · Editorial · Light-first · Professional*
 
-Applied to: `Hero`, `Services`, `About`, `Work`, `Contact`, `FinalCTA`, `Footer`, `Navbar`
+Applied to: `Hero`, `Work`, `Services`, `About`, `Contact`, `Footer`, `Navbar`
 
 - Light backgrounds in light mode; dark (but not theatrical) in dark mode
 - Night used as ink — primary text and headings
@@ -230,20 +230,23 @@ The premium redesign eliminates the "AI card" pattern: gradient background tile 
 </div>
 ```
 
-### Cards (Register B — Events Capabilities)
+### Capabilities list (Register B — Events)
+
+Retired the glass card grid in the 2026-11 redesign: four identical translucent
+cards read as template. Capabilities are a ruled 2-up list; the depth in this
+band comes from the background layers and the kiosk.
 
 ```tsx
-<div
-  className="rounded-lg p-5"
-  style={{ background: 'rgba(14,36,64,0.75)', border: '1px solid rgba(32,227,178,0.18)', backdropFilter: 'blur(8px)' }}
->
-  <Monitor className="size-5 mb-4" style={{ color: '#20E3B2' }} strokeWidth={1.5} />
-  <h3 className="font-display font-semibold text-white/90 mb-2">Interactive Kiosk Games</h3>
-  <p className="font-sans text-sm text-white/55 leading-relaxed">…</p>
-</div>
+<li className="flex gap-4 py-5" style={{ borderTop: '1px solid rgba(255,255,255,0.10)' }}>
+  <Gamepad2 className="mt-0.5 size-5 shrink-0" style={{ color: '#20E3B2' }} strokeWidth={1.5} />
+  <div>
+    <h3 className="font-display mb-1.5 font-semibold" style={{ color: 'rgba(255,255,255,0.92)' }}>Interactive Kiosk Games</h3>
+    <p className="font-sans text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.66)' }}>…</p>
+  </div>
+</li>
 ```
 
-**Register B Exception:** The inline `rgba()` and `#20E3B2` color values above are intentional. Register B (Events) uses glassmorphism and glow effects where semantic tokens don't map to exact values. This is the sole exception to the "no hardcoded hex" rule (see Anti-Patterns). All other sections must use semantic Tailwind classes.
+**Register B Exception:** The inline `rgba()` and `#20E3B2` color values above are intentional. Register B (Events) uses glow effects and translucent rules where semantic tokens don't map to exact values. This is the sole exception to the "no hardcoded hex" rule (see Anti-Patterns). All other sections must use semantic Tailwind classes.
 
 ### Buttons
 
@@ -404,8 +407,8 @@ const idleVariant = shouldReduceMotion
 - All interactive elements have visible focus rings: `focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2`. `--tw-ring-offset-color` is bound to `--color-background` in `@layer base`; Tailwind's white default prints a halo around every focused control in dark mode
 - **A skip link is the first focusable element on the page**, targeting `#main`
 - **Every `<section>` is named** via `aria-labelledby` pointing at its own heading, so landmark navigation lists real section names
-- **Horizontal carousels** (Services, Work) put `tabIndex={0}`, `role="region"`, and a label on the ScrollArea *viewport* via `viewportProps`. Without it, cards past the fold are unreachable by keyboard
-- **Never nest interactive elements.** Buttons are not wrapped in anchors — style the anchor with `buttonVariants()` from `@/components/ui/button` instead. Flip cards expose one control per visible face and mark the hidden face `inert`, moving focus to the face that became visible
+- **No horizontal carousels.** Services and Work used to scroll sideways and hid most of their content past the fold; both are now ruled lists that show everything at once. If a carousel ever returns, its viewport needs `tabIndex={0}`, `role="region"` and a label so off-screen items are keyboard-reachable
+- **Never nest interactive elements.** Buttons are not wrapped in anchors — style the anchor with `buttonVariants()` from `@/components/ui/button` instead. Rows that are clickable end to end (the Work index) use one real link or button stretched over the row with `after:absolute after:inset-0`, never a link around the row
 - **No rendered output may branch on a client-only signal** (`resolvedTheme`, `prefers-reduced-motion`). The prerendered document is always light and always English; branching on theme breaks hydration. Swap themed assets and icons with `dark:` CSS variants instead
 - Icon-only interactive elements must have `aria-label`
 - Decorative elements (particles, noise overlays, background shapes) must have `aria-hidden="true"`
@@ -460,15 +463,22 @@ These are the concrete moves that differentiate CFT Services from a template-gen
 
 | Section | Register | Layout | Key Constraints |
 |---------|----------|--------|-----------------|
-| `Navbar` | A | Horizontal, sticky | No heavy blur; thin border-bottom |
-| `Hero` | A | Asymmetric 2-col (lg) | Left-align headline; CTA row left |
-| `Services` | A | Numbered list or 2-col grid | Rule 1, 2, 3 apply strictly |
-| `Events` | B | Full-bleed dark, centered | Always dark; glow text; mockup centerpiece |
-| `About` | A | 2-col split (text + visual) | No blobs; hairline dividers |
-| `Work` | A | Portfolio grid | Card = image + title only, no gradients |
-| `Contact` | A | Centered (CTA exception) | Simple, low-friction |
-| `FinalCTA` | A | Centered band | One headline, one button |
+Page order: `Hero` → `Work` → `Services` → `Events` → `About` → `Contact`. Proof of work comes straight after the promise; Services still hands off directly into the Events band.
+
+| Section | Register | Layout | Key Constraints |
+|---------|----------|--------|-----------------|
+| `Navbar` | A | Horizontal, sticky | Thin border-bottom; "Start a project" button from `lg` |
+| `Hero` | A | Asymmetric 2-col (lg): copy left, live-work stack right | Imagery is three real client captures in `BrowserFrame`s, fanned, pointer parallax (off for reduced motion / touch). Client names set as type below a hairline, no logo wall |
+| `Work` | A | Featured case studies + ruled index | Real captures of live sites in `BrowserFrame` (+ `PhoneFrame` overhang). Rhythm: full row → offset two-up → full row (flipped) → "More projects" index. Private apps get a code-built illustration (`SchoolMockup`), never fake screenshots of real data |
+| `Services` | A | Ruled numbered index, 12-col rows | All five visible at once; no carousel, no cards. Mint cursor appears on row hover |
+| `Events` | B | Full-bleed dark, copy left + kiosk right | Always dark; capabilities as a ruled 2-up list, not glass cards |
+| `About` | A | Statement split, ruled figures, 3-step process, industries set as type | No cards, no counters, no marquee. Figures come from i18n (`about.stats.*.value`) |
+| `Contact` | A | 2-col: ask + call + direct lines left, form right | Absorbs the old FinalCTA — one closing ask, not two in a row |
 | `Footer` | A | 3-col at lg, stacked mobile | Hairline top border; no heavy bg |
+
+### Project imagery
+
+Captures live in `src/assets/projects/` as WebP: `{project}-desktop.webp` (1440×900), `{project}-desktop-sm.webp` (720×450, srcset partner) and `{project}-mobile.webp` (585×1266, from a 390×844 viewport). Re-capture from the live site with Playwright at deviceScaleFactor 2 (desktop) / 3 (mobile), wait for network idle plus a few seconds, then downscale. Project data is in `src/components/work/projects.ts`; copy is under `work.projects.<key>` in both locales.
 
 ---
 
@@ -523,7 +533,7 @@ These are the concrete moves that differentiate CFT Services from a template-gen
 
 ---
 
-*Last updated: 2026-09-25 (brand v2.0) | Maintained by: CFT Services / Cristian F. Torres Collazo*
+*Last updated: 2026-11-13 (premium redesign, Work refresh) · 2026-09-25 (brand v2.0) | Maintained by: CFT Services / Cristian F. Torres Collazo*
 
 ---
 
@@ -565,9 +575,9 @@ Started at the Task 11 Impeccable critique (2026-06-25); reviewed during the pol
 | D2 | Footer `NAV_LINKS` omits `#events` | P3 | **Resolved** — Events is in the footer nav |
 | D3 | Work "coming soon" card text hardcoded in English | P3 | **Resolved** — `work.comingSoon` / `work.comingSoonSub` exist in both locales |
 | D4 | `KioskMockup.tsx` uses `key={i}` on PARTICLES map | P3 | **Deferred.** PARTICLES is a static constant with no reordering; stable index keys are safe |
-| D5 | Stat values (`20+`, `10+`, `8+`) hardcoded in `About.tsx` | P3 | **Deferred.** Still literals; move to i18n if the figures start changing often |
+| D5 | Stat values (`20+`, `10+`, `8+`) hardcoded in `About.tsx` | P3 | **Resolved** (2026-11) — read from `about.stats.*.value` |
 | D6 | No inline (on-blur) form validation in Contact | P2 | **Resolved** — per-field `onBlur` validators, `aria-invalid`, `aria-describedby`, focus-to-first-error |
 | D7 | Services section eyebrow intentionally absent | Design decision | **Intentional.** Services jumps straight to `h2` as a deliberate rhythm break |
 | D8 | Spanish is not prerendered — `?lang=es` serves English markup to non-JS crawlers | P2 | **Open.** Fix by prerendering an `/es/` path; see Rendering & SEO Contract |
 | D9 | Hydration mismatch for reduced-motion visitors | P3 | **Open.** Framer `initial` values differ from the server render; React recovers with one client render |
-| D10 | Original project PNGs retained beside the shipped WebP | P3 | **Open.** Unreferenced masters in `src/assets/projects/`; kept as source, never bundled |
+| D10 | Original project PNGs retained beside the shipped WebP | P3 | **Open.** Two automation-diagram masters remain in `src/assets/projects/`; unreferenced, never bundled. Old logo files were removed with the flip cards |

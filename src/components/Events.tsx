@@ -100,7 +100,7 @@ export function Events() {
             {/* Headline — solid type; brand v2 has one accent and no gradients */}
             <motion.h2
               id="events-title"
-              className="font-display mb-6 text-4xl font-bold tracking-tight sm:text-5xl"
+              className="font-display mb-6 text-4xl font-bold tracking-tight sm:text-5xl lg:text-[3.5rem] lg:leading-[1.05]"
               style={
                 {
                   color: 'rgba(255,255,255,0.95)',
@@ -135,17 +135,15 @@ export function Events() {
               {t('events.subtitle')}
             </motion.p>
 
-            {/* Capabilities grid — 2×2 on sm+, stacked on mobile */}
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {/* Capabilities — a ruled 2-up list. Depth in this band comes
+                from the background layers and the kiosk, not from a grid of
+                glass cards. */}
+            <ul className="grid grid-cols-1 gap-x-10 sm:grid-cols-2">
               {CAPABILITIES.map(({ key, icon: Icon }, i) => (
-                <motion.div
+                <motion.li
                   key={key}
-                  className="rounded-lg p-5"
-                  style={{
-                    background: 'rgba(14, 36, 64, 0.75)',
-                    border: '1px solid rgba(32,227,178,0.18)',
-                    backdropFilter: 'blur(8px)',
-                  }}
+                  className="flex gap-4 py-5"
+                  style={{ borderTop: '1px solid rgba(255,255,255,0.10)' }}
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-60px' }}
@@ -153,33 +151,35 @@ export function Events() {
                     shouldReduceMotion
                       ? { duration: 0 }
                       : {
-                          duration: 0.4,
+                          duration: 0.5,
                           delay: 0.18 + i * 0.08,
-                          ease: 'easeOut',
+                          ease: [0.22, 1, 0.36, 1],
                         }
                   }
                 >
                   <Icon
-                    className="mb-3 size-5"
+                    className="mt-0.5 size-5 shrink-0"
                     style={{ color: '#20E3B2' }}
                     strokeWidth={1.5}
                     aria-hidden="true"
                   />
-                  <h3
-                    className="font-display mb-1.5 font-semibold"
-                    style={{ color: 'rgba(255,255,255,0.90)' }}
-                  >
-                    {t(`events.capabilities.${key}.title`)}
-                  </h3>
-                  <p
-                    className="font-sans text-sm leading-relaxed"
-                    style={{ color: 'rgba(255,255,255,0.60)' }}
-                  >
-                    {t(`events.capabilities.${key}.description`)}
-                  </p>
-                </motion.div>
+                  <div>
+                    <h3
+                      className="font-display mb-1.5 font-semibold"
+                      style={{ color: 'rgba(255,255,255,0.92)' }}
+                    >
+                      {t(`events.capabilities.${key}.title`)}
+                    </h3>
+                    <p
+                      className="font-sans text-sm leading-relaxed"
+                      style={{ color: 'rgba(255,255,255,0.66)' }}
+                    >
+                      {t(`events.capabilities.${key}.description`)}
+                    </p>
+                  </div>
+                </motion.li>
               ))}
-            </div>
+            </ul>
 
             {/* Context strip */}
             <motion.p

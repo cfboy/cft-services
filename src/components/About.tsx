@@ -1,403 +1,144 @@
-import { motion, useInView, useReducedMotion } from 'framer-motion'
-import {
-  Banknote,
-  BookOpen,
-  Building2,
-  Dumbbell,
-  Heart,
-  Home,
-  Scale,
-  Shield,
-  ShoppingBag,
-  Truck,
-  Users,
-  Utensils,
-} from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
+import { motion, useReducedMotion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 
-function useCounter(end: number, duration: number = 2000) {
-  const prefersReduced = useReducedMotion()
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+/** ease-out-quint */
+const EASE = [0.22, 1, 0.36, 1] as const
 
-  // `null` means "not counting". Server render, hydration, and reduced motion
-  // all resolve to the real figure, so prerendered markup never ships "0+" and
-  // there is no hydration mismatch to paper over.
-  const [progress, setProgress] = useState<number | null>(null)
+/** Figures live in i18n (`about.stats.*.value`) so they change without code. */
+const STATS = [
+  'projectsCompleted',
+  'satisfiedClients',
+  'yearsExperience',
+] as const
 
-  useEffect(() => {
-    if (!isInView || prefersReduced) return
+const STEPS = ['assessment', 'recommendations', 'implementation'] as const
 
-    let startTime: number | undefined
-    let animationFrame: number
-
-    const animate = (currentTime: number) => {
-      startTime ??= currentTime
-      const elapsed = Math.min((currentTime - startTime) / duration, 1)
-      setProgress(1 - (1 - elapsed) ** 4)
-      if (elapsed < 1) animationFrame = requestAnimationFrame(animate)
-    }
-
-    animationFrame = requestAnimationFrame(animate)
-    return () => cancelAnimationFrame(animationFrame)
-  }, [duration, isInView, prefersReduced])
-
-  const count = progress === null ? end : Math.round(progress * end)
-  return { count, ref }
-}
-
-type StatType = {
-  id: string
-  label: string
-  value: number
-  suffix: string
-  description: string
-}
-
-function StatCard({
-  stat,
-  index,
-  isLast,
-}: {
-  stat: StatType
-  index: number
-  isLast?: boolean
-}) {
-  const { count, ref } = useCounter(stat.value)
-  const prefersReduced = useReducedMotion()
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: prefersReduced ? 0 : 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.45, delay: index * 0.1 }}
-      className={`border-border/50 hover:border-border flex flex-col rounded-lg border p-6 transition-[border-color] duration-300 ${isLast ? 'col-span-2 md:col-span-1' : ''}`}
-    >
-      <div
-        ref={ref}
-        className="font-display mb-1 text-3xl font-bold tracking-tight tabular-nums"
-      >
-        {count}
-        {stat.suffix}
-      </div>
-      <div className="font-display mb-0.5 text-sm font-semibold">
-        {stat.label}
-      </div>
-      <div className="text-muted-foreground text-xs leading-relaxed">
-        {stat.description}
-      </div>
-    </motion.div>
-  )
-}
-
-const processSteps = [
-  {
-    phase: 1,
-    titleKey: 'about.howWeDoIt.assessment.title',
-    descKey: 'about.howWeDoIt.assessment.description',
-  },
-  {
-    phase: 2,
-    titleKey: 'about.howWeDoIt.recommendations.title',
-    descKey: 'about.howWeDoIt.recommendations.description',
-  },
-  {
-    phase: 3,
-    titleKey: 'about.howWeDoIt.implementation.title',
-    descKey: 'about.howWeDoIt.implementation.description',
-  },
-]
-
-const industries = [
-  {
-    nameKey: 'about.industries.healthcare.name',
-    Icon: Heart,
-  },
-  {
-    nameKey: 'about.industries.insurance.name',
-    Icon: Shield,
-  },
-  {
-    nameKey: 'about.industries.hospitality.name',
-    Icon: Utensils,
-  },
-  {
-    nameKey: 'about.industries.finance.name',
-    Icon: Banknote,
-  },
-  {
-    nameKey: 'about.industries.retail.name',
-    Icon: ShoppingBag,
-  },
-  {
-    nameKey: 'about.industries.education.name',
-    Icon: BookOpen,
-  },
-  {
-    nameKey: 'about.industries.legal.name',
-    Icon: Scale,
-  },
-  {
-    nameKey: 'about.industries.realestate.name',
-    Icon: Home,
-  },
-  {
-    nameKey: 'about.industries.logistics.name',
-    Icon: Truck,
-  },
-  {
-    nameKey: 'about.industries.fitness.name',
-    Icon: Dumbbell,
-  },
-  {
-    nameKey: 'about.industries.construction.name',
-    Icon: Building2,
-  },
-  {
-    nameKey: 'about.industries.government.name',
-    Icon: Users,
-  },
-]
+const INDUSTRIES = [
+  'healthcare',
+  'education',
+  'construction',
+  'hospitality',
+  'finance',
+  'insurance',
+  'retail',
+  'realestate',
+  'legal',
+  'logistics',
+  'fitness',
+  'government',
+] as const
 
 export function About() {
   const { t } = useTranslation()
   const prefersReduced = useReducedMotion()
 
-  const stats: StatType[] = [
-    {
-      id: 'projectsCompleted',
-      label: t('about.stats.projectsCompleted.label'),
-      value: 20,
-      suffix: '+',
-      description: t('about.stats.projectsCompleted.description'),
-    },
-    {
-      id: 'satisfiedClients',
-      label: t('about.stats.satisfiedClients.label'),
-      value: 10,
-      suffix: '+',
-      description: t('about.stats.satisfiedClients.description'),
-    },
-    {
-      id: 'yearsExperience',
-      label: t('about.stats.yearsExperience.label'),
-      value: 8,
-      suffix: '+',
-      description: t('about.stats.yearsExperience.description'),
-    },
-  ]
+  const reveal = (delay = 0) => ({
+    initial: prefersReduced ? (false as const) : { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, margin: '-80px' },
+    transition: { duration: 0.6, delay, ease: EASE },
+  })
 
   return (
     <section
       id="about"
-      // overflow-x-clip: the timeline cards enter from a 32px x-offset, which
-      // would otherwise let the whole page scroll sideways on narrow screens.
-      className="bg-muted/40 overflow-x-clip px-4 py-24 sm:py-32"
+      className="px-4 py-24 sm:py-32"
       aria-labelledby="about-title"
     >
-      <div className="mx-auto max-w-6xl space-y-20">
-        {/* ── Section header ── */}
+      <div className="mx-auto max-w-6xl">
+        {/* ── Statement ── */}
         <motion.div
-          initial={{ opacity: 0, y: prefersReduced ? 0 : 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.5 }}
+          {...reveal()}
+          className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12"
         >
           <h2
             id="about-title"
-            className="font-display mb-3 text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl"
+            className="font-display text-4xl font-bold tracking-tight text-balance sm:text-5xl lg:col-span-6"
           >
             {t('about.title')}
           </h2>
-          <p className="text-muted-foreground max-w-2xl text-base sm:text-lg">
+          <p className="text-muted-foreground max-w-[60ch] text-lg leading-relaxed text-pretty lg:col-span-6 lg:pt-2">
             {t('about.description')}
           </p>
         </motion.div>
 
-        {/* ── Stats grid ── */}
-        <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3">
-          {stats.map((stat, i) => (
-            <StatCard
-              key={stat.id}
-              stat={stat}
-              index={i}
-              isLast={i === stats.length - 1}
-            />
+        {/* ── Figures — ruled, not carded ── */}
+        <dl className="border-border mt-16 grid grid-cols-1 border-y sm:mt-20 sm:grid-cols-3">
+          {STATS.map((id, i) => (
+            <motion.div
+              key={id}
+              {...reveal(i * 0.08)}
+              className="border-border flex flex-col gap-1 py-8 not-first:border-t sm:px-8 sm:not-first:border-t-0 sm:not-first:border-l sm:first:pl-0"
+            >
+              <dt className="order-2 text-sm font-semibold">
+                {t(`about.stats.${id}.label`)}
+              </dt>
+              <dd className="font-display order-1 text-5xl font-bold tracking-tight tabular-nums sm:text-6xl">
+                {t(`about.stats.${id}.value`)}
+              </dd>
+              <dd className="text-muted-foreground order-3 text-sm leading-relaxed">
+                {t(`about.stats.${id}.description`)}
+              </dd>
+            </motion.div>
           ))}
-        </div>
+        </dl>
 
-        {/* ── How We Do It — Vertical Timeline ── */}
-        <div>
-          <motion.div
-            initial={{ opacity: 0, y: prefersReduced ? 0 : 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.5 }}
-            className="mb-12"
-          >
-            <h3 className="font-display mb-2 text-2xl font-bold tracking-tight sm:text-3xl">
+        {/* ── Process — a real sequence, so it earns its numbers ── */}
+        <div className="mt-24 sm:mt-32">
+          <motion.div {...reveal()} className="max-w-xl">
+            <h3 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">
               {t('about.howWeDoIt.title')}
             </h3>
-            <p className="text-muted-foreground max-w-xl text-sm sm:text-base">
+            <p className="text-muted-foreground mt-2">
               {t('about.howWeDoIt.subtitle')}
             </p>
           </motion.div>
 
-          <div className="relative">
-            {/* Vertical hairline */}
-            <motion.div
-              initial={{ scaleY: prefersReduced ? 1 : 0 }}
-              whileInView={{ scaleY: 1 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.8, ease: 'easeInOut' }}
-              className="border-border/50 absolute top-0 left-5 h-full w-px origin-top border-l lg:left-1/2 lg:-translate-x-px"
-            />
-
-            <ol className="space-y-10">
-              {processSteps.map(({ phase, titleKey, descKey }, i) => {
-                // Alternate sides at lg by reversing the row, so each card
-                // exists once in the DOM instead of being rendered twice and
-                // hidden — no duplicated copy for crawlers or screen readers.
-                const isLeft = i % 2 !== 0
-
-                return (
-                  <li
-                    key={phase}
-                    className={`relative flex items-center gap-6 ${
-                      isLeft ? 'lg:flex-row-reverse' : ''
-                    }`}
-                  >
-                    {/* Balancing column so the node stays on the centre line */}
-                    <div
-                      aria-hidden="true"
-                      className="hidden flex-1 lg:block"
-                    />
-
-                    {/* Timeline node — restrained circle */}
-                    <motion.div
-                      aria-hidden="true"
-                      initial={{ scale: prefersReduced ? 1 : 0 }}
-                      whileInView={{ scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{
-                        duration: 0.35,
-                        delay: i * 0.15 + 0.1,
-                        type: 'spring',
-                      }}
-                      className="border-border bg-background relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2"
-                    >
-                      <span className="text-muted-foreground font-mono text-xs tabular-nums">
-                        {phase}
-                      </span>
-                    </motion.div>
-
-                    <motion.div
-                      initial={{
-                        opacity: 0,
-                        x: prefersReduced ? 0 : isLeft ? -32 : 32,
-                      }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: i * 0.15 }}
-                      className={`flex flex-1 ${
-                        isLeft ? 'lg:justify-end' : 'justify-start'
-                      }`}
-                    >
-                      <div className="border-border/50 hover:border-border w-full rounded-lg border p-6 transition-[border-color] duration-300 lg:max-w-sm">
-                        <h4 className="font-display mb-2 text-base font-semibold">
-                          {t(titleKey)}
-                        </h4>
-                        <p className="text-muted-foreground text-sm leading-relaxed">
-                          {t(descKey)}
-                        </p>
-                      </div>
-                    </motion.div>
-                  </li>
-                )
-              })}
-            </ol>
-          </div>
+          <ol className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
+            {STEPS.map((step, i) => (
+              <motion.li
+                key={step}
+                {...reveal(i * 0.1)}
+                className="border-foreground/80 relative border-t pt-6"
+              >
+                <span
+                  aria-hidden="true"
+                  className="text-foreground/55 font-mono text-sm tabular-nums"
+                >
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <h4 className="font-display mt-4 text-xl font-semibold tracking-tight">
+                  {t(`about.howWeDoIt.${step}.title`)}
+                </h4>
+                <p className="text-muted-foreground mt-3 leading-relaxed text-pretty">
+                  {t(`about.howWeDoIt.${step}.description`)}
+                </p>
+              </motion.li>
+            ))}
+          </ol>
         </div>
 
-        {/* ── Industries — Horizontal scroll marquee ── */}
-        <div>
-          <motion.div
-            initial={{ opacity: 0, y: prefersReduced ? 0 : 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.5 }}
-            className="mb-10"
-          >
-            <h3 className="font-display mb-2 text-2xl font-bold tracking-tight sm:text-3xl">
-              {t('about.industries.title')}
-            </h3>
-            <p className="text-muted-foreground max-w-xl text-sm sm:text-base">
-              {t('about.industries.subtitle')}
-            </p>
-          </motion.div>
-
-          {/* Assistive tech reads the list once; the marquee below repeats each
-              item to loop seamlessly, so it is presentational only. */}
-          <ul className="sr-only">
-            {industries.map(({ nameKey }) => (
-              <li key={nameKey}>{t(nameKey)}</li>
+        {/* ── Industries — set as type ── */}
+        <motion.div {...reveal()} className="mt-24 sm:mt-32">
+          <h3 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">
+            {t('about.industries.title')}
+          </h3>
+          <ul className="font-display mt-8 flex max-w-5xl flex-wrap items-baseline gap-x-3 gap-y-2 text-2xl font-medium tracking-tight sm:text-3xl">
+            {INDUSTRIES.map((key, i) => (
+              <li
+                key={key}
+                className="text-foreground/80 flex items-baseline gap-3"
+              >
+                {t(`about.industries.${key}.name`)}
+                {i < INDUSTRIES.length - 1 && (
+                  <span aria-hidden="true" className="text-cft-mint-ink">
+                    /
+                  </span>
+                )}
+              </li>
             ))}
           </ul>
-
-          {/* Marquee rows — items duplicated for infinite scroll; slot prefix ensures unique keys */}
-          <div
-            aria-hidden="true"
-            className="space-y-3 overflow-hidden mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] py-1"
-          >
-            {/* Row 1 — scrolls left */}
-            <div className="pause-on-hover flex w-max gap-3 motion-safe:animate-[marquee_30s_linear_infinite]">
-              {(['a', 'b'] as const).flatMap(slot =>
-                industries.map(({ nameKey, Icon }) => (
-                  <div
-                    key={`${slot}-${nameKey}`}
-                    className="border-border/50 bg-card flex shrink-0 items-center gap-2.5 rounded-lg border px-4 py-2.5"
-                  >
-                    <Icon
-                      aria-hidden="true"
-                      className="text-muted-foreground/60 h-3.5 w-3.5 shrink-0"
-                      strokeWidth={1.5}
-                    />
-                    <p className="text-sm font-semibold whitespace-nowrap">
-                      {t(nameKey)}
-                    </p>
-                  </div>
-                ))
-              )}
-            </div>
-            {/* Row 2 — scrolls right (offset start for visual variety) */}
-            <div className="pause-on-hover flex w-max gap-3 motion-safe:animate-[marquee_25s_linear_infinite_reverse]">
-              {(['a', 'b', 'c'] as const).flatMap((slot, si) =>
-                (si === 0
-                  ? industries.slice(6)
-                  : si === 2
-                    ? industries.slice(0, 6)
-                    : industries
-                ).map(({ nameKey, Icon }) => (
-                  <div
-                    key={`${slot}-${nameKey}`}
-                    className="border-border/50 bg-card flex shrink-0 items-center gap-2.5 rounded-lg border px-4 py-2.5"
-                  >
-                    <Icon
-                      aria-hidden="true"
-                      className="text-muted-foreground/60 h-3.5 w-3.5 shrink-0"
-                      strokeWidth={1.5}
-                    />
-                    <p className="text-sm font-semibold whitespace-nowrap">
-                      {t(nameKey)}
-                    </p>
-                  </div>
-                ))
-              )}
-            </div>
-          </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

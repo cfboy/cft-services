@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 
 import { Logo } from '@/components/Logo'
 
-const NAV_LINKS = ['services', 'events', 'work', 'about', 'contact'] as const
+const NAV_LINKS = ['work', 'services', 'events', 'about', 'contact'] as const
 const INSTAGRAM_URL = 'https://www.instagram.com/cftservicespr'
 
 export function Footer() {
@@ -11,8 +11,8 @@ export function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="border-border bg-muted/30 border-t">
-      <div className="mx-auto max-w-6xl px-4 py-12">
+    <footer className="border-border bg-muted/30 border-t px-4">
+      <div className="mx-auto max-w-6xl py-12">
         <div className="grid grid-cols-2 gap-10 sm:grid-cols-3">
           {/* Brand */}
           <div className="col-span-2 flex flex-col items-center gap-4 sm:col-span-1 sm:items-start">

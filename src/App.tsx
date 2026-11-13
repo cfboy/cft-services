@@ -4,7 +4,6 @@ import { Toaster } from 'sonner'
 import { About } from '@/components/About'
 import { Contact } from '@/components/Contact'
 import { Events } from '@/components/Events'
-import { FinalCTA } from '@/components/FinalCTA'
 import { Footer } from '@/components/Footer'
 import { Hero } from '@/components/Hero'
 import { Navbar } from '@/components/Navbar'
@@ -27,12 +26,11 @@ export default function App() {
       <Navbar />
       <main id="main">
         <Hero />
+        <Work />
         <Services />
         <Events />
         <About />
-        <Work />
         <Contact />
-        <FinalCTA />
       </main>
       <Footer />
       <Toaster richColors closeButton />

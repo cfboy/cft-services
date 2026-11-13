@@ -1,176 +1,113 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { Check, Code2, GitBranch, Lightbulb, Monitor, Zap } from 'lucide-react'
+import { Code2, GitBranch, Lightbulb, Monitor, Zap } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
-import { useDragScroll } from '@/hooks/use-drag-scroll'
 
 const SECTION_ID = 'services'
 
+/** ease-out-quint */
+const EASE = [0.22, 1, 0.36, 1] as const
+
 const services = [
-  { key: 'consulting', Icon: Lightbulb, number: '01' },
-  { key: 'websites', Icon: Monitor, number: '02' },
-  { key: 'webapps', Icon: Code2, number: '03' },
-  { key: 'automation', Icon: Zap, number: '04' },
-  { key: 'crm', Icon: GitBranch, number: '05' },
-]
+  { key: 'consulting', Icon: Lightbulb },
+  { key: 'websites', Icon: Monitor },
+  { key: 'webapps', Icon: Code2 },
+  { key: 'automation', Icon: Zap },
+  { key: 'crm', Icon: GitBranch },
+] as const
 
-function ServiceCard({
-  serviceKey,
-  Icon,
-  number,
-  index,
-}: {
-  serviceKey: string
-  Icon: React.ComponentType<{
-    className?: string
-    strokeWidth?: number
-    'aria-hidden'?: boolean | 'true' | 'false'
-  }>
-  number: string
-  index: number
-}) {
-  const { t } = useTranslation()
-  const prefersReduced = useReducedMotion()
-  const features = t(`services.${serviceKey}.features`, {
-    returnObjects: true,
-  }) as string[]
-
-  return (
-    <motion.li
-      initial={{ opacity: 0, y: prefersReduced ? 0 : 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.45, delay: index * 0.08 }}
-      className="bg-card border-border/50 hover:border-border group relative my-2 flex w-72 shrink-0 flex-col overflow-hidden rounded-lg border transition-[border-color] duration-300 md:w-80"
-    >
-      {/* Card header: number index + icon */}
-      <div className="flex items-start justify-between p-6 pb-4">
-        <span
-          aria-hidden="true"
-          className="text-foreground/55 font-mono text-lg leading-none tabular-nums"
-        >
-          {number}
-        </span>
-        <Icon
-          aria-hidden="true"
-          className="text-muted-foreground/50 group-hover:text-muted-foreground h-5 w-5 transition-colors duration-200"
-          strokeWidth={1.5}
-        />
-      </div>
-
-      {/* Content */}
-      <div className="flex flex-1 flex-col px-6 pb-6">
-        <h3 className="font-display mb-2 text-lg leading-tight font-semibold">
-          {t(`services.${serviceKey}.title`)}
-        </h3>
-        <p className="text-muted-foreground mb-5 grow text-sm leading-relaxed">
-          {t(`services.${serviceKey}.description`)}
-        </p>
-
-        {/* Divider */}
-        <div aria-hidden="true" className="border-border/40 mb-4 border-t" />
-
-        {/* Features */}
-        <ul className="space-y-2">
-          {Array.isArray(features) &&
-            features.map(feature => (
-              <li key={feature} className="flex items-start gap-2.5">
-                <Check
-                  aria-hidden="true"
-                  className="text-muted-foreground/60 mt-0.5 h-3.5 w-3.5 shrink-0"
-                  strokeWidth={2}
-                />
-                <span className="text-muted-foreground text-sm">{feature}</span>
-              </li>
-            ))}
-        </ul>
-      </div>
-    </motion.li>
-  )
-}
-
+/**
+ * A ruled index, not a carousel of identical cards: every service is visible
+ * at once, and each row reads left to right — what it is, why it matters,
+ * what's included.
+ */
 export function Services() {
   const { t } = useTranslation()
   const prefersReduced = useReducedMotion()
-  const {
-    ref,
-    onMouseDown,
-    onMouseMove,
-    onMouseUp,
-    onMouseLeave,
-    onClickCapture,
-  } = useDragScroll<HTMLDivElement>()
 
   return (
     <section
       id={SECTION_ID}
-      className="relative overflow-x-clip px-4 py-24 sm:py-32"
+      className="bg-muted/40 px-4 py-24 sm:py-32"
       aria-labelledby="services-title"
     >
-      <div className="relative mx-auto max-w-6xl">
-        {/* Header — flush left per Register A asymmetric layout */}
-        <motion.div
-          initial={{ opacity: 0, y: prefersReduced ? 0 : 20 }}
+      <div className="mx-auto max-w-6xl">
+        <motion.header
+          initial={prefersReduced ? false : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.5 }}
-          className="mb-14"
+          transition={{ duration: 0.6, ease: EASE }}
+          className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:items-end"
         >
           <h2
             id="services-title"
-            className="font-display mb-3 text-3xl font-bold tracking-tight sm:text-4xl"
+            className="font-display text-4xl font-bold tracking-tight sm:text-5xl lg:col-span-7"
           >
             {t('services.title')}
           </h2>
-          <p className="text-muted-foreground max-w-lg">
+          <p className="text-muted-foreground max-w-md leading-relaxed lg:col-span-5 lg:justify-self-end">
             {t('services.subtitle')}
           </p>
-        </motion.div>
+        </motion.header>
 
-        {/* Horizontal carousel. The viewport carries tabIndex + a label so the
-            cards past the fold are reachable without a mouse. */}
-        <div
-          className="relative"
-          ref={ref}
-          onMouseDown={onMouseDown}
-          onMouseMove={onMouseMove}
-          onMouseUp={onMouseUp}
-          onMouseLeave={onMouseLeave}
-          onClickCapture={onClickCapture}
-        >
-          <ScrollArea
-            className="w-full"
-            viewportProps={{
-              tabIndex: 0,
-              role: 'region',
-              'aria-label': t('a11y.servicesCarousel'),
-            }}
-          >
-            <ul className="flex cursor-grab list-none gap-5 pb-4 select-none">
-              {services.map(({ key, Icon, number }, i) => (
-                <ServiceCard
-                  key={key}
-                  serviceKey={key}
-                  Icon={Icon}
-                  number={number}
-                  index={i}
-                />
-              ))}
-            </ul>
-            <ScrollBar orientation="horizontal" />
-          </ScrollArea>
+        <ol className="border-border mt-14 border-b sm:mt-16">
+          {services.map(({ key, Icon }, i) => {
+            const features = t(`services.${key}.features`, {
+              returnObjects: true,
+            }) as string[]
 
-          {/* Right-edge fade: tells the eye there is more to scroll toward. */}
-          <div
-            aria-hidden="true"
-            className="from-background pointer-events-none absolute inset-y-0 right-0 hidden w-16 bg-linear-to-l to-transparent sm:block"
-          />
-        </div>
+            return (
+              <motion.li
+                key={key}
+                initial={prefersReduced ? false : { opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.5, delay: i * 0.05, ease: EASE }}
+                className="group border-border grid grid-cols-[2.5rem_1fr] gap-x-4 gap-y-4 border-t py-8 sm:py-10 lg:grid-cols-12 lg:gap-x-8"
+              >
+                <span
+                  aria-hidden="true"
+                  className="text-foreground/55 pt-1.5 font-mono text-sm tabular-nums lg:col-span-1"
+                >
+                  {String(i + 1).padStart(2, '0')} /
+                </span>
 
-        <p className="text-muted-foreground mt-3 text-xs sm:hidden">
-          {t('services.scrollHint')}
-        </p>
+                <div className="lg:col-span-4">
+                  <h3 className="font-display flex items-center gap-3 text-2xl leading-tight font-semibold tracking-tight sm:text-[1.75rem]">
+                    {t(`services.${key}.title`)}
+                    {/* Cursor appears on hover — the brand mark, as state */}
+                    <span
+                      aria-hidden="true"
+                      className="bg-cft-mint-ink inline-block h-[0.14em] w-[0.45em] translate-y-[0.32em] opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+                    />
+                  </h3>
+                </div>
+
+                <p className="text-muted-foreground col-start-2 max-w-[56ch] leading-relaxed text-pretty lg:col-span-4 lg:col-start-auto">
+                  {t(`services.${key}.description`)}
+                </p>
+
+                <div className="col-start-2 lg:col-span-3 lg:col-start-auto">
+                  <Icon
+                    aria-hidden="true"
+                    className="text-muted-foreground mb-3 hidden h-5 w-5 lg:block"
+                    strokeWidth={1.5}
+                  />
+                  <ul className="flex flex-wrap gap-x-4 gap-y-1.5 lg:flex-col">
+                    {Array.isArray(features) &&
+                      features.map(feature => (
+                        <li
+                          key={feature}
+                          className="text-foreground/75 font-mono text-xs"
+                        >
+                          {feature}
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+              </motion.li>
+            )
+          })}
+        </ol>
       </div>
     </section>
   )

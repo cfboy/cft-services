@@ -65,7 +65,7 @@ import { cn } from '@/lib/utils'
 
 The site operates in two coordinated visual registers that share a palette but communicate in different emotional keys:
 
-- **Register A — IT & Digital Services** (`Hero`, `Services`, `About`, `Work`, `Contact`, `FinalCTA`, `Footer`, `Navbar`): Calm, editorial, light-first. Night as ink, mint as sparse accent, generous whitespace, no glow effects.
+- **Register A — IT & Digital Services** (`Hero`, `Work`, `Services`, `About`, `Contact`, `Footer`, `Navbar`): Calm, editorial, light-first. Night as ink, mint as sparse accent, generous whitespace, no glow effects.
 - **Register B — Experiential Technology** (`Events` section only): Immersive, **dark in both light and dark themes**, depth + glow + motion. Full-bleed Night `#0A1628` band; mint appears as glow, not ink; spring entrances + idle loops.
 
 The transition from Register A into Register B as the user scrolls from Services into Events should feel like stepping from a professional office onto an event floor. Register B glow effects must never appear in Register A sections.
@@ -136,7 +136,7 @@ These moves differentiate the site from template-generated output. Every impleme
 - **Always dark in both themes** — section background is a hardcoded radial gradient (`#0E2440` → `#0A1628` → `#050B16`), never `bg-background`.
 - **Layered depth**: noise texture overlay (`opacity-[0.04]`) + radial vignette + brand mint glow radial + floating particles — all `aria-hidden="true"`, all `pointer-events-none`.
 - **Solid headline text** — white at 95%. Brand v2 allows no gradient text.
-- **Glassmorphism capability cards** using `rgba()` inline styles and `backdropFilter` — the documented exception to the no-hex rule.
+- **Capabilities as a ruled 2-up list** (hairline `rgba(255,255,255,0.10)` top borders, mint line icons). Inline `rgba()`/hex here is the documented exception to the no-hex rule; glass cards were retired in the 2026-11 redesign.
 - **Motion**: spring entrances for the KioskMockup, scroll-triggered reveals for copy, idle glow pulse loops — all gated on `useReducedMotion()`.
 - The `KioskMockup` lives in `src/components/events/KioskMockup.tsx` — a code-built interactive mockup using CFT brand colors only, no client branding.
 
@@ -269,7 +269,8 @@ component output must be identical on both sides:
   light. Swap themed images and icons with `dark:` utilities (see `Logo.tsx`).
 - **Never branch rendered output on `prefers-reduced-motion` for layout.**
 - **Values that animate up from a placeholder must render their real value on
-  the server** — see `useCounter` in `About.tsx`.
+  the server.** (The About counters were removed in the 2026-11 redesign; the
+  rule stands for anything that counts up.)
 - Section `id`s are stable literals, not `useId()` — they are anchor targets.
 
 ## Key Conventions
@@ -277,7 +278,7 @@ component output must be identical on both sides:
 - **No hardcoded colors** — use semantic Tailwind classes (`bg-primary`, `text-foreground`).
 - **Accent text uses `text-cft-mint-ink`**, never raw `text-cft-mint` in Register A (bright mint is 1.6:1 on white). `cft-mint` is for the always-dark Events band only.
 - **No `asChild` prop** — but do not wrap `<Button>` in an `<a>` either; nesting interactive elements is invalid HTML. Style the anchor with `buttonVariants()` from `@/components/ui/button`.
-- **Horizontal carousels** pass `viewportProps={{ tabIndex: 0, role: 'region', 'aria-label': … }}` to `ScrollArea` so off-screen cards are keyboard-reachable.
+- **No horizontal carousels** — show content in ruled lists. Project captures go through `BrowserFrame` / `PhoneFrame` in `src/components/work/`; see DESIGN.md → Project imagery.
 - **All interactive elements** need `aria-label` when icon-only.
 - **Focus rings**: `focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2`.
 - **Disabled state**: `disabled:pointer-events-none disabled:opacity-50`.
